@@ -11,8 +11,9 @@ CURE decouples two decisions: how a sample is scored, and whether it is remember
 ## Contents
 
 ```
-papers/                  reviewed papers, one folder per group
-literature_review.xlsx   structured review of the method papers (English and Vietnamese sheets)
+papers/
+├── literature_review.xlsx   structured review of the method papers (English and Vietnamese sheets)
+└── <group folders>/         reviewed papers, one folder per group
 ```
 
 Each spreadsheet entry has the following columns:
