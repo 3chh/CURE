@@ -25,11 +25,12 @@ Each spreadsheet entry has the following columns:
 | Authors | First author, et al. |
 | Year / venue | Publication venue and year |
 | Source | Link to the official version or arXiv |
-| Dataset | Data and benchmarks used in the paper's experiments |
-| Method | How the method works |
+| Dataset & setting | Data, benchmarks and experimental setting used in the paper |
+| Methodology | How the method works, with its key parameters |
+| Results | Main quantitative results reported in the paper, with table or figure references |
 | Strengths | What the method does well, as reported by the paper |
 | Limitations | Weaknesses stated by the authors or visible from the design |
-| Gap | What the paper leaves open with respect to CURE |
+| Gaps | What the paper leaves open |
 
 PDF files are named after their entry number in the spreadsheet. For example, `papers/4_.../4.1_OODD_CVPR2025.pdf` corresponds to entry 4.1.
 
