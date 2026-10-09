@@ -12,7 +12,7 @@ CURE decouples two decisions: how a sample is scored, and whether it is remember
 
 ```
 papers/
-├── literature_review.xlsx   structured review of the method papers (English and Vietnamese sheets)
+├── literature_review.xlsx   structured review of the method papers
 └── <group folders>/         reviewed papers, one folder per group
 ```
 
