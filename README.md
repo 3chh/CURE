@@ -14,6 +14,10 @@ CURE decouples two decisions: how a sample is scored, and whether it is remember
 papers/
 ├── literature_review.xlsx   structured review of the method papers
 └── <group folders>/         reviewed papers, one folder per group
+slides/
+└── CURE_slides.pdf          problem, related work, method, pipeline and data
+eda/
+└── EDA_Benchmark_OpenOOD.ipynb   exploratory analysis of the OpenOOD v1.5 benchmark
 ```
 
 Each spreadsheet entry has the following columns:
