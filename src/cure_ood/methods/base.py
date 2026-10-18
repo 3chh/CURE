@@ -17,10 +17,18 @@ REGISTRY: dict[str, type[Method]] = {}
 class Output:
     scores: np.ndarray  # điểm OOD, lớn = lạ
     memory: list | None = None  # (đầu batch, chỉ số mẫu trong bộ nhớ dùng để chấm) cho DCR; None = ko có bộ nhớ
+    pvalues: np.ndarray | None = None  # p conformal cuối (hiệu chuẩn trên C); None = phương pháp ko cho p
+    memory_stats: dict | None = None  # thống kê hoạt động CDM của luồng (MemoryRun.activity)
+
+    def decide(self, alpha: float) -> np.ndarray:
+        """Quyết định ID/OOD: báo lạ khi p ≤ alpha; FPR trên ID ≈ alpha khi mẫu ID hoán đổi được với C."""
+        if self.pvalues is None:
+            raise ValueError("Phương pháp này ko trả p-value")
+        return self.pvalues <= alpha
 
 
 class Method:
-    """Phương pháp OOD: fit chỉ dùng dữ liệu ID ngoài luồng, score ko được đọc stream.y."""
+    """Phương pháp OOD: fit chỉ dùng dữ liệu ID ngoài luồng, score ko được đọc stream.y (trừ ablation oracle_labels của CURE)."""
     requires_logits: ClassVar[bool] = False
 
     def fit(self, bench: Benchmark) -> Method:

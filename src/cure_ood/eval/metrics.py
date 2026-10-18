@@ -1,4 +1,4 @@
-"""Chỉ số phát hiện (OOD là lớp dương) và DCR (tỉ lệ mẫu ID trong bộ nhớ dùng để chấm)."""
+"""Chỉ số phát hiện (OOD là lớp dương), FPR/TPR của quyết định p ≤ α và DCR (tỉ lệ mẫu ID trong bộ nhớ dùng để chấm)."""
 from __future__ import annotations
 
 import numpy as np
@@ -10,6 +10,12 @@ def detection_metrics(y: np.ndarray, s: np.ndarray) -> dict:
     return {"auroc": float(roc_auc_score(y, s)), "aupr_out": float(average_precision_score(y, s)),
             "aupr_in": float(average_precision_score(1 - y, -s)),
             "fpr95": float(fpr[np.searchsorted(tpr, 0.95)]), "tpr_fpr5": float(np.interp(0.05, fpr, tpr))}
+
+
+def decision_metrics(y: np.ndarray, p: np.ndarray, alphas) -> dict:
+    """FPR thực trên ID và TPR trên OOD của quyết định p ≤ α, theo từng α."""
+    y = np.asarray(y).astype(bool)
+    return {f"{a:g}": {"fpr": float(np.mean(p[~y] <= a)), "tpr": float(np.mean(p[y] <= a))} for a in alphas}
 
 
 def dcr_counts(memory, y: np.ndarray) -> list[int] | None:

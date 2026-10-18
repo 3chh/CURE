@@ -23,6 +23,7 @@ Code: `src/cure_ood/methods/cure.py`, `methods/memory.py`, `stats.py`. Defaults 
 3. **Memory channel.** If CDM is non-empty: a = cosine to the k_mem-th neighbour in CDM (k_mem = 5), statistic t = a − s0, p_mem = conformal p-value of t against the same statistic computed on C with the same CDM.
 4. **Combination.** Cauchy combination of p_s and p_mem (weights 1:1), recalibrated on C in the same memory state (leave-one-out p-values on C). Score = −log p + 10⁻⁴·T − 10⁻⁷·s0 (T = combined statistic, tie-breakers only).
 5. **Fallback.** If CDM is empty, score = −log p_s (the static detector).
+6. **Decision.** The final p-value (combined p when CDM is non-empty, p_s otherwise) is returned as `Output.pvalues`; `Output.decide(α)` flags OOD when p ≤ α. Every p is a conformal p-value against C in the same memory state, so on ID samples exchangeable with C the FPR stays at about α or below; the report lists the realised FPR per α.
 
 Labels are never used. Changing the base detector (`base: msp | energy`) only replaces p_s and the fallback; screening, review and the memory channel keep using the kNN score.
 
@@ -33,4 +34,11 @@ Labels are never used. Changing the base detector (`base: msp | energy`) only re
 | `cure` | official |
 | `cure` with `base: msp` / `energy` | static channel and fallback use MSP / Energy |
 | `cure_lf` (older version) | `certifier: elond`, `window: 512`, `wake: [256, 0.05]`, `memory: queue+cdm`, `rule: fisher`, `w_mem: 0.1`, `fallback: false` |
-| ablations | e.g. `certifier`, `alpha`, `window`, `capacity`, `rule`, `w_mem` |
+| `certifier: all` | no review: every expired sample enters CDM (ablation) |
+| `certifier: oracle_labels` | certifies exactly the true OOD samples; **reads stream labels**, diagnostic upper bound of the review, never a method |
+| `fallback: false` | no static fallback: p = 1 while CDM is empty |
+| other ablations | `certifier: elond`, `alpha`, `window`, `capacity`, `rule: fisher`, `w_mem`; see `configs/experiments/ablation.yaml` |
+
+## Activity statistics
+
+`Output.memory_stats` (stored per stream by the runner and summarised in the report): `cdm_mean` = CDM size averaged over batches, `coverage` = share of the stream scored with a non-empty memory, `certified` / `evicted` = samples that left the review queue into CDM / out of the system. They are read off the memory run and do not change the scores.

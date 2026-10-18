@@ -7,9 +7,9 @@ __pycache__/
 .ipynb_checkpoints/
 
 # Dữ liệu, checkpoint, kết quả: tải từ Hugging Face hoặc sinh lại, ko đưa lên git
-data/
-checkpoints/
-results/
+/data/
+/checkpoints/
+/results/
 *.npz
 *.npy
 *.pt

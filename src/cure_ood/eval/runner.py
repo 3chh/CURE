@@ -10,7 +10,7 @@ import yaml
 
 from ..data.benchmark import Benchmark
 from ..methods.base import build
-from .metrics import dcr_counts, detection_metrics
+from .metrics import dcr_counts, decision_metrics, detection_metrics
 
 CONFIG_DIR = Path(__file__).resolve().parents[3] / "configs" / "experiments"
 
@@ -23,6 +23,7 @@ class Experiment:
     pis: list[float] = field(default_factory=lambda: [0.05, 0.2, 0.5])
     seeds: list[int] = field(default_factory=lambda: [0, 1, 2])
     domains: list[str] | None = None  # None = mọi tập lạ của benchmark
+    decision_alphas: list[float] = field(default_factory=lambda: [0.05, 0.1])  # mức α của quyết định p ≤ α
     output: str = "results"
     report: dict = field(default_factory=dict)  # cấu hình bảng, xem eval/report.py
 
@@ -74,6 +75,10 @@ def run(exp: Experiment, benchmarks=None, domains=None, methods=None, log=print)
                         row["metrics"][a] = detection_metrics(stream.y, out.scores)
                         if out.memory is not None:
                             row["dcr"][a] = dcr_counts(out.memory, stream.y)
+                        if out.pvalues is not None:
+                            row.setdefault("decisions", {})[a] = decision_metrics(stream.y, out.pvalues, exp.decision_alphas)
+                        if out.memory_stats is not None:
+                            row.setdefault("memory_stats", {})[a] = out.memory_stats
                     done[(pi, seed)] = row
                     path.write_text("".join(json.dumps(r) + "\n" for r in done.values()), encoding="utf-8")
                     log(f"{bench.name} {dom} pi={pi} seed={seed} " +

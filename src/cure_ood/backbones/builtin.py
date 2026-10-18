@@ -17,6 +17,7 @@ CIFAR_NORMS = {
     "cifar10": ((0.4914, 0.4822, 0.4465), (0.2470, 0.2435, 0.2616)),
     "cifar100": ((0.5071, 0.4867, 0.4408), (0.2675, 0.2565, 0.2761)),
 }
+NORMS = {**CIFAR_NORMS, "imagenet": (IMAGENET_MEAN, IMAGENET_STD)}
 
 
 def _require(checkpoint: Path | None, name: str) -> Path:
@@ -25,7 +26,7 @@ def _require(checkpoint: Path | None, name: str) -> Path:
     return checkpoint
 
 
-def _resize_crop(resize: int, crop: int, mean, std, interpolation=transforms.InterpolationMode.BILINEAR):
+def resize_crop(resize: int, crop: int, mean, std, interpolation=transforms.InterpolationMode.BILINEAR):
     return transforms.Compose([transforms.Resize(resize, interpolation=interpolation), transforms.CenterCrop(crop),
                                transforms.ToTensor(), transforms.Normalize(mean, std)])
 
@@ -48,7 +49,7 @@ def resnet18_32x32(checkpoint, device, norm: str = "cifar10") -> Backbone:
     state = {k.replace(".short.", ".shortcut."): v for k, v in state.items()}
     model = ResNet18_32x32(num_classes=state["fc.weight"].shape[0])
     model.load_state_dict(state, strict=True)
-    return _openood("resnet18_32x32", model, _resize_crop(32, 32, *CIFAR_NORMS[norm]), device)
+    return _openood("resnet18_32x32", model, resize_crop(32, 32, *CIFAR_NORMS[norm]), device)
 
 
 @register_backbone("resnet18_224x224")
@@ -57,7 +58,7 @@ def resnet18_224x224(checkpoint, device) -> Backbone:
     state = load_state(_require(checkpoint, "resnet18_224x224"))
     model = ResNet18_224x224(num_classes=state["fc.weight"].shape[0])
     model.load_state_dict(state, strict=True)
-    return _openood("resnet18_224x224", model, _resize_crop(256, 224, IMAGENET_MEAN, IMAGENET_STD), device)
+    return _openood("resnet18_224x224", model, resize_crop(256, 224, IMAGENET_MEAN, IMAGENET_STD), device)
 
 
 @register_backbone("resnet50_in1k")
@@ -75,7 +76,7 @@ def resnet50_in1k(checkpoint, device, amp: bool = True) -> Backbone:
         # Logit tính bằng numpy từ đặc trưng fp32 như bản gốc; tính trên GPU lệch ~1e-6.
         return feats, torch.from_numpy((feats.numpy() @ w.T + b).astype(np.float32))
 
-    return Backbone("resnet50_in1k", model, _resize_crop(256, 224, IMAGENET_MEAN, IMAGENET_STD), encode, device, (w, b))
+    return Backbone("resnet50_in1k", model, resize_crop(256, 224, IMAGENET_MEAN, IMAGENET_STD), encode, device, (w, b))
 
 
 @register_backbone("dinov2_vitb14")
@@ -87,5 +88,5 @@ def dinov2_vitb14(checkpoint, device) -> Backbone:
     model = torch.hub.load("facebookresearch/dinov2:main", "dinov2_vitb14")
     dtype = torch.float16 if device.type == "cuda" else torch.float32  # CPU chạy fp16 chậm và kém hỗ trợ
     model = model.eval().to(device, dtype)
-    transform = _resize_crop(224, 224, IMAGENET_MEAN, IMAGENET_STD, transforms.InterpolationMode.BICUBIC)
+    transform = resize_crop(224, 224, IMAGENET_MEAN, IMAGENET_STD, transforms.InterpolationMode.BICUBIC)
     return Backbone("dinov2_vitb14", model, transform, lambda x: (model(x.to(dtype)), None), device)

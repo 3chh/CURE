@@ -46,10 +46,31 @@ cure-ood run quick                              # one stream, ~1 minute
 cure-ood run main                               # main table: 3 benchmarks x 15 OOD pairs x 3 π x 3 seeds
 cure-ood run main --benchmark cifar100 --method cure oodd    # shard / subset (resumable)
 cure-ood report main                            # results/main/report.md + summary.json
+cure-ood run seed35 && cure-ood report seed35   # fresh-seed confirmation (seeds 3-5)
+cure-ood run ablation && cure-ood report ablation
 cure-ood extract cifar10_resnet18 --image-root /path/to/images   # re-extract features
+cure-ood train configs/train/cifar10_resnet18_ce.yaml       # train your own backbone (docs/training.md)
+cure-ood latency main --extract cifar10_resnet18            # end-to-end timing: image -> backbone -> method
 ```
 
 Experiments are YAML files in `configs/experiments/`. A method entry is `label: {method: <registered name>, ...hyper-parameters}`; the label defaults to the method name. Several configurations of one method (ablations) are just several entries. To run 4 processes in parallel, shard by `--benchmark` or `--domain`. Results are stored per stream and per method, so an interrupted run resumes where it stopped. On a 16 GB machine run one benchmark per process (CIFAR-100 with all 26 methods peaks at a few GB) and split with `--method` if memory is tight.
+
+| Experiment | Content |
+|---|---|
+| `main` | main table: every method on `cifar10`, `cifar100`, `imagenet200`, seeds 0-2 |
+| `seed35` | `main` unchanged on seeds 3-5 (confirmation, no re-tuning) |
+| `ablation` | CURE with one component changed: no review (`certifier: all`), oracle review (`certifier: oracle_labels`, reads labels, upper bound only), no fallback, Fisher instead of Cauchy, e-LOND, window 128/512, capacity 128/2048 |
+| `robustness` | `main` methods on the SupCon and DINOv2 backbones |
+| `round57` | reproduces the round 57 table with the earlier baseline versions |
+| `quick` | one stream, smoke test |
+
+`report.md` contains, depending on the `report` section of the experiment file:
+
+- **Main table** (`ranking`): AUROC, FPR95, share of safe groups (AUROC no more than 0.5 below `reference`), mean rank.
+- **Same-base comparison** (`families`): all metrics, DCR, memory size, Δ to the base, harm rate, paired tests (bootstrap CI, Wilcoxon) for all / near / far groups, then a breakdown of AUROC / FPR95 by benchmark (all, near, far) and by π.
+- **Static methods** (`static`): AUROC, FPR95 and the share of groups where each method has the best AUROC.
+- **ID/OOD decisions**: for methods that return a final conformal p-value (CURE), the realised FPR on ID and TPR on OOD when flagging OOD at p ≤ α, for each α in `decision_alphas` (default 0.05, 0.1).
+- **CDM activity**: for CURE, mean CDM size per batch, share of the stream scored with memory (coverage), and samples certified / evicted per stream, overall, by near/far and by π.
 
 From Python:
 
@@ -62,6 +83,8 @@ bench = Benchmark.load("cifar10")
 stream = bench.stream("svhn", pi=0.2, seed=0)
 out = build("cure").fit(bench).score(stream)
 print(detection_metrics(stream.y, out.scores))
+flags = out.decide(alpha=0.05)    # True = OOD; CURE only (out.pvalues), FPR on ID ≈ 0.05 or below
+print(out.memory_stats)           # CDM size, coverage, certified / evicted
 ```
 
 ## Methods
@@ -102,7 +125,7 @@ Exceptions: Mahalanobis uses an expanded quadratic form that is ~50x faster than
 ```
 configs/
   benchmarks/       one YAML per feature file: splits, OOD sets, K
-  experiments/      main, robustness, quick
+  experiments/      main, seed35, ablation, robustness, round57, quick
   extract/          feature extraction configs
 src/cure_ood/
   ops.py            L2 normalisation, k-th neighbour similarity

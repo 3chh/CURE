@@ -1,4 +1,4 @@
-"""Công cụ thống kê của CURE: p-value conformal, gộp Cauchy/Fisher, beta-binomial, chứng nhận e-BH/e-LOND."""
+"""Công cụ thống kê của CURE: p-value conformal, gộp Cauchy/Fisher, beta-binomial, chứng nhận e-BH/e-LOND và các bản ablation."""
 from __future__ import annotations
 
 from collections.abc import Callable, Sequence
@@ -113,4 +113,14 @@ def elond_certifier(p: np.ndarray, alpha=0.2, kappa=0.5) -> Certifier:
     return certify
 
 
-CERTIFIERS = {"ebh": ebh_certifier, "elond": elond_certifier}
+def all_certifier(p: np.ndarray, alpha=None) -> Certifier:
+    """Bỏ hậu kiểm (ablation): mọi mẫu hết hạn đều vào CDM."""
+    return lambda expired: np.ones(len(expired), bool)
+
+
+def oracle_certifier(y: np.ndarray) -> Certifier:
+    """Chẩn đoán, đọc nhãn: chứng nhận đúng các mẫu OOD thật, cận trên của hậu kiểm; ko bao giờ là mặc định."""
+    return lambda expired: np.asarray(y)[expired] == 1
+
+
+CERTIFIERS = {"ebh": ebh_certifier, "elond": elond_certifier, "all": all_certifier}

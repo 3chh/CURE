@@ -1,0 +1,31 @@
+# ResNet-18 32x32 cross-entropy theo công thức OpenOOD v1.5 (Jingkang50/OpenOOD @ 3c35632):
+#   configs/pipelines/train/baseline.yml (SGD lr 0.1, momentum 0.9, wd 5e-4, 100 epoch),
+#   configs/datasets/cifar10/cifar10.yml (batch 128, train_cifar10, chọn checkpoint theo val_cifar10),
+#   openood/trainers/base_trainer.py (nesterov, cosine theo từng bước về 1e-6),
+#   openood/preprocessors/base_preprocessor.py (Resize 32, CenterCrop 32, flip, RandomCrop 32 pad 4).
+run: cifar10_resnet18_ce
+seed: 0
+amp: true
+select: best                # best.ckpt theo val acc như BaseRecorder của OpenOOD; last = epoch cuối
+data:
+  imglists: cifar10         # $CURE_IMGLISTS/cifar10/<list>.txt
+  image_root: images_classic
+  train: train_cifar10
+  val: val_cifar10
+  norm: cifar10
+  size: 32
+  resize: 32
+  cache: true               # giữ ảnh đã giải mã trong RAM (~150 MB với CIFAR)
+  num_workers: 0
+model: {name: resnet18_32x32}
+stages:
+  - name: ce
+    loss: {name: ce}
+    epochs: 100
+    batch_size: 128
+    augment: openood
+    optimizer: {lr: 0.1, momentum: 0.9, weight_decay: 5.0e-4, nesterov: true}
+    schedule: {name: cosine, per: step, min_lr: 1.0e-6}
+export:                     # mẫu để sinh configs/extract/<run>.yaml và configs/benchmarks/<run>.yaml
+  extract: cifar10_resnet18
+  benchmark: cifar10

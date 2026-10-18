@@ -17,6 +17,16 @@ class MemoryRun:
     pvals: np.ndarray | None = None  # p kênh bộ nhớ, hiệu chuẩn trên C (khi có calib)
     mem_cal: list = field(default_factory=list)  # (s, e, thống kê bộ nhớ của C) cho batch có bộ nhớ
     trace: list = field(default_factory=list)  # (s, chỉ số mẫu trong bộ nhớ) cho batch có bộ nhớ, để đo DCR
+    cdm_sizes: list = field(default_factory=list)  # cỡ CDM ở mỗi batch
+    certified: int = 0
+    evicted: int = 0
+
+    def activity(self, batch: int) -> dict:
+        """Thống kê hoạt động CDM của luồng: cỡ trung bình, phần luồng được chấm có bộ nhớ, số chứng nhận/trục xuất."""
+        n = len(self.scores)
+        scored = sum(min(n, s + batch) - s for s, _ in self.trace)
+        return {"cdm_mean": float(np.mean(self.cdm_sizes)), "coverage": scored / n,
+                "certified": self.certified, "evicted": self.evicted}
 
 
 @torch.inference_mode()
@@ -38,10 +48,13 @@ def run_memory(x, base, passes, shadow, *, batch=128, capacity=512, k_mem=5, ttl
         if ttl is not None:
             expired = queue[(s - queue) >= ttl]
             if len(expired):
-                if certifier is not None:
-                    cdm.extend(int(j) for j in expired[certifier(expired)])
-                    cdm = cdm[-capacity:]  # FIFO: bỏ mẫu cũ nhất
+                ok = certifier(expired) if certifier is not None else np.zeros(len(expired), bool)
+                cdm.extend(int(j) for j in expired[ok])
+                cdm = cdm[-capacity:]  # FIFO: bỏ mẫu cũ nhất
+                run.certified += int(ok.sum())
+                run.evicted += int((~ok).sum())
                 queue = queue[(s - queue) < ttl]
+        run.cdm_sizes.append(len(cdm))
         cand = np.concatenate((queue, np.arange(s, e)))
         keep = min(capacity, len(cand))
         # Thứ tự trong hàng chờ quyết định mẫu nào còn trong CDM sau khi cắt: giữ đúng argpartition.

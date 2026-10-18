@@ -23,6 +23,7 @@ Logit-based methods (MSP, Energy, ViM, ...) need `fc_*`. Without them, only feat
 | `resnet18_224x224` | `resnet18_imagenet200.ckpt` | OpenOOD v1.5 ImageNet-200 network |
 | `resnet50_in1k` | `resnet50_imagenet1k.pth` | torchvision ResNet-50. Option `amp` (default `true`) keeps the fp16 autocast used for the original features |
 | `dinov2_vitb14` | none (torch.hub) | CLS token, fp16 on GPU, no logits |
+| `torchvision` | output of `cure-ood train` | any `torchvision.models` architecture (option `arch`) with its own `fc`; options `norm`, `size`, `resize`. See [training.md](training.md) |
 
 The number of classes is read from the checkpoint. Checkpoint paths are resolved against `CURE_CHECKPOINTS`, a list of directories separated by `os.pathsep` (default `checkpoints/`).
 

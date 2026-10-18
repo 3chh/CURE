@@ -1,0 +1,38 @@
+# Ablation của CURE trên 3 benchmark chính, seed 0-2: mỗi mục đổi đúng một thành phần so với `cure`.
+# cure_oracle đọc nhãn luồng (certifier oracle_labels): chỉ là cận trên của hậu kiểm, ko phải phương pháp.
+name: ablation
+benchmarks: [cifar10, cifar100, imagenet200]
+pis: [0.05, 0.2, 0.5]
+seeds: [0, 1, 2]
+methods:
+  knn: {}
+  cure: {}
+  cure_no_review: {method: cure, certifier: all}          # mọi mẫu hết hạn đều vào CDM
+  cure_oracle: {method: cure, certifier: oracle_labels}   # chứng nhận đúng các mẫu OOD thật
+  cure_no_fallback: {method: cure, fallback: false}       # CDM rỗng thì p = 1 thay vì điểm tĩnh
+  cure_fisher: {method: cure, rule: fisher}
+  cure_elond: {method: cure, certifier: elond}            # chứng nhận online từng mẫu
+  cure_w128: {method: cure, window: 128}
+  cure_w512: {method: cure, window: 512}
+  cure_cap128: {method: cure, capacity: 128}
+  cure_cap2048: {method: cure, capacity: 2048}
+output: results
+report:
+  reference: knn
+  ranking: [knn, cure, cure_no_review, cure_oracle, cure_no_fallback, cure_fisher, cure_elond, cure_w128, cure_w512, cure_cap128,
+            cure_cap2048]
+  families:
+    kNN: {base: knn, method: cure, rivals: [cure_no_review, cure_oracle, cure_no_fallback, cure_fisher, cure_elond, cure_w128,
+                                            cure_w512, cure_cap128, cure_cap2048]}
+  labels:
+    knn: kNN
+    cure: "**CURE** (e-BH, Cauchy, window 256, capacity 512)"
+    cure_no_review: No review (every expired sample enters CDM)
+    cure_oracle: Oracle review (true labels, upper bound)
+    cure_no_fallback: No fallback
+    cure_fisher: Fisher combination
+    cure_elond: e-LOND certifier
+    cure_w128: Window 128
+    cure_w512: Window 512
+    cure_cap128: Capacity 128
+    cure_cap2048: Capacity 2048

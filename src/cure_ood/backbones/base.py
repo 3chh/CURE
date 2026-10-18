@@ -62,7 +62,8 @@ def resolve_checkpoint(checkpoint: str | Path) -> Path:
     p = Path(checkpoint)
     if p.is_absolute() or p.exists():
         return p
-    dirs = os.environ.get("CURE_CHECKPOINTS", str(REPO_ROOT / "checkpoints")).split(os.pathsep)
+    # Thư mục gốc repo đứng sau cùng để cấu hình sinh ra (vd results/train/<run>/best.ckpt) chạy từ mọi thư mục.
+    dirs = [*os.environ.get("CURE_CHECKPOINTS", str(REPO_ROOT / "checkpoints")).split(os.pathsep), str(REPO_ROOT)]
     for d in dirs:
         if (Path(d) / p).exists():
             return Path(d) / p

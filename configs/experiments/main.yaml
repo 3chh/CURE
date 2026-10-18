@@ -41,6 +41,7 @@ output: results
 report:
   reference: knn
   ranking: [knn, oodd, oodd_tout, adaodd, warden, age_queue, cure]
+  static: [msp, maxlogit, energy, gen, mahalanobis, vim, react, nci, fdbd, cadref, knn, cure]
   families:
     kNN: {base: knn, method: cure, rivals: [oodd, oodd_tout, oodd_protocol, adaodd, warden, age_queue]}
     MSP: {base: msp, method: cure_msp, rivals: [dcac_msp, dcac_msp_protocol, dynproto, rtl_plus, rtl_plus_protocol]}
@@ -65,3 +66,11 @@ report:
     dcac_msp_protocol: DCAC-MSP (official, batch 128)
     dcac_energy_protocol: DCAC-Energy (official, batch 128)
     dynproto: DynProto* (paper)
+    maxlogit: MaxLogit
+    gen: GEN
+    mahalanobis: Mahalanobis
+    vim: ViM
+    react: ReAct
+    nci: NCI
+    fdbd: fDBD
+    cadref: CADRef

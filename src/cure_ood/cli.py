@@ -1,4 +1,4 @@
-"""Dòng lệnh: cure-ood extract | run | report | list."""
+"""Dòng lệnh: cure-ood train | extract | run | report | latency | list."""
 from __future__ import annotations
 
 import argparse
@@ -19,9 +19,21 @@ def main(argv=None):
     s.add_argument("experiment")
     s.add_argument("--benchmark", nargs="*", help="restrict the report to these benchmarks")
     s.add_argument("--output")
+    t = sub.add_parser("latency", help="time image → backbone → method on one stream")
+    t.add_argument("experiment")
+    t.add_argument("--benchmark", default="cifar10")
+    t.add_argument("--domain", default="cifar100")
+    t.add_argument("--pi", type=float, default=0.2)
+    t.add_argument("--seed", type=int, default=0)
+    t.add_argument("--extract", help="extract config for the backbone part (needs images); omit to time methods only")
+    t.add_argument("--method", nargs="*", help="only these method labels")
     sub.add_parser("list", help="list registered methods and benchmark configs")
+    sub.add_parser("train", help="train a backbone (see docs/training.md)", add_help=False)
     sub.add_parser("extract", help="extract features from images (see docs/adding_a_backbone.md)", add_help=False)
     argv = sys.argv[1:] if argv is None else argv
+    if argv[:1] == ["train"]:
+        from .train import main as train_main
+        return train_main(argv[1:])
     if argv[:1] == ["extract"]:
         from .data.extract import main as extract_main
         return extract_main(argv[1:])
@@ -39,8 +51,12 @@ def main(argv=None):
         print("benchmarks:", ", ".join(sorted(f.stem for f in CONFIG_DIR.glob("*.yaml"))))
         return
     exp = Experiment.load(a.experiment)
-    if a.output:
+    if getattr(a, "output", None):
         exp.output = a.output
+    if a.cmd == "latency":
+        from .eval.latency import run as latency
+        print(latency(exp, a.benchmark, a.domain, a.pi, a.seed, a.extract, a.method)["markdown"])
+        return
     if a.cmd == "run":
         from .eval.runner import run
         run(exp, a.benchmark, a.domain, a.method)
