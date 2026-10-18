@@ -1,0 +1,8 @@
+name: cifar10_supcon
+description: CIFAR-10, ResNet18 trained with SupCon (robustness check, not an OpenOOD checkpoint)
+backbone: resnet18_32x32 SupCon
+features: resnet18_supcon_v15.npz
+k: 1
+val_ood: val_tin
+near: [cifar100, tin]
+far: [mnist, svhn, texture, places365]

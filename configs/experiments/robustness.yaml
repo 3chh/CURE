@@ -1,0 +1,67 @@
+# Độ bền theo backbone (cấu hình đối thủ như main.yaml): CIFAR-10 với SupCon (tự huấn luyện) và DINOv2 (ko có logit).
+# Đối thủ có code: gọi thẳng code chính thức (methods/*/_official, _openood); ko có code: cài lại đầy đủ theo bài
+# (docs/reimplementations). Mỗi đối thủ test-time có thêm cấu hình `_protocol` (batch 128 như CURE).
+name: robustness
+benchmarks: [cifar10_supcon, cifar10_dinov2]
+pis: [0.05, 0.2, 0.5]
+seeds: [0, 1, 2]
+methods:
+  # Phương pháp của ta (cấu hình vòng 57, ko đổi)
+  cure: {}
+  cure_msp: {method: cure, base: msp}
+  cure_energy: {method: cure, base: energy}
+  # Nền kNN
+  knn: {}
+  oodd: {}                                   # code chính thức: K1 10, K2 5, ALPHA 0,5, queue 512, batch 512, ko T-out
+  oodd_tout: {method: oodd, t_out: true}     # có T-out: thêm 128 mẫu OOD phụ trợ (CURE ko dùng)
+  oodd_protocol: {method: oodd, batch: 128}
+  adaodd: {}                                 # theo bài, siêu tham số Sec. VI-A
+  warden: {}                                 # theo bài: xếp hạng bằng kNN làm trắng, bộ nhớ chỉ vào quyết định
+  age_queue: {ttl: 512}                      # đối chứng của ta
+  # Nền MSP / Energy (logit)
+  msp: {}
+  energy: {}
+  rtl_plus: {}                               # code chính thức, điểm ban đầu MSP, chạy theo batch 512
+  rtl_plus_protocol: {method: rtl_plus, batch: 128}
+  dcac_msp: {}                               # code chính thức, batch 512
+  dcac_energy: {}
+  dcac_msp_protocol: {method: dcac_msp, batch: 128}
+  dcac_energy_protocol: {method: dcac_energy, batch: 128}
+  dynproto: {}                               # theo bài
+  # Tĩnh: postprocessor OpenOOD gốc, APS như OpenOOD
+  maxlogit: {}
+  gen: {}
+  mahalanobis: {}
+  vim: {}
+  react: {}
+  nci: {}
+  fdbd: {}
+  cadref: {}
+output: results
+report:
+  reference: knn
+  ranking: [knn, oodd, oodd_tout, adaodd, warden, age_queue, cure]
+  families:
+    kNN: {base: knn, method: cure, rivals: [oodd, oodd_tout, oodd_protocol, adaodd, warden, age_queue]}
+    MSP: {base: msp, method: cure_msp, rivals: [dcac_msp, dcac_msp_protocol, dynproto, rtl_plus, rtl_plus_protocol]}
+    Energy: {base: energy, method: cure_energy, rivals: [dcac_energy, dcac_energy_protocol]}
+  labels:
+    cure: "**CURE**"
+    cure_msp: "**CURE[MSP]**"
+    cure_energy: "**CURE[Energy]**"
+    knn: kNN
+    oodd: OODD (official)
+    oodd_tout: OODD + T-out (official)
+    oodd_protocol: OODD (official, batch 128)
+    adaodd: AdaODD* (paper)
+    warden: WARDEN* (paper)
+    age_queue: Age-expiry queue
+    msp: MSP
+    energy: Energy
+    rtl_plus: RTL++ (official)
+    rtl_plus_protocol: RTL++ (official, batch 128)
+    dcac_msp: DCAC-MSP (official)
+    dcac_energy: DCAC-Energy (official)
+    dcac_msp_protocol: DCAC-MSP (official, batch 128)
+    dcac_energy_protocol: DCAC-Energy (official, batch 128)
+    dynproto: DynProto* (paper)

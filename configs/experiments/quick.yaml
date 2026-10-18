@@ -1,0 +1,13 @@
+# Chạy thử nhanh (~1 phút): một luồng, vài phương pháp.
+name: quick
+benchmarks: [cifar10]
+domains: [svhn]
+pis: [0.2]
+seeds: [0]
+methods:
+  knn: {}
+  oodd: {}
+  cure: {}
+output: results
+report:
+  ranking: [knn, oodd, cure]

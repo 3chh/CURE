@@ -1,55 +1,122 @@
 # CURE: Dynamic Memory Curation via Retroactive Eviction for Test-Time OOD Detection
 
-## Problem
+Test-time OOD detectors keep a memory of samples seen during deployment and score new inputs against it. Most of them decide at arrival whether a sample enters memory and never revisit that decision, so an in-distribution sample admitted by mistake keeps biasing later decisions (self-poisoning).
 
-Test-time out-of-distribution (OOD) detectors keep a memory of samples observed during deployment and score new inputs against it. Most of these methods decide at arrival time whether a sample enters memory. They make that decision from the sample's own score, and they never revisit it. When an in-distribution sample is admitted by mistake, it stays in memory and biases every later decision. We refer to this failure as self-poisoning. Because of it, a memory-based detector can end up less reliable than a static detector that has no memory.
+CURE separates *scoring* from *remembering*. Every sample is scored with a calibrated static detector and waits in a review queue that is never used for scoring. After a fixed number of later samples, a label-free test (beta-binomial count against an ID reference set, e-BH certification) decides whether the sample joins the curated dynamic memory (CDM) or is evicted retroactively. The memory channel is combined with the static score and recalibrated on held-out ID data; when the CDM is empty, CURE falls back to the static detector. See [docs/method.md](docs/method.md).
 
-## Approach
+This repository contains the CURE implementation, all comparison methods behind one interface, the benchmark runner, feature extraction, and the literature review.
 
-CURE decouples two decisions: how a sample is scored, and whether it is remembered. Incoming samples are scored with a calibrated static detector, and each one is also placed in a quarantine buffer that does not affect scoring. Later, once more of the stream has been observed, CURE re-examines each buffered sample with a label-free statistical test. Samples whose evidence holds up are promoted to long-term memory, and all others are evicted retroactively. Stored entries contribute to scoring only while recent observations still support them. The memory signal is combined with the static score through a calibrated combination. If no supported entry exists, the detector falls back to the static score, so memory adds information without being able to silently degrade the detector.
+## Install
 
-## Contents
-
-```
-papers/
-├── literature_review.xlsx   structured review of the method papers
-└── <group folders>/         reviewed papers, one folder per group
-slides/
-└── CURE_slides.pdf          problem, related work, method, pipeline and data
-eda/
-└── EDA_Benchmark_OpenOOD.ipynb   exploratory analysis of the OpenOOD v1.5 benchmark
+```bash
+git clone https://github.com/3chh/CURE.git && cd CURE
+pip install -e ".[dev]"              # core + tests
+pip install -e ".[extract,data]"     # optional: feature extraction, Hugging Face download
 ```
 
-Each spreadsheet entry has the following columns:
+Python ≥ 3.10, PyTorch ≥ 2.1. A GPU is used when available; everything also runs on CPU.
 
-| Column | Description |
-|---|---|
-| No. | Entry number, `<group>.<index>` |
-| Paper | Full title |
-| Authors | First author, et al. |
-| Year / venue | Publication venue and year |
-| Source | Link to the official version or arXiv |
-| Dataset & setting | Data, benchmarks and experimental setting used in the paper |
-| Methodology | How the method works, with its key parameters |
-| Results | Main quantitative results reported in the paper, with table or figure references |
-| Strengths | What the method does well, as reported by the paper |
-| Limitations | Weaknesses stated by the authors or visible from the design |
-| Gaps | What the paper leaves open |
+## Data
 
-PDF files are named after their entry number in the spreadsheet. For example, `papers/4_.../4.1_OODD_CVPR2025.pdf` corresponds to entry 4.1.
+Methods run on pre-extracted features (one `.npz` per backbone × ID dataset, convention in [docs/adding_a_backbone.md](docs/adding_a_backbone.md)). They are hosted in a private Hugging Face dataset because of the ImageNet / Places / TinyImageNet licences; ask the maintainers for access, then:
 
-| # | Group | Papers |
+```bash
+huggingface-cli login
+python scripts/download_data.py features      # ~2.1 GB -> data/features/
+python scripts/download_data.py checkpoints   # only needed to re-extract features
+```
+
+`CURE_FEATURES` and `CURE_CHECKPOINTS` override the default folders.
+
+| Benchmark config | Backbone | ID | near-OOD | far-OOD | Role |
+|---|---|---|---|---|---|
+| `cifar10` | ResNet18, official OpenOOD v1.5 | CIFAR-10 | CIFAR-100, TinyImageNet | MNIST, SVHN, Textures, Places365 | main |
+| `cifar100` | ResNet18, official OpenOOD v1.5 | CIFAR-100 | CIFAR-10, TinyImageNet | MNIST, SVHN, Textures, Places365 | main |
+| `imagenet200` | ResNet18, official OpenOOD v1.5 | ImageNet-200 | SSB-hard, NINCO | Textures | main |
+| `cifar10_supcon` | ResNet18 trained with SupCon | CIFAR-10 | as `cifar10` | as `cifar10` | robustness |
+| `cifar10_dinov2` | DINOv2 ViT-B/14 (frozen, no logits) | CIFAR-10 | as `cifar10` | as `cifar10` | robustness |
+
+A stream mixes the ID test set with one OOD set at OOD ratio π ∈ {5, 20, 50}%, shuffled with a fixed seed, processed in batches of 128. The gallery and calibration sets never enter the stream; labels are used only for evaluation.
+
+## Usage
+
+```bash
+cure-ood list                                   # registered methods and benchmarks
+cure-ood run quick                              # one stream, ~1 minute
+cure-ood run main                               # main table: 3 benchmarks x 15 OOD pairs x 3 π x 3 seeds
+cure-ood run main --benchmark cifar100 --method cure oodd    # shard / subset (resumable)
+cure-ood report main                            # results/main/report.md + summary.json
+cure-ood extract cifar10_resnet18 --image-root /path/to/images   # re-extract features
+```
+
+Experiments are YAML files in `configs/experiments/`. A method entry is `label: {method: <registered name>, ...hyper-parameters}`; the label defaults to the method name. Several configurations of one method (ablations) are just several entries. To run 4 processes in parallel, shard by `--benchmark` or `--domain`. Results are stored per stream and per method, so an interrupted run resumes where it stopped. On a 16 GB machine run one benchmark per process (CIFAR-100 with all 26 methods peaks at a few GB) and split with `--method` if memory is tight.
+
+From Python:
+
+```python
+from cure_ood.data import Benchmark
+from cure_ood.methods import build
+from cure_ood.eval.metrics import detection_metrics
+
+bench = Benchmark.load("cifar10")
+stream = bench.stream("svhn", pi=0.2, seed=0)
+out = build("cure").fit(bench).score(stream)
+print(detection_metrics(stream.y, out.scores))
+```
+
+## Methods
+
+Comparison methods with public code **call the official code**, vendored verbatim with the upstream commit in each file header (`methods/testtime/_official/`, `methods/static/_openood/`). The adapters only feed precomputed features/logits; every change (for example taking an already ordered stream instead of shuffling internally) is marked `ADAPTED` in the vendored file, and `tests/test_official_*.py` check that the vendored code returns exactly what the upstream function returns. Methods without public code are reimplemented component by component from the paper; `docs/reimplementations/<method>.md` maps every paper element (section, equation, algorithm line) to the code and lists the choices the paper leaves open.
+
+| Name | Type | Source |
 |---|---|---|
-| 1 | Static OOD detectors | 10 |
-| 2 | VLM-based OOD detection and caches | 4 |
-| 3 | Test-time adaptation | 6 |
-| 4 | Test-time OOD detection with dynamic memory | 7 |
-| 5 | Reinforced retention on streams and buffer purification | 11 |
-| 6 | Self-poisoning and defenses | 6 |
-| 7 | Statistical testing methods used by CURE | 8 |
-| | **Method papers (spreadsheet)** | **52** |
-| 8 | Benchmarks and evaluation | 4 |
+| `cure` | test-time, curated memory (ours); `base: knn \| msp \| energy` | this repo |
+| `oodd` (`t_out: true` for the T-out variant) | test-time dictionary | official code, [zxk1212/OODD](https://github.com/zxk1212/OODD) |
+| `dcac_msp`, `dcac_energy` | test-time class-aware cache | official code, [wyqstan/DCAC](https://github.com/wyqstan/DCAC) |
+| `rtl_plus` | test-time linear re-scoring | official code (`RTL_OOD`), run per batch of the stream |
+| `msp`, `maxlogit`, `energy`, `gen`, `mahalanobis`, `vim`, `react`, `nci`, `fdbd` | static, OpenOOD APS | official OpenOOD v1.5 postprocessors |
+| `cadref` | static | official code (shipped with DCAC) |
+| `knn` | static | cosine to the K-th neighbour (monotone in the kNN-OOD distance) |
+| `adaodd`, `warden`, `dynproto` | test-time | reimplemented from the paper (no public code), see `docs/reimplementations/` |
+| `age_queue`, `oodd_core` | ablations | this repo |
+| `*_legacy`, `*_r53`, `oodd_core` | versions used in experiment rounds 21-57 | kept only to reproduce earlier tables (`configs/experiments/round57.yaml`) |
 
-Group 8 is not part of the method review. It covers the benchmark and OOD data used in the experiments (OpenOOD v1.5, ImageNet-O) and the motivation for the evaluation protocol (base-rate effects, precision-recall versus ROC).
+`cure-ood list` prints the paper and source of every method. To add a method see [docs/adding_a_method.md](docs/adding_a_method.md); to add a backbone or dataset see [docs/adding_a_backbone.md](docs/adding_a_backbone.md).
 
-The PDFs are provided for research reference only; copyright remains with the original authors and publishers.
+## Reproducibility
+
+Three kinds of tests:
+
+- `tests/test_official_*.py`: vendored official code (OODD, DCAC, RTL++, OpenOOD postprocessors) returns exactly the upstream result on the same input.
+- `tests/test_<method>.py`: unit tests of each reimplemented component against hand-computed values (AdaODD, WARDEN, DynProto).
+- `tests/test_golden_*.py`: CURE, CURE-LF and the round 21-57 versions of the baselines reproduce the stored results of the original experiment scripts bit for bit (AUROC with `==` and memory contamination counts); the feature extractors match the original networks and preprocessing.
+
+```bash
+pytest                                     # golden tests read tests/golden/ and skip without features
+```
+
+Exceptions: Mahalanobis uses an expanded quadratic form that is ~50x faster than the original per-class einsum (AUROC differs by < 1e-5). Bit-exactness assumes the same library versions and GPU; different BLAS thread counts can change RTL++ and DynProto in the last digits.
+
+## Repository layout
+
+```
+configs/
+  benchmarks/       one YAML per feature file: splits, OOD sets, K
+  experiments/      main, robustness, quick
+  extract/          feature extraction configs
+src/cure_ood/
+  ops.py            L2 normalisation, k-th neighbour similarity
+  stats.py          conformal p-values, Cauchy/Fisher combination, beta-binomial, e-BH, e-LOND
+  data/             Benchmark + Stream construction, feature extraction
+  backbones/        backbone registry (OpenOOD ResNet18, ResNet-50, DINOv2)
+  methods/          base interface, cure.py, memory.py (shared memory host), static/, testtime/
+  eval/             metrics, runner, report
+  cli.py
+scripts/            download_data.py
+tests/              unit, golden and equivalence tests
+docs/               method, adding a method / backbone
+papers/             literature review (xlsx) and PDFs, see papers/README.md
+slides/, eda/       slides and the EDA notebook of the OpenOOD benchmark
+```
+
+The PDFs in `papers/` are provided for research reference only; copyright remains with the original authors and publishers.

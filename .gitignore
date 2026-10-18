@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Dữ liệu, checkpoint, kết quả: tải từ Hugging Face hoặc sinh lại, ko đưa lên git
+data/
+checkpoints/
+results/
+*.npz
+*.npy
+*.pt
+*.pth
+*.ckpt
+*.zip
+*.tar
+*.bak

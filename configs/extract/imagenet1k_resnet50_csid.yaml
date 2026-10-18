@@ -1,0 +1,13 @@
+# ImageNet-1K, ID bị dịch hiệp biến (ImageNet-V2, ImageNet-R) cho giao thức full-spectrum; cùng backbone với imagenet1k_resnet50.
+backbone: resnet50_in1k
+checkpoint: resnet50_imagenet1k.pth
+options: {amp: true}
+imglists: imagenet
+image_root: images_largescale
+dedup: true
+output: resnet50_in1k_csid_v15.npz
+batch_size: 128
+num_workers: 6
+sets:
+  imagenet_v2: test_imagenet_v2
+  imagenet_r: test_imagenet_r

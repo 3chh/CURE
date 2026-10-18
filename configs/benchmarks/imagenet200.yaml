@@ -1,0 +1,9 @@
+name: imagenet200
+description: ImageNet-200, official OpenOOD v1.5 ResNet18 checkpoint; no ID train set, so the ID test set is split by class
+backbone: resnet18_224x224 (OpenOOD v1.5, imagenet200_resnet18_224x224_base_e90_lr0.1_default)
+features: resnet18_in200_v15.npz
+k: 10
+split: {source: id, seed: 0, gallery_frac: 0.8}   # nửa A: 3.520 gallery + 880 hiệu chuẩn; nửa B: 4.600 mẫu ID của luồng
+near: [ssb_hard, ninco]
+far: [textures]
+stream_salt: [33]

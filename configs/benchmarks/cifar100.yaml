@@ -1,0 +1,8 @@
+name: cifar100
+description: CIFAR-100, official OpenOOD v1.5 ResNet18 checkpoint
+backbone: resnet18_32x32 (OpenOOD v1.5, cifar100_resnet18_32x32_base_e100_lr0.1_default)
+features: resnet18_cifar100_v15.npz
+k: 1            # APS trên (id_val, val_tin)
+val_ood: val_tin
+near: [cifar10, tin]
+far: [mnist, svhn, texture, places365]

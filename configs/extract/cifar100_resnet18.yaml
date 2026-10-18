@@ -1,0 +1,19 @@
+# CIFAR-100, checkpoint ResNet-18 chính thức OpenOOD v1.5 → file của configs/benchmarks/cifar100.yaml
+backbone: resnet18_32x32
+checkpoint: resnet18_cifar100.ckpt
+options: {norm: cifar100}
+imglists: cifar100
+image_root: images_classic
+output: resnet18_cifar100_v15.npz
+batch_size: 512
+sets:
+  id_train: train_cifar100
+  id_val: val_cifar100
+  val_tin: val_tin
+  id_test: test_cifar100
+  cifar10: test_cifar10
+  tin: test_tin
+  mnist: test_mnist
+  svhn: test_svhn
+  texture: test_texture
+  places365: test_places365

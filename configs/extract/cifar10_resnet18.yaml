@@ -1,0 +1,19 @@
+# CIFAR-10, checkpoint ResNet-18 chính thức OpenOOD v1.5 → file của configs/benchmarks/cifar10.yaml
+backbone: resnet18_32x32
+checkpoint: resnet18_cifar10.ckpt
+options: {norm: cifar10}
+imglists: cifar10          # $CURE_IMGLISTS/cifar10/*.txt
+image_root: images_classic # $CURE_IMAGES/images_classic
+output: resnet18_official_v15.npz
+batch_size: 512
+sets:
+  id_train: train_cifar10
+  id_val: val_cifar10
+  val_tin: val_tin
+  id_test: test_cifar10
+  cifar100: test_cifar100
+  tin: test_tin
+  mnist: test_mnist
+  svhn: test_svhn
+  texture: test_texture
+  places365: test_places365

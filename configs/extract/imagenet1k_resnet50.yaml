@@ -1,0 +1,18 @@
+# ImageNet-1K, ResNet-50 torchvision (checkpoint OpenOOD) với autocast fp16 trên GPU như bản trích gốc.
+backbone: resnet50_in1k
+checkpoint: resnet50_imagenet1k.pth
+options: {amp: true}
+imglists: imagenet
+image_root: images_largescale   # bố cục OpenOOD: imagenet_1k/val/<wnid>/*.JPEG
+roots: {"texture/": images_classic}
+dedup: true                     # test_imagenet.txt lặp mỗi ảnh hai lần → 50k ảnh
+output: resnet50_in1k_v15.npz
+batch_size: 128
+num_workers: 6
+sets:
+  id: test_imagenet
+  ssb_hard: test_ssb_hard
+  ninco: test_ninco
+  inaturalist: test_inaturalist
+  textures: test_textures
+  openimage_o: test_openimage_o

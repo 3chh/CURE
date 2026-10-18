@@ -1,0 +1,16 @@
+# ImageNet-200, checkpoint ResNet-18 chính thức OpenOOD v1.5 → file của configs/benchmarks/imagenet200.yaml
+# Ko có tập train: Benchmark tự tách id theo lớp. OpenImage-O, iNaturalist ko tải được nên ko có.
+backbone: resnet18_224x224
+checkpoint: resnet18_imagenet200.ckpt
+imglists: imagenet200
+image_root: images_largescale   # chứa imagenet_1k/val/<wnid>/..., ssb_hard/, ninco/
+roots: {"texture/": images_classic}
+skip_missing: true               # bản gốc bỏ qua ảnh thiếu thay vì dừng
+output: resnet18_in200_v15.npz
+batch_size: 128
+num_workers: 4
+sets:
+  id: test_imagenet200
+  ssb_hard: test_ssb_hard
+  ninco: test_ninco
+  textures: test_textures

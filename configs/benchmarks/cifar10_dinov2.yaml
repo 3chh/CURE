@@ -1,0 +1,7 @@
+name: cifar10_dinov2
+description: CIFAR-10, frozen DINOv2 ViT-B/14 CLS features (robustness check; no logits)
+backbone: dinov2_vitb14
+features: dino_cifar10_v15.npz
+k: 10
+near: [cifar100, tin]
+far: [mnist, svhn, texture, places365]
