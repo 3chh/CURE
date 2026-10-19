@@ -8,6 +8,8 @@ from pathlib import Path
 import numpy as np
 from scipy.stats import wilcoxon
 
+from .latency import BUDGETS_FPS
+
 METRICS = ("auroc", "aupr_in", "aupr_out", "fpr95", "tpr_fpr5")
 HEADERS = {"auroc": "AUROC", "aupr_in": "AUPR-In", "aupr_out": "AUPR-Out", "fpr95": "FPR95", "tpr_fpr5": "TPR@FPR5"}
 MEMORY_STATS = ("cdm_mean", "coverage", "certified", "evicted")
@@ -46,6 +48,8 @@ def group(rows) -> dict:
                                     for al in v[0]["decisions"][a]}
         for a in arms & set.intersection(*[set(r.get("memory_stats", {})) for r in v]):
             A[k][a]["memory_stats"] = {m: float(np.mean([r["memory_stats"][a][m] for r in v])) for m in MEMORY_STATS}
+        for a in arms & set.intersection(*[set(r.get("latency", {})) for r in v]):
+            A[k][a]["latency"] = {m: float(np.mean([r["latency"][a][m] for r in v])) for m in v[0]["latency"][a]}
     return A
 
 
@@ -138,6 +142,19 @@ def memory_table(A) -> dict:
     return out
 
 
+def realtime_table(A, arms, ref) -> dict:
+    """Chất lượng (so với ref) và thời gian của từng cấu hình chạy phiên trực tuyến: phân vị step, độ trễ đầu-cuối."""
+    keys = [k for k in A if ref in A[k] and all(a in A[k] and "latency" in A[k][a] for a in arms)]
+    if not keys:
+        return {}
+    rec = summarize(A, arms, ref, keys)
+    for a in arms:
+        lat = [A[k][a]["latency"] for k in keys]
+        rec[a] |= {m: float(np.mean([x[m] for x in lat])) for m in lat[0]}
+        rec[a]["step_p99_worst_ms"] = float(max(x["step_p99_ms"] for x in lat))
+    return {"n_groups": len(keys), "arms": rec}
+
+
 def build_report(rows, cfg: dict) -> dict:
     rows = apply_select(rows, cfg.get("select"))
     A = group(rows)
@@ -158,6 +175,8 @@ def build_report(rows, cfg: dict) -> dict:
         res["breakdowns"][fam] = breakdown(A, arms, keys)
     if cfg.get("static"):
         res["static"] = static_table(A, cfg["static"])
+    if cfg.get("realtime"):
+        res["realtime"] = realtime_table(A, cfg["realtime"], ref)
     res["decisions"], res["memory"] = decision_table(A), memory_table(A)
     return res
 
@@ -207,6 +226,21 @@ def to_markdown(res: dict, cfg: dict, title: str) -> str:
         t = res["static"]
         L += [f"## Static methods ({t['n_groups']} groups)", "", "| Method | AUROC | FPR95 | Best in % of groups |", "|---|---|---|---|"]
         L += [f"| {nm(a)} | {r['auroc']:.2f} | {r['fpr95']:.1f} | {100 * r['best']:.1f}% |" for a, r in t["arms"].items()]
+        L.append("")
+    if res.get("realtime"):
+        t, rates = res["realtime"], BUDGETS_FPS
+        L += [f"## Real-time streaming ({t['n_groups']} groups)", "",
+              (f"Each stream is fed to the method one batch of B samples at a time. Harm / safe: AUROC more than 0.5 below / "
+               f"no more than 0.5 below {nm(cfg.get('reference', 'knn'))}. Step: processing time of one batch on features "
+               "(CUDA-synchronised), percentiles per stream then averaged over groups; worst = largest per-group p99. "
+               "End-to-end per sample at a uniform arrival rate = waiting for the batch to fill + waiting for the previous "
+               "batch + processing (backbone not included)."), "",
+              "| Method | B | AUROC | FPR95 | Harm | Safe | Step p50 (ms) | p95 | p99 | Worst p99 | "
+              + " | ".join(f"E2E @{r}/s mean / p99 (ms)" for r in rates) + " |", "|---" * (10 + len(rates)) + "|"]
+        L += [f"| {nm(a)} | {r['batch']:.0f} | {r['auroc']:.2f} | {r['fpr95']:.1f} | {100 * r['harm']:.1f}% | "
+              f"{100 * r['safe']:.1f}% | {r['step_p50_ms']:.2f} | {r['step_p95_ms']:.2f} | {r['step_p99_ms']:.2f} | "
+              f"{r['step_p99_worst_ms']:.2f} | " + " | ".join(f"{r[f'e2e{x}_mean_ms']:.0f} / {r[f'e2e{x}_p99_ms']:.0f}" for x in rates)
+              + " |" for a, r in t["arms"].items()]
         L.append("")
     if res.get("decisions"):
         L += ["## ID/OOD decisions (flag OOD when p ≤ α)", "",

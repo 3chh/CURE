@@ -6,15 +6,11 @@ import os
 import time
 
 import numpy as np
-import psutil
 import torch
 import yaml
 
-from ..backbones import build_backbone
 from ..data.benchmark import Benchmark
-from ..data.extract import CONFIG_DIR as EXTRACT_DIR
-from ..data.extract import ListSet, env_dir, load_rows
-from ..methods.base import build
+from ..methods.base import Method, Output, build, run_session
 
 BUDGETS_FPS = (30, 100)  # video 30 khung/giây và luồng 100 mẫu/giây
 
@@ -30,8 +26,48 @@ def _pct(x):
             "p99_ms": float(np.percentile(x, 99))}
 
 
+def queue_latency(step_s: np.ndarray, batch: int, n: int, rate: float) -> np.ndarray:
+    """Độ trễ (s) của từng mẫu khi mẫu đến đều `rate` mẫu/s: chờ gom đủ batch, chờ batch trước xong, rồi xử lý."""
+    arrive = np.arange(n) / rate
+    lat, free = np.empty(n), 0.0
+    for j, dt in enumerate(step_s):
+        s, e = j * batch, min(n, (j + 1) * batch)
+        free = max(arrive[e - 1], free) + dt  # batch cuối thiếu mẫu được xử lý khi mẫu cuối của luồng đến
+        lat[s:e] = free - arrive[s:e]
+    return lat
+
+
+def timed_session(method: Method, stream, batch: int, rates=BUDGETS_FPS) -> tuple[Output, dict]:
+    """Chạy phiên trên luồng, đo từng step (đồng bộ CUDA); trả kết quả và phân vị thời gian step, độ trễ đầu-cuối."""
+    z = stream.logits if method.requires_logits else None
+    # Một step bỏ đi trên phiên riêng: khởi tạo CUDA/cuBLAS và tải gallery ko tính vào lần đo.
+    method.session(stream.domain).step(stream.feats[:batch], None if z is None else z[:batch])
+    times = []
+
+    def wrap(step):
+        def timed(*args):
+            _sync()
+            t = time.perf_counter()
+            out = step(*args)
+            _sync()
+            times.append(time.perf_counter() - t)
+            return out
+        return timed
+
+    out = run_session(method, stream, batch, wrap)
+    step_s = np.asarray(times)
+    res = {"batch": batch, "steps": len(step_s)} | {f"step_{k}": v for k, v in _pct(step_s).items()}
+    for r in rates:
+        res |= {f"e2e{r}_{k}": v for k, v in _pct(queue_latency(step_s, batch, len(stream), r)).items()}
+    return out, res
+
+
 def backbone_latency(extract_cfg: str, batch_sizes=(1, 32, 128), n_images=2048, warmup=3) -> dict:
     """Từng batch ảnh ID test: đọc từ đĩa + tiền xử lý (CPU) và chạy mạng (GPU), đo riêng hai phần."""
+    # Nhập muộn: torchvision/PIL thuộc gói phụ `extract`, runner nhập module này cả khi ko có chúng.
+    from ..backbones import build_backbone
+    from ..data.extract import CONFIG_DIR as EXTRACT_DIR
+    from ..data.extract import ListSet, env_dir, load_rows
     cfg = yaml.safe_load((EXTRACT_DIR / f"{extract_cfg}.yaml").read_text(encoding="utf-8"))
     bb = build_backbone(cfg["backbone"], cfg.get("checkpoint"), **(cfg.get("options") or {}))
     imglist = env_dir("CURE_IMGLISTS", "data/benchmark_imglist") / cfg["imglists"] / f"{cfg['sets']['id_test']}.txt"
@@ -57,6 +93,7 @@ def backbone_latency(extract_cfg: str, batch_sizes=(1, 32, 128), n_images=2048, 
 
 def method_latency(bench: Benchmark, methods: dict, domain: str, pi: float, seed: int) -> dict:
     """Mỗi phương pháp trên cùng một luồng đặc trưng: thời gian fit, thời gian chấm cả luồng, bộ nhớ đỉnh."""
+    import psutil
     stream = bench.stream(domain, pi, seed)
     _ = stream.x, stream.feats, stream.logits  # nạp trước để ko tính vào thời gian phương pháp
     proc, out = psutil.Process(os.getpid()), {}
@@ -87,7 +124,7 @@ def method_latency(bench: Benchmark, methods: dict, domain: str, pi: float, seed
 def to_markdown(res: dict) -> str:
     L = [f"# Latency: {res['benchmark']} / {res['domain']}, π = {res['pi']}", "",
          (f"Device: {res['device']}. Method times are amortised over the whole stream ({res['n']} samples); "
-          "per-batch percentiles need the incremental interface."), ""]
+          "per-batch percentiles come from experiments with `streaming: true`."), ""]
     if res.get("backbone"):
         L += ["## Backbone (image → features)", "",
               ("| Batch | Load+preprocess p50 (ms) | Forward p50 (ms) | Total p95 (ms) | Total p99 (ms) | Per sample (ms) | "

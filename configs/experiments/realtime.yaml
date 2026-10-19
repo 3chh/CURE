@@ -1,0 +1,72 @@
+# Vòng 59: luồng thời gian thực. Mỗi luồng được đưa vào phương pháp từng batch B (phiên trực tuyến, Method.session)
+# và đo thời gian từng step. CURE giữ cấu hình vòng 57, đối thủ cấu hình vòng 58; chỉ đổi B.
+# knn (khối 2048) là mốc so sánh; knn_b* chỉ lệch bit cuối so với knn, dùng để đo thời gian theo B.
+name: realtime
+benchmarks: [cifar10, cifar100, imagenet200]
+pis: [0.05, 0.2, 0.5]
+seeds: [0, 1, 2]
+streaming: true
+methods:
+  knn: {}
+  knn_b1: {method: knn, batch: 1}
+  knn_b8: {method: knn, batch: 8}
+  knn_b32: {method: knn, batch: 32}
+  knn_b128: {method: knn, batch: 128}
+  cure_b1: {method: cure, batch: 1}
+  cure_b8: {method: cure, batch: 8}
+  cure_b32: {method: cure, batch: 32}
+  cure_b128: {method: cure, batch: 128}
+  cure_elond_b1: {method: cure, certifier: elond, batch: 1}
+  cure_elond_b8: {method: cure, certifier: elond, batch: 8}
+  cure_elond_b32: {method: cure, certifier: elond, batch: 32}
+  cure_elond_b128: {method: cure, certifier: elond, batch: 128}
+  oodd_b1: {method: oodd, batch: 1}
+  oodd_b8: {method: oodd, batch: 8}
+  oodd_b32: {method: oodd, batch: 32}
+  oodd_b128: {method: oodd, batch: 128}
+  dcac_msp_b1: {method: dcac_msp, batch: 1}
+  dcac_msp_b8: {method: dcac_msp, batch: 8}
+  dcac_msp_b32: {method: dcac_msp, batch: 32}
+  dcac_msp_b128: {method: dcac_msp, batch: 128}
+  dcac_energy_b1: {method: dcac_energy, batch: 1}
+  dcac_energy_b8: {method: dcac_energy, batch: 8}
+  dcac_energy_b32: {method: dcac_energy, batch: 32}
+  dcac_energy_b128: {method: dcac_energy, batch: 128}
+  adaodd_b1: {method: adaodd, batch: 1}
+  adaodd_b8: {method: adaodd, batch: 8}
+  adaodd_b32: {method: adaodd, batch: 32}
+  adaodd_b128: {method: adaodd, batch: 128}
+output: results
+report:
+  reference: knn
+  realtime: [knn_b1, knn_b8, knn_b32, knn_b128, cure_b1, cure_b8, cure_b32, cure_b128, cure_elond_b1, cure_elond_b8, cure_elond_b32, cure_elond_b128, oodd_b1, oodd_b8, oodd_b32, oodd_b128, dcac_msp_b1, dcac_msp_b8, dcac_msp_b32, dcac_msp_b128, dcac_energy_b1, dcac_energy_b8, dcac_energy_b32, dcac_energy_b128, adaodd_b1, adaodd_b8, adaodd_b32, adaodd_b128]
+  labels:
+    knn: kNN (offline)
+    knn_b1: kNN
+    knn_b8: kNN
+    knn_b32: kNN
+    knn_b128: kNN
+    cure_b1: "**CURE** e-BH"
+    cure_b8: "**CURE** e-BH"
+    cure_b32: "**CURE** e-BH"
+    cure_b128: "**CURE** e-BH"
+    cure_elond_b1: "**CURE** e-LOND"
+    cure_elond_b8: "**CURE** e-LOND"
+    cure_elond_b32: "**CURE** e-LOND"
+    cure_elond_b128: "**CURE** e-LOND"
+    oodd_b1: OODD (official)
+    oodd_b8: OODD (official)
+    oodd_b32: OODD (official)
+    oodd_b128: OODD (official)
+    dcac_msp_b1: DCAC-MSP (official)
+    dcac_msp_b8: DCAC-MSP (official)
+    dcac_msp_b32: DCAC-MSP (official)
+    dcac_msp_b128: DCAC-MSP (official)
+    dcac_energy_b1: DCAC-Energy (official)
+    dcac_energy_b8: DCAC-Energy (official)
+    dcac_energy_b32: DCAC-Energy (official)
+    dcac_energy_b128: DCAC-Energy (official)
+    adaodd_b1: "AdaODD* (paper)"
+    adaodd_b8: "AdaODD* (paper)"
+    adaodd_b32: "AdaODD* (paper)"
+    adaodd_b128: "AdaODD* (paper)"

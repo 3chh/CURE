@@ -7,7 +7,7 @@ import numpy as np
 from sklearn.metrics import roc_auc_score
 
 from ...ops import kth_sim, l2
-from ..base import Method, Output, knn_context, register
+from ..base import Method, Output, Session, register
 
 K_GRID = [1, 2, 5, 10, 25, 50, 100, 200, 500, 750, 1000]  # lưới K của OpenOOD v1.5
 
@@ -16,8 +16,25 @@ K_GRID = [1, 2, 5, 10, 25, 50, 100, 200, 500, 750, 1000]  # lưới K của Open
 class KNN(Method):
     """OOD = -cosine tới láng giềng thứ K trong gallery (tương đương đơn điệu với kNN-OOD trên đặc trưng L2)."""
 
+    def __init__(self, batch=2048):
+        # Cỡ khối của phép nhân với gallery; trên GPU bit của điểm phụ thuộc hình dạng phép nhân.
+        self.batch = batch
+
     def score(self, stream):
-        return Output(-knn_context(stream).b)
+        return Output(-kth_sim(stream.x, self.bench.G_device, self.bench.k, self.batch))
+
+    def session(self, domain=None):
+        return KNNSession(self)
+
+
+class KNNSession(Session):
+    def __init__(self, m: KNN):
+        super().__init__()
+        self.m = m
+
+    def step(self, feats, logits=None):
+        self.t += len(feats)
+        return Output(-kth_sim(l2(feats), self.m.bench.G_device, self.m.bench.k, self.m.batch))
 
 
 def select_k(bench, grid=K_GRID) -> tuple[int, float]:

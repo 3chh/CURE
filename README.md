@@ -48,6 +48,7 @@ cure-ood run main --benchmark cifar100 --method cure oodd    # shard / subset (r
 cure-ood report main                            # results/main/report.md + summary.json
 cure-ood run seed35 && cure-ood report seed35   # fresh-seed confirmation (seeds 3-5)
 cure-ood run ablation && cure-ood report ablation
+cure-ood run realtime && cure-ood report realtime   # round 59: batch-by-batch sessions, per-step latency
 cure-ood extract cifar10_resnet18 --image-root /path/to/images   # re-extract features
 cure-ood train configs/train/cifar10_resnet18_ce.yaml       # train your own backbone (docs/training.md)
 cure-ood latency main --extract cifar10_resnet18            # end-to-end timing: image -> backbone -> method
@@ -61,6 +62,7 @@ Experiments are YAML files in `configs/experiments/`. A method entry is `label: 
 | `seed35` | `main` unchanged on seeds 3-5 (confirmation, no re-tuning) |
 | `ablation` | CURE with one component changed: no review (`certifier: all`), oracle review (`certifier: oracle_labels`, reads labels, upper bound only), no fallback, Fisher instead of Cauchy, e-LOND, window 128/512, capacity 128/2048 |
 | `robustness` | `main` methods on the SupCon and DINOv2 backbones |
+| `realtime` | round 59: kNN, CURE (e-BH, e-LOND), OODD, DCAC, AdaODD fed one batch of B ∈ {1, 8, 32, 128} at a time; quality, per-step latency, end-to-end latency at 30 / 100 samples/s |
 | `round57` | reproduces the round 57 table with the earlier baseline versions |
 | `quick` | one stream, smoke test |
 
@@ -70,6 +72,7 @@ Experiments are YAML files in `configs/experiments/`. A method entry is `label: 
 - **Same-base comparison** (`families`): all metrics, DCR, memory size, Δ to the base, harm rate, paired tests (bootstrap CI, Wilcoxon) for all / near / far groups, then a breakdown of AUROC / FPR95 by benchmark (all, near, far) and by π.
 - **Static methods** (`static`): AUROC, FPR95 and the share of groups where each method has the best AUROC.
 - **ID/OOD decisions**: for methods that return a final conformal p-value (CURE), the realised FPR on ID and TPR on OOD when flagging OOD at p ≤ α, for each α in `decision_alphas` (default 0.05, 0.1).
+- **Real-time streaming** (`realtime`): per method and batch size B, AUROC, FPR95, harm / safe vs `reference`, p50 / p95 / p99 of the per-batch processing time and end-to-end latency per sample at 30 and 100 samples/s (experiments with `streaming: true`).
 - **CDM activity**: for CURE, mean CDM size per batch, share of the stream scored with memory (coverage), and samples certified / evicted per stream, overall, by near/far and by π.
 
 From Python:
@@ -85,6 +88,9 @@ out = build("cure").fit(bench).score(stream)
 print(detection_metrics(stream.y, out.scores))
 flags = out.decide(alpha=0.05)    # True = OOD; CURE only (out.pvalues), FPR on ID ≈ 0.05 or below
 print(out.memory_stats)           # CDM size, coverage, certified / evicted
+
+sess = build("cure", batch=8).fit(bench).session()   # deployment: one batch at a time, state kept in between
+step = sess.step(stream.feats[:8])                     # scores and p-values of exactly these 8 samples
 ```
 
 ## Methods

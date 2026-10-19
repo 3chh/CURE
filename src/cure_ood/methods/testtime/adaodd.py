@@ -5,7 +5,7 @@ import numpy as np
 import torch
 
 from ...ops import DEVICE, l2
-from ..base import Method, Output, register
+from ..base import Method, Output, Session, register
 
 # Sec. VI-A "Hyper-parameters details". k = None: quy tắc k = 1‰ cỡ tập train (Sec. VI-C "Effect of k").
 # CIFAR-100: bài chỉ cho k = 200; γ, κ lấy theo CIFAR-10 (cùng nhóm benchmark nhỏ).
@@ -77,23 +77,15 @@ class AdaODD(Method):
         self.lam = np.quantile(sc.cpu().numpy(), round(1 - self.tpr, 12))
         return self
 
-    @torch.inference_mode()
     def score(self, stream):
-        mem = torch.as_tensor(self.mem0, device=DEVICE)
-        wts = torch.ones(len(mem), device=DEVICE)
-        xt = torch.as_tensor(stream.x if self.normalize else self._feats(stream.feats), device=DEVICE)
-        lo, hi = self.lam * self.gamma_, self.lam / self.gamma_
-        out = np.empty(len(xt), np.float32)
-        for s in range(0, len(xt), self.batch):
-            q = xt[s:s + self.batch]
-            sc = knn_score(q, mem, wts, self.k_, self.agg)
-            out[s:s + self.batch] = sc.cpu().numpy()
-            add_ood, add_id = sc < lo, sc > hi
-            mem = torch.cat([mem, q[add_ood], q[add_id]])
-            wts = torch.cat([wts, torch.full((int(add_ood.sum()),), self.kappa_, device=DEVICE),
-                             torch.ones(int(add_id.sum()), device=DEVICE)])
-        self.memory_ = (mem, wts)
+        sess = self.session()
+        x = stream.x if self.normalize else self._feats(stream.feats)
+        out = np.concatenate([sess.adapt(x[s:s + self.batch]) for s in range(0, len(x), self.batch)])
+        self.memory_ = (sess.mem, sess.wts)
         return Output(-out)
+
+    def session(self, domain=None):
+        return AdaODDSession(self)
 
     @torch.inference_mode()
     def reevaluate(self, feats: np.ndarray) -> float:
@@ -102,3 +94,29 @@ class AdaODD(Method):
         x = l2(feats) if self.normalize else self._feats(feats)
         sc = knn_score(torch.as_tensor(x, device=DEVICE), mem, wts, self.k_, self.agg)
         return float((sc.cpu().numpy() >= self.lam).mean())
+
+
+class AdaODDSession(Session):
+    """Bộ nhớ và trọng số của AdaODD giữ giữa các batch."""
+
+    def __init__(self, m: AdaODD):
+        super().__init__()
+        self.m = m
+        self.mem = torch.as_tensor(m.mem0, device=DEVICE)
+        self.wts = torch.ones(len(self.mem), device=DEVICE)
+
+    @torch.inference_mode()
+    def adapt(self, x: np.ndarray) -> np.ndarray:
+        """Chấm batch rồi nạp mẫu chắc chắn OOD (trọng số κ) và chắc chắn ID (trọng số 1) vào bộ nhớ."""
+        m = self.m
+        q = torch.as_tensor(x, device=DEVICE)
+        sc = knn_score(q, self.mem, self.wts, m.k_, m.agg)
+        add_ood, add_id = sc < m.lam * m.gamma_, sc > m.lam / m.gamma_
+        self.mem = torch.cat([self.mem, q[add_ood], q[add_id]])
+        self.wts = torch.cat([self.wts, torch.full((int(add_ood.sum()),), m.kappa_, device=DEVICE),
+                              torch.ones(int(add_id.sum()), device=DEVICE)])
+        self.t += len(x)
+        return sc.cpu().numpy()
+
+    def step(self, feats, logits=None):
+        return Output(-self.adapt(l2(feats) if self.m.normalize else self.m._feats(feats)))

@@ -11,12 +11,12 @@ def l2(a: np.ndarray) -> np.ndarray:
     return (a / np.linalg.norm(a, axis=1, keepdims=True).clip(1e-12)).astype(np.float32)
 
 
-def kth_sim(q: np.ndarray, g: np.ndarray, k: int, chunk: int = 2048) -> np.ndarray:
-    """Cosine tới láng giềng thứ k trong g (lớn = giống); q, g đã chuẩn hóa L2."""
+def kth_sim(q: np.ndarray, g, k: int, chunk: int = 2048) -> np.ndarray:
+    """Cosine tới láng giềng thứ k trong g (lớn = giống); q, g đã chuẩn hóa L2, g có thể là tensor sẵn trên DEVICE."""
     out = np.empty(len(q), np.float32)
     if len(q) == 0:
         return out
-    gt = torch.as_tensor(np.ascontiguousarray(g, dtype=np.float32), device=DEVICE)
+    gt = g if torch.is_tensor(g) else torch.as_tensor(np.ascontiguousarray(g, dtype=np.float32), device=DEVICE)
     # Giữ khối 2048 như bản gốc: đổi hình dạng phép nhân làm lệch bit trên GPU.
     for s in range(0, len(q), chunk):
         qt = torch.as_tensor(np.ascontiguousarray(q[s:s + chunk], dtype=np.float32), device=DEVICE)

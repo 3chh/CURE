@@ -20,6 +20,13 @@ class Output:
     pvalues: np.ndarray | None = None  # p conformal cuối (hiệu chuẩn trên C); None = phương pháp ko cho p
     memory_stats: dict | None = None  # thống kê hoạt động CDM của luồng (MemoryRun.activity)
 
+    @classmethod
+    def concat(cls, outs: list[Output], memory_stats: dict | None = None) -> Output:
+        """Ghép kết quả các bước của một phiên thành kết quả cả luồng."""
+        pv = None if any(o.pvalues is None for o in outs) else np.concatenate([o.pvalues for o in outs])
+        mem = None if all(o.memory is None for o in outs) else [m for o in outs for m in o.memory or []]
+        return cls(np.concatenate([o.scores for o in outs]), mem, pv, memory_stats)
+
     def decide(self, alpha: float) -> np.ndarray:
         """Quyết định ID/OOD: báo lạ khi p ≤ alpha; FPR trên ID ≈ alpha khi mẫu ID hoán đổi được với C."""
         if self.pvalues is None:
@@ -37,6 +44,37 @@ class Method:
 
     def score(self, stream: Stream) -> Output:
         raise NotImplementedError
+
+    def session(self, domain: str | None = None) -> Session:
+        """Phiên trực tuyến sau fit; domain chỉ dùng cho phương pháp cần dữ liệu phụ theo tập lạ (OODD T-out)."""
+        raise NotImplementedError(f"{self.name}: chưa có phiên trực tuyến, dùng score()")
+
+
+class Session:
+    """Trạng thái của phương pháp khi nhận luồng từng batch; step chấm đúng các mẫu vừa đến."""
+
+    def __init__(self):
+        self.t = 0  # số mẫu đã nhận = chỉ số trong luồng của mẫu đầu batch kế tiếp
+
+    def step(self, feats: np.ndarray, logits: np.ndarray | None = None) -> Output:
+        raise NotImplementedError
+
+    def activity(self) -> dict | None:
+        """Thống kê hoạt động bộ nhớ từ đầu phiên (như Output.memory_stats); None nếu ko có."""
+        return None
+
+
+def has_session(method: Method) -> bool:
+    return type(method).session is not Method.session
+
+
+def run_session(method: Method, stream: Stream, batch: int, wrap=None) -> Output:
+    """Đưa luồng vào một phiên mới theo từng batch cỡ `batch`; wrap(step) để bọc bước (vd đo thời gian)."""
+    sess = method.session(stream.domain)
+    step = wrap(sess.step) if wrap else sess.step
+    z = stream.logits if method.requires_logits else None
+    outs = [step(stream.feats[s:s + batch], None if z is None else z[s:s + batch]) for s in range(0, len(stream), batch)]
+    return Output.concat(outs, sess.activity())
 
 
 def register(name: str):
@@ -62,12 +100,19 @@ class KnnContext:
     shadow: np.ndarray  # tập đối chứng S = {c ∈ C: s0(c) ≤ τ}
 
 
+def knn_reference(bench: Benchmark, q: float = 0.2):
+    """Phần chỉ phụ thuộc dữ liệu ID: s0 của C, ngưỡng sàng lọc τ và tập đối chứng S."""
+    cb = kth_sim(bench.C, bench.G, bench.k)
+    tau = id_threshold(cb, q)
+    return cb, tau, bench.C[cb <= tau]
+
+
 def knn_context(stream: Stream, q: float = 0.2) -> KnnContext:
     """Điểm kNN và sàng lọc dùng chung cho mọi phương pháp test-time; tính một lần mỗi luồng."""
     key = ("knn", q)
     if key not in stream.cache:
         B = stream.bench
-        b, cb = kth_sim(stream.x, B.G, B.k), kth_sim(B.C, B.G, B.k)
-        tau = id_threshold(cb, q)
-        stream.cache[key] = KnnContext(b, cb, b <= tau, B.C[cb <= tau])
+        b = kth_sim(stream.x, B.G, B.k)
+        cb, tau, shadow = knn_reference(B, q)
+        stream.cache[key] = KnnContext(b, cb, b <= tau, shadow)
     return stream.cache[key]

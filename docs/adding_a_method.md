@@ -29,6 +29,7 @@ Rules:
 - `fit` may only use in-distribution data outside the stream. `score` must be causal in the sense of the protocol (batch `t` may use samples of batches `≤ t`) and must not read `stream.y`.
 - Return OOD-positive scores (larger = more likely OOD). AUROC, AUPR, FPR95 and TPR@FPR5 are computed by the runner.
 - Expensive quantities shared by several methods go into `stream.cache` (per stream) or are computed once in `fit` (per benchmark).
+- Optional, for real-time streaming (`streaming: true` experiments): implement `session(domain=None)` returning a `Session` whose `step(feats, logits=None)` scores the next batch and keeps the state between batches. Driving it with `run_session(method, stream, method.batch)` must reproduce `score(stream)`; add the method to `tests/test_streaming.py`.
 - Import the new module in `methods/static/__init__.py` or `methods/testtime/__init__.py` so that it registers itself.
 
 Then add it to an experiment config:

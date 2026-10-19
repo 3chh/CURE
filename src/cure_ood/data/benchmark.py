@@ -7,9 +7,10 @@ from functools import cached_property
 from pathlib import Path
 
 import numpy as np
+import torch
 import yaml
 
-from ..ops import l2
+from ..ops import DEVICE, l2
 
 CONFIG_DIR = Path(__file__).resolve().parents[3] / "configs" / "benchmarks"
 
@@ -99,6 +100,11 @@ class Benchmark:
     def G(self) -> np.ndarray:
         """Gallery đã chuẩn hóa L2."""
         return l2(self.train_feats)
+
+    @cached_property
+    def G_device(self) -> torch.Tensor:
+        """Gallery trên DEVICE, tải một lần cho mọi phiên trực tuyến."""
+        return torch.as_tensor(self.G, device=DEVICE)
 
     @cached_property
     def cal_feats(self):

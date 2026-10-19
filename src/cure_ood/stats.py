@@ -10,7 +10,8 @@ from scipy.stats import betabinom
 from .ops import DEVICE
 
 EPS = 1e-12
-Certifier = Callable[[np.ndarray], np.ndarray]
+Certifier = Callable[[np.ndarray], np.ndarray]  # chỉ số mẫu hết hạn → mặt nạ chứng nhận
+Rule = Callable[[np.ndarray], np.ndarray]  # p của các mẫu hết hạn cùng lúc → mặt nạ chứng nhận
 
 
 def rank_p(stat, ref) -> np.ndarray:
@@ -81,14 +82,14 @@ def betabinom_pvalues(counts, npass, k, m) -> np.ndarray:
     return p
 
 
-def ebh_certifier(p: np.ndarray, alpha=0.2, kappa=0.5) -> Certifier:
+def ebh_rule(alpha=0.2, kappa=0.5) -> Rule:
     """e-BH trên các mẫu hết hạn cùng batch; FDR ≤ alpha dưới mọi phụ thuộc."""
-    def certify(expired):
-        keep = np.zeros(len(expired), bool)
-        if len(expired) == 0:
+    def certify(p):
+        keep = np.zeros(len(p), bool)
+        if len(p) == 0:
             return keep
-        ev = kappa * np.maximum(p[expired], EPS) ** (kappa - 1)
-        order, m = np.argsort(-ev), len(expired)
+        ev = kappa * np.maximum(p, EPS) ** (kappa - 1)
+        order, m = np.argsort(-ev), len(p)
         ok = ev[order] >= m / (alpha * np.arange(1, m + 1))
         if ok.any():
             keep[order[: int(np.flatnonzero(ok)[-1]) + 1]] = True
@@ -96,16 +97,16 @@ def ebh_certifier(p: np.ndarray, alpha=0.2, kappa=0.5) -> Certifier:
     return certify
 
 
-def elond_certifier(p: np.ndarray, alpha=0.2, kappa=0.5) -> Certifier:
+def elond_rule(alpha=0.2, kappa=0.5) -> Rule:
     """e-LOND (online, xét từng mẫu); FDR ≤ alpha dưới mọi phụ thuộc. Có trạng thái: tạo mới cho mỗi luồng."""
-    j = np.arange(1, 2 * len(p) + 10)
-    gamma = 0.07720838 * np.log(np.maximum(j, 2)) / (j * np.exp(np.sqrt(np.log(j))))
     state = {"t": 0, "r": 0}
 
-    def certify(expired):
-        keep = np.zeros(len(expired), bool)
-        for i, e in enumerate(expired):
-            if kappa * max(p[e], EPS) ** (kappa - 1) >= 1.0 / (alpha * gamma[state["t"]] * (state["r"] + 1)):
+    def certify(p):
+        keep = np.zeros(len(p), bool)
+        j = np.arange(state["t"] + 1, state["t"] + len(p) + 1)
+        gamma = 0.07720838 * np.log(np.maximum(j, 2)) / (j * np.exp(np.sqrt(np.log(j))))
+        for i, pi in enumerate(p):
+            if kappa * max(pi, EPS) ** (kappa - 1) >= 1.0 / (alpha * gamma[i] * (state["r"] + 1)):
                 keep[i] = True
                 state["r"] += 1
             state["t"] += 1
@@ -113,8 +114,28 @@ def elond_certifier(p: np.ndarray, alpha=0.2, kappa=0.5) -> Certifier:
     return certify
 
 
-def all_certifier(p: np.ndarray, alpha=None) -> Certifier:
+def all_rule(alpha=None) -> Rule:
     """Bỏ hậu kiểm (ablation): mọi mẫu hết hạn đều vào CDM."""
+    return lambda p: np.ones(len(p), bool)
+
+
+RULES = {"ebh": ebh_rule, "elond": elond_rule, "all": all_rule}
+
+
+def ebh_certifier(p: np.ndarray, alpha=0.2, kappa=0.5) -> Certifier:
+    """e-BH theo chỉ số mẫu của luồng (p của cả luồng)."""
+    rule = ebh_rule(alpha, kappa)
+    return lambda expired: rule(p[expired])
+
+
+def elond_certifier(p: np.ndarray, alpha=0.2, kappa=0.5) -> Certifier:
+    """e-LOND theo chỉ số mẫu của luồng; tạo mới cho mỗi luồng."""
+    rule = elond_rule(alpha, kappa)
+    return lambda expired: rule(p[expired])
+
+
+def all_certifier(p: np.ndarray, alpha=None) -> Certifier:
+    """Bỏ hậu kiểm theo chỉ số mẫu (ablation)."""
     return lambda expired: np.ones(len(expired), bool)
 
 

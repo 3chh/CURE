@@ -9,7 +9,8 @@ from pathlib import Path
 import yaml
 
 from ..data.benchmark import Benchmark
-from ..methods.base import build
+from ..methods.base import build, has_session
+from .latency import timed_session
 from .metrics import dcr_counts, decision_metrics, detection_metrics
 
 CONFIG_DIR = Path(__file__).resolve().parents[3] / "configs" / "experiments"
@@ -25,6 +26,7 @@ class Experiment:
     domains: list[str] | None = None  # None = mọi tập lạ của benchmark
     decision_alphas: list[float] = field(default_factory=lambda: [0.05, 0.1])  # mức α của quyết định p ≤ α
     output: str = "results"
+    streaming: bool = False  # chấm bằng phiên trực tuyến từng batch (cỡ = tham số batch) và đo thời gian từng step
     report: dict = field(default_factory=dict)  # cấu hình bảng, xem eval/report.py
 
     @classmethod
@@ -70,7 +72,10 @@ def run(exp: Experiment, benchmarks=None, domains=None, methods=None, log=print)
                                   "n": len(stream), "metrics": {}, "dcr": {}, "seconds": {}}
                     for a in todo:
                         t = time.perf_counter()
-                        out = arms[a].score(stream)
+                        if exp.streaming and has_session(arms[a]):
+                            out, row.setdefault("latency", {})[a] = timed_session(arms[a], stream, arms[a].batch)
+                        else:
+                            out = arms[a].score(stream)
                         row["seconds"][a] = round(time.perf_counter() - t, 3)
                         row["metrics"][a] = detection_metrics(stream.y, out.scores)
                         if out.memory is not None:
