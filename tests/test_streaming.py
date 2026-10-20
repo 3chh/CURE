@@ -19,6 +19,7 @@ BENCHES = {}
 
 def stream_of(name, domain, pi, seed):
     if name not in BENCHES:
+        BENCHES.clear()  # giữ một benchmark mỗi lúc: máy 16 GB ko chứa nổi cả ImageNet-200 lẫn CIFAR-100
         BENCHES[name] = Benchmark.load(name)
     need_features(BENCHES[name])
     return BENCHES[name].stream(domain, pi, seed)
