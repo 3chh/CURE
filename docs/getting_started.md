@@ -15,7 +15,12 @@ pip install -e ".[dev,data,extract]"
 
 ## 2. Lấy dữ liệu
 
-Dữ liệu nằm trên Hugging Face, để private vì license ImageNet/Places/TinyImageNet. Xin quyền truy cập `3chh/cure-data` và `3chh/cure-checkpoints`, rồi `huggingface-cli login`.
+Dữ liệu nằm trên Hugging Face, để private vì license ImageNet/Places/TinyImageNet. Ko cần tài khoản HF: xin trưởng nhóm token chỉ đọc (gửi riêng, **ko commit, ko dán vào code hay issue**) rồi đặt biến môi trường một lần:
+
+```bash
+setx HF_TOKEN hf_...            # Windows, mở terminal mới sau đó
+export HF_TOKEN=hf_...          # Linux/macOS, thêm vào ~/.bashrc
+```
 
 Ko cần tải trước: thiếu file đặc trưng, gallery OODD hay checkpoint nào thì lần chạy đầu tự lấy đúng file đó từ HF vào cache HF (`HF_HOME`), lần sau dùng lại. Muốn chạy offline thì đặt `CURE_HF_AUTO=0`. Nếu muốn tải hết về thư mục repo từ đầu:
 

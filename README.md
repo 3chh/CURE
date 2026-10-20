@@ -20,7 +20,11 @@ Python ≥ 3.10, PyTorch ≥ 2.1. A GPU is used when available; everything also 
 
 ## Data
 
-Methods run on pre-extracted features (one `.npz` per backbone × ID dataset, convention in [docs/adding_a_backbone.md](docs/adding_a_backbone.md)). They are hosted in a private Hugging Face dataset (`3chh/cure-data`, checkpoints in `3chh/cure-checkpoints`) because of the ImageNet / Places / TinyImageNet licences; ask the maintainers for access and run `huggingface-cli login`.
+Methods run on pre-extracted features (one `.npz` per backbone × ID dataset, convention in [docs/adding_a_backbone.md](docs/adding_a_backbone.md)). They are hosted in a private Hugging Face dataset (`3chh/cure-data`, checkpoints in `3chh/cure-checkpoints`) because of the ImageNet / Places / TinyImageNet licences. Team members get a read-only token from the maintainers and set it once (never commit it):
+
+```bash
+export HF_TOKEN=hf_...                 # Windows: setx HF_TOKEN hf_...  (then open a new terminal)
+```
 
 No separate download step is needed: when a feature file, OODD gallery or checkpoint is missing locally, it is fetched from Hugging Face on first use into the Hugging Face cache (`HF_HOME`) and reused afterwards. Only the files a run needs are fetched (the `quick` experiment needs one ~0.45 GB file). Set `CURE_HF_AUTO=0` to work offline. To place everything in the repo folders up front instead:
 
