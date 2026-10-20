@@ -6,6 +6,8 @@ CURE separates *scoring* from *remembering*. Every sample is scored with a calib
 
 This repository contains the CURE implementation, all comparison methods behind one interface, the benchmark runner, feature extraction, and the literature review.
 
+New team members: start with [docs/getting_started.md](docs/getting_started.md) (Vietnamese): setup, data, experiments and team rules. Result summaries of the experiments already run are in [reports/](reports/).
+
 ## Install
 
 ```bash
@@ -18,12 +20,14 @@ Python ≥ 3.10, PyTorch ≥ 2.1. A GPU is used when available; everything also 
 
 ## Data
 
-Methods run on pre-extracted features (one `.npz` per backbone × ID dataset, convention in [docs/adding_a_backbone.md](docs/adding_a_backbone.md)). They are hosted in a private Hugging Face dataset because of the ImageNet / Places / TinyImageNet licences; ask the maintainers for access, then:
+Methods run on pre-extracted features (one `.npz` per backbone × ID dataset, convention in [docs/adding_a_backbone.md](docs/adding_a_backbone.md)). They are hosted in a private Hugging Face dataset (`3chh/cure-data`, checkpoints in `3chh/cure-checkpoints`) because of the ImageNet / Places / TinyImageNet licences; ask the maintainers for access and run `huggingface-cli login`.
+
+No separate download step is needed: when a feature file, OODD gallery or checkpoint is missing locally, it is fetched from Hugging Face on first use into the Hugging Face cache (`HF_HOME`) and reused afterwards. Only the files a run needs are fetched (the `quick` experiment needs one ~0.45 GB file). Set `CURE_HF_AUTO=0` to work offline. To place everything in the repo folders up front instead:
 
 ```bash
-huggingface-cli login
-python scripts/download_data.py features      # ~2.1 GB -> data/features/
-python scripts/download_data.py checkpoints   # only needed to re-extract features
+python scripts/download_data.py                 # features (~2.1 GB) + OODD 5-crop galleries -> data/features/
+python scripts/download_data.py checkpoints     # only needed to re-extract features or train
+python scripts/download_data.py imglists images cifar10 cifar100   # images, only to re-extract features
 ```
 
 `CURE_FEATURES` and `CURE_CHECKPOINTS` override the default folders.
@@ -131,19 +135,23 @@ Exceptions: Mahalanobis uses an expanded quadratic form that is ~50x faster than
 ```
 configs/
   benchmarks/       one YAML per feature file: splits, OOD sets, K
-  experiments/      main, seed35, ablation, robustness, round57, quick
+  experiments/      main, seed35, ablation, robustness, realtime, round57, quick, oodd_in200_alpha1
   extract/          feature extraction configs
+  train/            backbone training configs
+  oodd_t_out.json   OODD official T-out lists mapped to feature rows
 src/cure_ood/
   ops.py            L2 normalisation, k-th neighbour similarity
   stats.py          conformal p-values, Cauchy/Fisher combination, beta-binomial, e-BH, e-LOND
   data/             Benchmark + Stream construction, feature extraction
-  backbones/        backbone registry (OpenOOD ResNet18, ResNet-50, DINOv2)
-  methods/          base interface, cure.py, memory.py (shared memory host), static/, testtime/
-  eval/             metrics, runner, report
+  backbones/        backbone registry (OpenOOD ResNet18, ResNet-50, DINOv2, torchvision)
+  methods/          base interface + streaming sessions, cure.py, memory.py, static/ (+ _openood/), testtime/ (+ _official/), legacy/
+  eval/             metrics, runner, report, latency
+  train/            backbone training (CE, SupCon, pluggable losses)
   cli.py
-scripts/            download_data.py
+scripts/            download_data.py, run_all.py (low-RAM runner), build_oodd_gallery.py, export_reports.py, upload_data.py
+reports/            report.md + summary.json of the experiments already run
 tests/              unit, golden and equivalence tests
-docs/               method, adding a method / backbone
+docs/               getting_started (VI), method, adding a method / backbone, training, reimplementations/
 papers/             literature review (xlsx) and PDFs, see papers/README.md
 slides/, eda/       slides and the EDA notebook of the OpenOOD benchmark
 ```

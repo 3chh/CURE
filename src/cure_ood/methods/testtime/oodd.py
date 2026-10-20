@@ -8,6 +8,7 @@ from queue import PriorityQueue
 import numpy as np
 import torch
 
+from ...data import hub
 from ...data.benchmark import data_root
 from ...ops import DEVICE
 from ..base import Method, Output, Session, knn_context, register
@@ -17,12 +18,24 @@ from ._official import oodd_knn as official
 T_OUT = Path(__file__).resolve().parents[4] / "configs" / "oodd_t_out.json"
 
 
-def informative_gallery(bench):
-    """Gallery informative của OODD: file 5 crop nếu có, ko thì xấp xỉ 1 view (ImageNet-200)."""
-    path = data_root() / f"oodd_gallery_{bench.name}.npz"
-    if path.exists():
+def t_out_lists(bench) -> dict:
+    """Danh sách T-out của OODD (chỉ số dòng trong file đặc trưng) cho bộ ID mà benchmark dùng chung tập test."""
+    return json.loads(T_OUT.read_text(encoding="utf-8")).get(bench.t_out or bench.name, {})
+
+
+def informative_gallery(bench, allow_approx=False):
+    """Gallery informative của OODD: file 5 crop; chỉ xấp xỉ 1 view khi bộ ID ko có ảnh train (ImageNet-200)."""
+    name = f"oodd_gallery_{bench.name}.npz"
+    path = hub.feature_file(name, data_root() / name)
+    if path is not None:
         d = np.load(path)
         return d["activation_log"], d["idx"], "5-crop"
+    if not bench.has_logits:  # vd DINOv2: ko có MSP để xếp nên dùng cả gallery (fit đặt ALPHA = 1)
+        return official.normalizer(bench.train_feats).astype(np.float32), np.arange(len(bench.train_feats)), "full"
+    if bench.split is None and not allow_approx:
+        # Lặng lẽ xấp xỉ sẽ cho số OODD khác bảng chính mà ko ai biết: buộc tải hoặc dựng file.
+        raise FileNotFoundError(f"thiếu {name}: chạy `py scripts/download_data.py oodd` hoặc "
+                                f"`py scripts/build_oodd_gallery.py {bench.name}`, hoặc đặt gallery: approx")
     msp = torch.softmax(torch.as_tensor(bench.train_logits, dtype=torch.float32), 1).max(1).values
     idx = official.informative_order(msp, torch.as_tensor(bench.train_labels))
     return official.normalizer(bench.train_feats).astype(np.float32), idx, "1-view"
@@ -32,14 +45,22 @@ def informative_gallery(bench):
 class OODD(Method):
     """OODD chạy conf_postprocess gốc; t_out=True thêm 128 mẫu OOD phụ trợ theo danh sách chính thức."""
 
-    def __init__(self, K1=10, K2=5, alpha=0.5, queue_size=512, batch=512, t_out=False):
+    def __init__(self, K1=10, K2=5, alpha=0.5, queue_size=512, batch=512, t_out=False, gallery="auto"):
         self.K1, self.K2, self.alpha, self.queue_size, self.batch, self.t_out = K1, K2, alpha, queue_size, batch, t_out
+        self.gallery = gallery  # auto: bắt buộc file 5 crop khi có ảnh train; approx: cho phép xấp xỉ 1 view
 
     def fit(self, bench):
         super().fit(bench)
-        self.activation_log, self.idx, self.gallery_kind = informative_gallery(bench)
-        self.t_out_index = json.loads(T_OUT.read_text(encoding="utf-8")).get(bench.name, {}) if self.t_out else {}
+        self.activation_log, self.idx, self.gallery_kind = informative_gallery(bench, self.gallery == "approx")
+        if self.gallery_kind == "full":
+            self.alpha = 1.0
+        self.t_out_index = t_out_lists(bench) if self.t_out else {}
         return self
+
+    def supports(self, bench):
+        if self.t_out and not t_out_lists(bench):
+            return "ko có danh sách T-out chính thức khớp với file đặc trưng (khai báo t_out trong config benchmark)"
+        return super().supports(bench)
 
     def aux(self, domain):
         if not self.t_out:

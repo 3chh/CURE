@@ -41,7 +41,7 @@ class Experiment:
         return Path(self.output) / self.name
 
 
-def run(exp: Experiment, benchmarks=None, domains=None, methods=None, log=print) -> None:
+def run(exp: Experiment, benchmarks=None, domains=None, methods=None, log=print, force=False) -> None:
     """Lọc theo benchmarks/domains/methods để chia việc cho nhiều tiến trình; luồng đã có kết quả thì bỏ qua."""
     exp.out_dir.mkdir(parents=True, exist_ok=True)
     for bname in benchmarks or exp.benchmarks:
@@ -52,7 +52,8 @@ def run(exp: Experiment, benchmarks=None, domains=None, methods=None, log=print)
                 continue
             spec = dict(spec or {})
             m = build(spec.pop("method", label), **spec)
-            if m.requires_logits and not bench.has_logits:
+            if why := m.supports(bench):
+                log(f"bỏ qua {label} trên {bench.name}: {why}")
                 continue
             arms[label] = m.fit(bench)
         for dom in domains or exp.domains or bench.domains:
@@ -64,7 +65,8 @@ def run(exp: Experiment, benchmarks=None, domains=None, methods=None, log=print)
             for pi in exp.pis:
                 for seed in exp.seeds:
                     row = done.get((pi, seed))
-                    todo = [a for a in arms if row is None or a not in row["metrics"]]
+                    # force: tính lại các phương pháp đã chọn (vd sau khi thêm chỉ số mới), giữ nguyên phương pháp khác.
+                    todo = [a for a in arms if force or row is None or a not in row["metrics"]]
                     if not todo:
                         continue
                     stream = bench.stream(dom, pi, seed)

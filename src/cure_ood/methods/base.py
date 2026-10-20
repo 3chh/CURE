@@ -38,6 +38,10 @@ class Method:
     """Phương pháp OOD: fit chỉ dùng dữ liệu ID ngoài luồng, score ko được đọc stream.y (trừ ablation oracle_labels của CURE)."""
     requires_logits: ClassVar[bool] = False
 
+    def supports(self, bench: Benchmark) -> str | None:
+        """Lý do ko chạy được trên benchmark này (vd thiếu logit), None nếu chạy được."""
+        return "benchmark ko có logit" if self.requires_logits and not bench.has_logits else None
+
     def fit(self, bench: Benchmark) -> Method:
         self.bench = bench
         return self

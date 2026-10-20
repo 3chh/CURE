@@ -11,6 +11,7 @@ import torch
 import yaml
 
 from ..ops import DEVICE, l2
+from . import hub
 
 CONFIG_DIR = Path(__file__).resolve().parents[3] / "configs" / "benchmarks"
 
@@ -33,6 +34,7 @@ class Benchmark:
     val_ood: str | None = None  # OOD proxy cho APS (chọn siêu tham số tĩnh)
     split: dict | None = None  # giao thức tách khi bộ ID ko có tập train (ImageNet-200)
     stream_salt: list[int] = field(default_factory=list)
+    t_out: str | None = None  # nhóm danh sách T-out của OODD (configs/oodd_t_out.json); None = theo tên benchmark
     backbone: str = ""
     description: str = ""
 
@@ -50,7 +52,11 @@ class Benchmark:
 
     @cached_property
     def npz(self):
-        return np.load(data_root() / self.features)
+        local = data_root() / self.features
+        path = hub.feature_file(self.features, local)
+        if path is None:
+            raise FileNotFoundError(f"thiếu {local}: chạy `py scripts/download_data.py` hoặc bật CURE_HF_AUTO")
+        return np.load(path)
 
     def array(self, key: str):
         return self.npz[key] if key in self.npz.files else None

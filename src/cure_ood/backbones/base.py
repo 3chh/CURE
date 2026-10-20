@@ -67,6 +67,9 @@ def resolve_checkpoint(checkpoint: str | Path) -> Path:
     for d in dirs:
         if (Path(d) / p).exists():
             return Path(d) / p
+    from ..data import hub
+    if (cached := hub.checkpoint_file(str(p))) is not None:
+        return cached
     raise FileNotFoundError(f"ko thấy checkpoint '{checkpoint}' trong {dirs}")
 
 

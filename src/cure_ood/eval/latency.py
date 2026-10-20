@@ -100,7 +100,7 @@ def method_latency(bench: Benchmark, methods: dict, domain: str, pi: float, seed
     for label, spec in methods.items():
         spec = dict(spec or {})
         m = build(spec.pop("method", label), **spec)
-        if m.requires_logits and not bench.has_logits:
+        if m.supports(bench):
             continue
         stream.cache.clear()  # ko cho phương pháp sau dùng lại kNN/kênh bộ nhớ đã tính
         if torch.cuda.is_available():

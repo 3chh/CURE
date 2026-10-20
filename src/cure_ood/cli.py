@@ -15,6 +15,7 @@ def main(argv=None):
     r.add_argument("--domain", nargs="*", help="only these OOD sets")
     r.add_argument("--method", nargs="*", help="only these method labels")
     r.add_argument("--output", help="override the output root")
+    r.add_argument("--force", action="store_true", help="recompute the selected methods even if results exist")
     s = sub.add_parser("report", help="aggregate results into Markdown + JSON tables")
     s.add_argument("experiment")
     s.add_argument("--benchmark", nargs="*", help="restrict the report to these benchmarks")
@@ -59,7 +60,7 @@ def main(argv=None):
         return
     if a.cmd == "run":
         from .eval.runner import run
-        run(exp, a.benchmark, a.domain, a.method)
+        run(exp, a.benchmark, a.domain, a.method, force=a.force)
     else:
         from .eval.report import build_report, load_rows, to_markdown
         res = build_report(load_rows(exp.out_dir, a.benchmark), exp.report)

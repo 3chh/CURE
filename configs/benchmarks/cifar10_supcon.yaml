@@ -6,3 +6,4 @@ k: 1
 val_ood: val_tin
 near: [cifar100, tin]
 far: [mnist, svhn, texture, places365]
+t_out: cifar10    # cùng tập test và thứ tự dòng với cifar10 nên dùng chung danh sách T-out của OODD
