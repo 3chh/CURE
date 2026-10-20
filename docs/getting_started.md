@@ -7,7 +7,7 @@ Hướng dẫn cho thành viên mới: cài đặt, lấy dữ liệu, chạy th
 ```bash
 git clone https://github.com/3chh/CURE.git && cd CURE
 python -m venv .venv && .venv\Scripts\activate          # Linux/macOS: source .venv/bin/activate
-pip install -e ".[dev,data,extract]"
+pip install -e ".[dev,extract]"
 ```
 
 - Python ≥ 3.10, PyTorch ≥ 2.1. Có GPU thì dùng GPU; phương pháp tĩnh bản OpenOOD bắt buộc GPU vì code gốc gọi `.cuda()`.

@@ -149,9 +149,9 @@ def test_shipped_configs_parse():
     assert cfg["stages"][0]["epochs"] == 1 and cfg["data"]["subsample"] == 2000
 
 
-CLASSIC = Path(os.environ.get("CURE_SMOKE_IMAGES", "C:/Users/Hp Victus/Desktop/DeepFakeDetection/data/images"))
-LISTS = Path(os.environ.get("CURE_SMOKE_IMGLISTS",
-                            "C:/Users/Hp Victus/Desktop/DeepFakeDetection/baselines_official/OODD/data/benchmark_imglist"))
+REPO = Path(__file__).resolve().parents[1]
+CLASSIC = Path(os.environ.get("CURE_SMOKE_IMAGES", REPO / "data" / "images"))
+LISTS = Path(os.environ.get("CURE_SMOKE_IMGLISTS", REPO / "data" / "benchmark_imglist"))
 
 
 @pytest.mark.skipif(os.environ.get("CURE_TRAIN_SMOKE") != "1" or not (LISTS / "cifar10" / "train_cifar10.txt").exists()

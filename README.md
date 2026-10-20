@@ -13,7 +13,7 @@ New team members: start with [docs/getting_started.md](docs/getting_started.md) 
 ```bash
 git clone https://github.com/3chh/CURE.git && cd CURE
 pip install -e ".[dev]"              # core + tests
-pip install -e ".[extract,data]"     # optional: feature extraction, Hugging Face download
+pip install -e ".[extract]"          # optional: feature extraction, training
 ```
 
 Python ≥ 3.10, PyTorch ≥ 2.1. A GPU is used when available; everything also runs on CPU.
@@ -129,7 +129,15 @@ Three kinds of tests:
 - `tests/test_golden_*.py`: CURE, CURE-LF and the round 21-57 versions of the baselines reproduce the stored results of the original experiment scripts bit for bit (AUROC with `==` and memory contamination counts); the feature extractors match the original networks and preprocessing.
 
 ```bash
-pytest                                     # golden tests read tests/golden/ and skip without features
+pytest                                     # tests that need local data or upstream code skip with the reason
+```
+
+Tests skip instead of failing when their inputs are missing: golden tests need the feature files in `data/features/` (`python scripts/download_data.py`); the `test_official_*` equivalence tests need the upstream code at the pinned commit:
+
+```bash
+git clone https://github.com/zxk1212/OODD   && git -C OODD checkout edbb1a3    # CURE_OODD_REPO=OODD
+git clone https://github.com/wyqstan/DCAC   && git -C DCAC checkout 00013c5    # CURE_DCAC_REPO=DCAC
+# RTL++: folder holding the authors' RTL_plus.py               # CURE_RTL_REPO=<folder>
 ```
 
 Exceptions: Mahalanobis uses an expanded quadratic form that is ~50x faster than the original per-class einsum (AUROC differs by < 1e-5). Bit-exactness assumes the same library versions and GPU; different BLAS thread counts can change RTL++ and DynProto in the last digits.
