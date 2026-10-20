@@ -1,0 +1,3 @@
+# Code vendor được kiểm bằng sha256 nên giữ nguyên byte, ko đổi xuống dòng khi checkout trên Windows.
+src/cure_ood/methods/static/_openood/** -text
+src/cure_ood/methods/testtime/_official/** -text

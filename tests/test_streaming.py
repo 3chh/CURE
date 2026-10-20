@@ -20,7 +20,7 @@ BENCHES = {}
 def stream_of(name, domain, pi, seed):
     if name not in BENCHES:
         BENCHES[name] = Benchmark.load(name)
-        need_features(BENCHES[name])
+    need_features(BENCHES[name])
     return BENCHES[name].stream(domain, pi, seed)
 
 

@@ -7,6 +7,9 @@ import pytest
 
 from cure_ood.data.benchmark import data_root
 
+# Test ko tự tải từ HF: thiếu dữ liệu thì bỏ qua cho nhanh và chạy được offline.
+os.environ.setdefault("CURE_HF_AUTO", "0")
+
 # Kết quả gốc (golden) của các vòng thử nghiệm, chỉ gồm các luồng mà test dùng.
 GOLDEN = Path(os.environ.get("CURE_GOLDEN", Path(__file__).resolve().parent / "golden"))
 LEGACY_NAME = {"cifar10": "cifar10", "cifar100": "cifar100", "imagenet200": "in200",
