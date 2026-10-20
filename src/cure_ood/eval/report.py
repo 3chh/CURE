@@ -161,7 +161,7 @@ def build_report(rows, cfg: dict) -> dict:
     ref = cfg.get("reference", "knn")
     res = {"n_streams": len(rows), "families": {}, "breakdowns": {}}
     ranking = [a for a in cfg.get("ranking", []) if all(a in A[k] for k in A)]
-    if ranking:
+    if ranking and A:  # A rỗng thì all() đúng một cách rỗng
         keys = list(A)
         res["main"] = {"n_groups": len(keys), "arms": summarize(A, ranking, ref, keys)}
     for fam, f in (cfg.get("families") or {}).items():

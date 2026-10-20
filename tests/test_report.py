@@ -58,3 +58,9 @@ def test_report_without_new_fields_is_unchanged():
     res = build_report(old, {"reference": "knn"})
     assert res["decisions"] == {} and res["memory"] == {} and "static" not in res
     assert "## CDM activity" not in to_markdown(res, {}, "t")
+
+
+def test_empty_results_do_not_crash():
+    from cure_ood.eval.report import build_report
+    res = build_report([], {"ranking": ["knn", "cure"], "reference": "knn"})
+    assert res["n_streams"] == 0 and "main" not in res
