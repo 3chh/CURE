@@ -19,7 +19,7 @@ CONFIG_DIR = Path(__file__).resolve().parents[3] / "configs" / "experiments"
 @dataclass
 class Experiment:
     name: str
-    benchmarks: list[str]
+    benchmarks: list[str | dict]  # tên, hoặc biến thể {name, base, ...ghi đè} (vd đổi chỉ mục gallery)
     methods: dict[str, dict]  # nhãn → {method: tên đăng ký (mặc định = nhãn), ...tham số}
     pis: list[float] = field(default_factory=lambda: [0.05, 0.2, 0.5])
     seeds: list[int] = field(default_factory=lambda: [0, 1, 2])
@@ -36,6 +36,10 @@ class Experiment:
             path = CONFIG_DIR / f"{name_or_path}.yaml"
         return cls(**yaml.safe_load(path.read_text(encoding="utf-8")))
 
+    def benchmark_specs(self, names=None) -> list[str | dict]:
+        specs = {b if isinstance(b, str) else b["name"]: b for b in self.benchmarks}
+        return [specs.get(n, n) for n in names] if names else list(specs.values())
+
     @property
     def out_dir(self) -> Path:
         return Path(self.output) / self.name
@@ -44,8 +48,8 @@ class Experiment:
 def run(exp: Experiment, benchmarks=None, domains=None, methods=None, log=print, force=False) -> None:
     """Lọc theo benchmarks/domains/methods để chia việc cho nhiều tiến trình; luồng đã có kết quả thì bỏ qua."""
     exp.out_dir.mkdir(parents=True, exist_ok=True)
-    for bname in benchmarks or exp.benchmarks:
-        bench = Benchmark.load(bname)
+    for spec in exp.benchmark_specs(benchmarks):
+        bench = Benchmark.load(spec)
         arms = {}
         for label, spec in exp.methods.items():
             if methods and label not in methods:

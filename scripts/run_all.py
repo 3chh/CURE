@@ -37,8 +37,10 @@ def main():
     size = a.group or len(labels)
     groups = [labels[i:i + size] for i in range(0, len(labels), size)]
     failed = []
-    for bname in a.benchmark or exp["benchmarks"]:
-        bench = load("benchmarks", bname)
+    specs = {b if isinstance(b, str) else b["name"]: b for b in exp["benchmarks"]}
+    for bname in a.benchmark or specs:
+        spec = specs.get(bname, bname)
+        bench = load("benchmarks", spec if isinstance(spec, str) else spec["base"])
         for dom in exp.get("domains") or bench["near"] + bench["far"]:
             for g in groups:
                 cmd = [sys.executable, "-m", "cure_ood.cli", "run", a.experiment, "--benchmark", bname, "--domain", dom,

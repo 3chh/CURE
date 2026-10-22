@@ -1,0 +1,143 @@
+# Vòng 60 (docs/CURE_Causal_Research_Log.md): thiết bị biên, CPU, B = 1. Cùng luồng, chỉ đổi chỉ mục gallery của điểm kNN;
+# C và S được chấm bằng đúng chỉ mục đó, K chọn bằng APS trên (id_val, val_tin). g0 = gallery đầy đủ, tìm chính xác.
+name: edge_gallery
+benchmarks:
+- {name: cifar10_g0, base: cifar10}
+- name: cifar10_sub50
+  base: cifar10
+  index: {subsample: 0.5}
+  k: aps
+- name: cifar10_sub20
+  base: cifar10
+  index: {subsample: 0.2}
+  k: aps
+- name: cifar10_sub10
+  base: cifar10
+  index: {subsample: 0.1}
+  k: aps
+- name: cifar10_sub05
+  base: cifar10
+  index: {subsample: 0.05}
+  k: aps
+- name: cifar10_sub01
+  base: cifar10
+  index: {subsample: 0.01}
+  k: aps
+- name: cifar10_proto10
+  base: cifar10
+  index: {prototypes: 10}
+  k: aps
+- name: cifar10_proto50
+  base: cifar10
+  index: {prototypes: 50}
+  k: aps
+- name: cifar10_proto100
+  base: cifar10
+  index: {prototypes: 100}
+  k: aps
+- name: cifar10_bf16
+  base: cifar10
+  index: {precision: bf16}
+  k: aps
+- name: cifar10_sq8
+  base: cifar10
+  index: {faiss: SQ8}
+  k: aps
+- name: cifar10_hnsw16
+  base: cifar10
+  index: {faiss: HNSW32, ef_search: 16}
+  k: aps
+- name: cifar10_hnsw64
+  base: cifar10
+  index: {faiss: HNSW32, ef_search: 64}
+  k: aps
+- name: cifar10_hnsw256
+  base: cifar10
+  index: {faiss: HNSW32, ef_search: 256}
+  k: aps
+- name: cifar10_ivf1
+  base: cifar10
+  index: {faiss: 'IVF256,Flat', nprobe: 1}
+  k: aps
+- name: cifar10_ivf4
+  base: cifar10
+  index: {faiss: 'IVF256,Flat', nprobe: 4}
+  k: aps
+- name: cifar10_ivf16
+  base: cifar10
+  index: {faiss: 'IVF256,Flat', nprobe: 16}
+  k: aps
+- {name: cifar100_g0, base: cifar100}
+- name: cifar100_sub50
+  base: cifar100
+  index: {subsample: 0.5}
+  k: aps
+- name: cifar100_sub20
+  base: cifar100
+  index: {subsample: 0.2}
+  k: aps
+- name: cifar100_sub10
+  base: cifar100
+  index: {subsample: 0.1}
+  k: aps
+- name: cifar100_sub05
+  base: cifar100
+  index: {subsample: 0.05}
+  k: aps
+- name: cifar100_sub01
+  base: cifar100
+  index: {subsample: 0.01}
+  k: aps
+- name: cifar100_proto10
+  base: cifar100
+  index: {prototypes: 10}
+  k: aps
+- name: cifar100_proto50
+  base: cifar100
+  index: {prototypes: 50}
+  k: aps
+- name: cifar100_proto100
+  base: cifar100
+  index: {prototypes: 100}
+  k: aps
+- name: cifar100_bf16
+  base: cifar100
+  index: {precision: bf16}
+  k: aps
+- name: cifar100_sq8
+  base: cifar100
+  index: {faiss: SQ8}
+  k: aps
+- name: cifar100_hnsw16
+  base: cifar100
+  index: {faiss: HNSW32, ef_search: 16}
+  k: aps
+- name: cifar100_hnsw64
+  base: cifar100
+  index: {faiss: HNSW32, ef_search: 64}
+  k: aps
+- name: cifar100_hnsw256
+  base: cifar100
+  index: {faiss: HNSW32, ef_search: 256}
+  k: aps
+- name: cifar100_ivf1
+  base: cifar100
+  index: {faiss: 'IVF256,Flat', nprobe: 1}
+  k: aps
+- name: cifar100_ivf4
+  base: cifar100
+  index: {faiss: 'IVF256,Flat', nprobe: 4}
+  k: aps
+- name: cifar100_ivf16
+  base: cifar100
+  index: {faiss: 'IVF256,Flat', nprobe: 16}
+  k: aps
+methods:
+  knn: {}
+  cure_elond_b1: {method: cure, certifier: elond, batch: 1}
+decision_alphas: [0.05, 0.1]
+output: results
+report:
+  reference: knn
+  ranking: [knn, cure_elond_b1]
+  labels: {knn: kNN, cure_elond_b1: '**CURE** e-LOND B=1'}

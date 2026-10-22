@@ -5,7 +5,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from ..ops import DEVICE, kth_sim, l2
+from ..ops import DEVICE, l2
 from ..stats import (
     CERTIFIERS,
     RULES,
@@ -106,13 +106,14 @@ class CURESession(Session):
                   "x": torch.empty(0, d, device=DEVICE), "xn": torch.empty(0, d, device=DEVICE)}
         self.cdm_idx, self.cdm_x = np.empty(0, np.int64), torch.empty(0, d, device=DEVICE)
         self.cdm_sizes, self.covered, self.certified, self.evicted = [], 0, 0, 0
+        self.cdm_view = None  # (mem, mem_x, aff_c): chỉ đổi khi CDM đổi, tránh tính lại C x CDM mỗi bước
 
     @torch.inference_mode()
     def step(self, feats, logits=None):
         m, s, n = self.m, self.t, len(feats)
         x = l2(feats)
         xt = torch.as_tensor(x, device=DEVICE)
-        s0 = kth_sim(x, m.bench.G_device, m.bench.k)
+        s0 = m.bench.knn(x)
         xn = F.normalize(xt, dim=1)
         new = {"idx": np.arange(s, s + n), "s0": s0, "cnt": np.zeros(n, np.int64), "npass": np.zeros(n, np.int64),
                "rad": (xn @ self.shadow.T).topk(m.k_shadow, dim=1).values[:, -1], "x": xt, "xn": xn}
@@ -126,12 +127,16 @@ class CURESession(Session):
         p_static = rank_p(static, self.s_cal)
         p, stat, covered, trace = np.ones(n), np.zeros(n), np.zeros(n, bool), []
         if len(self.cdm_idx):
-            order = np.argsort(self.cdm_idx)
-            mem, mem_x = self.cdm_idx[order], self.cdm_x[torch.as_tensor(order, device=DEVICE)]
+            if self.cdm_view is None:
+                order = np.argsort(self.cdm_idx)
+                mem_x = self.cdm_x[torch.as_tensor(order, device=DEVICE)]
+                k = min(m.k_mem, len(order))
+                aff_c = (self.cal_x @ mem_x.T).topk(k, dim=1).values[:, -1].cpu().numpy()
+                self.cdm_view = (self.cdm_idx[order], mem_x, aff_c)
+            mem, mem_x, aff_c = self.cdm_view
             k = min(m.k_mem, len(mem))
             # CDM chỉ chứa mẫu đã hậu kiểm nên ko có mẫu của batch này: ko cần bỏ tự-khớp.
             aff = (xt @ mem_x.T).topk(k, dim=1).values[:, -1].cpu().numpy()
-            aff_c = (self.cal_x @ mem_x.T).topk(k, dim=1).values[:, -1].cpu().numpy()
             t_test, t_cal = -(s0 - aff), -(self.cb - aff_c)
             p_mem = rank_p(t_test, t_cal)
             stat = combine([p_static, p_mem], [1.0, m.w_mem], m.rule)
@@ -152,6 +157,8 @@ class CURESession(Session):
         self.cdm_idx = np.concatenate((self.cdm_idx, q["idx"][exp][ok]))[-m.capacity:]
         self.cdm_x = torch.cat((self.cdm_x, q["x"][exp_t][torch.as_tensor(ok, device=DEVICE)]))[-m.capacity:]
         self.certified += int(ok.sum())
+        if ok.any():
+            self.cdm_view = None
         self.evicted += int((~ok).sum())
         self.q = {key: v[~exp_t] if torch.is_tensor(v) else v[~exp] for key, v in q.items()}
 

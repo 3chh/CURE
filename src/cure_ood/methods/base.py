@@ -7,7 +7,6 @@ from typing import ClassVar
 import numpy as np
 
 from ..data.benchmark import Benchmark, Stream
-from ..ops import kth_sim
 from ..stats import id_threshold
 
 REGISTRY: dict[str, type[Method]] = {}
@@ -106,7 +105,7 @@ class KnnContext:
 
 def knn_reference(bench: Benchmark, q: float = 0.2):
     """Phần chỉ phụ thuộc dữ liệu ID: s0 của C, ngưỡng sàng lọc τ và tập đối chứng S."""
-    cb = kth_sim(bench.C, bench.G, bench.k)
+    cb = bench.knn(bench.C)
     tau = id_threshold(cb, q)
     return cb, tau, bench.C[cb <= tau]
 
@@ -116,7 +115,7 @@ def knn_context(stream: Stream, q: float = 0.2) -> KnnContext:
     key = ("knn", q)
     if key not in stream.cache:
         B = stream.bench
-        b = kth_sim(stream.x, B.G, B.k)
+        b = B.knn(stream.x)
         cb, tau, shadow = knn_reference(B, q)
         stream.cache[key] = KnnContext(b, cb, b <= tau, shadow)
     return stream.cache[key]

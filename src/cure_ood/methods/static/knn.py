@@ -21,7 +21,7 @@ class KNN(Method):
         self.batch = batch
 
     def score(self, stream):
-        return Output(-kth_sim(stream.x, self.bench.G_device, self.bench.k, self.batch))
+        return Output(-self.bench.knn(stream.x, chunk=self.batch))
 
     def session(self, domain=None):
         return KNNSession(self)
@@ -34,7 +34,7 @@ class KNNSession(Session):
 
     def step(self, feats, logits=None):
         self.t += len(feats)
-        return Output(-kth_sim(l2(feats), self.m.bench.G_device, self.m.bench.k, self.m.batch))
+        return Output(-self.m.bench.knn(l2(feats), chunk=self.m.batch))
 
 
 def select_k(bench, grid=K_GRID) -> tuple[int, float]:

@@ -21,11 +21,16 @@ def data_root() -> Path:
     return Path(os.environ.get("CURE_FEATURES", Path(__file__).resolve().parents[3] / "data" / "features"))
 
 
+def _config_path(name_or_path: str) -> Path:
+    path = Path(name_or_path)
+    return path if path.suffix else CONFIG_DIR / f"{name_or_path}.yaml"
+
+
 @dataclass
 class Benchmark:
     name: str
     features: str
-    k: int
+    k: int | str  # "aps": chọn bằng APS trên (id_val, val_ood) cho đúng chỉ mục `index`
     near: list[str]
     far: list[str]
     gallery: str = "id_train"
@@ -34,16 +39,19 @@ class Benchmark:
     val_ood: str | None = None  # OOD proxy cho APS (chọn siêu tham số tĩnh)
     split: dict | None = None  # giao thức tách khi bộ ID ko có tập train (ImageNet-200)
     stream_salt: list[int] = field(default_factory=list)
+    index: dict | None = None  # chỉ mục gallery của điểm kNN (data/gallery.py); None = tìm chính xác
     t_out: str | None = None  # nhóm danh sách T-out của OODD (configs/oodd_t_out.json); None = theo tên benchmark
     backbone: str = ""
     description: str = ""
 
     @classmethod
-    def load(cls, name_or_path: str) -> Benchmark:
-        path = Path(name_or_path)
-        if not path.suffix:
-            path = CONFIG_DIR / f"{name_or_path}.yaml"
-        return cls(**yaml.safe_load(path.read_text(encoding="utf-8")))
+    def load(cls, spec: str | dict) -> Benchmark:
+        """Tên/đường dẫn file cấu hình, hoặc biến thể {name, base, ...trường ghi đè} khai báo trong file thí nghiệm."""
+        if isinstance(spec, dict):
+            spec = dict(spec)
+            cfg = yaml.safe_load(_config_path(spec.pop("base")).read_text(encoding="utf-8"))
+            return cls(**{**cfg, **spec})
+        return cls(**yaml.safe_load(_config_path(spec).read_text(encoding="utf-8")))
 
     @property
     def domains(self) -> list[str]:
@@ -111,6 +119,29 @@ class Benchmark:
     def G_device(self) -> torch.Tensor:
         """Gallery trên DEVICE, tải một lần cho mọi phiên trực tuyến."""
         return torch.as_tensor(self.G, device=DEVICE)
+
+    @cached_property
+    def gallery_index(self):
+        from .gallery import build_index
+        if not self.index:  # dùng chung G_device với các phương pháp khác
+            from .gallery import ExactIndex
+            return ExactIndex(self.G, g=self.G_device)
+        return build_index(self.G, self.index, self.train_labels)
+
+    @cached_property
+    def k_knn(self) -> int:
+        """K của điểm kNN; với k: aps thì chọn trên lưới OpenOOD, bỏ các K lớn hơn cỡ gallery."""
+        if self.k != "aps":
+            return int(self.k)
+        from ..methods.static.knn import K_GRID, aps_select
+        idx = self.gallery_index
+        p, _ = aps_select(lambda f, z, K: -idx.kth_sim(l2(f), K), {"K": K_GRID}, (self.cal_feats, None),
+                          self.val_ood_data(), valid=lambda p: p["K"] <= idx.size)
+        return p["K"]
+
+    def knn(self, q: np.ndarray, k: int | None = None, chunk: int = 2048) -> np.ndarray:
+        """Cosine tới láng giềng thứ K trong gallery (q đã chuẩn hóa L2), qua chỉ mục của benchmark."""
+        return self.gallery_index.kth_sim(q, k or self.k_knn, chunk)
 
     @cached_property
     def cal_feats(self):
