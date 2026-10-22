@@ -40,6 +40,19 @@ class CrossEntropy(Objective):
         return F.cross_entropy(model(x), y)
 
 
+@register_loss("logitnorm")
+class LogitNorm(Objective):
+    """LogitNorm (Wei et al., ICML 2022): cross-entropy trên logit chuẩn hóa L2 chia nhiệt độ τ (CIFAR-10: 0,04)."""
+
+    def __init__(self, feat_dim, num_classes, temperature: float = 0.04):
+        super().__init__()
+        self.temperature = temperature
+
+    def forward(self, model, x, y):
+        z = model(x).float()
+        return F.cross_entropy(z / ((z.norm(dim=1, keepdim=True) + 1e-7) * self.temperature), y)
+
+
 @register_loss("linear_ce")
 class LinearProbe(Objective):
     """Cross-entropy trên `model.fc` với thân đóng băng (giai đoạn đánh giá tuyến tính của SupCon)."""

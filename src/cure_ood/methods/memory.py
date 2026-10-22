@@ -43,6 +43,7 @@ def run_memory(x, base, passes, shadow, *, batch=128, capacity=512, k_mem=5, ttl
         run.pvals = np.empty(n, np.float64)
     if wake is not None:
         sh_t = torch.as_tensor(shadow, device=DEVICE)
+    prev = None  # (mem, mem_x, t_cal, ref): bộ nhớ ko đổi giữa hai batch thì ko tính lại C x bộ nhớ (B nhỏ)
     for s in range(0, n, batch):
         e = min(n, s + batch)
         if ttl is not None:
@@ -69,7 +70,10 @@ def run_memory(x, base, passes, shadow, *, batch=128, capacity=512, k_mem=5, ttl
                 run.pvals[s:e] = (1 + len(cal_sorted) - np.searchsorted(cal_sorted, -base[s:e], side="left")) / (len(cal_sorted) + 1)
             continue
         k = min(k_mem, len(mem))
-        sims = xt[s:e] @ xt[mem].T
+        if prev is None or not np.array_equal(prev[0], mem):
+            prev = (mem, xt[mem], None, None)
+        mem_x = prev[1]
+        sims = xt[s:e] @ mem_x.T
         aff = sims.topk(k, dim=1).values[:, -1].cpu().numpy()
         run.scores[s:e] = -(base[s:e] - aff)
         run.trace.append((s, mem.copy()))
@@ -78,10 +82,12 @@ def run_memory(x, base, passes, shadow, *, batch=128, capacity=512, k_mem=5, ttl
         # Thống kê của mẫu luồng bỏ tự-khớp để hoán đổi được với C (C ko bao giờ nằm trong bộ nhớ).
         own = torch.as_tensor(mem[None, :] == np.arange(s, e)[:, None], device=DEVICE)
         aff_ex = torch.where(own, torch.tensor(-4.0, device=DEVICE), sims).topk(k, dim=1).values[:, -1].cpu().numpy()
-        aff_c = (cal_x @ xt[mem].T).topk(k, dim=1).values[:, -1].cpu().numpy()
-        t_test, t_cal = -(base[s:e] - aff_ex), -(cal_b - aff_c)
-        run.mem_cal.append((s, e, t_cal))
-        ref = np.sort(t_cal)
+        if prev[2] is None:
+            aff_c = (cal_x @ mem_x.T).topk(k, dim=1).values[:, -1].cpu().numpy()
+            t_cal = -(cal_b - aff_c)
+            prev = (*prev[:2], t_cal, np.sort(t_cal))
+        t_test, t_cal, ref = -(base[s:e] - aff_ex), prev[2], prev[3]
+        run.mem_cal.append((s, e, t_cal))  # cùng một mảng khi bộ nhớ ko đổi: conformal_combine dựa vào đó để ko tính lại
         run.pvals[s:e] = (1 + len(ref) - np.searchsorted(ref, t_test, side="left")) / (len(ref) + 1)
     return run
 

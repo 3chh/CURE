@@ -41,9 +41,11 @@ def conformal_combine(static_test, static_cal, mem_p, mem_cal, n, rule="cauchy",
     """Gộp p tĩnh với p bộ nhớ, hiệu chuẩn lại trên C theo bộ nhớ từng batch; trả (p, thống kê, mặt nạ có bộ nhớ)."""
     ps_test, ps_cal = rank_p(static_test, static_cal), loo_p(static_cal)
     out, stat, covered = np.ones(n), np.zeros(n), np.zeros(n, bool)
+    last, t_cal = None, None
     for s, e, c_mem in mem_cal:
         t_test = combine([ps_test[s:e], mem_p[s:e]], [1.0, w_mem], rule)
-        t_cal = combine([ps_cal, loo_p(c_mem)], [1.0, w_mem], rule)
+        if c_mem is not last:  # run_memory trả lại đúng mảng cũ khi bộ nhớ ko đổi
+            t_cal, last = combine([ps_cal, loo_p(c_mem)], [1.0, w_mem], rule), c_mem
         out[s:e], stat[s:e], covered[s:e] = rank_p(t_test, t_cal), t_test, True
     return out, stat, covered
 

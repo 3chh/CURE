@@ -6,6 +6,7 @@ from dataclasses import dataclass
 
 from torch import nn
 
+from ..backbones.cifar_nets import CIFAR_NETS
 from ..backbones.openood_nets import ResNet18_32x32
 from ..backbones.torchvision_net import TorchvisionNet
 
@@ -47,3 +48,15 @@ def torchvision_model(num_classes, data, arch: str, weights: str | None = None) 
     """Mô hình torchvision theo tên `arch`; `weights` (vd DEFAULT) chỉ dùng để khởi tạo."""
     return ModelSpec(TorchvisionNet(arch, num_classes, weights), "torchvision",
                      {"arch": arch, "norm": data["norm"], "size": data["size"], "resize": data["resize"]})
+
+
+def _cifar_model(name):
+    def fn(num_classes, data, **options) -> ModelSpec:
+        if (data["size"], data["resize"]) != (32, 32) or data["norm"] not in ("cifar10", "cifar100"):
+            raise ValueError(f"{name} cần size = resize = 32 và norm cifar10 | cifar100")
+        return ModelSpec(CIFAR_NETS[name](num_classes=num_classes, **options), name, {"norm": data["norm"]})
+    return fn
+
+
+for _name in CIFAR_NETS:
+    register_model(_name)(_cifar_model(_name))

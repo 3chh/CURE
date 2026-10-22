@@ -9,6 +9,7 @@ import torchvision
 from torchvision import transforms
 
 from .base import Backbone, fc_arrays, load_state, register_backbone
+from .cifar_nets import CIFAR_NETS
 from .openood_nets import ResNet18_32x32, ResNet18_224x224
 
 IMAGENET_MEAN, IMAGENET_STD = (0.485, 0.456, 0.406), (0.229, 0.224, 0.225)
@@ -50,6 +51,21 @@ def resnet18_32x32(checkpoint, device, norm: str = "cifar10") -> Backbone:
     model = ResNet18_32x32(num_classes=state["fc.weight"].shape[0])
     model.load_state_dict(state, strict=True)
     return _openood("resnet18_32x32", model, resize_crop(32, 32, *CIFAR_NORMS[norm]), device)
+
+
+def _cifar_net(name):
+    def builder(checkpoint, device, norm: str = "cifar10") -> Backbone:
+        state = load_state(_require(checkpoint, name))
+        opts = {"dim": state["embed.0.weight"].shape[0]} if "embed.0.weight" in state else {}
+        model = CIFAR_NETS[name](num_classes=state["fc.weight"].shape[0], **opts)
+        model.load_state_dict(state, strict=True)
+        return _openood(name, model, resize_crop(32, 32, *CIFAR_NORMS[norm]), device)
+    builder.__doc__ = f"{name} tự huấn luyện (vòng 61); `norm` như resnet18_32x32."
+    return builder
+
+
+for _name in CIFAR_NETS:
+    register_backbone(_name)(_cifar_net(_name))
 
 
 @register_backbone("resnet18_224x224")
