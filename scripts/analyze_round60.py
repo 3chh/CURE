@@ -79,6 +79,12 @@ def main():
             rec["gallery_size"], rec["k"] = L["gallery_size"], L["k"]
         summary[c] = rec
 
+    if not summary:
+        print("chưa có kết quả lưới cho", a.pool)
+        Path(a.out or Path(a.results) / f"summary_{'+'.join(a.pool)}.json").write_text(
+            __import__("json").dumps({"configs": {}, "verdict": {"pool": a.pool, "note": "chưa có kết quả lưới"}}, indent=1),
+            encoding="utf-8")
+        return
     base_ms = summary.get("g0", {}).get("knn_p50_ms")
     h_b = [c for c, r in summary.items() if c != "g0" and base_ms and r.get("knn_p50_ms", np.inf) <= base_ms / 5
            and r["CURE"]["drop"] <= HARM and r["CURE"]["harm"] <= 0.10]
