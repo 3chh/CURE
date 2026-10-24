@@ -5,6 +5,7 @@ Chạy khi máy rảnh: py scripts/edge_latency.py [biến thể ...] [--experim
 from __future__ import annotations
 
 import argparse
+import gc
 import json
 import os
 import sys
@@ -20,6 +21,14 @@ from cure_ood.data import Benchmark
 from cure_ood.eval.runner import Experiment
 from cure_ood.methods import build
 from cure_ood.ops import l2
+
+
+def _rss_gb():
+    try:
+        import psutil
+        return round(psutil.Process().memory_info().rss / 1e9, 2)
+    except ImportError:
+        return None
 
 
 def measure(fn, n_warm, n_steps, reps):
@@ -85,7 +94,9 @@ def main():
             if key in res:
                 continue
             res[key] = one(exp.benchmark_specs([name])[0], th, a.warm, a.steps, a.reps)
-            print(key, {k: res[key][k] for k in ("k", "gallery_size", "build_s")},
+            gc.collect()  # mỗi biến thể nạp lại đặc trưng: giải phóng ngay để ko cộng dồn RAM qua 34 lần đo
+            res[key]["rss_gb"] = _rss_gb()
+            print(key, {k: res[key][k] for k in ("k", "gallery_size", "build_s", "rss_gb")},
                   "knn p50", round(res[key]["knn"]["p50_ms"], 3), "cure p50", round(res[key]["cure"]["p50_ms"], 3), flush=True)
             out.parent.mkdir(parents=True, exist_ok=True)
             out.write_text(json.dumps(res, indent=1), encoding="utf-8")
