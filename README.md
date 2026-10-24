@@ -62,6 +62,8 @@ cure-ood train configs/train/cifar10_resnet18_ce.yaml       # train your own bac
 cure-ood latency main --extract cifar10_resnet18            # end-to-end timing: image -> backbone -> method
 ```
 
+Heavy runs can go to Kaggle instead of a laptop: `notebooks/kaggle_round60.ipynb` clones this branch with a read-only token from Kaggle Secrets (`HF_TOKEN`, `GH_TOKEN`), runs the round 60 grid on 4 CPU workers and zips the results.
+
 Experiments are YAML files in `configs/experiments/`. A method entry is `label: {method: <registered name>, ...hyper-parameters}`; the label defaults to the method name. Several configurations of one method (ablations) are just several entries. To run 4 processes in parallel, shard by `--benchmark` or `--domain`. Results are stored per stream and per method, so an interrupted run resumes where it stopped. On a 16 GB machine run one benchmark per process (CIFAR-100 with all 26 methods peaks at a few GB) and split with `--method` if memory is tight.
 
 | Experiment | Content |

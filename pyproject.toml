@@ -20,6 +20,7 @@ dependencies = [
 [project.optional-dependencies]
 extract = ["torchvision>=0.16", "pillow>=10"]
 dev = ["pytest>=7", "ruff>=0.4"]
+edge = ["faiss-cpu>=1.8"]  # chỉ mục gallery xấp xỉ (vòng 60)
 
 [project.scripts]
 cure-ood = "cure_ood.cli:main"

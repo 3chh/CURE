@@ -66,6 +66,8 @@ python scripts/run_all.py main --group 5      # mỗi (benchmark, tập lạ, 5 
 cure-ood report main
 ```
 
+Việc nặng nên chạy trên Kaggle thay vì laptop: mở `notebooks/kaggle_round60.ipynb` trên Kaggle, thêm Secrets `HF_TOKEN` và `GH_TOKEN` (token GitHub chỉ đọc), bật Internet, rồi Save & Run All. Notebook tự clone repo, chạy song song và nén kết quả vào tab Output.
+
 Kết quả lưu theo từng luồng và từng phương pháp, chạy lại lệnh sẽ tiếp từ chỗ dừng. Bản tóm tắt kết quả đã chạy nằm trong `reports/`.
 
 ## 5. Quy tắc làm việc của nhóm
