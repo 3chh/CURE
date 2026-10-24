@@ -53,3 +53,44 @@ def test_variant_inherits_base():
     base = Benchmark.load("cifar10")
     assert (b.name, b.index, b.k) == ("c10_sub", {"subsample": 0.1}, "aps")
     assert (b.features, b.near, b.far, b.stream_salt) == (base.features, base.near, base.far, base.stream_salt)
+
+
+@pytest.fixture
+def syn(tmp_path, monkeypatch):
+    """Benchmark tổng hợp nhỏ để kiểm chỉ mục được dùng nhất quán."""
+    import yaml
+    rng = np.random.default_rng(0)
+    np.savez(tmp_path / "syn.npz", id_train_feats=rng.normal(size=(600, 16)).astype(np.float32),
+             id_train_labels=np.repeat(np.arange(6), 100),
+             id_val_feats=rng.normal(size=(120, 16)).astype(np.float32),
+             id_test_feats=rng.normal(size=(200, 16)).astype(np.float32),
+             id_test_labels=np.zeros(200), ood_feats=rng.normal(size=(150, 16)).astype(np.float32),
+             ood_labels=np.zeros(150))
+    cfg = tmp_path / "syn.yaml"
+    cfg.write_text(yaml.safe_dump({"name": "syn", "features": "syn.npz", "k": 5, "near": [], "far": ["ood"]}), encoding="utf-8")
+    monkeypatch.setenv("CURE_FEATURES", str(tmp_path))
+    return str(cfg)
+
+
+@pytest.mark.parametrize("index", [{"subsample": 0.1}, {"prototypes": 5}, {"precision": "bf16"}])
+def test_calibration_scored_with_same_index(syn, index):
+    """C và tập đối chứng S phải được chấm bằng đúng chỉ mục của biến thể (điều kiện để p conformal hợp lệ)."""
+    from cure_ood.methods.base import knn_reference
+    b = Benchmark.load({"name": "v", "base": syn, "index": index})
+    cb, tau, shadow = knn_reference(b, 0.2)
+    assert np.array_equal(cb, b.gallery_index.kth_sim(b.C, b.k_knn))
+    assert not np.array_equal(cb, Benchmark.load(syn).knn(b.C))  # khác chỉ mục gốc, tức đã dùng chỉ mục mới
+    assert len(shadow) == int((cb <= tau).sum()) > 0
+
+
+def test_session_and_score_share_the_index(syn):
+    """Phiên trực tuyến và score() cùng đi qua Benchmark.knn, nên đổi chỉ mục là đổi cả hai."""
+    from cure_ood.methods import build
+    b = Benchmark.load({"name": "v", "base": syn, "index": {"subsample": 0.1}})
+    st = b.stream("ood", 0.5, 0)
+    m = build("cure", certifier="elond", batch=16).fit(b)
+    ref = m.score(st)
+    st.cache.clear()
+    sess = m.session()
+    out = np.concatenate([sess.step(st.feats[i:i + 16]).scores for i in range(0, len(st.feats), 16)])
+    assert np.allclose(ref.scores, out, atol=1e-5)
