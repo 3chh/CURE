@@ -5,7 +5,7 @@ import torch
 
 from cure_ood.data.benchmark import Benchmark
 from cure_ood.data.gallery import ExactIndex, build_index
-from cure_ood.ops import kth_sim, l2
+from cure_ood.ops import DEVICE, kth_sim, l2
 
 RNG = np.random.default_rng(0)
 G = l2(RNG.normal(size=(2000, 32)).astype(np.float32))
@@ -15,7 +15,7 @@ LABELS = np.repeat(np.arange(10), 200)
 
 def test_default_is_bit_exact():
     assert np.array_equal(build_index(G, None).kth_sim(Q, 5), kth_sim(Q, G, 5))
-    assert np.array_equal(ExactIndex(G, g=torch.as_tensor(G)).kth_sim(Q, 5), kth_sim(Q, G, 5))
+    assert np.array_equal(ExactIndex(G, g=torch.as_tensor(G, device=DEVICE)).kth_sim(Q, 5), kth_sim(Q, G, 5))
 
 
 @pytest.mark.parametrize("frac,n", [(0.1, 200), (0.01, 20), (0.0001, 1)])
