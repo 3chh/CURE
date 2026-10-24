@@ -1,6 +1,6 @@
 """Vòng 60: độ trễ trên CPU, B = 1, của bước kNN và cả bước CURE e-LOND cho từng chỉ mục gallery.
 
-Chạy khi máy rảnh: py scripts/edge_latency.py [biến thể ...] --threads 1 4 --out results/edge_gallery/latency.json
+Chạy khi máy rảnh: py scripts/edge_latency.py [biến thể ...] [--experiment edge_gallery] [--bases cifar10] --threads 1 4
 """
 from __future__ import annotations
 
@@ -36,7 +36,7 @@ def measure(fn, n_warm, n_steps, reps):
     return {"p50_ms": float(np.median(p50)), "p99_ms": float(np.median(p99)), "runs_p50": p50, "runs_p99": p99}
 
 
-def one(spec, threads, n_warm, n_steps, reps, domain="svhn", pi=0.5, seed=0):
+def one(spec, threads, n_warm, n_steps, reps, pi=0.5, seed=0):
     torch.set_num_threads(threads)
     try:  # FAISS dùng OpenMP riêng, ko theo số luồng của torch
         import faiss
@@ -47,9 +47,10 @@ def one(spec, threads, n_warm, n_steps, reps, domain="svhn", pi=0.5, seed=0):
     bench = Benchmark.load(spec)
     _ = bench.gallery_index, bench.k_knn
     build_s = time.perf_counter() - t0
+    domain = "svhn" if "svhn" in bench.domains else bench.far[0]  # luồng cố định theo đăng ký: svhn (CIFAR), textures (IN-200)
     st = bench.stream(domain, pi, seed)
     x = l2(st.feats)
-    res = {"k": bench.k_knn, "gallery_size": bench.gallery_index.size, "build_s": round(build_s, 2), "threads": threads}
+    res = {"domain": domain, "k": bench.k_knn, "gallery_size": bench.gallery_index.size, "build_s": round(build_s, 2), "threads": threads}
     res["knn"] = measure(lambda i: bench.knn(x[i:i + 1]), n_warm, n_steps, reps)
     m = build("cure", certifier="elond", batch=1).fit(bench)
     sessions = {}
@@ -65,16 +66,18 @@ def one(spec, threads, n_warm, n_steps, reps, domain="svhn", pi=0.5, seed=0):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("variants", nargs="*", help="tên biến thể trong configs/experiments/edge_gallery.yaml (mặc định: mọi biến thể cifar10)")
+    ap.add_argument("variants", nargs="*", help="tên biến thể trong file thí nghiệm (mặc định: mọi biến thể của --bases)")
+    ap.add_argument("--experiment", default="edge_gallery")
+    ap.add_argument("--bases", nargs="+", default=["cifar10"])
     ap.add_argument("--threads", type=int, nargs="+", default=[1, 4])
     ap.add_argument("--warm", type=int, default=200)
     ap.add_argument("--steps", type=int, default=2000)
     ap.add_argument("--reps", type=int, default=3)
-    ap.add_argument("--out", default="results/edge_gallery/latency.json")
+    ap.add_argument("--out")
     a = ap.parse_args()
-    exp = Experiment.load("edge_gallery")
-    names = a.variants or [b["name"] for b in exp.benchmarks if b["base"] == "cifar10"]
-    out = Path(a.out)
+    exp = Experiment.load(a.experiment)
+    names = a.variants or [b["name"] for b in exp.benchmarks if b["base"] in a.bases]
+    out = Path(a.out or exp.out_dir / "latency.json")
     res = json.loads(out.read_text(encoding="utf-8")) if out.exists() else {}
     for name in names:
         for th in a.threads:

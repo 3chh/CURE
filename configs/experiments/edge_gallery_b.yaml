@@ -1,0 +1,176 @@
+# Vòng 60b (docs/CURE_Causal_Research_Log.md): lưới gallery của vòng 60 trên SupCon, DINOv2 và ImageNet-200 (đối chứng).
+# K: APS cho cifar10_supcon; cifar10_dinov2 và imagenet200 ko có OOD validation nên giữ K gốc (10) cho mọi biến thể.
+name: edge_gallery_b
+benchmarks:
+- {name: cifar10_supcon@g0, base: cifar10_supcon}
+- name: cifar10_supcon@sub50
+  base: cifar10_supcon
+  index: {subsample: 0.5}
+  k: aps
+- name: cifar10_supcon@sub20
+  base: cifar10_supcon
+  index: {subsample: 0.2}
+  k: aps
+- name: cifar10_supcon@sub10
+  base: cifar10_supcon
+  index: {subsample: 0.1}
+  k: aps
+- name: cifar10_supcon@sub05
+  base: cifar10_supcon
+  index: {subsample: 0.05}
+  k: aps
+- name: cifar10_supcon@sub01
+  base: cifar10_supcon
+  index: {subsample: 0.01}
+  k: aps
+- name: cifar10_supcon@proto10
+  base: cifar10_supcon
+  index: {prototypes: 10}
+  k: aps
+- name: cifar10_supcon@proto50
+  base: cifar10_supcon
+  index: {prototypes: 50}
+  k: aps
+- name: cifar10_supcon@proto100
+  base: cifar10_supcon
+  index: {prototypes: 100}
+  k: aps
+- name: cifar10_supcon@bf16
+  base: cifar10_supcon
+  index: {precision: bf16}
+  k: aps
+- name: cifar10_supcon@sq8
+  base: cifar10_supcon
+  index: {faiss: SQ8}
+  k: aps
+- name: cifar10_supcon@hnsw16
+  base: cifar10_supcon
+  index: {faiss: HNSW32, ef_search: 16}
+  k: aps
+- name: cifar10_supcon@hnsw64
+  base: cifar10_supcon
+  index: {faiss: HNSW32, ef_search: 64}
+  k: aps
+- name: cifar10_supcon@hnsw256
+  base: cifar10_supcon
+  index: {faiss: HNSW32, ef_search: 256}
+  k: aps
+- name: cifar10_supcon@ivf1
+  base: cifar10_supcon
+  index: {faiss: 'IVF256,Flat', nprobe: 1}
+  k: aps
+- name: cifar10_supcon@ivf4
+  base: cifar10_supcon
+  index: {faiss: 'IVF256,Flat', nprobe: 4}
+  k: aps
+- name: cifar10_supcon@ivf16
+  base: cifar10_supcon
+  index: {faiss: 'IVF256,Flat', nprobe: 16}
+  k: aps
+- {name: cifar10_dinov2@g0, base: cifar10_dinov2}
+- name: cifar10_dinov2@sub50
+  base: cifar10_dinov2
+  index: {subsample: 0.5}
+- name: cifar10_dinov2@sub20
+  base: cifar10_dinov2
+  index: {subsample: 0.2}
+- name: cifar10_dinov2@sub10
+  base: cifar10_dinov2
+  index: {subsample: 0.1}
+- name: cifar10_dinov2@sub05
+  base: cifar10_dinov2
+  index: {subsample: 0.05}
+- name: cifar10_dinov2@sub01
+  base: cifar10_dinov2
+  index: {subsample: 0.01}
+- name: cifar10_dinov2@proto10
+  base: cifar10_dinov2
+  index: {prototypes: 10}
+- name: cifar10_dinov2@proto50
+  base: cifar10_dinov2
+  index: {prototypes: 50}
+- name: cifar10_dinov2@proto100
+  base: cifar10_dinov2
+  index: {prototypes: 100}
+- name: cifar10_dinov2@bf16
+  base: cifar10_dinov2
+  index: {precision: bf16}
+- name: cifar10_dinov2@sq8
+  base: cifar10_dinov2
+  index: {faiss: SQ8}
+- name: cifar10_dinov2@hnsw16
+  base: cifar10_dinov2
+  index: {faiss: HNSW32, ef_search: 16}
+- name: cifar10_dinov2@hnsw64
+  base: cifar10_dinov2
+  index: {faiss: HNSW32, ef_search: 64}
+- name: cifar10_dinov2@hnsw256
+  base: cifar10_dinov2
+  index: {faiss: HNSW32, ef_search: 256}
+- name: cifar10_dinov2@ivf1
+  base: cifar10_dinov2
+  index: {faiss: 'IVF256,Flat', nprobe: 1}
+- name: cifar10_dinov2@ivf4
+  base: cifar10_dinov2
+  index: {faiss: 'IVF256,Flat', nprobe: 4}
+- name: cifar10_dinov2@ivf16
+  base: cifar10_dinov2
+  index: {faiss: 'IVF256,Flat', nprobe: 16}
+- {name: imagenet200@g0, base: imagenet200}
+- name: imagenet200@sub50
+  base: imagenet200
+  index: {subsample: 0.5}
+- name: imagenet200@sub20
+  base: imagenet200
+  index: {subsample: 0.2}
+- name: imagenet200@sub10
+  base: imagenet200
+  index: {subsample: 0.1}
+- name: imagenet200@sub05
+  base: imagenet200
+  index: {subsample: 0.05}
+- name: imagenet200@sub01
+  base: imagenet200
+  index: {subsample: 0.01}
+- name: imagenet200@proto10
+  base: imagenet200
+  index: {prototypes: 10}
+- name: imagenet200@proto50
+  base: imagenet200
+  index: {prototypes: 50}
+- name: imagenet200@proto100
+  base: imagenet200
+  index: {prototypes: 100}
+- name: imagenet200@bf16
+  base: imagenet200
+  index: {precision: bf16}
+- name: imagenet200@sq8
+  base: imagenet200
+  index: {faiss: SQ8}
+- name: imagenet200@hnsw16
+  base: imagenet200
+  index: {faiss: HNSW32, ef_search: 16}
+- name: imagenet200@hnsw64
+  base: imagenet200
+  index: {faiss: HNSW32, ef_search: 64}
+- name: imagenet200@hnsw256
+  base: imagenet200
+  index: {faiss: HNSW32, ef_search: 256}
+- name: imagenet200@ivf1
+  base: imagenet200
+  index: {faiss: 'IVF256,Flat', nprobe: 1}
+- name: imagenet200@ivf4
+  base: imagenet200
+  index: {faiss: 'IVF256,Flat', nprobe: 4}
+- name: imagenet200@ivf16
+  base: imagenet200
+  index: {faiss: 'IVF256,Flat', nprobe: 16}
+methods:
+  knn: {}
+  cure_elond_b1: {method: cure, certifier: elond, batch: 1}
+decision_alphas: [0.05, 0.1]
+output: results
+report:
+  reference: knn
+  ranking: [knn, cure_elond_b1]
+  labels: {knn: kNN, cure_elond_b1: '**CURE** e-LOND B=1'}
