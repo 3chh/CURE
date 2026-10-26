@@ -47,6 +47,33 @@ def latency_of(lat: dict, base: str, cfg: str, threads: int = 4):
     return lat.get(f"{base}@{cfg}@{threads}") or lat.get(f"{base}_{cfg}@{threads}")
 
 
+def to_markdown(summary: dict, verdict: dict, title: str | None) -> str:
+    """Bảng kết quả và kết luận giả thuyết, dạng Markdown để đưa thẳng vào báo cáo."""
+    def ms(r, k):
+        return f"{r[k]:.3f}" if k in r else "-"
+    lines = [f"# {title or 'Nén gallery: ' + ', '.join(verdict['pool'])}", ""]
+    lines += [(f"Bộ: {', '.join(verdict['pool'])}. Δ là chênh lệch AUROC so với g0 (gallery đầy đủ, tìm chính xác); "
+               "hại = tỉ lệ nhóm thấp hơn g0 quá 0,5 AUROC. Độ trễ đo trên CPU, B = 1, 4 luồng."), ""]
+    lines.append("| Cấu hình | Nhóm | kNN | Δ | CURE | Δ | Hại | FPR 5% | Tệ nhất | kNN p50 (ms) | CURE p50 (ms) |")
+    lines.append("|---|---|---|---|---|---|---|---|---|---|---|")
+    for c, r in summary.items():
+        lines.append(f"| {c} | {r['groups']} | {r['kNN']['auroc']:.2f} | {-r['kNN']['drop']:+.2f} | "
+                     f"{r['CURE']['auroc']:.2f} | {-r['CURE']['drop']:+.2f} | {100 * r['CURE']['harm']:.0f}% | "
+                     f"{r['fpr05_mean']:.2f} | {r['fpr05_worst']:.2f} | {ms(r, 'knn_p50_ms')} | {ms(r, 'cure_p50_ms')} |")
+    lines.append("")
+    for h, v in verdict.items():
+        if h.startswith("H60") and isinstance(v, dict):
+            extra = f" ({', '.join(v['configs'])})" if v.get("configs") else ""
+            if "hurt_configs" in v:
+                extra = f"; CURE mất ít hơn kNN ở {len(v['cure_less'])}/{len(v['hurt_configs'])} cấu hình"
+            lines.append(f"- **{h}: {'đạt' if v.get('pass') else 'trượt'}**{extra}")
+    if "recommended" in verdict:
+        lines.append(f"- Khuyến nghị theo quy tắc ghi trước (rẻ nhất mà đạt): **{verdict['recommended']}**")
+    if "max_knn_saving_ms" in verdict:
+        lines.append(f"- Tiết kiệm nhiều nhất ở bước kNN so với g0: {verdict['max_knn_saving_ms']:.3f} ms")
+    return "\n".join(lines) + "\n"
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", default="results/edge_gallery")
@@ -54,6 +81,7 @@ def main():
     ap.add_argument("--latency", nargs="*", default=["results/edge_gallery/latency.json"])
     ap.add_argument("--latency-base", default="cifar10", help="bộ có số đo độ trễ dùng cho pool này")
     ap.add_argument("--out")
+    ap.add_argument("--title")
     a = ap.parse_args()
     sys.stdout.reconfigure(encoding="utf-8")
     A = load(Path(a.results), a.pool)
@@ -103,6 +131,7 @@ def main():
         verdict["recommended"] = min(h_b, key=lambda c: summary[c]["knn_p50_ms"])
     out = Path(a.out or Path(a.results) / f"summary_{'+'.join(a.pool)}.json")
     out.write_text(json.dumps({"configs": summary, "verdict": verdict}, indent=1), encoding="utf-8")
+    out.with_suffix(".md").write_text(to_markdown(summary, verdict, a.title), encoding="utf-8")
 
     print(f"{'cấu hình':10s} {'nhóm':>4s} {'kNN':>7s} {'Δ':>6s} {'CURE':>7s} {'Δ':>6s} {'hại':>5s} {'FPR5%':>6s} {'tệ':>5s} "
           f"{'kNN ms':>7s} {'CURE ms':>8s}")
