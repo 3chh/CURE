@@ -1,0 +1,38 @@
+# Vòng 60c (docs/CURE_Causal_Research_Log.md): nén gallery ở quy mô ImageNet-1k (1,28 triệu x 2048).
+# 9 cấu hình; IVF dùng nlist 4096 (~sqrt(N)) thay 256 của CIFAR vì gallery lớn gấp 25 lần.
+name: edge_gallery_in1k
+benchmarks:
+- {name: imagenet1k@g0, base: imagenet1k}
+- name: imagenet1k@sub10
+  base: imagenet1k
+  index: {subsample: 0.1}
+- name: imagenet1k@sub01
+  base: imagenet1k
+  index: {subsample: 0.01}
+- name: imagenet1k@sub001
+  base: imagenet1k
+  index: {subsample: 0.001}
+- name: imagenet1k@proto10
+  base: imagenet1k
+  index: {prototypes: 10}
+- name: imagenet1k@ivf4
+  base: imagenet1k
+  index: {faiss: 'IVF4096,Flat', nprobe: 4}
+- name: imagenet1k@ivf16
+  base: imagenet1k
+  index: {faiss: 'IVF4096,Flat', nprobe: 16}
+- name: imagenet1k@hnsw64
+  base: imagenet1k
+  index: {faiss: HNSW32, ef_search: 64}
+- name: imagenet1k@bf16
+  base: imagenet1k
+  index: {precision: bf16}
+methods:
+  knn: {}
+  cure_elond_b1: {method: cure, certifier: elond, batch: 1}
+decision_alphas: [0.05, 0.1]
+output: results
+report:
+  reference: knn
+  ranking: [knn, cure_elond_b1]
+  labels: {knn: kNN, cure_elond_b1: '**CURE** e-LOND B=1'}

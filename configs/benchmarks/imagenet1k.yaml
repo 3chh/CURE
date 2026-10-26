@@ -1,0 +1,12 @@
+# ImageNet-1k, ResNet-50 torchvision (checkpoint OpenOOD), vòng 60c.
+# Gallery = toàn bộ 1,28 triệu ảnh train, lưu thành mảnh fp16 (scripts/build_in1k_benchmark.py + notebook trích).
+# Phía truy vấn tách từ 50.000 ảnh validation: 5/lớp hiệu chuẩn, 10/lớp vào luồng (xem đăng ký vòng 60c).
+name: imagenet1k
+backbone: resnet50_in1k (torchvision, checkpoint OpenOOD v1.5)
+features: in1k_query.npz
+gallery_shards: feats_*.npy     # cùng thư mục với file đặc trưng; nhãn lấy ở labels_*.npy
+k: aps                          # chọn riêng cho từng chỉ mục, trên (C, val_oi)
+val_ood: val_oi                 # 1.000 mẫu OpenImage-O tách riêng, đã loại khỏi tập test
+near: [ssb_hard, ninco]
+far: [inaturalist, textures, openimage_o]
+stream_salt: [1000]
