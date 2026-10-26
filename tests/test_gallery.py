@@ -94,3 +94,41 @@ def test_session_and_score_share_the_index(syn):
     sess = m.session()
     out = np.concatenate([sess.step(st.feats[i:i + 16]).scores for i in range(0, len(st.feats), 16)])
     assert np.allclose(ref.scores, out, atol=1e-5)
+
+
+@pytest.fixture
+def sharded(tmp_path, monkeypatch):
+    """Cùng dữ liệu, một bản nạp cả mảng và một bản chia 3 mảnh fp16, để so kết quả."""
+    import yaml
+    rng = np.random.default_rng(1)
+    feats = rng.normal(size=(900, 16)).astype(np.float16)
+    labels = np.repeat(np.arange(9), 100).astype(np.int16)
+    for i in range(3):
+        np.save(tmp_path / f"shard_feats_{i}.npy", feats[i * 300:(i + 1) * 300])
+        np.save(tmp_path / f"shard_labels_{i}.npy", labels[i * 300:(i + 1) * 300])
+    np.savez(tmp_path / "syn.npz", id_train_feats=feats.astype(np.float32), id_train_labels=labels,
+             id_val_feats=rng.normal(size=(120, 16)).astype(np.float32),
+             id_test_feats=rng.normal(size=(200, 16)).astype(np.float32),
+             id_test_labels=np.zeros(200), ood_feats=rng.normal(size=(150, 16)).astype(np.float32),
+             ood_labels=np.zeros(150))
+    base = {"name": "syn", "features": "syn.npz", "k": 5, "near": [], "far": ["ood"]}
+    (tmp_path / "syn.yaml").write_text(yaml.safe_dump(base), encoding="utf-8")
+    (tmp_path / "syn_sh.yaml").write_text(yaml.safe_dump({**base, "name": "syn_sh", "gallery_shards": "shard_feats_*.npy"}),
+                                          encoding="utf-8")
+    monkeypatch.setenv("CURE_FEATURES", str(tmp_path))
+    return str(tmp_path / "syn.yaml"), str(tmp_path / "syn_sh.yaml")
+
+
+@pytest.mark.parametrize("index", [None, {"subsample": 0.2}, {"prototypes": 3}, {"precision": "bf16"}])
+def test_sharded_gallery_matches_whole(sharded, index):
+    whole, shard = (Benchmark.load({"name": "v", "base": p, **({"index": index} if index else {})}) for p in sharded)
+    assert shard.shards.size == 900 and shard.dim == 16
+    q = whole.C
+    assert np.allclose(whole.knn(q, 5), shard.knn(q, 5), atol=1e-6)
+
+
+def test_sharded_refuses_to_materialise(sharded):
+    b = Benchmark.load(sharded[1])
+    with pytest.raises(RuntimeError, match="theo mảnh"):
+        _ = b.train_feats
+    assert np.array_equal(b.train_labels, np.repeat(np.arange(9), 100))

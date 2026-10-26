@@ -99,7 +99,7 @@ class CURESession(Session):
         self.s_cal = -self.cb if m.base == "knn" else static_scores(B.cal_logits, m.base)
         self.ps_cal = loo_p(self.s_cal)
         self.certify = RULES[m.certifier](alpha=m.alpha)
-        d = B.G.shape[1]
+        d = B.dim
         # Hàng chờ: chỉ số, s0, N_e, n_pass, bán kính r_e, x (cho CDM) và x chuẩn hóa lại (cho hậu kiểm).
         self.q = {"idx": np.empty(0, np.int64), "s0": np.empty(0, np.float32), "cnt": np.empty(0, np.int64),
                   "npass": np.empty(0, np.int64), "rad": torch.empty(0, device=DEVICE),

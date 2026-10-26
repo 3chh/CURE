@@ -39,6 +39,7 @@ class Benchmark:
     val_ood: str | None = None  # OOD proxy cho APS (chọn siêu tham số tĩnh)
     split: dict | None = None  # giao thức tách khi bộ ID ko có tập train (ImageNet-200)
     stream_salt: list[int] = field(default_factory=list)
+    gallery_shards: str | None = None  # glob các file .npy của gallery lớn (vd ImageNet-1k), đọc theo mảnh
     index: dict | None = None  # chỉ mục gallery của điểm kNN (data/gallery.py); None = tìm chính xác
     t_out: str | None = None  # nhóm danh sách T-out của OODD (configs/oodd_t_out.json); None = theo tên benchmark
     backbone: str = ""
@@ -99,7 +100,22 @@ class Benchmark:
 
     # Dữ liệu ID dùng để "fit" các phương pháp (ko bao giờ nằm trong luồng).
     @cached_property
+    def shards(self):
+        """Gallery theo mảnh (nếu config khai báo); nhãn lấy từ file labels_* cùng thư mục."""
+        from .gallery import Shards
+        if not self.gallery_shards:
+            return None
+        feats = sorted(data_root().glob(self.gallery_shards))
+        if not feats:
+            raise FileNotFoundError(f"ko thấy mảnh gallery {data_root() / self.gallery_shards}")
+        labels = sorted(p.with_name(p.name.replace("feats", "labels")) for p in feats)
+        return Shards(feats, [p for p in labels if p.exists()])
+
+    @cached_property
     def train_feats(self):
+        if self.gallery_shards:
+            raise RuntimeError(f"{self.name}: gallery theo mảnh ({self.shards.size} x {self.shards.dim}), "
+                               "ko nạp cả vào RAM; dùng bench.knn hoặc bench.shards")
         return self._part("gallery", "feats")
 
     @cached_property
@@ -108,7 +124,7 @@ class Benchmark:
 
     @cached_property
     def train_labels(self):
-        return self._part("gallery", "labels")
+        return self.shards.labels if self.gallery_shards else self._part("gallery", "labels")
 
     @cached_property
     def G(self) -> np.ndarray:
@@ -121,8 +137,14 @@ class Benchmark:
         return torch.as_tensor(self.G, device=DEVICE)
 
     @cached_property
+    def dim(self) -> int:
+        return int(self.shards.dim if self.gallery_shards else self.G.shape[1])
+
+    @cached_property
     def gallery_index(self):
-        from .gallery import build_index
+        from .gallery import build_index, build_index_shards
+        if self.gallery_shards:
+            return build_index_shards(self.shards, self.index)
         if not self.index:  # dùng chung G_device với các phương pháp khác
             from .gallery import ExactIndex
             return ExactIndex(self.G, g=self.G_device)

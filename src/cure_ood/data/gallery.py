@@ -1,6 +1,9 @@
 """Chỉ mục gallery cho điểm kNN: tìm chính xác (mặc định), thu nhỏ gallery, giảm độ chính xác số, FAISS xấp xỉ."""
 from __future__ import annotations
 
+from functools import cached_property
+from pathlib import Path
+
 import numpy as np
 import torch
 
@@ -79,3 +82,88 @@ def build_index(G: np.ndarray, spec: dict | None, labels: np.ndarray | None = No
     if spec:
         raise ValueError(f"tham số chỉ mục ko hiểu: {sorted(spec)}")
     return index
+
+
+class Shards:
+    """Gallery lưu thành nhiều file .npy (vd ImageNet-1k 1,28 triệu x 2048 fp16): đọc theo mảnh, ko nạp hết vào RAM."""
+
+    def __init__(self, feats: list[Path], labels: list[Path] | None = None):
+        self.parts = [np.load(p, mmap_mode="r") for p in feats]
+        self.sizes = [len(p) for p in self.parts]
+        self.offsets = np.cumsum([0] + self.sizes)
+        self.size, self.dim = int(self.offsets[-1]), int(self.parts[0].shape[1])
+        self._labels = labels
+
+    @cached_property
+    def labels(self) -> np.ndarray:
+        if not self._labels:
+            raise ValueError("gallery theo mảnh ko có file nhãn: cần cho prototypes")
+        return np.concatenate([np.load(p) for p in self._labels])
+
+    def chunks(self, size: int = 100_000):
+        """Lần lượt trả các khối đã chuẩn hóa L2 (float32), ko bao giờ giữ quá `size` dòng."""
+        for part in self.parts:
+            for s in range(0, len(part), size):
+                yield l2(np.asarray(part[s:s + size], dtype=np.float32))
+
+    def rows(self, idx: np.ndarray) -> np.ndarray:
+        """Các dòng theo chỉ số toàn cục (đã chuẩn hóa L2); idx phải tăng dần."""
+        out = np.empty((len(idx), self.dim), np.float32)
+        at = np.searchsorted(self.offsets, idx, side="right") - 1
+        for j, part in enumerate(self.parts):
+            m = at == j
+            if m.any():
+                out[m] = np.asarray(part[idx[m] - self.offsets[j]], dtype=np.float32)
+        return l2(out)
+
+
+def _exact_from_shards(sh: Shards, dtype: torch.dtype) -> ExactIndex:
+    """Dựng thẳng tensor trên DEVICE theo khối, nên RAM chỉ giữ một khối thay vì cả gallery."""
+    g = torch.empty((sh.size, sh.dim), dtype=dtype, device=DEVICE)
+    at = 0
+    for c in sh.chunks():
+        g[at:at + len(c)] = torch.as_tensor(c, device=DEVICE).to(dtype)
+        at += len(c)
+    idx = ExactIndex.__new__(ExactIndex)
+    idx.dtype, idx.size, idx.g = dtype, sh.size, g
+    return idx
+
+
+def _faiss_from_shards(sh: Shards, factory: str, ef_search, nprobe, train_n: int = 262_144) -> FaissIndex:
+    import faiss
+    index = faiss.index_factory(sh.dim, factory, faiss.METRIC_INNER_PRODUCT)
+    if not index.is_trained:  # huấn luyện trên mẫu con trải đều, như khuyến nghị của FAISS
+        step = max(1, sh.size // train_n)
+        index.train(np.ascontiguousarray(sh.rows(np.arange(0, sh.size, step))))
+    for c in sh.chunks():
+        index.add(np.ascontiguousarray(c))
+    if ef_search is not None:
+        faiss.ParameterSpace().set_index_parameter(index, "efSearch", ef_search)
+    if nprobe is not None:
+        faiss.ParameterSpace().set_index_parameter(index, "nprobe", nprobe)
+    out = FaissIndex.__new__(FaissIndex)
+    out.index, out.size = index, sh.size
+    return out
+
+
+def build_index_shards(sh: Shards, spec: dict | None):
+    """Như build_index nhưng nguồn là gallery theo mảnh; chỉ giữ một khối trong RAM mỗi lúc."""
+    spec = dict(spec or {})
+    seed = spec.pop("seed", 0)
+    if "subsample" in spec:
+        n = max(1, round(spec.pop("subsample") * sh.size))
+        idx = np.sort(np.random.default_rng(seed).choice(sh.size, n, replace=False))
+        return build_index(sh.rows(idx), spec or None)
+    if "prototypes" in spec:
+        m, lab = spec.pop("prototypes"), sh.labels
+        cent = []
+        for c in np.unique(lab):
+            Xc = sh.rows(np.flatnonzero(lab == c))
+            cent.append(class_prototypes(Xc, np.zeros(len(Xc), int), m, seed))
+        return build_index(np.concatenate(cent), spec or None)
+    if "faiss" in spec:
+        return _faiss_from_shards(sh, spec.pop("faiss"), spec.pop("ef_search", None), spec.pop("nprobe", None))
+    dtype = {"fp32": torch.float32, "bf16": torch.bfloat16}[spec.pop("precision", "fp32")]
+    if spec:
+        raise ValueError(f"tham số chỉ mục ko hiểu: {sorted(spec)}")
+    return _exact_from_shards(sh, dtype)
