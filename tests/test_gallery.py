@@ -132,3 +132,17 @@ def test_sharded_refuses_to_materialise(sharded):
     with pytest.raises(RuntimeError, match="theo mảnh"):
         _ = b.train_feats
     assert np.array_equal(b.train_labels, np.repeat(np.arange(9), 100))
+
+
+@pytest.mark.parametrize("n,item,want", [(50_000, 4, 2048), (3_520, 4, 2048), (1_281_167, 4, 209), (1_281_167, 2, 419)])
+def test_budget_chunk(n, item, want):
+    """Gallery nhỏ giữ nguyên khối 2048 (ko đổi kết quả cũ); gallery lớn bị chia nhỏ để ko tràn bộ nhớ."""
+    idx = ExactIndex.__new__(ExactIndex)
+    idx.size, idx.g = n, torch.empty(0, dtype=torch.float32 if item == 4 else torch.bfloat16)
+    assert idx.budget_chunk(2048) == want
+
+
+def test_big_gallery_chunking_matches_small_chunk():
+    """Chia khối nhỏ cho cùng kết quả: tính đúng đắn ko phụ thuộc kích thước khối (trên CPU)."""
+    idx = build_index(G, None)
+    assert np.allclose(idx.kth_sim(Q, 5, chunk=7), kth_sim(Q, G, 5), atol=1e-6)

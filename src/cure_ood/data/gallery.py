@@ -17,7 +17,15 @@ class ExactIndex:
         self.dtype, self.size = dtype, len(G)
         self.g = (g if g is not None else torch.as_tensor(G, device=DEVICE)).to(dtype)
 
+    def budget_chunk(self, chunk: int, budget: int = 1 << 30) -> int:
+        """Ma trận tương đồng của một khối là chunk x size: với gallery lớn phải chia nhỏ hơn.
+
+        Gallery ≤ ~130 nghìn mẫu giữ nguyên khối người gọi yêu cầu, nên kết quả các vòng trước ko đổi.
+        """
+        return max(1, min(chunk, budget // (self.size * self.g.element_size())))
+
     def kth_sim(self, q: np.ndarray, k: int, chunk: int = 2048) -> np.ndarray:
+        chunk = self.budget_chunk(chunk)
         if self.dtype == torch.float32:
             return kth_sim(q, self.g, k, chunk)
         out = np.empty(len(q), np.float32)
