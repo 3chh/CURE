@@ -91,9 +91,16 @@ def main():
             lat.update(json.loads(Path(p).read_text(encoding="utf-8")))
     groups = sorted({g[1:] for g in A})
     cfgs = sorted({g[0] for g in A}, key=lambda c: (c != "g0", c))
+    if "g0" not in cfgs:
+        print(f"thiếu cấu hình mốc g0 cho {a.pool}: mọi Δ đều so với nó, nên chưa kết luận được. "
+              f"Các cấu hình đã có: {cfgs}")
+        return
     summary = {}
     for c in cfgs:
         ks = [g for g in groups if (c, *g) in A and ("g0", *g) in A]
+        if not ks:
+            print(f"bỏ qua {c}: ko có nhóm nào chạy cả {c} lẫn g0")
+            continue
         rec = {"groups": len(ks)}
         for m, name in METHODS.items():
             d = np.array([A[(c, *g)][m] - A[("g0", *g)][m] for g in ks])
