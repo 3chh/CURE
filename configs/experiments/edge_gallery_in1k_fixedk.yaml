@@ -1,0 +1,20 @@
+# Vòng 60d (docs/CURE_Causal_Research_Log.md): khóa K để tách ảnh hưởng của K khỏi ảnh hưởng của chỉ mục.
+name: edge_gallery_in1k_fixedk
+benchmarks:
+- name: imagenet1k@ivf4k200
+  base: imagenet1k
+  index: {faiss: 'IVF4096,Flat', nprobe: 4}
+  k: 200
+- name: imagenet1k@ivf1k200
+  base: imagenet1k
+  index: {faiss: 'IVF4096,Flat', nprobe: 1}
+  k: 200
+- {name: imagenet1k@g0k2, base: imagenet1k, k: 2}
+methods:
+  knn: {}
+  cure_elond_b1: {method: cure, certifier: elond, batch: 1}
+decision_alphas: [0.05, 0.1]
+output: results
+report:
+  reference: knn
+  ranking: [knn, cure_elond_b1]
