@@ -1,0 +1,62 @@
+# Bảng chính 81 nhóm: gộp kết quả vòng 58 (`main`: CIFAR-10, CIFAR-100, ImageNet-200)
+# với `robustness` (SupCon, DINOv2), cùng một bộ phương pháp trung thành. Chỉ để dựng báo cáo:
+# chép *.jsonl của hai thí nghiệm vào results/main81/ rồi chạy `cure-ood report main81`.
+name: main81
+benchmarks: [cifar10, cifar100, imagenet200, cifar10_supcon, cifar10_dinov2]
+pis: [0.05, 0.2, 0.5]
+seeds: [0, 1, 2]
+methods:
+  cure: {}
+  cure_msp: {method: cure, base: msp}
+  cure_energy: {method: cure, base: energy}
+  knn: {}
+  oodd: {}
+  oodd_tout: {method: oodd, t_out: true}
+  oodd_protocol: {method: oodd, batch: 128}
+  adaodd: {}
+  warden: {}
+  age_queue: {ttl: 512}
+  msp: {}
+  energy: {}
+  rtl_plus: {}
+  rtl_plus_protocol: {method: rtl_plus, batch: 128}
+  dcac_msp: {}
+  dcac_energy: {}
+  dcac_msp_protocol: {method: dcac_msp, batch: 128}
+  dcac_energy_protocol: {method: dcac_energy, batch: 128}
+  dynproto: {}
+  maxlogit: {}
+  gen: {}
+  mahalanobis: {}
+  vim: {}
+  react: {}
+  nci: {}
+  fdbd: {}
+  cadref: {}
+output: results
+report:
+  reference: knn
+  ranking: [knn, oodd, oodd_tout, adaodd, warden, age_queue, cure]
+  static: [msp, maxlogit, energy, gen, mahalanobis, vim, react, nci, fdbd, cadref,
+    knn, cure]
+  families:
+    kNN:
+      base: knn
+      method: cure
+      rivals: [oodd, oodd_tout, oodd_protocol, adaodd, warden, age_queue]
+    MSP:
+      base: msp
+      method: cure_msp
+      rivals: [dcac_msp, dcac_msp_protocol, dynproto, rtl_plus, rtl_plus_protocol]
+    Energy:
+      base: energy
+      method: cure_energy
+      rivals: [dcac_energy, dcac_energy_protocol]
+  labels: {cure: '**CURE**', cure_msp: '**CURE[MSP]**', cure_energy: '**CURE[Energy]**',
+    knn: kNN, oodd: OODD (official), oodd_tout: OODD + T-out (official), oodd_protocol: 'OODD
+      (official, batch 128)', adaodd: AdaODD* (paper), warden: WARDEN* (paper), age_queue: Age-expiry
+      queue, msp: MSP, energy: Energy, rtl_plus: RTL++ (official), rtl_plus_protocol: 'RTL++
+      (official, batch 128)', dcac_msp: DCAC-MSP (official), dcac_energy: DCAC-Energy
+      (official), dcac_msp_protocol: 'DCAC-MSP (official, batch 128)', dcac_energy_protocol: 'DCAC-Energy
+      (official, batch 128)', dynproto: DynProto* (paper), maxlogit: MaxLogit, gen: GEN,
+    mahalanobis: Mahalanobis, vim: ViM, react: ReAct, nci: NCI, fdbd: fDBD, cadref: CADRef}
