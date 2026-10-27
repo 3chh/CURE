@@ -82,6 +82,9 @@ def main():
     ap.add_argument("--latency-base", default="cifar10", help="bộ có số đo độ trễ dùng cho pool này")
     ap.add_argument("--out")
     ap.add_argument("--title")
+    ap.add_argument("--hyp", nargs=3, default=["H60b", "H60c", "H60d"],
+                    help="tên 3 giả thuyết (tốc độ+chất lượng, bộ nhớ bù, FPR); vòng 60c: H60f H60g H60i")
+    ap.add_argument("--speedup", type=float, default=5.0, help="ngưỡng nhanh hơn g0 bao nhiêu lần (vòng 60: 5; 60c: 10)")
     a = ap.parse_args()
     sys.stdout.reconfigure(encoding="utf-8")
     A = load(Path(a.results), a.pool)
@@ -121,15 +124,16 @@ def main():
             encoding="utf-8")
         return
     base_ms = summary.get("g0", {}).get("knn_p50_ms")
-    h_b = [c for c, r in summary.items() if c != "g0" and base_ms and r.get("knn_p50_ms", np.inf) <= base_ms / 5
+    h_b = [c for c, r in summary.items() if c != "g0" and base_ms and r.get("knn_p50_ms", np.inf) <= base_ms / a.speedup
            and r["CURE"]["drop"] <= HARM and r["CURE"]["harm"] <= 0.10]
     hurt = [c for c, r in summary.items() if c != "g0" and r["kNN"]["drop"] >= 0.2]
     comp = [c for c in hurt if summary[c]["CURE"]["drop"] < summary[c]["kNN"]["drop"]]
     verdict = {
         "pool": a.pool,
-        "H60b": {"pass": bool(h_b), "configs": h_b} if base_ms else "chưa có số đo độ trễ",
-        "H60c": {"pass": len(hurt) > 0 and len(comp) >= 2 / 3 * len(hurt), "hurt_configs": hurt, "cure_less": comp},
-        "H60d": {"pass": all(r["fpr05_mean"] <= 6 and r["fpr05_worst"] <= 8 for r in summary.values())},
+        "speedup_threshold": a.speedup,
+        a.hyp[0]: {"pass": bool(h_b), "configs": h_b} if base_ms else "chưa có số đo độ trễ",
+        a.hyp[1]: {"pass": len(hurt) > 0 and len(comp) >= 2 / 3 * len(hurt), "hurt_configs": hurt, "cure_less": comp},
+        a.hyp[2]: {"pass": all(r["fpr05_mean"] <= 6 and r["fpr05_worst"] <= 8 for r in summary.values())},
     }
     if base_ms:
         saving = {c: base_ms - r["knn_p50_ms"] for c, r in summary.items() if "knn_p50_ms" in r}
