@@ -43,7 +43,7 @@ report:
     kNN:
       base: knn
       method: cure
-      rivals: [oodd, oodd_tout, oodd_protocol, adaodd, warden, age_queue]
+      rivals: [oodd, oodd_protocol, adaodd, warden, age_queue]
     MSP:
       base: msp
       method: cure_msp
