@@ -1,0 +1,22 @@
+# Vòng 62 (docs/CURE_Causal_Research_Log.md): online e-BH so với e-BH theo đợt và e-LOND, ở B = 1 và B = 128.
+name: online_ebh
+benchmarks: [cifar10, cifar100, imagenet200]
+pis: [0.05, 0.2, 0.5]
+seeds: [0, 1, 2]
+methods:
+  knn: {}
+  cure_ebh_b1: {method: cure, batch: 1}
+  cure_elond_b1: {method: cure, certifier: elond, batch: 1}
+  cure_oebh_b1: {method: cure, certifier: online_ebh, batch: 1}
+  cure_ebh_b128: {method: cure}
+  cure_elond_b128: {method: cure, certifier: elond}
+  cure_oebh_b128: {method: cure, certifier: online_ebh}
+decision_alphas: [0.05, 0.1]
+output: results
+report:
+  reference: knn
+  ranking: [knn, cure_ebh_b1, cure_elond_b1, cure_oebh_b1, cure_ebh_b128, cure_elond_b128,
+    cure_oebh_b128]
+  labels: {knn: kNN, cure_ebh_b1: CURE e-BH B=1, cure_elond_b1: CURE e-LOND B=1, cure_oebh_b1: '**CURE
+      online e-BH B=1**', cure_ebh_b128: CURE e-BH B=128, cure_elond_b128: CURE e-LOND
+      B=128, cure_oebh_b128: CURE online e-BH B=128}
