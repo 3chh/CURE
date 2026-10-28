@@ -116,12 +116,51 @@ def elond_rule(alpha=0.2, kappa=0.5) -> Rule:
     return certify
 
 
+GAMMA_C = 0.07720838  # hằng chuẩn hóa để tổng trọng số gamma bằng 1 (dùng chung cho e-LOND và online e-BH)
+
+
+def _gamma(j: int) -> float:
+    """Trọng số gamma_j của dãy chuẩn, tổng bằng 1."""
+    return GAMMA_C * np.log(max(j, 2)) / (j * np.exp(np.sqrt(np.log(j))))
+
+
+def online_ebh_rule(alpha=0.2, kappa=0.5) -> Rule:
+    """Online e-BH (Fischer, Xu, Ramdas, arXiv:2407.20683): SupFDR ≤ alpha dưới mọi phụ thuộc.
+
+    Ngưỡng của mẫu j là 1/(k* · alpha · gamma_j), với k* là số lớn nhất sao cho có ít nhất k* mẫu
+    vượt ngưỡng ứng với chính k* đó. k* chỉ tăng theo thời gian, nên ngưỡng nới dần khi bằng chứng
+    tích lũy - đó là chỗ thủ tục này mạnh hơn e-LOND, vốn có gamma giảm dần mà ko bù lại.
+
+    Khác bản gốc: bài cho phép chứng nhận một mẫu ở thời điểm sau, còn CURE phải quyết ngay lúc mẫu
+    hết hạn (mẫu ko đạt bị trục xuất). Vì vậy ở đây chỉ dùng ngưỡng đang có, ko xét lại mẫu cũ.
+    """
+    state = {"t": 0, "kstar": 0, "cum": 0, "cnt": {}}
+
+    def certify(p):
+        keep = np.zeros(len(p), bool)
+        for i, pi in enumerate(p):
+            state["t"] += 1
+            e = kappa * max(float(pi), EPS) ** (kappa - 1)
+            # c = số mục tối thiểu phải có để mẫu này vượt ngưỡng; k* nguyên nên so bằng trần của c.
+            c = 1.0 / max(e * alpha * _gamma(state["t"]), EPS)
+            m = max(1, int(np.ceil(c)))
+            state["cnt"][m] = state["cnt"].get(m, 0) + 1
+            if m <= state["kstar"]:
+                state["cum"] += 1
+            while state["cum"] + state["cnt"].get(state["kstar"] + 1, 0) >= state["kstar"] + 1:
+                state["kstar"] += 1
+                state["cum"] += state["cnt"].get(state["kstar"], 0)
+            keep[i] = m <= state["kstar"]
+        return keep
+    return certify
+
+
 def all_rule(alpha=None) -> Rule:
     """Bỏ hậu kiểm (ablation): mọi mẫu hết hạn đều vào CDM."""
     return lambda p: np.ones(len(p), bool)
 
 
-RULES = {"ebh": ebh_rule, "elond": elond_rule, "all": all_rule}
+RULES = {"ebh": ebh_rule, "elond": elond_rule, "online_ebh": online_ebh_rule, "all": all_rule}
 
 
 def ebh_certifier(p: np.ndarray, alpha=0.2, kappa=0.5) -> Certifier:
@@ -136,6 +175,12 @@ def elond_certifier(p: np.ndarray, alpha=0.2, kappa=0.5) -> Certifier:
     return lambda expired: rule(p[expired])
 
 
+def online_ebh_certifier(p: np.ndarray, alpha=0.2, kappa=0.5) -> Certifier:
+    """Online e-BH theo chỉ số mẫu của luồng; có trạng thái nên tạo mới cho mỗi luồng."""
+    rule = online_ebh_rule(alpha, kappa)
+    return lambda expired: rule(p[expired])
+
+
 def all_certifier(p: np.ndarray, alpha=None) -> Certifier:
     """Bỏ hậu kiểm theo chỉ số mẫu (ablation)."""
     return lambda expired: np.ones(len(expired), bool)
@@ -146,4 +191,5 @@ def oracle_certifier(y: np.ndarray) -> Certifier:
     return lambda expired: np.asarray(y)[expired] == 1
 
 
-CERTIFIERS = {"ebh": ebh_certifier, "elond": elond_certifier, "all": all_certifier}
+CERTIFIERS = {"ebh": ebh_certifier, "elond": elond_certifier, "online_ebh": online_ebh_certifier,
+               "all": all_certifier}
