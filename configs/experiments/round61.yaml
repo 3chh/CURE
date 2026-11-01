@@ -1,0 +1,26 @@
+# Vòng 61 (docs/CURE_Causal_Research_Log.md): đánh đổi backbone - chất lượng - độ trễ trên CIFAR-10.
+# Mọi backbone dùng chung chỉ mục IVF256 nprobe 4 (khuyến nghị vòng 60) và K chọn lại bằng APS,
+# nên khác biệt giữa các dòng chỉ đến từ kiến trúc backbone.
+name: round61
+benchmarks:
+- {name: r61_resnet20_ivf4, base: r61_resnet20, index: {faiss: 'IVF256,Flat', nprobe: 4}, k: aps}
+- {name: r61_mobilenetv2_ivf4, base: r61_mobilenetv2, index: {faiss: 'IVF256,Flat', nprobe: 4}, k: aps}
+- {name: r61_resnet18_s0_ivf4, base: r61_resnet18_s0, index: {faiss: 'IVF256,Flat', nprobe: 4}, k: aps}
+- {name: r61_resnet18_s1_ivf4, base: r61_resnet18_s1, index: {faiss: 'IVF256,Flat', nprobe: 4}, k: aps}
+- {name: r61_resnet18_s2_ivf4, base: r61_resnet18_s2, index: {faiss: 'IVF256,Flat', nprobe: 4}, k: aps}
+- {name: r61_resnet18embed128_ivf4, base: r61_resnet18embed128, index: {faiss: 'IVF256,Flat', nprobe: 4}, k: aps}
+- {name: r61_resnet50_ivf4, base: r61_resnet50, index: {faiss: 'IVF256,Flat', nprobe: 4}, k: aps}
+- {name: r61_resnet18_logitnorm_ivf4, base: r61_resnet18_logitnorm, index: {faiss: 'IVF256,Flat', nprobe: 4}, k: aps}
+- {name: r61_dinov2_ivf4, base: cifar10_dinov2, index: {faiss: 'IVF256,Flat', nprobe: 4}, k: aps}
+pis: [0.05, 0.2, 0.5]
+seeds: [0, 1, 2]
+methods:
+  knn: {}
+  cure: {}
+  cure_oebh_b1: {method: cure, certifier: online_ebh, batch: 1}
+decision_alphas: [0.05, 0.1]
+output: results
+report:
+  reference: knn
+  ranking: [knn, cure, cure_oebh_b1]
+  labels: {knn: kNN, cure: CURE e-BH B=128, cure_oebh_b1: '**CURE** online e-BH B=1'}
