@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
 import zipfile
 from pathlib import Path
 
@@ -50,6 +51,7 @@ def rebuild(source: Path, events: list[dict]) -> dict:
 
 
 def main():
+    sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser()
     ap.add_argument("kernel")
     ap.add_argument("--source", required=True, help="notebook đã đẩy lên (để lấy mã nguồn từng ô)")

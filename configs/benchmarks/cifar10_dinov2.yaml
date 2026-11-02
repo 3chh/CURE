@@ -3,5 +3,6 @@ description: CIFAR-10, frozen DINOv2 ViT-B/14 CLS features (robustness check; no
 backbone: dinov2_vitb14
 features: dino_cifar10_v15.npz
 k: 10
+val_ood: tin
 near: [cifar100, tin]
 far: [mnist, svhn, texture, places365]

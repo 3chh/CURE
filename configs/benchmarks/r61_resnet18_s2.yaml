@@ -1,0 +1,15 @@
+name: r61_resnet18_s2
+description: CIFAR-10, ResNet18 seed 2 | backbone tu huan luyen, run r61_resnet18_s2
+backbone: resnet18_32x32 (r61_resnet18_s2)
+features: r61_resnet18_s2.npz
+k: 5
+val_ood: val_tin
+near:
+- cifar100
+- tin
+far:
+- mnist
+- svhn
+- texture
+- places365
+

@@ -1,0 +1,20 @@
+# sinh cho run r61_resnet18_s1
+backbone: resnet18_32x32
+checkpoint: /kaggle/working/results/train/r61_resnet18_s1/best.ckpt
+options:
+  norm: cifar10
+imglists: cifar10
+image_root: images_classic
+output: r61_resnet18_s1.npz
+batch_size: 512
+sets:
+  id_train: train_cifar10
+  id_val: val_cifar10
+  val_tin: val_tin
+  id_test: test_cifar10
+  cifar100: test_cifar100
+  tin: test_tin
+  mnist: test_mnist
+  svhn: test_svhn
+  texture: test_texture
+  places365: test_places365
