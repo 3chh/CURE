@@ -105,7 +105,7 @@ class CURESession(Session):
                   "npass": np.empty(0, np.int64), "rad": torch.empty(0, device=DEVICE),
                   "x": torch.empty(0, d, device=DEVICE), "xn": torch.empty(0, d, device=DEVICE)}
         self.cdm_idx, self.cdm_x = np.empty(0, np.int64), torch.empty(0, d, device=DEVICE)
-        self.cdm_sizes, self.covered, self.certified, self.evicted = [], 0, 0, 0
+        self.cdm_sum, self.cdm_steps, self.covered, self.certified, self.evicted = 0, 0, 0, 0, 0
         self.cdm_view = None  # (mem, mem_x, aff_c): chỉ đổi khi CDM đổi, tránh tính lại C x CDM mỗi bước
 
     @torch.inference_mode()
@@ -121,7 +121,8 @@ class CURESession(Session):
         self.count(self.q, new)
         self.count(new, new)
         self.review(s)
-        self.cdm_sizes.append(len(self.cdm_idx))
+        self.cdm_sum += len(self.cdm_idx)
+        self.cdm_steps += 1
         self.enqueue(new)
         static = -s0 if m.base == "knn" else static_scores(logits, m.base)
         p_static = rank_p(static, self.s_cal)
@@ -183,5 +184,5 @@ class CURESession(Session):
         self.q = {key: v[sel_t] if torch.is_tensor(v) else v[sel] for key, v in cand.items()}
 
     def activity(self):
-        return {"cdm_mean": float(np.mean(self.cdm_sizes)), "coverage": self.covered / self.t,
+        return {"cdm_mean": float(self.cdm_sum / max(1, self.cdm_steps)), "coverage": self.covered / self.t,
                 "certified": self.certified, "evicted": self.evicted}
