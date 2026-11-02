@@ -70,3 +70,4 @@ report:
     dcac_msp_protocol: "DCAC[MSP] (B=128)"
     dcac_energy_protocol: "DCAC[Energy] (B=128)"
     dynproto: "DynProto"
+

@@ -1,0 +1,74 @@
+# Xác nhận mở rộng trên seed mới 10-19 (10 seed tiếp theo), cùng 81 nhóm và cùng bộ phương pháp trung thành của bảng chính.
+# Cấu hình khóa, ko chỉnh gì sau khi đã xem kết quả seed 0-9.
+name: seed2029_81
+benchmarks: [cifar10, cifar100, imagenet200, cifar10_supcon, cifar10_dinov2]
+pis: [0.05, 0.2, 0.5]
+seeds: [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+methods:
+  cure: {}
+  cure_msp: {method: cure, base: msp}
+  cure_energy: {method: cure, base: energy}
+  knn: {}
+  oodd: {}
+  oodd_tout: {method: oodd, t_out: true}
+  oodd_protocol: {method: oodd, batch: 128}
+  adaodd: {}
+  warden: {}
+  age_queue: {ttl: 512}
+  msp: {}
+  energy: {}
+  rtl_plus: {}
+  rtl_plus_protocol: {method: rtl_plus, batch: 128}
+  dcac_msp: {}
+  dcac_energy: {}
+  dcac_msp_protocol: {method: dcac_msp, batch: 128}
+  dcac_energy_protocol: {method: dcac_energy, batch: 128}
+  dynproto: {}
+  maxlogit: {}
+  gen: {}
+  mahalanobis: {}
+  vim: {}
+  react: {}
+  nci: {}
+  fdbd: {}
+  cadref: {}
+output: results
+report:
+  reference: knn
+  ranking: [knn, oodd, oodd_tout, adaodd, warden, age_queue, cure]
+  static: [msp, maxlogit, energy, gen, mahalanobis, vim, react, nci, fdbd, cadref,
+    knn, cure]
+  families:
+    kNN:
+      base: knn
+      method: cure
+      rivals: [oodd, oodd_tout, oodd_protocol, adaodd, warden, age_queue]
+    MSP:
+      base: msp
+      method: cure_msp
+      rivals: [dcac_msp, dcac_msp_protocol, dynproto, rtl_plus, rtl_plus_protocol]
+    Energy:
+      base: energy
+      method: cure_energy
+      rivals: [dcac_energy, dcac_energy_protocol]
+  labels:
+    cure: "**CURE**"
+    cure_msp: "**CURE[MSP]**"
+    cure_energy: "**CURE[Energy]**"
+    knn: "kNN tĩnh"
+    oodd: "OODD"
+    oodd_tout: "OODD+Tout"
+    oodd_protocol: "OODD (B=128)"
+    adaodd: "AdaODD"
+    warden: "WARDEN"
+    age_queue: "AgeQueue"
+    msp: "MSP"
+    energy: "Energy"
+    rtl_plus: "RTL+"
+    rtl_plus_protocol: "RTL+ (B=128)"
+    dcac_msp: "DCAC[MSP]"
+    dcac_energy: "DCAC[Energy]"
+    dcac_msp_protocol: "DCAC[MSP] (B=128)"
+    dcac_energy_protocol: "DCAC[Energy] (B=128)"
+    dynproto: "DynProto"
+

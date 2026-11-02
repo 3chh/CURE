@@ -45,3 +45,4 @@ print(f"Merged {len(all_jsonls)} files into {OUT}.")
 print("Running report generation...")
 subprocess.run([sys.executable, "-m", "cure_ood.cli", "report", "master20_81"], cwd=REPO, check=False)
 print("Done master20_81!")
+
