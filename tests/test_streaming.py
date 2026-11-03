@@ -31,7 +31,20 @@ def compare(method, stream):
     stream.cache.clear()
     ref = m.score(stream)
     stream.cache.clear()
-    return ref, run_session(m, stream, m.batch)
+    out = run_session(m, stream, m.batch)
+    stream.cache.clear()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+    return ref, out
+
+
+@pytest.fixture(autouse=True)
+def clean_gpu():
+    yield
+    import gc
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
 
 
 def assert_same(a, b):

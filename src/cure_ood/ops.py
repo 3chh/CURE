@@ -17,7 +17,9 @@ def kth_sim(q: np.ndarray, g, k: int, chunk: int = 2048) -> np.ndarray:
     if len(q) == 0:
         return out
     gt = g if torch.is_tensor(g) else torch.as_tensor(np.ascontiguousarray(g, dtype=np.float32), device=DEVICE)
-    # Giữ khối 2048 như bản gốc: đổi hình dạng phép nhân làm lệch bit trên GPU.
+    # Tự động điều chỉnh chunk khi gallery lớn (CIFAR-10 50k, ImageNet) để tránh OOM trên GPU:
+    if DEVICE == "cuda" and len(gt) > 10000 and chunk > 512:
+        chunk = 512
     for s in range(0, len(q), chunk):
         qt = torch.as_tensor(np.ascontiguousarray(q[s:s + chunk], dtype=np.float32), device=DEVICE)
         out[s:s + chunk] = (qt @ gt.T).topk(k, dim=1).values[:, -1].cpu().numpy()

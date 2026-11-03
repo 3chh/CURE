@@ -70,3 +70,36 @@ def test_online_ebh_state_is_per_stream():
     rule = RULES["online_ebh"]()
     b = np.concatenate([rule(p[i:i + 1]) for i in range(len(p))])
     assert a.sum() <= b.sum()  # rule dùng lại tích lũy bằng chứng nên chứng nhận ít nhất bằng
+
+def test_proposition3_cauchy_rank_preservation():
+    """Mệnh đề 3: lim_{p_s -> 0} T_Cauchy(x_i) / T_Cauchy(x_j) = p_s(x_j) / p_s(x_i).
+    Khi p_s cực nhỏ (bằng chứng tĩnh rất mạnh), Cauchy bảo toàn thứ hạng tương đối của p_s
+    bất chấp nhiễu hoặc biến động trong kênh bộ nhớ p_mem."""
+    rng = np.random.default_rng(42)
+    p_s_i = 1e-6
+    p_s_j = 1e-5
+    theoretical_ratio = p_s_j / p_s_i  # 10.0
+
+    n_trials = 100
+    p_mem_i = rng.uniform(0.05, 0.95, size=n_trials)
+    p_mem_j = rng.uniform(0.05, 0.95, size=n_trials)
+
+    t_i = combine([np.full(n_trials, p_s_i), p_mem_i], [1.0, 1.0], "cauchy")
+    t_j = combine([np.full(n_trials, p_s_j), p_mem_j], [1.0, 1.0], "cauchy")
+
+    # 1. Thứ hạng luôn luôn được bảo toàn 100%: T(x_i) > T(x_j) dù p_mem_i bất lợi hơn p_mem_j rất nhiều
+    assert np.all(t_i > t_j)
+
+    # 2. Tỉ số thực nghiệm xấp xỉ tỉ số lý thuyết (sai số tương đối < 1% do p_s nhỏ áp đảo)
+    empirical_ratios = t_i / t_j
+    assert np.all(np.abs(empirical_ratios - theoretical_ratio) / theoretical_ratio < 0.01)
+
+
+def test_cauchy_extreme_divergence_dominance():
+    """Kiểm tra tính chất đuôi nặng Cauchy: một kênh có bằng chứng cực đoan (p -> 0)
+    sẽ áp đảo hoàn toàn kênh còn lại, ngăn ngừa false negative do kênh phụ kéo xuống."""
+    t_cauchy_extreme = combine([np.array([1e-8]), np.array([0.95])], [1.0, 1.0], "cauchy")
+    t_cauchy_moderate = combine([np.array([0.05]), np.array([0.05])], [1.0, 1.0], "cauchy")
+
+    assert t_cauchy_extreme[0] > t_cauchy_moderate[0]
+
