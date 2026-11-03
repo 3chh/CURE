@@ -29,7 +29,7 @@ def need_features(bench):
         pytest.skip(f"thiếu file đặc trưng {bench.features}")
 
 
-@pytest.fixture(autouse=True, scope="module")
+@pytest.fixture(autouse=True, scope="function")
 def free_gpu():
     """Giải phóng GPU sau mỗi file test: mô hình của test backbone chiếm gần hết 6 GB nếu để lại."""
     yield
