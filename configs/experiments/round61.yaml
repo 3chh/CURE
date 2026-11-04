@@ -18,9 +18,13 @@ methods:
   knn: {}
   cure: {}
   cure_oebh_b1: {method: cure, certifier: online_ebh, batch: 1}
+  oodd: {method: oodd, gallery: approx}
+  adaodd: {}
+  warden: {}
+  age_queue: {method: age_queue, ttl: 512}
 decision_alphas: [0.05, 0.1]
 output: results
 report:
   reference: knn
-  ranking: [knn, cure, cure_oebh_b1]
-  labels: {knn: kNN, cure: CURE e-BH B=128, cure_oebh_b1: '**CURE** online e-BH B=1'}
+  ranking: [knn, cure, cure_oebh_b1, oodd, adaodd, warden, age_queue]
+  labels: {knn: kNN, cure: CURE e-BH B=128, cure_oebh_b1: '**CURE** online e-BH B=1', oodd: OODD, adaodd: AdaODD*, warden: WARDEN*, age_queue: AgeQueue}

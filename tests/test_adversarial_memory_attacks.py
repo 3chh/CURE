@@ -154,3 +154,4 @@ def test_conformal_cauchy_prevents_masking_under_corrupted_memory():
     t_cauchy = combine([p_s_ood, p_mem_noisy], [1.0, 1.0], "cauchy")
     # Phân kỳ tan((0.5 - 1e-6)*pi) ~ 318,309 áp đảo hoàn toàn tan((0.5 - 0.95)*pi) ~ -6.31
     assert t_cauchy[0] > 150000.0, "Điểm Cauchy của mẫu OOD phải đạt giá trị khổng lồ bất chấp kênh bộ nhớ nhiễu"
+
