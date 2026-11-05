@@ -22,20 +22,20 @@
       "significant_001": true
     },
     "cure_vs_warden": {
-      "mean_delta": 2.95,
+      "mean_delta": 3.13,
       "ci95": [
-        -0.38,
-        11.5
+        -0.08,
+        11.58
       ],
-      "wilcoxon_stat": 26.0,
-      "p_value": 0.0234375,
+      "wilcoxon_stat": 27.0,
+      "p_value": 0.015625,
       "significant_05": true
     },
     "cure_b1_vs_warden": {
-      "mean_delta": 2.68,
+      "mean_delta": 2.76,
       "ci95": [
-        -0.41,
-        10.79
+        -0.25,
+        10.82
       ],
       "wilcoxon_stat": 26.0,
       "p_value": 0.0234375,

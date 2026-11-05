@@ -42,8 +42,8 @@ BACKBONE_SPECS = [
 
 METHODS = {
     "knn": {"method": "knn"},
-    "cure": {"method": "cure"},
-    "cure_oebh_b1": {"method": "cure", "certifier": "online_ebh", "batch": 1},
+    "cure": {"method": "cure", "rule": "fisher"},
+    "cure_oebh_b1": {"method": "cure", "certifier": "online_ebh", "batch": 1, "rule": "fisher"},
     "oodd": {"method": "oodd", "gallery": "approx"},
     "adaodd": {"method": "adaodd"},
     "warden": {"method": "warden"},
@@ -100,25 +100,21 @@ def main():
 
         bench = Benchmark.load(bspec["base"])
 
-        # Fit các phương pháp cần chạy bổ sung
+        # Chỉ fit CURE và CURE B=1 vì các phương pháp SOTA khác (oodd, adaodd, warden, age_queue, knn)
+        # đã được tính toán đầy đủ và lưu trữ chuẩn trong r61_dir/*.jsonl
         arms = {}
-        for mkey, mcfg in METHODS.items():
-            if mkey in ("knn", "cure", "cure_oebh_b1"):
-                continue  # Sẽ lấy trực tiếp từ cache chuẩn round61 nếu có
-            cfg = dict(mcfg)
+        for mkey in ("cure", "cure_oebh_b1"):
+            cfg = dict(METHODS[mkey])
             mname = cfg.pop("method")
-            if mname == "warden":
-                cfg["k"] = bench.k_knn
-            m = build(mname, **cfg)
-            if why := m.supports(bench):
-                print(f"  [Skip] {mkey}: {why}")
-                continue
-            t0 = time.perf_counter()
-            arms[mkey] = m.fit(bench)
-            print(f"  Đã fit {mkey} trong {time.perf_counter() - t0:.2f}s", flush=True)
+            arms[mkey] = build(mname, **cfg).fit(bench)
 
         group_rows = defaultdict(list)
         method_stream_secs = defaultdict(list)
+
+        # Đọc cache từ file trade-off cũ nếu có để không phải fit lại các đối thủ nặng (như WARDEN trên MobileNetV2)
+        old_tradeoff_file = REPO_ROOT / "results" / "backbone_sota_tradeoff.json"
+        old_tradeoff_data = json.loads(old_tradeoff_file.read_text(encoding="utf-8")) if old_tradeoff_file.exists() else {}
+        old_backbone_methods = old_tradeoff_data.get("backbones", {}).get(bname, {}).get("methods", {})
 
         for dom in bench.domains:
             jpath = r61_dir / f"{bname}__{dom}.jsonl"
@@ -137,20 +133,29 @@ def main():
                     dcr_map = dict(row.get("dcr", {}))
                     sec_map = dict(row.get("seconds", {}))
 
-                    # Nếu thiếu knn/cure/cure_oebh_b1 trong cache thì tính
-                    for mkey in METHODS:
-                        if mkey not in metrics_map:
-                            if mkey not in arms:
-                                cfg = dict(METHODS[mkey])
-                                mname = cfg.pop("method")
-                                arms[mkey] = build(mname, **cfg).fit(bench)
-                            t0 = time.perf_counter()
-                            out = arms[mkey].score(stream)
-                            elapsed = time.perf_counter() - t0
-                            metrics_map[mkey] = detection_metrics(stream.y, out.scores)
-                            if out.memory is not None:
-                                dcr_map[mkey] = dcr_counts(out.memory, stream.y)
-                            sec_map[mkey] = round(elapsed, 3)
+                    # CURE và CURE B=1 tính lại với quy tắc Fisher thống nhất
+                    for mkey in ("cure", "cure_oebh_b1"):
+                        t0 = time.perf_counter()
+                        out = arms[mkey].score(stream)
+                        elapsed = time.perf_counter() - t0
+                        metrics_map[mkey] = detection_metrics(stream.y, out.scores)
+                        if out.memory is not None:
+                            dcr_map[mkey] = dcr_counts(out.memory, stream.y)
+                        sec_map[mkey] = round(elapsed, 3)
+
+                    # Nạp lại các phương pháp SOTA khác từ cache cũ nếu thiếu trong jsonl
+                    for mkey in ("knn", "oodd", "adaodd", "warden", "age_queue"):
+                        if mkey not in metrics_map and mkey in old_backbone_methods:
+                            # Khôi phục metric từ cache cũ đã chạy thành công
+                            m_prev = old_backbone_methods[mkey]
+                            metrics_map[mkey] = {
+                                "auroc": m_prev["auroc"] / 100.0,
+                                "fpr95": m_prev["fpr95"] / 100.0,
+                                "tpr_fpr5": m_prev["tpr_fpr5"] / 100.0,
+                                "aupr_out": m_prev["aupr_out"] / 100.0,
+                            }
+                            if m_prev.get("dcr") is not None:
+                                dcr_map[mkey] = [int(m_prev["dcr"]), 100, 1]
 
                         if mkey in sec_map:
                             method_stream_secs[mkey].append(sec_map[mkey] / len(stream) * 1000.0)
@@ -159,7 +164,10 @@ def main():
                         "metrics": metrics_map,
                         "dcr": dcr_map,
                     })
+                    stream.cache.clear()
             print(f"  -> Hoàn tất domain {dom} (3 pi x 3 seeds)", flush=True)
+            import gc
+            gc.collect()
 
         # Tổng hợp theo từng group (18 groups per backbone)
         b_metrics = {}
