@@ -1,0 +1,58 @@
+{
+  "suite1_126groups": {
+    "n_groups": 126,
+    "cure_vs_knn": {
+      "mean_delta": 1.59,
+      "ci95": [
+        1.17,
+        2.05
+      ],
+      "wilcoxon_stat": 5633.0,
+      "p_value": 3.3875536095559734e-10,
+      "significant_001": true
+    },
+    "cure_b1_vs_knn": {
+      "mean_delta": 1.31,
+      "ci95": [
+        0.91,
+        1.76
+      ],
+      "wilcoxon_stat": 4722.0,
+      "p_value": 3.1906489744026695e-07,
+      "significant_001": true
+    },
+    "cure_vs_warden": {
+      "mean_delta": 2.95,
+      "ci95": [
+        -0.38,
+        11.5
+      ],
+      "wilcoxon_stat": 26.0,
+      "p_value": 0.0234375,
+      "significant_05": true
+    },
+    "cure_b1_vs_warden": {
+      "mean_delta": 2.68,
+      "ci95": [
+        -0.41,
+        10.79
+      ],
+      "wilcoxon_stat": 26.0,
+      "p_value": 0.0234375,
+      "significant_05": true
+    }
+  },
+  "suite2_14scenarios": {
+    "n_scenarios": 14,
+    "cure_vs_oodd": {
+      "mean_delta": 3.42,
+      "ci95": [
+        2.01,
+        5.21
+      ],
+      "wilcoxon_p": 6.103515625e-05,
+      "significant_005": true
+    },
+    "cure_vs_warden_diff": 0.18
+  }
+}
