@@ -1,0 +1,211 @@
+{
+  "backbones": {
+    "r61_resnet20_ivf4": {
+      "label": "ResNet-20 (64-d)",
+      "methods": {
+        "knn": {
+          "auroc": 57.05,
+          "fpr95": 59.99,
+          "tpr5": 0.0
+        },
+        "cure": {
+          "auroc": 69.08,
+          "fpr95": 53.72,
+          "tpr5": 15.41
+        },
+        "cure_oebh_b1": {
+          "auroc": 57.05,
+          "fpr95": 59.99,
+          "tpr5": 0.0
+        },
+        "oodd": {
+          "auroc": 71.13,
+          "fpr95": 69.22,
+          "tpr5": 12.99
+        },
+        "warden": {
+          "auroc": 58.38,
+          "fpr95": 59.08,
+          "tpr5": 0.0
+        },
+        "age_queue": {
+          "auroc": 79.72,
+          "fpr95": 58.03,
+          "tpr5": 50.98
+        }
+      }
+    },
+    "r61_resnet18embed128_ivf4": {
+      "label": "ResNet-18-Bottleneck (128-d)",
+      "methods": {
+        "knn": {
+          "auroc": 60.63,
+          "fpr95": 53.5,
+          "tpr5": 0.25
+        },
+        "cure": {
+          "auroc": 71.88,
+          "fpr95": 51.0,
+          "tpr5": 25.09
+        },
+        "cure_oebh_b1": {
+          "auroc": 64.0,
+          "fpr95": 52.73,
+          "tpr5": 6.99
+        },
+        "oodd": {
+          "auroc": 79.93,
+          "fpr95": 65.86,
+          "tpr5": 38.29
+        },
+        "warden": {
+          "auroc": 60.5,
+          "fpr95": 52.5,
+          "tpr5": 0.0
+        },
+        "age_queue": {
+          "auroc": 47.68,
+          "fpr95": 95.12,
+          "tpr5": 30.96
+        }
+      }
+    },
+    "r61_mobilenetv2_ivf4": {
+      "label": "MobileNetV2 (1280-d)",
+      "methods": {
+        "knn": {
+          "auroc": 56.8,
+          "fpr95": 61.23,
+          "tpr5": 0.0
+        },
+        "cure": {
+          "auroc": 66.02,
+          "fpr95": 52.69,
+          "tpr5": 5.42
+        },
+        "cure_oebh_b1": {
+          "auroc": 56.8,
+          "fpr95": 61.23,
+          "tpr5": 0.0
+        },
+        "oodd": {
+          "auroc": 54.8,
+          "fpr95": 68.69,
+          "tpr5": 9.64
+        },
+        "warden": {
+          "auroc": 49.34,
+          "fpr95": 76.94,
+          "tpr5": 0.0
+        },
+        "age_queue": {
+          "auroc": 63.64,
+          "fpr95": 70.44,
+          "tpr5": 39.84
+        }
+      }
+    },
+    "r61_resnet18_s0_ivf4": {
+      "label": "ResNet-18 Seed 0 (512-d)",
+      "methods": {
+        "knn": {
+          "auroc": 59.94,
+          "fpr95": 52.29,
+          "tpr5": 0.0
+        },
+        "cure": {
+          "auroc": 71.82,
+          "fpr95": 48.84,
+          "tpr5": 14.8
+        },
+        "cure_oebh_b1": {
+          "auroc": 70.36,
+          "fpr95": 49.16,
+          "tpr5": 12.03
+        },
+        "oodd": {
+          "auroc": 56.09,
+          "fpr95": 67.61,
+          "tpr5": 10.1
+        },
+        "warden": {
+          "auroc": 59.83,
+          "fpr95": 54.35,
+          "tpr5": 0.0
+        },
+        "age_queue": {
+          "auroc": 61.85,
+          "fpr95": 81.15,
+          "tpr5": 47.28
+        }
+      }
+    },
+    "r61_dinov2_ivf4": {
+      "label": "DINOv2 ViT-B/14 (768-d)",
+      "methods": {
+        "knn": {
+          "auroc": 70.03,
+          "fpr95": 41.63,
+          "tpr5": 6.69
+        },
+        "cure": {
+          "auroc": 81.09,
+          "fpr95": 35.19,
+          "tpr5": 27.77
+        },
+        "cure_oebh_b1": {
+          "auroc": 81.2,
+          "fpr95": 35.13,
+          "tpr5": 27.9
+        },
+        "oodd": {
+          "auroc": 86.6,
+          "fpr95": 38.85,
+          "tpr5": 53.3
+        },
+        "warden": {
+          "auroc": 64.03,
+          "fpr95": 42.29,
+          "tpr5": 0.0
+        },
+        "age_queue": {
+          "auroc": 91.61,
+          "fpr95": 26.94,
+          "tpr5": 67.86
+        }
+      }
+    }
+  },
+  "global_summary": {
+    "knn": {
+      "auroc": 60.89,
+      "fpr95": 53.73,
+      "tpr5": 1.39
+    },
+    "cure": {
+      "auroc": 71.98,
+      "fpr95": 48.29,
+      "tpr5": 17.7
+    },
+    "cure_oebh_b1": {
+      "auroc": 65.88,
+      "fpr95": 51.65,
+      "tpr5": 9.39
+    },
+    "oodd": {
+      "auroc": 69.71,
+      "fpr95": 62.05,
+      "tpr5": 24.86
+    },
+    "warden": {
+      "auroc": 58.42,
+      "fpr95": 57.03,
+      "tpr5": 0.0
+    },
+    "age_queue": {
+      "auroc": 68.9,
+      "fpr95": 66.33,
+      "tpr5": 47.39
+    }
+  }
+}
