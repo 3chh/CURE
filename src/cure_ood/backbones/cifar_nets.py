@@ -130,5 +130,23 @@ class ResNet18Embed_32x32(_Head):
         return self.head(self.embed(f), return_feature)
 
 
+class ConvNeXtTiny_32x32(_Head):
+    """ConvNeXt-Tiny (CVPR 2022) cho ảnh 32x32; vector đặc trưng 768 chiều."""
+
+    def __init__(self, num_classes=10):
+        super().__init__()
+        import torchvision.models as models
+        m = models.convnext_tiny(num_classes=num_classes)
+        self.features = m.features
+        self.avgpool = m.avgpool
+        self.fc = nn.Linear(768, num_classes)
+
+    def forward(self, x, return_feature=False):
+        f = self.features(x)
+        f = self.avgpool(f).flatten(1)
+        return self.head(f, return_feature)
+
+
 CIFAR_NETS = {"resnet20_32x32": ResNet20_32x32, "mobilenetv2_32x32": MobileNetV2_32x32,
-              "resnet50_32x32": ResNet50_32x32, "resnet18embed_32x32": ResNet18Embed_32x32}
+              "resnet50_32x32": ResNet50_32x32, "resnet18embed_32x32": ResNet18Embed_32x32,
+              "convnext_tiny_32x32": ConvNeXtTiny_32x32}
