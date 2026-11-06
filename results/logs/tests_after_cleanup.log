@@ -1,0 +1,13 @@
+test_adaodd.py: 9 passed in 4.99s
+test_backbones.py: 17 passed in 8.02s
+test_dynproto.py: 14 passed in 13.25s
+test_golden_cure.py: 6 passed in 11.36s
+test_golden_static.py: 11 passed in 24.36s
+test_golden_testtime.py: 6 passed in 140.63s (0:02:20)
+test_official_dcac.py: 2 passed in 3.92s
+test_official_oodd.py: 2 passed in 3.37s
+test_official_rtl.py: 1 passed in 3.13s
+test_official_static.py: 4 passed in 1.53s
+test_stats.py: 4 passed in 0.86s
+test_warden.py: 12 passed in 4.06s
+FIN

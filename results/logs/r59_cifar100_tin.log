@@ -1,0 +1,42 @@
+cifar100 tin pi=0.2 seed=0 knn=83.80 knn_b1=83.80 knn_b8=83.80 knn_b32=83.80 knn_b128=83.80
+cifar100 tin pi=0.2 seed=1 knn=83.19 knn_b1=83.19 knn_b8=83.19 knn_b32=83.19 knn_b128=83.19
+cifar100 tin pi=0.2 seed=2 knn=83.92 knn_b1=83.92 knn_b8=83.92 knn_b32=83.92 knn_b128=83.92
+cifar100 tin pi=0.5 seed=0 knn=83.67 knn_b1=83.67 knn_b8=83.67 knn_b32=83.67 knn_b128=83.67
+cifar100 tin pi=0.5 seed=1 knn=83.49 knn_b1=83.49 knn_b8=83.49 knn_b32=83.49 knn_b128=83.49
+cifar100 tin pi=0.5 seed=2 knn=83.33 knn_b1=83.33 knn_b8=83.33 knn_b32=83.33 knn_b128=83.33
+cifar100 tin pi=0.2 seed=0 cure_b1=83.52 cure_b8=83.44 cure_b32=83.80 cure_b128=83.80
+cifar100 tin pi=0.2 seed=1 cure_b1=83.12 cure_b8=82.99 cure_b32=83.17 cure_b128=83.17
+cifar100 tin pi=0.2 seed=2 cure_b1=83.84 cure_b8=82.24 cure_b32=83.62 cure_b128=83.62
+cifar100 tin pi=0.5 seed=0 cure_b1=84.28 cure_b8=84.51 cure_b32=83.72 cure_b128=83.67
+cifar100 tin pi=0.5 seed=1 cure_b1=84.49 cure_b8=83.62 cure_b32=83.37 cure_b128=83.53
+cifar100 tin pi=0.5 seed=2 cure_b1=84.41 cure_b8=84.20 cure_b32=83.58 cure_b128=83.31
+cifar100 tin pi=0.2 seed=0 cure_elond_b1=83.80 cure_elond_b8=83.80 cure_elond_b32=83.80 cure_elond_b128=83.80
+cifar100 tin pi=0.2 seed=1 cure_elond_b1=83.19 cure_elond_b8=83.19 cure_elond_b32=83.19 cure_elond_b128=83.19
+cifar100 tin pi=0.2 seed=2 cure_elond_b1=83.92 cure_elond_b8=83.92 cure_elond_b32=83.92 cure_elond_b128=83.92
+cifar100 tin pi=0.5 seed=0 cure_elond_b1=83.67 cure_elond_b8=83.67 cure_elond_b32=83.67 cure_elond_b128=83.67
+cifar100 tin pi=0.5 seed=1 cure_elond_b1=83.49 cure_elond_b8=83.49 cure_elond_b32=83.49 cure_elond_b128=83.49
+cifar100 tin pi=0.5 seed=2 cure_elond_b1=83.33 cure_elond_b8=83.33 cure_elond_b32=83.33 cure_elond_b128=83.33
+cifar100 tin pi=0.2 seed=0 oodd_b1=84.73 oodd_b8=84.77 oodd_b32=84.82 oodd_b128=84.94
+cifar100 tin pi=0.2 seed=1 oodd_b1=83.80 oodd_b8=83.83 oodd_b32=83.88 oodd_b128=83.96
+cifar100 tin pi=0.2 seed=2 oodd_b1=84.66 oodd_b8=84.69 oodd_b32=84.77 oodd_b128=84.82
+cifar100 tin pi=0.5 seed=0 oodd_b1=85.41 oodd_b8=85.43 oodd_b32=85.46 oodd_b128=85.48
+cifar100 tin pi=0.5 seed=1 oodd_b1=85.06 oodd_b8=85.06 oodd_b32=85.11 oodd_b128=85.18
+cifar100 tin pi=0.5 seed=2 oodd_b1=85.12 oodd_b8=85.13 oodd_b32=85.18 oodd_b128=85.25
+cifar100 tin pi=0.2 seed=0 dcac_msp_b1=78.74 dcac_msp_b8=78.74 dcac_msp_b32=78.69 dcac_msp_b128=78.72
+cifar100 tin pi=0.2 seed=1 dcac_msp_b1=78.32 dcac_msp_b8=78.32 dcac_msp_b32=78.31 dcac_msp_b128=78.23
+cifar100 tin pi=0.2 seed=2 dcac_msp_b1=78.29 dcac_msp_b8=78.31 dcac_msp_b32=78.31 dcac_msp_b128=78.31
+cifar100 tin pi=0.5 seed=0 dcac_msp_b1=80.59 dcac_msp_b8=80.60 dcac_msp_b32=80.58 dcac_msp_b128=80.52
+cifar100 tin pi=0.5 seed=1 dcac_msp_b1=80.20 dcac_msp_b8=80.20 dcac_msp_b32=80.21 dcac_msp_b128=80.19
+cifar100 tin pi=0.5 seed=2 dcac_msp_b1=79.38 dcac_msp_b8=79.37 dcac_msp_b32=79.34 dcac_msp_b128=79.36
+cifar100 tin pi=0.2 seed=0 dcac_energy_b1=72.58 dcac_energy_b8=72.60 dcac_energy_b32=72.62 dcac_energy_b128=72.76
+cifar100 tin pi=0.2 seed=1 dcac_energy_b1=72.67 dcac_energy_b8=72.68 dcac_energy_b32=72.71 dcac_energy_b128=72.81
+cifar100 tin pi=0.2 seed=2 dcac_energy_b1=72.62 dcac_energy_b8=72.63 dcac_energy_b32=72.67 dcac_energy_b128=72.84
+cifar100 tin pi=0.5 seed=0 dcac_energy_b1=75.68 dcac_energy_b8=75.69 dcac_energy_b32=75.73 dcac_energy_b128=75.85
+cifar100 tin pi=0.5 seed=1 dcac_energy_b1=75.76 dcac_energy_b8=75.77 dcac_energy_b32=75.82 dcac_energy_b128=75.96
+cifar100 tin pi=0.5 seed=2 dcac_energy_b1=74.94 dcac_energy_b8=74.95 dcac_energy_b32=74.98 dcac_energy_b128=75.12
+cifar100 tin pi=0.2 seed=0 adaodd_b1=83.51 adaodd_b8=83.51 adaodd_b32=83.51 adaodd_b128=83.51
+cifar100 tin pi=0.2 seed=1 adaodd_b1=82.76 adaodd_b8=82.76 adaodd_b32=82.76 adaodd_b128=82.76
+cifar100 tin pi=0.2 seed=2 adaodd_b1=83.43 adaodd_b8=83.43 adaodd_b32=83.43 adaodd_b128=83.43
+cifar100 tin pi=0.5 seed=0 adaodd_b1=83.20 adaodd_b8=83.20 adaodd_b32=83.20 adaodd_b128=83.20
+cifar100 tin pi=0.5 seed=1 adaodd_b1=83.04 adaodd_b8=83.04 adaodd_b32=83.04 adaodd_b128=83.04
+cifar100 tin pi=0.5 seed=2 adaodd_b1=82.91 adaodd_b8=82.91 adaodd_b32=82.91 adaodd_b128=82.91

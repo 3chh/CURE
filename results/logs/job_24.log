@@ -1,0 +1,32 @@
+bỏ qua cure_msp trên cifar10_dinov2: benchmark ko có logit
+bỏ qua cure_energy trên cifar10_dinov2: benchmark ko có logit
+bỏ qua oodd_tout trên cifar10_dinov2: ko có danh sách T-out chính thức khớp với file đặc trưng (khai báo t_out trong config benchmark)
+bỏ qua msp trên cifar10_dinov2: benchmark ko có logit
+bỏ qua energy trên cifar10_dinov2: benchmark ko có logit
+bỏ qua rtl_plus trên cifar10_dinov2: benchmark ko có logit
+bỏ qua rtl_plus_protocol trên cifar10_dinov2: benchmark ko có logit
+bỏ qua dcac_msp trên cifar10_dinov2: benchmark ko có logit
+bỏ qua dcac_energy trên cifar10_dinov2: benchmark ko có logit
+bỏ qua dcac_msp_protocol trên cifar10_dinov2: benchmark ko có logit
+bỏ qua dcac_energy_protocol trên cifar10_dinov2: benchmark ko có logit
+bỏ qua dynproto trên cifar10_dinov2: benchmark ko có logit
+bỏ qua maxlogit trên cifar10_dinov2: benchmark ko có logit
+bỏ qua gen trên cifar10_dinov2: benchmark ko có logit
+bỏ qua mahalanobis trên cifar10_dinov2: benchmark ko có logit
+bỏ qua vim trên cifar10_dinov2: benchmark ko có logit
+bỏ qua react trên cifar10_dinov2: benchmark ko có logit
+bỏ qua nci trên cifar10_dinov2: benchmark ko có logit
+bỏ qua fdbd trên cifar10_dinov2: benchmark ko có logit
+bỏ qua cadref trên cifar10_dinov2: benchmark ko có logit
+cifar10_dinov2 svhn pi=0.05 seed=6 cure=99.71 knn=97.53 oodd=100.00 oodd_protocol=100.00 adaodd=97.53 warden=98.55 age_queue=100.00
+cifar10_dinov2 svhn pi=0.05 seed=7 cure=99.81 knn=97.47 oodd=100.00 oodd_protocol=100.00 adaodd=97.49 warden=98.64 age_queue=100.00
+cifar10_dinov2 svhn pi=0.05 seed=8 cure=99.63 knn=97.33 oodd=100.00 oodd_protocol=99.99 adaodd=97.35 warden=98.60 age_queue=99.98
+cifar10_dinov2 svhn pi=0.05 seed=9 cure=99.75 knn=97.31 oodd=100.00 oodd_protocol=99.95 adaodd=97.30 warden=98.54 age_queue=99.84
+cifar10_dinov2 svhn pi=0.2 seed=6 cure=99.82 knn=97.36 oodd=100.00 oodd_protocol=100.00 adaodd=97.35 warden=98.59 age_queue=100.00
+cifar10_dinov2 svhn pi=0.2 seed=7 cure=99.84 knn=97.29 oodd=100.00 oodd_protocol=100.00 adaodd=97.30 warden=98.54 age_queue=99.99
+cifar10_dinov2 svhn pi=0.2 seed=8 cure=99.84 knn=97.36 oodd=100.00 oodd_protocol=100.00 adaodd=97.36 warden=98.62 age_queue=100.00
+cifar10_dinov2 svhn pi=0.2 seed=9 cure=99.80 knn=97.16 oodd=100.00 oodd_protocol=100.00 adaodd=97.13 warden=98.41 age_queue=100.00
+cifar10_dinov2 svhn pi=0.5 seed=6 cure=99.88 knn=97.33 oodd=99.99 oodd_protocol=99.99 adaodd=97.33 warden=98.58 age_queue=100.00
+cifar10_dinov2 svhn pi=0.5 seed=7 cure=99.86 knn=97.34 oodd=99.99 oodd_protocol=99.99 adaodd=97.34 warden=98.58 age_queue=100.00
+cifar10_dinov2 svhn pi=0.5 seed=8 cure=99.88 knn=97.34 oodd=99.99 oodd_protocol=99.99 adaodd=97.34 warden=98.58 age_queue=100.00
+cifar10_dinov2 svhn pi=0.5 seed=9 cure=99.88 knn=97.36 oodd=99.99 oodd_protocol=100.00 adaodd=97.36 warden=98.58 age_queue=100.00

@@ -1,0 +1,38 @@
+{
+  "timestamp": "2026-11-03 15:05:41",
+  "platform": "Windows-11-10.0.22621-SP0",
+  "python": "3.12.10",
+  "pytorch": "2.11.0+cu128",
+  "cuda_available": true,
+  "profiles": [
+    {
+      "profile": "Profile 1: Edge Vision (GPU)",
+      "hardware": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+      "batch_size": 128,
+      "feature_dim": 512,
+      "gallery_size": 10000,
+      "cdm_capacity": 512,
+      "mean_latency_ms": 1.1864140808582306,
+      "p50_latency_ms": 1.105407953262329,
+      "p95_latency_ms": 1.7969663560390463,
+      "p99_latency_ms": 2.088386478424071,
+      "amortized_per_sample_ms": 0.009268860006704927,
+      "peak_vram_mb": 84.27392578125,
+      "throughput_fps": 107888.13287465967
+    },
+    {
+      "profile": "Profile 2: Industrial NIDS (SCADA CPU)",
+      "hardware": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel (Single Core CPU)",
+      "batch_size": 1,
+      "feature_dim": 36,
+      "gallery_size": 2000,
+      "cdm_capacity": 256,
+      "mean_latency_us": 301.69875,
+      "p50_latency_us": 210.15,
+      "p95_latency_us": 783.2599999999998,
+      "p99_latency_us": 1894.2350000000001,
+      "mean_latency_ms": 0.30169875,
+      "throughput_pps": 3314.564611222287
+    }
+  ]
+}

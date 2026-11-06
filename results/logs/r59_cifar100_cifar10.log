@@ -1,0 +1,147 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Scripts\cure-ood.exe\__main__.py", line 7, in <module>
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\cli.py", line 62, in main
+    run(exp, a.benchmark, a.domain, a.method)
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\eval\runner.py", line 76, in run
+    out, row.setdefault("latency", {})[a] = timed_session(arms[a], stream, arms[a].batch)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\eval\latency.py", line 57, in timed_session
+    out = run_session(method, stream, batch, wrap)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\base.py", line 76, in run_session
+    outs = [step(stream.feats[s:s + batch], None if z is None else z[s:s + batch]) for s in range(0, len(stream), batch)]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\eval\latency.py", line 51, in timed
+    out = step(*args)
+          ^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\testtime\oodd.py", line 99, in step
+    food = np.stack([self.pool[d] for d in ids])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\_core\shape_base.py", line 465, in stack
+    return _nx.concatenate(expanded_arrays, axis=axis, out=out,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.00 MiB for an array with shape (512, 512) and data type float32
+fatal   : Memory allocation failure
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Scripts\cure-ood.exe\__main__.py", line 7, in <module>
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\cli.py", line 62, in main
+    run(exp, a.benchmark, a.domain, a.method)
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\eval\runner.py", line 76, in run
+    out, row.setdefault("latency", {})[a] = timed_session(arms[a], stream, arms[a].batch)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\eval\latency.py", line 44, in timed_session
+    method.session(stream.domain).step(stream.feats[:batch], None if z is None else z[:batch])
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\cure.py", line 83, in session
+    return CURESession(self)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\cure.py", line 96, in __init__
+    self.shadow = F.normalize(torch.as_tensor(shadow, device=DEVICE), dim=1)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\functional.py", line 5707, in normalize
+    denom = input.norm(p, dim, keepdim=True).clamp_min(eps).expand_as(input)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\_tensor.py", line 908, in norm
+    return torch.norm(self, p, dim, keepdim, dtype=dtype)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\functional.py", line 1839, in norm
+    return torch.linalg.vector_norm(input, _p, _dim, keepdim, dtype=dtype)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.AcceleratorError: CUDA error: unknown error
+Search for `cudaErrorUnknown' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Scripts\cure-ood.exe\__main__.py", line 7, in <module>
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\cli.py", line 62, in main
+    run(exp, a.benchmark, a.domain, a.method)
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\eval\runner.py", line 57, in run
+    arms[label] = m.fit(bench)
+                  ^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\testtime\adaodd.py", line 69, in fit
+    self.mem0 = self._feats(bench.G if self.normalize else bench.train_feats)
+                            ^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\functools.py", line 998, in __get__
+    val = self.func(instance)
+          ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\data\benchmark.py", line 102, in G
+    return l2(self.train_feats)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\ops.py", line 11, in l2
+    return (a / np.linalg.norm(a, axis=1, keepdims=True).clip(1e-12)).astype(np.float32)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\linalg\_linalg.py", line 2803, in norm
+    s = (x.conj() * x).real
+         ~~~~~~~~~^~~
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 97.7 MiB for an array with shape (50000, 512) and data type float32
+cifar100 cifar10 pi=0.05 seed=0 knn=77.04 knn_b1=77.04 knn_b8=77.04 knn_b32=77.04 knn_b128=77.04
+cifar100 cifar10 pi=0.05 seed=1 knn=78.03 knn_b1=78.03 knn_b8=78.03 knn_b32=78.03 knn_b128=78.03
+cifar100 cifar10 pi=0.05 seed=2 knn=77.22 knn_b1=77.22 knn_b8=77.22 knn_b32=77.22 knn_b128=77.22
+cifar100 cifar10 pi=0.2 seed=0 knn=77.79 knn_b1=77.79 knn_b8=77.79 knn_b32=77.79 knn_b128=77.79
+cifar100 cifar10 pi=0.2 seed=1 knn=77.56 knn_b1=77.56 knn_b8=77.56 knn_b32=77.56 knn_b128=77.56
+cifar100 cifar10 pi=0.2 seed=2 knn=77.57 knn_b1=77.57 knn_b8=77.57 knn_b32=77.57 knn_b128=77.57
+cifar100 cifar10 pi=0.5 seed=0 knn=77.56 knn_b1=77.56 knn_b8=77.56 knn_b32=77.56 knn_b128=77.56
+cifar100 cifar10 pi=0.5 seed=1 knn=77.60 knn_b1=77.60 knn_b8=77.60 knn_b32=77.60 knn_b128=77.60
+cifar100 cifar10 pi=0.5 seed=2 knn=77.64 knn_b1=77.64 knn_b8=77.64 knn_b32=77.64 knn_b128=77.64
+cifar100 cifar10 pi=0.05 seed=0 cure_b1=76.81 cure_b8=77.04 cure_b32=77.04 cure_b128=77.04
+cifar100 cifar10 pi=0.05 seed=1 cure_b1=76.80 cure_b8=78.03 cure_b32=78.03 cure_b128=78.03
+cifar100 cifar10 pi=0.05 seed=2 cure_b1=77.32 cure_b8=77.55 cure_b32=77.22 cure_b128=77.22
+cifar100 cifar10 pi=0.2 seed=0 cure_b1=80.43 cure_b8=77.53 cure_b32=77.79 cure_b128=77.79
+cifar100 cifar10 pi=0.2 seed=1 cure_b1=81.91 cure_b8=77.64 cure_b32=77.56 cure_b128=77.56
+cifar100 cifar10 pi=0.2 seed=2 cure_b1=80.35 cure_b8=78.01 cure_b32=77.40 cure_b128=77.57
+cifar100 cifar10 pi=0.5 seed=0 cure_b1=87.53 cure_b8=82.72 cure_b32=80.12 cure_b128=78.71
+cifar100 cifar10 pi=0.5 seed=1 cure_b1=87.55 cure_b8=80.86 cure_b32=80.47 cure_b128=79.77
+cifar100 cifar10 pi=0.5 seed=2 cure_b1=88.32 cure_b8=81.88 cure_b32=79.59 cure_b128=78.27
+cifar100 cifar10 pi=0.05 seed=0 cure_elond_b1=77.04 cure_elond_b8=77.04 cure_elond_b32=77.04 cure_elond_b128=77.04
+cifar100 cifar10 pi=0.05 seed=1 cure_elond_b1=78.03 cure_elond_b8=78.03 cure_elond_b32=78.03 cure_elond_b128=78.03
+cifar100 cifar10 pi=0.05 seed=2 cure_elond_b1=77.22 cure_elond_b8=77.22 cure_elond_b32=77.22 cure_elond_b128=77.22
+cifar100 cifar10 pi=0.2 seed=0 cure_elond_b1=77.79 cure_elond_b8=77.79 cure_elond_b32=77.79 cure_elond_b128=77.79
+cifar100 cifar10 pi=0.2 seed=1 cure_elond_b1=77.56 cure_elond_b8=77.56 cure_elond_b32=77.56 cure_elond_b128=77.56
+cifar100 cifar10 pi=0.2 seed=2 cure_elond_b1=77.57 cure_elond_b8=77.57 cure_elond_b32=77.57 cure_elond_b128=77.57
+cifar100 cifar10 pi=0.5 seed=0 cure_elond_b1=77.56 cure_elond_b8=77.56 cure_elond_b32=77.56 cure_elond_b128=77.56
+cifar100 cifar10 pi=0.5 seed=1 cure_elond_b1=77.60 cure_elond_b8=77.60 cure_elond_b32=77.60 cure_elond_b128=77.60
+cifar100 cifar10 pi=0.5 seed=2 cure_elond_b1=77.64 cure_elond_b8=77.64 cure_elond_b32=77.64 cure_elond_b128=77.64
+cifar100 cifar10 pi=0.05 seed=0 oodd_b1=78.61 oodd_b8=78.41 oodd_b32=78.56 oodd_b128=78.68
+cifar100 cifar10 pi=0.05 seed=1 oodd_b1=79.33 oodd_b8=79.41 oodd_b32=79.41 oodd_b128=79.48
+cifar100 cifar10 pi=0.05 seed=2 oodd_b1=78.82 oodd_b8=78.82 oodd_b32=78.85 oodd_b128=79.12
+cifar100 cifar10 pi=0.2 seed=0 oodd_b1=80.83 oodd_b8=80.86 oodd_b32=81.00 oodd_b128=81.10
+cifar100 cifar10 pi=0.2 seed=1 oodd_b1=80.79 oodd_b8=80.77 oodd_b32=80.81 oodd_b128=80.84
+cifar100 cifar10 pi=0.2 seed=2 oodd_b1=81.25 oodd_b8=81.28 oodd_b32=81.33 oodd_b128=81.39
+cifar100 cifar10 pi=0.5 seed=0 oodd_b1=82.09 oodd_b8=82.11 oodd_b32=82.11 oodd_b128=82.10
+cifar100 cifar10 pi=0.5 seed=1 oodd_b1=82.35 oodd_b8=82.37 oodd_b32=82.41 oodd_b128=82.39
+cifar100 cifar10 pi=0.5 seed=2 oodd_b1=82.18 oodd_b8=82.19 oodd_b32=82.23 oodd_b128=82.22
+cifar100 cifar10 pi=0.05 seed=0 dcac_msp_b1=77.88 dcac_msp_b8=77.94 dcac_msp_b32=77.81 dcac_msp_b128=77.88
+cifar100 cifar10 pi=0.05 seed=1 dcac_msp_b1=77.56 dcac_msp_b8=77.56 dcac_msp_b32=77.61 dcac_msp_b128=77.50
+cifar100 cifar10 pi=0.05 seed=2 dcac_msp_b1=77.34 dcac_msp_b8=77.33 dcac_msp_b32=77.34 dcac_msp_b128=77.22
+cifar100 cifar10 pi=0.2 seed=0 dcac_msp_b1=79.66 dcac_msp_b8=79.67 dcac_msp_b32=79.70 dcac_msp_b128=79.71
+cifar100 cifar10 pi=0.2 seed=1 dcac_msp_b1=78.34 dcac_msp_b8=78.36 dcac_msp_b32=78.38 dcac_msp_b128=78.47
+cifar100 cifar10 pi=0.2 seed=2 dcac_msp_b1=79.65 dcac_msp_b8=79.65 dcac_msp_b32=79.66 dcac_msp_b128=79.66
+cifar100 cifar10 pi=0.5 seed=0 dcac_msp_b1=82.70 dcac_msp_b8=82.70 dcac_msp_b32=82.72 dcac_msp_b128=82.73
+cifar100 cifar10 pi=0.5 seed=1 dcac_msp_b1=81.23 dcac_msp_b8=81.23 dcac_msp_b32=81.24 dcac_msp_b128=81.27
+cifar100 cifar10 pi=0.5 seed=2 dcac_msp_b1=81.83 dcac_msp_b8=81.83 dcac_msp_b32=81.83 dcac_msp_b128=81.88
+cifar100 cifar10 pi=0.05 seed=0 dcac_energy_b1=71.81 dcac_energy_b8=71.83 dcac_energy_b32=71.83 dcac_energy_b128=71.97
+cifar100 cifar10 pi=0.05 seed=1 dcac_energy_b1=71.58 dcac_energy_b8=71.59 dcac_energy_b32=71.64 dcac_energy_b128=71.69
+cifar100 cifar10 pi=0.05 seed=2 dcac_energy_b1=70.61 dcac_energy_b8=70.61 dcac_energy_b32=70.63 dcac_energy_b128=70.77
+cifar100 cifar10 pi=0.2 seed=0 dcac_energy_b1=72.85 dcac_energy_b8=72.86 dcac_energy_b32=72.89 dcac_energy_b128=73.01
+cifar100 cifar10 pi=0.2 seed=1 dcac_energy_b1=72.19 dcac_energy_b8=72.20 dcac_energy_b32=72.24 dcac_energy_b128=72.38
+cifar100 cifar10 pi=0.2 seed=2 dcac_energy_b1=71.99 dcac_energy_b8=72.00 dcac_energy_b32=72.03 dcac_energy_b128=72.17
+cifar100 cifar10 pi=0.5 seed=0 dcac_energy_b1=76.24 dcac_energy_b8=76.25 dcac_energy_b32=76.28 dcac_energy_b128=76.39
+cifar100 cifar10 pi=0.5 seed=1 dcac_energy_b1=75.76 dcac_energy_b8=75.77 dcac_energy_b32=75.80 dcac_energy_b128=75.90
+cifar100 cifar10 pi=0.5 seed=2 dcac_energy_b1=75.96 dcac_energy_b8=75.97 dcac_energy_b32=75.99 dcac_energy_b128=76.10
+cifar100 cifar10 pi=0.05 seed=0 adaodd_b1=76.06 adaodd_b8=76.06 adaodd_b32=76.06 adaodd_b128=76.07
+cifar100 cifar10 pi=0.05 seed=1 adaodd_b1=77.20 adaodd_b8=77.20 adaodd_b32=77.20 adaodd_b128=77.20
+cifar100 cifar10 pi=0.05 seed=2 adaodd_b1=76.28 adaodd_b8=76.28 adaodd_b32=76.28 adaodd_b128=76.29
+cifar100 cifar10 pi=0.2 seed=0 adaodd_b1=76.40 adaodd_b8=76.40 adaodd_b32=76.40 adaodd_b128=76.40
+cifar100 cifar10 pi=0.2 seed=1 adaodd_b1=76.42 adaodd_b8=76.42 adaodd_b32=76.42 adaodd_b128=76.42
+cifar100 cifar10 pi=0.2 seed=2 adaodd_b1=76.35 adaodd_b8=76.35 adaodd_b32=76.35 adaodd_b128=76.35
+cifar100 cifar10 pi=0.5 seed=0 adaodd_b1=75.89 adaodd_b8=75.89 adaodd_b32=75.89 adaodd_b128=75.90
+cifar100 cifar10 pi=0.5 seed=1 adaodd_b1=75.91 adaodd_b8=75.91 adaodd_b32=75.91 adaodd_b128=75.91
+cifar100 cifar10 pi=0.5 seed=2 adaodd_b1=76.00 adaodd_b8=76.00 adaodd_b32=76.00 adaodd_b128=76.00

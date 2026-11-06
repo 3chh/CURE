@@ -1,0 +1,47 @@
+[
+  {
+    "d": 32,
+    "auroc": 95.75,
+    "fpr95": 16.69,
+    "certified_count": 4,
+    "covered_samples": 0,
+    "runtime_s": 4.841,
+    "memory_buffer_ram_kb": 64.0
+  },
+  {
+    "d": 64,
+    "auroc": 96.7,
+    "fpr95": 13.59,
+    "certified_count": 58,
+    "covered_samples": 0,
+    "runtime_s": 0.748,
+    "memory_buffer_ram_kb": 128.0
+  },
+  {
+    "d": 128,
+    "auroc": 97.08,
+    "fpr95": 13.72,
+    "certified_count": 221,
+    "covered_samples": 0,
+    "runtime_s": 0.728,
+    "memory_buffer_ram_kb": 256.0
+  },
+  {
+    "d": 256,
+    "auroc": 97.19,
+    "fpr95": 13.36,
+    "certified_count": 542,
+    "covered_samples": 0,
+    "runtime_s": 2.555,
+    "memory_buffer_ram_kb": 512.0
+  },
+  {
+    "d": 512,
+    "auroc": 96.96,
+    "fpr95": 14.67,
+    "certified_count": 1034,
+    "covered_samples": 0,
+    "runtime_s": 1.103,
+    "memory_buffer_ram_kb": 1024.0
+  }
+]

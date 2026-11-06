@@ -1,0 +1,88 @@
+cifar100 places365 pi=0.05 seed=0 knn=80.78 knn_b1=80.78 knn_b8=80.78 knn_b32=80.78 knn_b128=80.78
+cifar100 places365 pi=0.05 seed=1 knn=79.47 knn_b1=79.47 knn_b8=79.47 knn_b32=79.47 knn_b128=79.47
+cifar100 places365 pi=0.05 seed=2 knn=79.32 knn_b1=79.32 knn_b8=79.32 knn_b32=79.32 knn_b128=79.32
+cifar100 places365 pi=0.2 seed=0 knn=79.54 knn_b1=79.54 knn_b8=79.54 knn_b32=79.54 knn_b128=79.54
+cifar100 places365 pi=0.2 seed=1 knn=79.00 knn_b1=79.00 knn_b8=79.00 knn_b32=79.00 knn_b128=79.00
+cifar100 places365 pi=0.2 seed=2 knn=79.25 knn_b1=79.25 knn_b8=79.25 knn_b32=79.25 knn_b128=79.25
+cifar100 places365 pi=0.5 seed=0 knn=79.47 knn_b1=79.47 knn_b8=79.47 knn_b32=79.47 knn_b128=79.47
+cifar100 places365 pi=0.5 seed=1 knn=79.75 knn_b1=79.75 knn_b8=79.75 knn_b32=79.75 knn_b128=79.75
+cifar100 places365 pi=0.5 seed=2 knn=79.55 knn_b1=79.55 knn_b8=79.55 knn_b32=79.55 knn_b128=79.55
+cifar100 places365 pi=0.05 seed=0 cure_b1=81.16 cure_b8=79.55 cure_b32=80.78 cure_b128=80.78
+cifar100 places365 pi=0.05 seed=1 cure_b1=79.18 cure_b8=79.78 cure_b32=79.47 cure_b128=79.47
+cifar100 places365 pi=0.05 seed=2 cure_b1=83.03 cure_b8=79.19 cure_b32=79.32 cure_b128=79.32
+cifar100 places365 pi=0.2 seed=0 cure_b1=87.94 cure_b8=86.60 cure_b32=85.57 cure_b128=84.04
+cifar100 places365 pi=0.2 seed=1 cure_b1=87.24 cure_b8=87.23 cure_b32=85.71 cure_b128=83.33
+cifar100 places365 pi=0.2 seed=2 cure_b1=87.46 cure_b8=86.51 cure_b32=85.75 cure_b128=84.84
+cifar100 places365 pi=0.5 seed=0 cure_b1=89.82 cure_b8=89.83 cure_b32=89.86 cure_b128=89.90
+cifar100 places365 pi=0.5 seed=1 cure_b1=89.83 cure_b8=89.88 cure_b32=89.81 cure_b128=89.69
+cifar100 places365 pi=0.5 seed=2 cure_b1=89.86 cure_b8=89.84 cure_b32=89.89 cure_b128=89.83
+cifar100 places365 pi=0.05 seed=0 cure_elond_b1=80.78 cure_elond_b8=80.78 cure_elond_b32=80.78 cure_elond_b128=80.78
+cifar100 places365 pi=0.05 seed=1 cure_elond_b1=79.47 cure_elond_b8=79.47 cure_elond_b32=79.47 cure_elond_b128=79.47
+cifar100 places365 pi=0.05 seed=2 cure_elond_b1=79.32 cure_elond_b8=79.32 cure_elond_b32=79.32 cure_elond_b128=79.32
+cifar100 places365 pi=0.2 seed=0 cure_elond_b1=79.54 cure_elond_b8=79.54 cure_elond_b32=79.54 cure_elond_b128=79.54
+cifar100 places365 pi=0.2 seed=1 cure_elond_b1=79.00 cure_elond_b8=79.00 cure_elond_b32=79.00 cure_elond_b128=79.00
+cifar100 places365 pi=0.2 seed=2 cure_elond_b1=79.25 cure_elond_b8=79.25 cure_elond_b32=79.25 cure_elond_b128=79.25
+cifar100 places365 pi=0.5 seed=0 cure_elond_b1=87.33 cure_elond_b8=87.33 cure_elond_b32=87.35 cure_elond_b128=87.46
+cifar100 places365 pi=0.5 seed=1 cure_elond_b1=87.63 cure_elond_b8=87.63 cure_elond_b32=87.62 cure_elond_b128=87.65
+cifar100 places365 pi=0.5 seed=2 cure_elond_b1=88.17 cure_elond_b8=88.17 cure_elond_b32=88.16 cure_elond_b128=88.13
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Scripts\cure-ood.exe\__main__.py", line 7, in <module>
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\cli.py", line 62, in main
+    run(exp, a.benchmark, a.domain, a.method)
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\eval\runner.py", line 76, in run
+    out, row.setdefault("latency", {})[a] = timed_session(arms[a], stream, arms[a].batch)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\eval\latency.py", line 57, in timed_session
+    out = run_session(method, stream, batch, wrap)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\base.py", line 76, in run_session
+    outs = [step(stream.feats[s:s + batch], None if z is None else z[s:s + batch]) for s in range(0, len(stream), batch)]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\eval\latency.py", line 51, in timed
+    out = step(*args)
+          ^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\testtime\oodd.py", line 99, in step
+    food = np.stack([self.pool[d] for d in ids])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\_core\shape_base.py", line 465, in stack
+    return _nx.concatenate(expanded_arrays, axis=axis, out=out,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.00 MiB for an array with shape (512, 512) and data type float32
+cifar100 places365 pi=0.05 seed=0 oodd_b1=81.13 oodd_b8=81.15 oodd_b32=81.12 oodd_b128=81.08
+cifar100 places365 pi=0.05 seed=1 oodd_b1=81.81 oodd_b8=81.80 oodd_b32=81.84 oodd_b128=81.90
+cifar100 places365 pi=0.05 seed=2 oodd_b1=81.04 oodd_b8=81.04 oodd_b32=81.04 oodd_b128=81.13
+cifar100 places365 pi=0.2 seed=0 oodd_b1=84.31 oodd_b8=84.36 oodd_b32=84.40 oodd_b128=84.52
+cifar100 places365 pi=0.2 seed=1 oodd_b1=84.17 oodd_b8=84.19 oodd_b32=84.22 oodd_b128=84.27
+cifar100 places365 pi=0.2 seed=2 oodd_b1=84.25 oodd_b8=84.25 oodd_b32=84.27 oodd_b128=84.32
+cifar100 places365 pi=0.5 seed=0 oodd_b1=86.14 oodd_b8=86.16 oodd_b32=86.19 oodd_b128=86.21
+cifar100 places365 pi=0.5 seed=1 oodd_b1=85.93 oodd_b8=85.96 oodd_b32=85.98 oodd_b128=86.00
+cifar100 places365 pi=0.5 seed=2 oodd_b1=86.19 oodd_b8=86.20 oodd_b32=86.22 oodd_b128=86.26
+cifar100 places365 pi=0.05 seed=0 dcac_msp_b1=76.37 dcac_msp_b8=76.46 dcac_msp_b32=76.41 dcac_msp_b128=76.25
+cifar100 places365 pi=0.05 seed=1 dcac_msp_b1=76.54 dcac_msp_b8=76.53 dcac_msp_b32=76.62 dcac_msp_b128=76.64
+cifar100 places365 pi=0.05 seed=2 dcac_msp_b1=76.79 dcac_msp_b8=76.78 dcac_msp_b32=76.84 dcac_msp_b128=77.00
+cifar100 places365 pi=0.2 seed=0 dcac_msp_b1=77.93 dcac_msp_b8=77.95 dcac_msp_b32=77.95 dcac_msp_b128=78.01
+cifar100 places365 pi=0.2 seed=1 dcac_msp_b1=78.97 dcac_msp_b8=78.95 dcac_msp_b32=78.97 dcac_msp_b128=79.03
+cifar100 places365 pi=0.2 seed=2 dcac_msp_b1=79.76 dcac_msp_b8=79.74 dcac_msp_b32=79.74 dcac_msp_b128=79.83
+cifar100 places365 pi=0.5 seed=0 dcac_msp_b1=81.74 dcac_msp_b8=81.74 dcac_msp_b32=81.74 dcac_msp_b128=81.72
+cifar100 places365 pi=0.5 seed=1 dcac_msp_b1=82.25 dcac_msp_b8=82.25 dcac_msp_b32=82.26 dcac_msp_b128=82.34
+cifar100 places365 pi=0.5 seed=2 dcac_msp_b1=82.44 dcac_msp_b8=82.44 dcac_msp_b32=82.45 dcac_msp_b128=82.49
+cifar100 places365 pi=0.05 seed=0 dcac_energy_b1=69.89 dcac_energy_b8=69.91 dcac_energy_b32=69.92 dcac_energy_b128=70.01
+cifar100 places365 pi=0.05 seed=1 dcac_energy_b1=67.25 dcac_energy_b8=67.25 dcac_energy_b32=67.30 dcac_energy_b128=67.45
+cifar100 places365 pi=0.05 seed=2 dcac_energy_b1=68.85 dcac_energy_b8=68.85 dcac_energy_b32=68.92 dcac_energy_b128=69.06
+cifar100 places365 pi=0.2 seed=0 dcac_energy_b1=71.92 dcac_energy_b8=71.93 dcac_energy_b32=71.95 dcac_energy_b128=72.08
+cifar100 places365 pi=0.2 seed=1 dcac_energy_b1=71.19 dcac_energy_b8=71.19 dcac_energy_b32=71.23 dcac_energy_b128=71.36
+cifar100 places365 pi=0.2 seed=2 dcac_energy_b1=72.47 dcac_energy_b8=72.48 dcac_energy_b32=72.50 dcac_energy_b128=72.62
+cifar100 places365 pi=0.5 seed=0 dcac_energy_b1=76.09 dcac_energy_b8=76.10 dcac_energy_b32=76.13 dcac_energy_b128=76.23
+cifar100 places365 pi=0.5 seed=1 dcac_energy_b1=75.98 dcac_energy_b8=75.99 dcac_energy_b32=76.02 dcac_energy_b128=76.14
+cifar100 places365 pi=0.5 seed=2 dcac_energy_b1=76.11 dcac_energy_b8=76.11 dcac_energy_b32=76.14 dcac_energy_b128=76.26
+cifar100 places365 pi=0.05 seed=0 adaodd_b1=79.39 adaodd_b8=79.39 adaodd_b32=79.39 adaodd_b128=79.39
+cifar100 places365 pi=0.05 seed=1 adaodd_b1=78.49 adaodd_b8=78.49 adaodd_b32=78.49 adaodd_b128=78.49
+cifar100 places365 pi=0.05 seed=2 adaodd_b1=78.54 adaodd_b8=78.54 adaodd_b32=78.54 adaodd_b128=78.54
+cifar100 places365 pi=0.2 seed=0 adaodd_b1=78.47 adaodd_b8=78.47 adaodd_b32=78.47 adaodd_b128=78.47
+cifar100 places365 pi=0.2 seed=1 adaodd_b1=77.86 adaodd_b8=77.86 adaodd_b32=77.86 adaodd_b128=77.86
+cifar100 places365 pi=0.2 seed=2 adaodd_b1=77.87 adaodd_b8=77.87 adaodd_b32=77.87 adaodd_b128=77.87
+cifar100 places365 pi=0.5 seed=0 adaodd_b1=78.24 adaodd_b8=78.24 adaodd_b32=78.24 adaodd_b128=78.24
+cifar100 places365 pi=0.5 seed=1 adaodd_b1=78.53 adaodd_b8=78.53 adaodd_b32=78.53 adaodd_b128=78.53
+cifar100 places365 pi=0.5 seed=2 adaodd_b1=78.36 adaodd_b8=78.36 adaodd_b32=78.36 adaodd_b128=78.37

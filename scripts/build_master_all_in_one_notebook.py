@@ -126,14 +126,16 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 # 1.1. Path Resolution & Package Registration
-def find_repo_root():
-    current = Path.cwd().resolve()
-    for p in [current, current / "deliverables" / "CURE_repo", current.parent, current.parent / "deliverables" / "CURE_repo"]:
-        if (p / "src" / "cure_ood").exists():
-            return p
-    return current
+current_p = Path.cwd().resolve()
+for cand in [current_p, current_p / "deliverables" / "CURE_repo", current_p.parent, current_p.parent / "deliverables" / "CURE_repo"]:
+    if (cand / "src" / "cure_ood").exists():
+        if str(cand / "src") not in sys.path:
+            sys.path.insert(0, str(cand / "src"))
+        break
 
-REPO_ROOT = find_repo_root()
+from cure_ood.paths import get_repo_root, get_results_dir, get_figures_dir
+
+REPO_ROOT = get_repo_root()
 SRC_PATH = REPO_ROOT / "src"
 if str(SRC_PATH) not in sys.path:
     sys.path.insert(0, str(SRC_PATH))

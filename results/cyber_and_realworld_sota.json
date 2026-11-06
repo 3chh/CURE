@@ -1,0 +1,1302 @@
+{
+  "scenarios": {
+    "westermo_full_chrono": {
+      "category": "A. Mạng Công Nghiệp (Gốc & Từng Đòn Tấn Công)",
+      "label": "Westermo Toàn Luồng Thời Gian Thực (28.286 gói)",
+      "n_streams": 1,
+      "stream_len": 28286,
+      "methods": {
+        "knn": {
+          "auroc": 65.44,
+          "fpr95": 98.33,
+          "tpr_fpr5": 33.88,
+          "aupr_out": 47.4,
+          "dcr": null,
+          "delta_knn": 0.0,
+          "us_per_pkt": 1.1
+        },
+        "cure": {
+          "auroc": 64.56,
+          "fpr95": 92.0,
+          "tpr_fpr5": 28.59,
+          "aupr_out": 42.16,
+          "dcr": 18.39,
+          "delta_knn": -0.88,
+          "us_per_pkt": 22.1
+        },
+        "cure_oebh_b1": {
+          "auroc": 65.44,
+          "fpr95": 98.33,
+          "tpr_fpr5": 33.88,
+          "aupr_out": 47.4,
+          "dcr": 0.0,
+          "delta_knn": 0.0,
+          "us_per_pkt": 43.4
+        },
+        "oodd": {
+          "auroc": 61.64,
+          "fpr95": 93.05,
+          "tpr_fpr5": 27.32,
+          "aupr_out": 41.95,
+          "dcr": 27.86,
+          "delta_knn": -3.8,
+          "us_per_pkt": 11.9
+        },
+        "adaodd": {
+          "auroc": 64.75,
+          "fpr95": 100.0,
+          "tpr_fpr5": 33.73,
+          "aupr_out": 45.13,
+          "dcr": null,
+          "delta_knn": -0.69,
+          "us_per_pkt": 10.6
+        },
+        "warden": {
+          "auroc": 65.34,
+          "fpr95": 100.0,
+          "tpr_fpr5": 33.88,
+          "aupr_out": 47.57,
+          "dcr": 0.0,
+          "delta_knn": -0.09,
+          "us_per_pkt": 2.1
+        },
+        "age_queue": {
+          "auroc": 62.9,
+          "fpr95": 95.11,
+          "tpr_fpr5": 30.92,
+          "aupr_out": 44.92,
+          "dcr": 82.69,
+          "delta_knn": -2.53,
+          "us_per_pkt": 2.2
+        }
+      }
+    },
+    "westermo_ssh": {
+      "category": "A. Mạng Công Nghiệp (Gốc & Từng Đòn Tấn Công)",
+      "label": "Westermo — SSH Brute Force (BAD-SSH)",
+      "n_streams": 3,
+      "stream_len": 6258,
+      "methods": {
+        "knn": {
+          "auroc": 99.95,
+          "fpr95": 0.0,
+          "tpr_fpr5": 99.6,
+          "aupr_out": 99.79,
+          "dcr": null,
+          "delta_knn": 0.0,
+          "us_per_pkt": 1.7
+        },
+        "cure": {
+          "auroc": 99.81,
+          "fpr95": 1.14,
+          "tpr_fpr5": 99.38,
+          "aupr_out": 98.99,
+          "dcr": 0.0,
+          "delta_knn": -0.14,
+          "us_per_pkt": 25.3
+        },
+        "cure_oebh_b1": {
+          "auroc": 99.81,
+          "fpr95": 1.16,
+          "tpr_fpr5": 99.33,
+          "aupr_out": 98.97,
+          "dcr": 0.0,
+          "delta_knn": -0.14,
+          "us_per_pkt": 521.2
+        },
+        "oodd": {
+          "auroc": 98.9,
+          "fpr95": 0.0,
+          "tpr_fpr5": 98.05,
+          "aupr_out": 98.47,
+          "dcr": 27.84,
+          "delta_knn": -1.05,
+          "us_per_pkt": 20.8
+        },
+        "adaodd": {
+          "auroc": 99.52,
+          "fpr95": 1.85,
+          "tpr_fpr5": 99.6,
+          "aupr_out": 96.47,
+          "dcr": null,
+          "delta_knn": -0.43,
+          "us_per_pkt": 10.2
+        },
+        "warden": {
+          "auroc": 99.95,
+          "fpr95": 0.0,
+          "tpr_fpr5": 99.6,
+          "aupr_out": 99.79,
+          "dcr": 1.4,
+          "delta_knn": 0.0,
+          "us_per_pkt": 11.5
+        },
+        "age_queue": {
+          "auroc": 97.27,
+          "fpr95": 0.0,
+          "tpr_fpr5": 96.65,
+          "aupr_out": 97.14,
+          "dcr": 85.25,
+          "delta_knn": -2.67,
+          "us_per_pkt": 2.6
+        }
+      }
+    },
+    "westermo_portscan": {
+      "category": "A. Mạng Công Nghiệp (Gốc & Từng Đòn Tấn Công)",
+      "label": "Westermo — Port Scanning (BAD-PORTSCAN 1&2)",
+      "n_streams": 3,
+      "stream_len": 4260,
+      "methods": {
+        "knn": {
+          "auroc": 99.48,
+          "fpr95": 0.1,
+          "tpr_fpr5": 97.89,
+          "aupr_out": 98.45,
+          "dcr": null,
+          "delta_knn": 0.0,
+          "us_per_pkt": 1.6
+        },
+        "cure": {
+          "auroc": 99.26,
+          "fpr95": 1.1,
+          "tpr_fpr5": 97.1,
+          "aupr_out": 97.72,
+          "dcr": 0.0,
+          "delta_knn": -0.23,
+          "us_per_pkt": 23.4
+        },
+        "cure_oebh_b1": {
+          "auroc": 99.24,
+          "fpr95": 1.11,
+          "tpr_fpr5": 96.87,
+          "aupr_out": 97.71,
+          "dcr": 0.0,
+          "delta_knn": -0.24,
+          "us_per_pkt": 438.5
+        },
+        "oodd": {
+          "auroc": 96.91,
+          "fpr95": 5.48,
+          "tpr_fpr5": 95.38,
+          "aupr_out": 96.03,
+          "dcr": 50.14,
+          "delta_knn": -2.57,
+          "us_per_pkt": 22.5
+        },
+        "adaodd": {
+          "auroc": 98.72,
+          "fpr95": 2.53,
+          "tpr_fpr5": 97.89,
+          "aupr_out": 92.64,
+          "dcr": null,
+          "delta_knn": -0.76,
+          "us_per_pkt": 22.7
+        },
+        "warden": {
+          "auroc": 99.45,
+          "fpr95": 0.1,
+          "tpr_fpr5": 97.89,
+          "aupr_out": 98.45,
+          "dcr": 2.02,
+          "delta_knn": -0.04,
+          "us_per_pkt": 8.0
+        },
+        "age_queue": {
+          "auroc": 94.15,
+          "fpr95": 68.04,
+          "tpr_fpr5": 91.95,
+          "aupr_out": 92.98,
+          "dcr": 87.64,
+          "delta_knn": -5.34,
+          "us_per_pkt": 2.5
+        }
+      }
+    },
+    "westermo_mitm": {
+      "category": "A. Mạng Công Nghiệp (Gốc & Từng Đòn Tấn Công)",
+      "label": "Westermo — Man-in-the-Middle (BAD-MITM)",
+      "n_streams": 3,
+      "stream_len": 5040,
+      "methods": {
+        "knn": {
+          "auroc": 99.35,
+          "fpr95": 0.26,
+          "tpr_fpr5": 98.41,
+          "aupr_out": 98.1,
+          "dcr": null,
+          "delta_knn": 0.0,
+          "us_per_pkt": 1.5
+        },
+        "cure": {
+          "auroc": 98.71,
+          "fpr95": 2.51,
+          "tpr_fpr5": 97.55,
+          "aupr_out": 94.46,
+          "dcr": 0.31,
+          "delta_knn": -0.64,
+          "us_per_pkt": 20.3
+        },
+        "cure_oebh_b1": {
+          "auroc": 98.94,
+          "fpr95": 0.94,
+          "tpr_fpr5": 98.54,
+          "aupr_out": 94.97,
+          "dcr": 0.0,
+          "delta_knn": -0.41,
+          "us_per_pkt": 241.1
+        },
+        "oodd": {
+          "auroc": 98.05,
+          "fpr95": 0.12,
+          "tpr_fpr5": 96.23,
+          "aupr_out": 96.93,
+          "dcr": 46.18,
+          "delta_knn": -1.3,
+          "us_per_pkt": 18.4
+        },
+        "adaodd": {
+          "auroc": 98.31,
+          "fpr95": 4.92,
+          "tpr_fpr5": 95.63,
+          "aupr_out": 88.77,
+          "dcr": null,
+          "delta_knn": -1.04,
+          "us_per_pkt": 13.5
+        },
+        "warden": {
+          "auroc": 99.38,
+          "fpr95": 0.26,
+          "tpr_fpr5": 98.41,
+          "aupr_out": 98.12,
+          "dcr": 1.6,
+          "delta_knn": 0.03,
+          "us_per_pkt": 7.0
+        },
+        "age_queue": {
+          "auroc": 93.31,
+          "fpr95": 73.5,
+          "tpr_fpr5": 91.49,
+          "aupr_out": 92.51,
+          "dcr": 87.66,
+          "delta_knn": -6.04,
+          "us_per_pkt": 2.4
+        }
+      }
+    },
+    "westermo_dupip": {
+      "category": "A. Mạng Công Nghiệp (Gốc & Từng Đòn Tấn Công)",
+      "label": "Westermo — IP Spoofing / Duplicate Device",
+      "n_streams": 3,
+      "stream_len": 7059,
+      "methods": {
+        "knn": {
+          "auroc": 51.23,
+          "fpr95": 97.88,
+          "tpr_fpr5": 6.99,
+          "aupr_out": 16.46,
+          "dcr": null,
+          "delta_knn": 0.0,
+          "us_per_pkt": 1.5
+        },
+        "cure": {
+          "auroc": 51.23,
+          "fpr95": 97.88,
+          "tpr_fpr5": 6.99,
+          "aupr_out": 16.46,
+          "dcr": 0.0,
+          "delta_knn": 0.0,
+          "us_per_pkt": 14.0
+        },
+        "cure_oebh_b1": {
+          "auroc": 51.23,
+          "fpr95": 97.88,
+          "tpr_fpr5": 6.99,
+          "aupr_out": 16.46,
+          "dcr": 0.0,
+          "delta_knn": 0.0,
+          "us_per_pkt": 40.2
+        },
+        "oodd": {
+          "auroc": 50.86,
+          "fpr95": 95.28,
+          "tpr_fpr5": 6.67,
+          "aupr_out": 16.33,
+          "dcr": 82.31,
+          "delta_knn": -0.37,
+          "us_per_pkt": 14.5
+        },
+        "adaodd": {
+          "auroc": 51.3,
+          "fpr95": 100.0,
+          "tpr_fpr5": 6.86,
+          "aupr_out": 16.33,
+          "dcr": null,
+          "delta_knn": 0.07,
+          "us_per_pkt": 9.1
+        },
+        "warden": {
+          "auroc": 51.55,
+          "fpr95": 100.0,
+          "tpr_fpr5": 6.99,
+          "aupr_out": 16.55,
+          "dcr": 0.0,
+          "delta_knn": 0.32,
+          "us_per_pkt": 3.0
+        },
+        "age_queue": {
+          "auroc": 49.28,
+          "fpr95": 95.89,
+          "tpr_fpr5": 4.87,
+          "aupr_out": 14.84,
+          "dcr": 84.91,
+          "delta_knn": -1.95,
+          "us_per_pkt": 2.5
+        }
+      }
+    },
+    "westermo_attenuated_stealth": {
+      "category": "B. Mạng Công Nghiệp Độ Khó Cao (Ngụy Trang, Nhiễu, Mất Gói & APT)",
+      "label": "Westermo Hard — Tấn Công Ngụy Trang Biên ID (Stealth Boundary)",
+      "n_streams": 3,
+      "stream_len": 6098,
+      "methods": {
+        "knn": {
+          "auroc": 99.81,
+          "fpr95": 1.12,
+          "tpr_fpr5": 99.06,
+          "aupr_out": 99.21,
+          "dcr": null,
+          "delta_knn": 0.0,
+          "us_per_pkt": 1.5
+        },
+        "cure": {
+          "auroc": 99.61,
+          "fpr95": 3.0,
+          "tpr_fpr5": 98.66,
+          "aupr_out": 98.57,
+          "dcr": 0.0,
+          "delta_knn": -0.2,
+          "us_per_pkt": 24.5
+        },
+        "cure_oebh_b1": {
+          "auroc": 99.59,
+          "fpr95": 2.97,
+          "tpr_fpr5": 98.6,
+          "aupr_out": 98.46,
+          "dcr": 0.0,
+          "delta_knn": -0.22,
+          "us_per_pkt": 514.3
+        },
+        "oodd": {
+          "auroc": 93.54,
+          "fpr95": 57.12,
+          "tpr_fpr5": 89.04,
+          "aupr_out": 92.25,
+          "dcr": 19.49,
+          "delta_knn": -6.27,
+          "us_per_pkt": 19.7
+        },
+        "adaodd": {
+          "auroc": 99.16,
+          "fpr95": 2.87,
+          "tpr_fpr5": 98.57,
+          "aupr_out": 95.31,
+          "dcr": null,
+          "delta_knn": -0.65,
+          "us_per_pkt": 12.5
+        },
+        "warden": {
+          "auroc": 99.81,
+          "fpr95": 1.12,
+          "tpr_fpr5": 99.06,
+          "aupr_out": 99.21,
+          "dcr": 1.08,
+          "delta_knn": -0.0,
+          "us_per_pkt": 10.0
+        },
+        "age_queue": {
+          "auroc": 96.45,
+          "fpr95": 32.42,
+          "tpr_fpr5": 94.39,
+          "aupr_out": 95.92,
+          "dcr": 77.85,
+          "delta_knn": -3.36,
+          "us_per_pkt": 2.6
+        }
+      }
+    },
+    "westermo_noisy_scada": {
+      "category": "B. Mạng Công Nghiệp Độ Khó Cao (Ngụy Trang, Nhiễu, Mất Gói & APT)",
+      "label": "Westermo Hard — Nhiễu Điện Từ SCADA (SNR Thấp σ=0.12)",
+      "n_streams": 3,
+      "stream_len": 6098,
+      "methods": {
+        "knn": {
+          "auroc": 95.34,
+          "fpr95": 44.2,
+          "tpr_fpr5": 90.04,
+          "aupr_out": 93.56,
+          "dcr": null,
+          "delta_knn": 0.0,
+          "us_per_pkt": 1.7
+        },
+        "cure": {
+          "auroc": 95.33,
+          "fpr95": 43.36,
+          "tpr_fpr5": 90.01,
+          "aupr_out": 93.55,
+          "dcr": 0.0,
+          "delta_knn": -0.01,
+          "us_per_pkt": 24.2
+        },
+        "cure_oebh_b1": {
+          "auroc": 95.3,
+          "fpr95": 43.54,
+          "tpr_fpr5": 89.71,
+          "aupr_out": 93.44,
+          "dcr": 0.0,
+          "delta_knn": -0.04,
+          "us_per_pkt": 514.3
+        },
+        "oodd": {
+          "auroc": 93.03,
+          "fpr95": 56.01,
+          "tpr_fpr5": 85.06,
+          "aupr_out": 90.36,
+          "dcr": 21.34,
+          "delta_knn": -2.31,
+          "us_per_pkt": 17.8
+        },
+        "adaodd": {
+          "auroc": 95.37,
+          "fpr95": 44.13,
+          "tpr_fpr5": 90.07,
+          "aupr_out": 93.66,
+          "dcr": null,
+          "delta_knn": 0.03,
+          "us_per_pkt": 20.2
+        },
+        "warden": {
+          "auroc": 95.34,
+          "fpr95": 43.97,
+          "tpr_fpr5": 90.01,
+          "aupr_out": 93.54,
+          "dcr": 0.1,
+          "delta_knn": 0.0,
+          "us_per_pkt": 12.1
+        },
+        "age_queue": {
+          "auroc": 92.5,
+          "fpr95": 69.97,
+          "tpr_fpr5": 85.67,
+          "aupr_out": 90.38,
+          "dcr": 78.28,
+          "delta_knn": -2.84,
+          "us_per_pkt": 2.7
+        }
+      }
+    },
+    "westermo_packet_loss": {
+      "category": "B. Mạng Công Nghiệp Độ Khó Cao (Ngụy Trang, Nhiễu, Mất Gói & APT)",
+      "label": "Westermo Hard — Mất 35% Kênh Cảm Biến Telemetry",
+      "n_streams": 3,
+      "stream_len": 6098,
+      "methods": {
+        "knn": {
+          "auroc": 99.66,
+          "fpr95": 0.18,
+          "tpr_fpr5": 98.82,
+          "aupr_out": 99.24,
+          "dcr": null,
+          "delta_knn": 0.0,
+          "us_per_pkt": 1.4
+        },
+        "cure": {
+          "auroc": 99.46,
+          "fpr95": 1.61,
+          "tpr_fpr5": 98.18,
+          "aupr_out": 98.71,
+          "dcr": 0.0,
+          "delta_knn": -0.21,
+          "us_per_pkt": 23.8
+        },
+        "cure_oebh_b1": {
+          "auroc": 99.43,
+          "fpr95": 1.51,
+          "tpr_fpr5": 98.15,
+          "aupr_out": 98.58,
+          "dcr": 0.0,
+          "delta_knn": -0.24,
+          "us_per_pkt": 520.1
+        },
+        "oodd": {
+          "auroc": 93.75,
+          "fpr95": 56.25,
+          "tpr_fpr5": 89.59,
+          "aupr_out": 92.52,
+          "dcr": 19.29,
+          "delta_knn": -5.91,
+          "us_per_pkt": 18.8
+        },
+        "adaodd": {
+          "auroc": 99.14,
+          "fpr95": 2.57,
+          "tpr_fpr5": 97.66,
+          "aupr_out": 96.82,
+          "dcr": null,
+          "delta_knn": -0.53,
+          "us_per_pkt": 13.4
+        },
+        "warden": {
+          "auroc": 99.65,
+          "fpr95": 0.18,
+          "tpr_fpr5": 98.82,
+          "aupr_out": 99.26,
+          "dcr": 0.86,
+          "delta_knn": -0.01,
+          "us_per_pkt": 9.6
+        },
+        "age_queue": {
+          "auroc": 95.5,
+          "fpr95": 50.18,
+          "tpr_fpr5": 94.3,
+          "aupr_out": 95.57,
+          "dcr": 77.86,
+          "delta_knn": -4.16,
+          "us_per_pkt": 2.6
+        }
+      }
+    },
+    "westermo_stealth_apt": {
+      "category": "B. Mạng Công Nghiệp Độ Khó Cao (Ngụy Trang, Nhiễu, Mất Gói & APT)",
+      "label": "Westermo Hard — Tấn Công APT Nhỏ Giọt (Stealth π = 2%)",
+      "n_streams": 3,
+      "stream_len": 6122,
+      "methods": {
+        "knn": {
+          "auroc": 99.91,
+          "fpr95": 0.03,
+          "tpr_fpr5": 99.45,
+          "aupr_out": 98.85,
+          "dcr": null,
+          "delta_knn": 0.0,
+          "us_per_pkt": 1.3
+        },
+        "cure": {
+          "auroc": 99.81,
+          "fpr95": 0.08,
+          "tpr_fpr5": 99.45,
+          "aupr_out": 92.48,
+          "dcr": 33.33,
+          "delta_knn": -0.1,
+          "us_per_pkt": 14.9
+        },
+        "cure_oebh_b1": {
+          "auroc": 99.91,
+          "fpr95": 0.03,
+          "tpr_fpr5": 99.45,
+          "aupr_out": 98.85,
+          "dcr": 0.0,
+          "delta_knn": -0.0,
+          "us_per_pkt": 40.9
+        },
+        "oodd": {
+          "auroc": 95.7,
+          "fpr95": 35.22,
+          "tpr_fpr5": 94.26,
+          "aupr_out": 94.0,
+          "dcr": 87.43,
+          "delta_knn": -4.21,
+          "us_per_pkt": 13.1
+        },
+        "adaodd": {
+          "auroc": 99.84,
+          "fpr95": 0.09,
+          "tpr_fpr5": 99.18,
+          "aupr_out": 97.92,
+          "dcr": null,
+          "delta_knn": -0.07,
+          "us_per_pkt": 8.6
+        },
+        "warden": {
+          "auroc": 99.91,
+          "fpr95": 0.03,
+          "tpr_fpr5": 99.45,
+          "aupr_out": 98.85,
+          "dcr": 0.0,
+          "delta_knn": -0.0,
+          "us_per_pkt": 2.8
+        },
+        "age_queue": {
+          "auroc": 83.31,
+          "fpr95": 99.92,
+          "tpr_fpr5": 82.51,
+          "aupr_out": 82.76,
+          "dcr": 97.53,
+          "delta_knn": -16.6,
+          "us_per_pkt": 2.8
+        }
+      }
+    },
+    "wm811k_center_defect": {
+      "category": "C. Đa Miền Thực Tế (Bán Dẫn, AI Forensics & Cảm Biến Nhiễu)",
+      "label": "Bán Dẫn WM-811K — Lỗi Tâm Wafer (Center Defect)",
+      "n_streams": 3,
+      "stream_len": 7351,
+      "methods": {
+        "knn": {
+          "auroc": 96.51,
+          "fpr95": 17.38,
+          "tpr_fpr5": 81.13,
+          "aupr_out": 89.17,
+          "dcr": null,
+          "delta_knn": 0.0,
+          "us_per_pkt": 4.2
+        },
+        "cure": {
+          "auroc": 99.7,
+          "fpr95": 0.22,
+          "tpr_fpr5": 98.5,
+          "aupr_out": 99.25,
+          "dcr": 2.33,
+          "delta_knn": 3.19,
+          "us_per_pkt": 34.4
+        },
+        "cure_oebh_b1": {
+          "auroc": 99.73,
+          "fpr95": 0.21,
+          "tpr_fpr5": 98.71,
+          "aupr_out": 99.32,
+          "dcr": 0.14,
+          "delta_knn": 3.22,
+          "us_per_pkt": 615.1
+        },
+        "oodd": {
+          "auroc": 98.8,
+          "fpr95": 8.86,
+          "tpr_fpr5": 91.66,
+          "aupr_out": 96.91,
+          "dcr": 18.49,
+          "delta_knn": 2.29,
+          "us_per_pkt": 30.7
+        },
+        "adaodd": {
+          "auroc": 99.01,
+          "fpr95": 3.26,
+          "tpr_fpr5": 95.99,
+          "aupr_out": 97.94,
+          "dcr": null,
+          "delta_knn": 2.51,
+          "us_per_pkt": 21.6
+        },
+        "warden": {
+          "auroc": 98.97,
+          "fpr95": 3.5,
+          "tpr_fpr5": 97.03,
+          "aupr_out": 96.69,
+          "dcr": 0.89,
+          "delta_knn": 2.46,
+          "us_per_pkt": 27.3
+        },
+        "age_queue": {
+          "auroc": 98.15,
+          "fpr95": 3.62,
+          "tpr_fpr5": 95.4,
+          "aupr_out": 97.27,
+          "dcr": 75.25,
+          "delta_knn": 1.65,
+          "us_per_pkt": 2.8
+        }
+      }
+    },
+    "wm811k_mixed_defect": {
+      "category": "C. Đa Miền Thực Tế (Bán Dẫn, AI Forensics & Cảm Biến Nhiễu)",
+      "label": "Bán Dẫn WM-811K — Lỗi Xước & Vành (Scratch/Edge-Loc)",
+      "n_streams": 3,
+      "stream_len": 4967,
+      "methods": {
+        "knn": {
+          "auroc": 82.75,
+          "fpr95": 68.71,
+          "tpr_fpr5": 41.89,
+          "aupr_out": 53.73,
+          "dcr": null,
+          "delta_knn": 0.0,
+          "us_per_pkt": 4.0
+        },
+        "cure": {
+          "auroc": 87.37,
+          "fpr95": 57.99,
+          "tpr_fpr5": 54.87,
+          "aupr_out": 65.19,
+          "dcr": 0.0,
+          "delta_knn": 4.62,
+          "us_per_pkt": 21.6
+        },
+        "cure_oebh_b1": {
+          "auroc": 85.3,
+          "fpr95": 61.27,
+          "tpr_fpr5": 48.6,
+          "aupr_out": 59.54,
+          "dcr": 0.0,
+          "delta_knn": 2.55,
+          "us_per_pkt": 134.6
+        },
+        "oodd": {
+          "auroc": 75.0,
+          "fpr95": 73.35,
+          "tpr_fpr5": 28.02,
+          "aupr_out": 41.69,
+          "dcr": 63.0,
+          "delta_knn": -7.75,
+          "us_per_pkt": 27.6
+        },
+        "adaodd": {
+          "auroc": 82.31,
+          "fpr95": 69.95,
+          "tpr_fpr5": 41.39,
+          "aupr_out": 52.88,
+          "dcr": null,
+          "delta_knn": -0.44,
+          "us_per_pkt": 20.7
+        },
+        "warden": {
+          "auroc": 89.1,
+          "fpr95": 54.11,
+          "tpr_fpr5": 60.12,
+          "aupr_out": 66.65,
+          "dcr": 0.0,
+          "delta_knn": 6.35,
+          "us_per_pkt": 19.5
+        },
+        "age_queue": {
+          "auroc": 60.05,
+          "fpr95": 97.14,
+          "tpr_fpr5": 19.13,
+          "aupr_out": 28.4,
+          "dcr": 85.61,
+          "delta_knn": -22.7,
+          "us_per_pkt": 2.6
+        }
+      }
+    },
+    "openfake_mj7_flux2": {
+      "category": "C. Đa Miền Thực Tế (Bán Dẫn, AI Forensics & Cảm Biến Nhiễu)",
+      "label": "DeepFake Forensics — Midjourney-7 / Flux.2 / GPT-Image",
+      "n_streams": 3,
+      "stream_len": 6000,
+      "methods": {
+        "knn": {
+          "auroc": 99.61,
+          "fpr95": 0.89,
+          "tpr_fpr5": 98.8,
+          "aupr_out": 99.19,
+          "dcr": null,
+          "delta_knn": 0.0,
+          "us_per_pkt": 3.6
+        },
+        "cure": {
+          "auroc": 99.76,
+          "fpr95": 0.33,
+          "tpr_fpr5": 99.27,
+          "aupr_out": 99.51,
+          "dcr": 0.0,
+          "delta_knn": 0.15,
+          "us_per_pkt": 26.2
+        },
+        "cure_oebh_b1": {
+          "auroc": 99.74,
+          "fpr95": 0.4,
+          "tpr_fpr5": 99.09,
+          "aupr_out": 99.46,
+          "dcr": 0.0,
+          "delta_knn": 0.13,
+          "us_per_pkt": 374.1
+        },
+        "oodd": {
+          "auroc": 97.68,
+          "fpr95": 15.69,
+          "tpr_fpr5": 85.58,
+          "aupr_out": 95.06,
+          "dcr": 13.17,
+          "delta_knn": -1.93,
+          "us_per_pkt": 32.3
+        },
+        "adaodd": {
+          "auroc": 99.68,
+          "fpr95": 0.64,
+          "tpr_fpr5": 98.8,
+          "aupr_out": 99.32,
+          "dcr": null,
+          "delta_knn": 0.07,
+          "us_per_pkt": 23.5
+        },
+        "warden": {
+          "auroc": 99.37,
+          "fpr95": 1.62,
+          "tpr_fpr5": 98.73,
+          "aupr_out": 96.79,
+          "dcr": 0.0,
+          "delta_knn": -0.24,
+          "us_per_pkt": 19.1
+        },
+        "age_queue": {
+          "auroc": 96.3,
+          "fpr95": 24.82,
+          "tpr_fpr5": 85.04,
+          "aupr_out": 93.55,
+          "dcr": 69.22,
+          "delta_knn": -3.31,
+          "us_per_pkt": 3.2
+        }
+      }
+    },
+    "openfake_sora2_veo3": {
+      "category": "C. Đa Miền Thực Tế (Bán Dẫn, AI Forensics & Cảm Biến Nhiễu)",
+      "label": "DeepFake Video Gen — Sora-2 / Veo-3 / Wan-2.5",
+      "n_streams": 3,
+      "stream_len": 6000,
+      "methods": {
+        "knn": {
+          "auroc": 99.48,
+          "fpr95": 1.51,
+          "tpr_fpr5": 97.98,
+          "aupr_out": 98.79,
+          "dcr": null,
+          "delta_knn": 0.0,
+          "us_per_pkt": 4.1
+        },
+        "cure": {
+          "auroc": 99.71,
+          "fpr95": 0.52,
+          "tpr_fpr5": 98.87,
+          "aupr_out": 99.34,
+          "dcr": 0.0,
+          "delta_knn": 0.24,
+          "us_per_pkt": 30.8
+        },
+        "cure_oebh_b1": {
+          "auroc": 99.71,
+          "fpr95": 0.47,
+          "tpr_fpr5": 98.82,
+          "aupr_out": 99.33,
+          "dcr": 0.0,
+          "delta_knn": 0.23,
+          "us_per_pkt": 445.2
+        },
+        "oodd": {
+          "auroc": 97.9,
+          "fpr95": 14.42,
+          "tpr_fpr5": 86.64,
+          "aupr_out": 95.48,
+          "dcr": 13.41,
+          "delta_knn": -1.58,
+          "us_per_pkt": 31.0
+        },
+        "adaodd": {
+          "auroc": 99.51,
+          "fpr95": 1.37,
+          "tpr_fpr5": 98.18,
+          "aupr_out": 98.83,
+          "dcr": null,
+          "delta_knn": 0.03,
+          "us_per_pkt": 21.8
+        },
+        "warden": {
+          "auroc": 99.16,
+          "fpr95": 2.04,
+          "tpr_fpr5": 98.04,
+          "aupr_out": 95.42,
+          "dcr": 0.0,
+          "delta_knn": -0.32,
+          "us_per_pkt": 18.8
+        },
+        "age_queue": {
+          "auroc": 96.57,
+          "fpr95": 24.13,
+          "tpr_fpr5": 87.44,
+          "aupr_out": 94.3,
+          "dcr": 69.2,
+          "delta_knn": -2.9,
+          "us_per_pkt": 2.8
+        }
+      }
+    },
+    "synthbuster_diffusion": {
+      "category": "C. Đa Miền Thực Tế (Bán Dẫn, AI Forensics & Cảm Biến Nhiễu)",
+      "label": "SynthBuster — Stable Diffusion / DALLE-2 vs Camera Raw",
+      "n_streams": 3,
+      "stream_len": 289,
+      "methods": {
+        "knn": {
+          "auroc": 73.86,
+          "fpr95": 73.94,
+          "tpr_fpr5": 20.79,
+          "aupr_out": 56.2,
+          "dcr": null,
+          "delta_knn": 0.0,
+          "us_per_pkt": 2.1
+        },
+        "cure": {
+          "auroc": 73.86,
+          "fpr95": 73.94,
+          "tpr_fpr5": 20.79,
+          "aupr_out": 56.2,
+          "dcr": 0.0,
+          "delta_knn": 0.0,
+          "us_per_pkt": 13.1
+        },
+        "cure_oebh_b1": {
+          "auroc": 73.86,
+          "fpr95": 73.94,
+          "tpr_fpr5": 20.79,
+          "aupr_out": 56.2,
+          "dcr": 0.0,
+          "delta_knn": 0.0,
+          "us_per_pkt": 25.6
+        },
+        "oodd": {
+          "auroc": 68.54,
+          "fpr95": 76.6,
+          "tpr_fpr5": 17.82,
+          "aupr_out": 53.58,
+          "dcr": 65.05,
+          "delta_knn": -5.32,
+          "us_per_pkt": 9.4
+        },
+        "adaodd": {
+          "auroc": 73.97,
+          "fpr95": 74.65,
+          "tpr_fpr5": 17.82,
+          "aupr_out": 54.89,
+          "dcr": null,
+          "delta_knn": 0.11,
+          "us_per_pkt": 8.9
+        },
+        "warden": {
+          "auroc": 73.71,
+          "fpr95": 69.5,
+          "tpr_fpr5": 11.22,
+          "aupr_out": 53.21,
+          "dcr": 0.0,
+          "delta_knn": -0.15,
+          "us_per_pkt": 19.0
+        },
+        "age_queue": {
+          "auroc": 74.48,
+          "fpr95": 75.71,
+          "tpr_fpr5": 26.07,
+          "aupr_out": 62.17,
+          "dcr": 64.98,
+          "delta_knn": 0.62,
+          "us_per_pkt": 4.2
+        }
+      }
+    }
+  },
+  "summary_by_category": {
+    "A. Mạng Công Nghiệp (Gốc & Từng Đòn Tấn Công)": {
+      "knn": {
+        "auroc": 83.09,
+        "fpr95": 39.31,
+        "tpr_fpr5": 67.35,
+        "aupr_out": 72.04,
+        "dcr": null,
+        "delta_knn": 0.0,
+        "harm_rate": 0.0,
+        "worst_delta": 0.0
+      },
+      "cure": {
+        "auroc": 82.71,
+        "fpr95": 38.93,
+        "tpr_fpr5": 65.92,
+        "aupr_out": 69.96,
+        "dcr": 3.74,
+        "delta_knn": -0.38,
+        "harm_rate": 40.0,
+        "worst_delta": -0.88
+      },
+      "cure_oebh_b1": {
+        "auroc": 82.93,
+        "fpr95": 39.88,
+        "tpr_fpr5": 67.12,
+        "aupr_out": 71.1,
+        "dcr": 0.0,
+        "delta_knn": -0.16,
+        "harm_rate": 0.0,
+        "worst_delta": -0.41
+      },
+      "oodd": {
+        "auroc": 81.27,
+        "fpr95": 38.79,
+        "tpr_fpr5": 64.73,
+        "aupr_out": 69.94,
+        "dcr": 46.87,
+        "delta_knn": -1.82,
+        "harm_rate": 80.0,
+        "worst_delta": -3.8
+      },
+      "adaodd": {
+        "auroc": 82.52,
+        "fpr95": 41.86,
+        "tpr_fpr5": 66.74,
+        "aupr_out": 67.87,
+        "dcr": null,
+        "delta_knn": -0.57,
+        "harm_rate": 60.0,
+        "worst_delta": -1.04
+      },
+      "warden": {
+        "auroc": 83.13,
+        "fpr95": 40.07,
+        "tpr_fpr5": 67.35,
+        "aupr_out": 72.1,
+        "dcr": 1.0,
+        "delta_knn": 0.04,
+        "harm_rate": 0.0,
+        "worst_delta": -0.09
+      },
+      "age_queue": {
+        "auroc": 79.38,
+        "fpr95": 66.51,
+        "tpr_fpr5": 63.18,
+        "aupr_out": 68.48,
+        "dcr": 85.63,
+        "delta_knn": -3.71,
+        "harm_rate": 100.0,
+        "worst_delta": -6.04
+      }
+    },
+    "B. Mạng Công Nghiệp Độ Khó Cao (Ngụy Trang, Nhiễu, Mất Gói & APT)": {
+      "knn": {
+        "auroc": 98.68,
+        "fpr95": 11.38,
+        "tpr_fpr5": 96.84,
+        "aupr_out": 97.72,
+        "dcr": null,
+        "delta_knn": 0.0,
+        "harm_rate": 0.0,
+        "worst_delta": 0.0
+      },
+      "cure": {
+        "auroc": 98.55,
+        "fpr95": 12.01,
+        "tpr_fpr5": 96.58,
+        "aupr_out": 95.83,
+        "dcr": 8.33,
+        "delta_knn": -0.13,
+        "harm_rate": 0.0,
+        "worst_delta": -0.21
+      },
+      "cure_oebh_b1": {
+        "auroc": 98.56,
+        "fpr95": 12.01,
+        "tpr_fpr5": 96.48,
+        "aupr_out": 97.33,
+        "dcr": 0.0,
+        "delta_knn": -0.12,
+        "harm_rate": 0.0,
+        "worst_delta": -0.24
+      },
+      "oodd": {
+        "auroc": 94.0,
+        "fpr95": 51.15,
+        "tpr_fpr5": 89.49,
+        "aupr_out": 92.28,
+        "dcr": 36.89,
+        "delta_knn": -4.68,
+        "harm_rate": 100.0,
+        "worst_delta": -6.27
+      },
+      "adaodd": {
+        "auroc": 98.37,
+        "fpr95": 12.41,
+        "tpr_fpr5": 96.37,
+        "aupr_out": 95.92,
+        "dcr": null,
+        "delta_knn": -0.3,
+        "harm_rate": 50.0,
+        "worst_delta": -0.65
+      },
+      "warden": {
+        "auroc": 98.68,
+        "fpr95": 11.32,
+        "tpr_fpr5": 96.84,
+        "aupr_out": 97.72,
+        "dcr": 0.51,
+        "delta_knn": -0.0,
+        "harm_rate": 0.0,
+        "worst_delta": -0.01
+      },
+      "age_queue": {
+        "auroc": 91.94,
+        "fpr95": 63.12,
+        "tpr_fpr5": 89.22,
+        "aupr_out": 91.16,
+        "dcr": 82.88,
+        "delta_knn": -6.74,
+        "harm_rate": 100.0,
+        "worst_delta": -16.6
+      }
+    },
+    "C. Đa Miền Thực Tế (Bán Dẫn, AI Forensics & Cảm Biến Nhiễu)": {
+      "knn": {
+        "auroc": 90.44,
+        "fpr95": 32.48,
+        "tpr_fpr5": 68.12,
+        "aupr_out": 79.41,
+        "dcr": null,
+        "delta_knn": 0.0,
+        "harm_rate": 0.0,
+        "worst_delta": 0.0
+      },
+      "cure": {
+        "auroc": 92.08,
+        "fpr95": 26.6,
+        "tpr_fpr5": 74.46,
+        "aupr_out": 83.9,
+        "dcr": 0.47,
+        "delta_knn": 1.64,
+        "harm_rate": 0.0,
+        "worst_delta": 0.0
+      },
+      "cure_oebh_b1": {
+        "auroc": 91.67,
+        "fpr95": 27.26,
+        "tpr_fpr5": 73.2,
+        "aupr_out": 82.77,
+        "dcr": 0.03,
+        "delta_knn": 1.23,
+        "harm_rate": 0.0,
+        "worst_delta": 0.0
+      },
+      "oodd": {
+        "auroc": 87.58,
+        "fpr95": 37.78,
+        "tpr_fpr5": 61.94,
+        "aupr_out": 76.54,
+        "dcr": 34.62,
+        "delta_knn": -2.86,
+        "harm_rate": 80.0,
+        "worst_delta": -7.75
+      },
+      "adaodd": {
+        "auroc": 90.9,
+        "fpr95": 29.97,
+        "tpr_fpr5": 70.43,
+        "aupr_out": 80.77,
+        "dcr": null,
+        "delta_knn": 0.46,
+        "harm_rate": 0.0,
+        "worst_delta": -0.44
+      },
+      "warden": {
+        "auroc": 92.06,
+        "fpr95": 26.15,
+        "tpr_fpr5": 73.03,
+        "aupr_out": 81.75,
+        "dcr": 0.18,
+        "delta_knn": 1.62,
+        "harm_rate": 0.0,
+        "worst_delta": -0.32
+      },
+      "age_queue": {
+        "auroc": 85.11,
+        "fpr95": 45.08,
+        "tpr_fpr5": 62.62,
+        "aupr_out": 75.14,
+        "dcr": 72.85,
+        "delta_knn": -5.33,
+        "harm_rate": 60.0,
+        "worst_delta": -22.7
+      }
+    }
+  },
+  "global_summary": {
+    "knn": {
+      "label": "kNN (Static)",
+      "auroc": 90.17,
+      "fpr95": 28.89,
+      "tpr_fpr5": 76.05,
+      "aupr_out": 82.01,
+      "dcr": null,
+      "delta_knn": 0.0,
+      "harm_rate": 0.0,
+      "worst_delta": 0.0,
+      "us_per_pkt": 2.2
+    },
+    "cure": {
+      "label": "CURE (Batch e-BH, B=128)",
+      "auroc": 90.58,
+      "fpr95": 26.83,
+      "tpr_fpr5": 77.73,
+      "aupr_out": 82.33,
+      "dcr": 3.88,
+      "delta_knn": 0.42,
+      "harm_rate": 14.3,
+      "worst_delta": -0.88,
+      "us_per_pkt": 22.8
+    },
+    "cure_oebh_b1": {
+      "label": "CURE (Online e-BH, B=1)",
+      "auroc": 90.52,
+      "fpr95": 27.41,
+      "tpr_fpr5": 77.68,
+      "aupr_out": 82.76,
+      "dcr": 0.01,
+      "delta_knn": 0.35,
+      "harm_rate": 0.0,
+      "worst_delta": -0.41,
+      "us_per_pkt": 319.2
+    },
+    "oodd": {
+      "label": "OODD (CVPR)",
+      "auroc": 87.16,
+      "fpr95": 41.96,
+      "tpr_fpr5": 70.81,
+      "aupr_out": 78.68,
+      "dcr": 39.64,
+      "delta_knn": -3.01,
+      "harm_rate": 85.7,
+      "worst_delta": -7.75,
+      "us_per_pkt": 20.6
+    },
+    "adaodd": {
+      "label": "AdaODD* (ICLR)",
+      "auroc": 90.04,
+      "fpr95": 29.2,
+      "tpr_fpr5": 76.53,
+      "aupr_out": 80.49,
+      "dcr": null,
+      "delta_knn": -0.13,
+      "harm_rate": 35.7,
+      "worst_delta": -1.04,
+      "us_per_pkt": 15.5
+    },
+    "warden": {
+      "label": "WARDEN* (ICML)",
+      "auroc": 90.76,
+      "fpr95": 26.89,
+      "tpr_fpr5": 77.8,
+      "aupr_out": 82.86,
+      "dcr": 0.57,
+      "delta_knn": 0.59,
+      "harm_rate": 0.0,
+      "worst_delta": -0.32,
+      "us_per_pkt": 12.1
+    },
+    "age_queue": {
+      "label": "AgeQueue (FIFO)",
+      "auroc": 85.02,
+      "fpr95": 57.89,
+      "tpr_fpr5": 70.42,
+      "aupr_out": 77.34,
+      "dcr": 80.28,
+      "delta_knn": -5.15,
+      "harm_rate": 85.7,
+      "worst_delta": -22.7,
+      "us_per_pkt": 2.8
+    }
+  }
+}

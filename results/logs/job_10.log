@@ -1,0 +1,46 @@
+
+ Estimating mean and variance from training set...
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup:  28%|██▊       | 70/250 [00:00<00:00, 698.86it/s]Setup:  62%|██████▏   | 154/250 [00:00<00:00, 779.37it/s]Setup:  94%|█████████▍| 236/250 [00:00<00:00, 793.53it/s]Setup: 100%|██████████| 250/250 [00:00<00:00, 780.74it/s]
+ Train acc: 99.97%
+Extracting id training feature
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup:  74%|███████▍  | 185/250 [00:00<00:00, 1845.00it/s]Setup: 100%|██████████| 250/250 [00:00<00:00, 1800.25it/s]
+/kaggle/working/CURE/src/cure_ood/methods/static/_openood/postprocessors/vim_postprocessor.py:63: RuntimeWarning: divide by zero encountered in scalar divide
+  self.alpha = self.logit_id_train.max(
+/kaggle/working/CURE/src/cure_ood/methods/static/_openood/postprocessors/vim_postprocessor.py:74: RuntimeWarning: invalid value encountered in multiply
+  vlogit_ood = norm(np.matmul(feature_ood.numpy() - self.u, self.NS),
+dim=256, self.alpha=9.9603
+dim=256, self.alpha=9.9603
+dim=1000, self.alpha=inf
+dim=256, self.alpha=9.9603
+Setup:   0%|          | 0/5 [00:00<?, ?it/s]Setup: 100%|██████████| 5/5 [00:00<00:00, 1516.49it/s]
+Threshold at percentile 85 over id data is: 0.6144641041755676
+Threshold at percentile 90 over id data is: 0.8057510852813721
+Threshold at percentile 95 over id data is: 1.1753970384597778
+Threshold at percentile 99 over id data is: 2.163146495819092
+Threshold at percentile 99 over id data is: 2.163146495819092
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup:  73%|███████▎  | 182/250 [00:00<00:00, 1810.09it/s]Setup: 100%|██████████| 250/250 [00:00<00:00, 1810.59it/s]
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup:  74%|███████▍  | 185/250 [00:00<00:00, 1848.46it/s]Setup: 100%|██████████| 250/250 [00:00<00:00, 1841.77it/s]
+  0%|          | 0/48 [00:00<?, ?it/s] 67%|██████▋   | 32/48 [00:00<00:00, 314.58it/s]100%|██████████| 48/48 [00:00<00:00, 317.81it/s]
+cifar100 texture pi=0.05 seed=6 cure=81.57 cure_msp=79.21 cure_energy=80.32 knn=81.57 oodd=86.08 oodd_tout=88.62 oodd_protocol=85.99 adaodd=84.82 warden=83.40 age_queue=72.65 msp=79.21 energy=80.31 rtl_plus=69.05 rtl_plus_protocol=68.45 dcac_msp=75.98 dcac_energy=68.65 dcac_msp_protocol=75.91 dcac_energy_protocol=68.31 dynproto=82.54 maxlogit=80.43 gen=80.88 mahalanobis=76.05 vim=86.48 react=81.50 nci=84.98 fdbd=82.86 cadref=84.42
+  0%|          | 0/48 [00:00<?, ?it/s] 38%|███▊      | 18/48 [00:00<00:00, 176.85it/s] 77%|███████▋  | 37/48 [00:00<00:00, 179.38it/s]100%|██████████| 48/48 [00:00<00:00, 182.64it/s]
+cifar100 texture pi=0.05 seed=7 cure=80.40 cure_msp=77.32 cure_energy=77.95 knn=80.40 oodd=85.69 oodd_tout=88.27 oodd_protocol=85.63 adaodd=83.91 warden=82.87 age_queue=72.91 msp=77.32 energy=77.95 rtl_plus=67.57 rtl_plus_protocol=67.97 dcac_msp=75.57 dcac_energy=68.34 dcac_msp_protocol=75.68 dcac_energy_protocol=68.07 dynproto=81.29 maxlogit=78.04 gen=78.63 mahalanobis=77.78 vim=86.46 react=79.37 nci=83.78 fdbd=81.23 cadref=83.27
+  0%|          | 0/48 [00:00<?, ?it/s] 42%|████▏     | 20/48 [00:00<00:00, 189.94it/s] 83%|████████▎ | 40/48 [00:00<00:00, 190.83it/s]100%|██████████| 48/48 [00:00<00:00, 192.38it/s]
+cifar100 texture pi=0.05 seed=8 cure=79.38 cure_msp=76.80 cure_energy=77.90 knn=79.38 oodd=85.54 oodd_tout=88.47 oodd_protocol=85.28 adaodd=83.72 warden=83.29 age_queue=70.98 msp=76.80 energy=77.90 rtl_plus=65.95 rtl_plus_protocol=67.46 dcac_msp=76.27 dcac_energy=65.82 dcac_msp_protocol=76.31 dcac_energy_protocol=65.47 dynproto=80.39 maxlogit=77.86 gen=78.48 mahalanobis=77.04 vim=86.82 react=79.36 nci=83.57 fdbd=80.89 cadref=83.59
+  0%|          | 0/48 [00:00<?, ?it/s] 38%|███▊      | 18/48 [00:00<00:00, 177.96it/s] 77%|███████▋  | 37/48 [00:00<00:00, 181.16it/s]100%|██████████| 48/48 [00:00<00:00, 185.08it/s]
+cifar100 texture pi=0.05 seed=9 cure=81.82 cure_msp=78.96 cure_energy=80.32 knn=81.82 oodd=85.72 oodd_tout=88.33 oodd_protocol=85.80 adaodd=85.27 warden=83.47 age_queue=72.39 msp=78.96 energy=80.32 rtl_plus=70.89 rtl_plus_protocol=67.71 dcac_msp=75.96 dcac_energy=68.15 dcac_msp_protocol=75.81 dcac_energy_protocol=67.81 dynproto=82.52 maxlogit=80.28 gen=80.84 mahalanobis=75.24 vim=86.45 react=81.56 nci=84.93 fdbd=82.66 cadref=85.02
+  0%|          | 0/57 [00:00<?, ?it/s] 35%|███▌      | 20/57 [00:00<00:00, 197.89it/s] 70%|███████   | 40/57 [00:00<00:00, 197.88it/s]100%|██████████| 57/57 [00:00<00:00, 199.27it/s]
+cifar100 texture pi=0.2 seed=6 cure=91.73 cure_msp=91.32 cure_energy=91.55 knn=80.46 oodd=90.27 oodd_tout=91.04 oodd_protocol=90.23 adaodd=83.95 warden=83.37 age_queue=86.59 msp=77.55 energy=78.70 rtl_plus=69.61 rtl_plus_protocol=68.77 dcac_msp=80.11 dcac_energy=72.25 dcac_msp_protocol=79.84 dcac_energy_protocol=71.70 dynproto=82.63 maxlogit=78.76 gen=79.32 mahalanobis=77.32 vim=86.86 react=80.04 nci=84.09 fdbd=81.62 cadref=83.70
+  0%|          | 0/57 [00:00<?, ?it/s] 35%|███▌      | 20/57 [00:00<00:00, 192.13it/s] 70%|███████   | 40/57 [00:00<00:00, 193.55it/s]100%|██████████| 57/57 [00:00<00:00, 194.64it/s]
+cifar100 texture pi=0.2 seed=7 cure=92.23 cure_msp=91.83 cure_energy=92.03 knn=80.39 oodd=90.53 oodd_tout=91.20 oodd_protocol=90.45 adaodd=84.12 warden=83.53 age_queue=86.00 msp=77.66 energy=78.50 rtl_plus=68.52 rtl_plus_protocol=68.47 dcac_msp=79.65 dcac_energy=71.01 dcac_msp_protocol=79.68 dcac_energy_protocol=70.48 dynproto=83.24 maxlogit=78.59 gen=79.16 mahalanobis=77.14 vim=86.79 react=79.87 nci=84.06 fdbd=81.62 cadref=83.62
+  0%|          | 0/57 [00:00<?, ?it/s] 33%|███▎      | 19/57 [00:00<00:00, 186.41it/s] 68%|██████▊   | 39/57 [00:00<00:00, 189.41it/s]100%|██████████| 57/57 [00:00<00:00, 190.69it/s]
+cifar100 texture pi=0.2 seed=8 cure=92.59 cure_msp=92.14 cure_energy=92.36 knn=80.30 oodd=90.06 oodd_tout=90.85 oodd_protocol=90.07 adaodd=83.79 warden=82.90 age_queue=85.62 msp=77.37 energy=78.40 rtl_plus=69.85 rtl_plus_protocol=69.49 dcac_msp=79.21 dcac_energy=71.18 dcac_msp_protocol=79.05 dcac_energy_protocol=70.68 dynproto=82.74 maxlogit=78.47 gen=79.02 mahalanobis=76.36 vim=86.25 react=79.75 nci=83.82 fdbd=81.45 cadref=83.36
+  0%|          | 0/57 [00:00<?, ?it/s] 54%|█████▍    | 31/57 [00:00<00:00, 307.37it/s]100%|██████████| 57/57 [00:00<00:00, 317.90it/s]
+cifar100 texture pi=0.2 seed=9 cure=91.69 cure_msp=91.18 cure_energy=91.44 knn=80.42 oodd=89.81 oodd_tout=90.57 oodd_protocol=89.65 adaodd=83.90 warden=83.09 age_queue=85.88 msp=77.67 energy=78.51 rtl_plus=69.28 rtl_plus_protocol=69.12 dcac_msp=79.11 dcac_energy=71.66 dcac_msp_protocol=79.08 dcac_energy_protocol=71.24 dynproto=82.90 maxlogit=78.61 gen=79.13 mahalanobis=76.72 vim=86.55 react=79.79 nci=83.99 fdbd=81.58 cadref=83.52
+  0%|          | 0/57 [00:00<?, ?it/s] 37%|███▋      | 21/57 [00:00<00:00, 201.67it/s] 74%|███████▎  | 42/57 [00:00<00:00, 198.36it/s]100%|██████████| 57/57 [00:00<00:00, 197.80it/s]
+cifar100 texture pi=0.5 seed=6 cure=94.05 cure_msp=93.64 cure_energy=93.85 knn=79.93 oodd=92.18 oodd_tout=92.50 oodd_protocol=92.20 adaodd=83.61 warden=82.85 age_queue=92.68 msp=77.21 energy=78.13 rtl_plus=68.38 rtl_plus_protocol=68.85 dcac_msp=83.58 dcac_energy=74.64 dcac_msp_protocol=83.45 dcac_energy_protocol=74.20 dynproto=84.37 maxlogit=78.21 gen=78.77 mahalanobis=76.94 vim=86.41 react=79.51 nci=83.72 fdbd=81.28 cadref=83.16
+  0%|          | 0/57 [00:00<?, ?it/s] 56%|█████▌    | 32/57 [00:00<00:00, 317.65it/s]100%|██████████| 57/57 [00:00<00:00, 317.60it/s]
+cifar100 texture pi=0.5 seed=7 cure=94.20 cure_msp=93.86 cure_energy=94.04 knn=80.06 oodd=92.02 oodd_tout=92.34 oodd_protocol=92.06 adaodd=83.57 warden=82.86 age_queue=92.75 msp=77.24 energy=78.03 rtl_plus=67.59 rtl_plus_protocol=69.17 dcac_msp=83.77 dcac_energy=74.81 dcac_msp_protocol=83.71 dcac_energy_protocol=74.41 dynproto=83.88 maxlogit=78.15 gen=78.69 mahalanobis=77.00 vim=86.43 react=79.39 nci=83.71 fdbd=81.26 cadref=83.07
+  0%|          | 0/57 [00:00<?, ?it/s] 39%|███▊      | 22/57 [00:00<00:00, 217.51it/s] 77%|███████▋  | 44/57 [00:00<00:00, 218.58it/s]100%|██████████| 57/57 [00:00<00:00, 220.81it/s]
+cifar100 texture pi=0.5 seed=8 cure=94.00 cure_msp=93.69 cure_energy=93.80 knn=80.67 oodd=92.33 oodd_tout=92.56 oodd_protocol=92.36 adaodd=84.00 warden=83.45 age_queue=93.15 msp=78.03 energy=78.83 rtl_plus=68.97 rtl_plus_protocol=69.24 dcac_msp=84.31 dcac_energy=75.66 dcac_msp_protocol=84.09 dcac_energy_protocol=75.17 dynproto=84.43 maxlogit=78.91 gen=79.46 mahalanobis=77.20 vim=86.87 react=80.19 nci=84.22 fdbd=81.90 cadref=83.76
+  0%|          | 0/57 [00:00<?, ?it/s] 35%|███▌      | 20/57 [00:00<00:00, 195.55it/s] 70%|███████   | 40/57 [00:00<00:00, 192.96it/s]100%|██████████| 57/57 [00:00<00:00, 196.25it/s]
+cifar100 texture pi=0.5 seed=9 cure=94.17 cure_msp=93.75 cure_energy=93.97 knn=80.27 oodd=92.25 oodd_tout=92.45 oodd_protocol=92.27 adaodd=83.79 warden=83.21 age_queue=92.82 msp=77.41 energy=78.27 rtl_plus=68.35 rtl_plus_protocol=68.79 dcac_msp=83.18 dcac_energy=74.41 dcac_msp_protocol=83.10 dcac_energy_protocol=73.91 dynproto=84.02 maxlogit=78.37 gen=78.95 mahalanobis=77.26 vim=86.66 react=79.66 nci=83.96 fdbd=81.49 cadref=83.42

@@ -1,0 +1,7 @@
+{'bench': 'cifar10', 'domain': 'cifar100', 'pi': 0.05, 'seed': 0, 'same': True}
+{'bench': 'cifar10', 'domain': 'cifar100', 'pi': 0.05, 'seed': 1, 'same': True}
+{'bench': 'cifar10', 'domain': 'cifar100', 'pi': 0.05, 'seed': 2, 'same': True}
+{'bench': 'cifar10', 'domain': 'cifar100', 'pi': 0.2, 'seed': 0, 'same': True}
+{'bench': 'cifar10', 'domain': 'cifar100', 'pi': 0.2, 'seed': 1, 'same': True}
+{'bench': 'cifar10', 'domain': 'cifar100', 'pi': 0.2, 'seed': 2, 'same': True}
+{'bench': 'cifar10', 'domain': 'cifar100', 'pi': 0.5, 'seed': 0, 'same': True}

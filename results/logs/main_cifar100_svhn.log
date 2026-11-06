@@ -1,0 +1,223 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Scripts\cure-ood.exe\__main__.py", line 7, in <module>
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\cli.py", line 45, in main
+    run(exp, a.benchmark, a.domain, a.method)
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\eval\runner.py", line 72, in run
+    out = arms[a].score(stream)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\testtime\dynproto.py", line 84, in score
+    lab = Birch(threshold=self.birch_threshold, n_clusters=None).fit_predict(F)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py", line 769, in fit_predict
+    self.fit(X, **kwargs)
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py", line 1403, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\cluster\_birch.py", line 521, in fit
+    return self._fit(X, partial=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\cluster\_birch.py", line 591, in _fit
+    self._global_clustering(X)
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\cluster\_birch.py", line 724, in _global_clustering
+    self.labels_ = self._predict(X)
+                   ^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\cluster\_birch.py", line 662, in _predict
+    argmin = pairwise_distances_argmin(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\utils\_param_validation.py", line 191, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\pairwise.py", line 957, in pairwise_distances_argmin
+    indices = ArgKmin.compute(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_pairwise_distances_reduction\_dispatcher.py", line 289, in compute
+    return ArgKmin32.compute(
+           ^^^^^^^^^^^^^^^^^^
+  File "sklearn/metrics/_pairwise_distances_reduction/_argkmin.pyx", line 550, in sklearn.metrics._pairwise_distances_reduction._argkmin.ArgKmin32.compute
+  File "sklearn/metrics/_pairwise_distances_reduction/_argkmin.pyx", line 568, in sklearn.metrics._pairwise_distances_reduction._argkmin.ArgKmin32.compute
+  File "sklearn/metrics/_pairwise_distances_reduction/_argkmin.pyx", line 839, in sklearn.metrics._pairwise_distances_reduction._argkmin.EuclideanArgKmin32.__init__
+  File "sklearn/metrics/_pairwise_distances_reduction/_middle_term_computer.pyx", line 634, in sklearn.metrics._pairwise_distances_reduction._middle_term_computer.MiddleTermComputer32.get_for
+  File "sklearn/metrics/_pairwise_distances_reduction/_middle_term_computer.pyx", line 803, in sklearn.metrics._pairwise_distances_reduction._middle_term_computer.DenseDenseMiddleTermComputer32.__init__
+MemoryError: bad allocation
+cifar100 svhn pi=0.05 seed=0 cure=95.77 cure_msp=94.98 cure_energy=96.03 cure_lf=86.90 knn=81.77 oodd=97.21 age_queue=97.28 adaodd=81.77 warden_a=81.77 warden_b=81.77 warden_c=81.77 rtl_plus=80.32 msp=78.09 energy=83.30 dcac_msp=84.56 dcac_energy=70.66 dynproto=93.34 energy_aps=82.79 maxlogit=82.56 gen=82.57 mahalanobis=61.06 vim=78.27 react=83.52 nci=80.83 fdbd=79.96 cadref=86.58
+cifar100 svhn pi=0.05 seed=1 cure=96.60 cure_msp=96.15 cure_energy=96.81 cure_lf=87.82 knn=83.38 oodd=97.33 age_queue=96.96 adaodd=83.63 warden_a=83.38 warden_b=83.38 warden_c=83.38 rtl_plus=81.54 msp=80.04 energy=84.95 dcac_msp=87.50 dcac_energy=74.47 dynproto=93.92 energy_aps=84.46 maxlogit=84.27 gen=84.31 mahalanobis=62.22 vim=79.47 react=85.18 nci=82.58 fdbd=81.94 cadref=88.33
+cifar100 svhn pi=0.05 seed=2 cure=95.99 cure_msp=95.04 cure_energy=96.24 cure_lf=88.23 knn=83.30 oodd=97.68 age_queue=97.70 adaodd=83.46 warden_a=83.30 warden_b=83.30 warden_c=83.30 rtl_plus=82.03 msp=79.21 energy=84.21 dcac_msp=83.52 dcac_energy=71.13 dynproto=94.25 energy_aps=83.71 maxlogit=83.50 gen=83.56 mahalanobis=63.36 vim=79.26 react=84.49 nci=82.29 fdbd=81.50 cadref=88.47
+cifar100 svhn pi=0.2 seed=0 cure=99.29 cure_msp=99.11 cure_energy=99.27 cure_lf=89.25 knn=82.44 oodd=98.72 age_queue=99.42 adaodd=82.60 warden_a=82.44 warden_b=82.44 warden_c=82.44 rtl_plus=79.52 msp=78.97 energy=83.88 dcac_msp=88.60 dcac_energy=76.07 dynproto=95.72 energy_aps=83.39 maxlogit=83.16 gen=83.26 mahalanobis=61.99 vim=79.18 react=84.14 nci=81.68 fdbd=80.87 cadref=87.42
+cifar100 svhn pi=0.2 seed=1 cure=99.08 cure_msp=98.81 cure_energy=99.05 cure_lf=89.50 knn=82.97 oodd=98.78 age_queue=99.35 adaodd=83.19 warden_a=82.97 warden_b=82.97 warden_c=82.97 rtl_plus=81.04 msp=79.23 energy=84.11 dcac_msp=90.66 dcac_energy=76.16 dynproto=95.68 energy_aps=83.62 maxlogit=83.41 gen=83.51 mahalanobis=62.57 vim=79.47 react=84.32 nci=82.03 fdbd=81.25 cadref=87.75
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Scripts\cure-ood.exe\__main__.py", line 7, in <module>
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\cli.py", line 45, in main
+    run(exp, a.benchmark, a.domain, a.method)
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\eval\runner.py", line 72, in run
+    out = arms[a].score(stream)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\cure.py", line 60, in score
+    s, s_cal = base_scores(stream, self.base)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\cure.py", line 22, in base_scores
+    for z in (stream.logits, stream.bench.cal_logits):
+              ^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\functools.py", line 998, in __get__
+    val = self.func(instance)
+          ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\data\benchmark.py", line 173, in logits
+    return self._gather("logits")
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\data\benchmark.py", line 153, in _gather
+    a_id, a_ood = self.bench.array(f"{src}_{kind}"), self.bench.array(f"{self.domain}_{kind}")
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\data\benchmark.py", line 59, in array
+    return self.npz[key] if key in self.npz.files else None
+           ~~~~~~~~^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 257, in __getitem__
+    return format.read_array(
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_format_impl.py", line 862, in read_array
+    array = numpy.ndarray(count, dtype=dtype)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 9.93 MiB for an array with shape (2603200,) and data type float32
+cifar100 svhn pi=0.2 seed=2 cure=99.13 cure_msp=98.89 cure_energy=99.09 cure_lf=89.69 knn=83.27 oodd=98.68 age_queue=99.26 adaodd=83.48
+cifar100 svhn pi=0.5 seed=0 cure=99.37 cure_msp=99.21 cure_energy=99.36 cure_lf=89.26 knn=82.52 oodd=98.88 age_queue=99.73 adaodd=82.73
+cifar100 svhn pi=0.5 seed=1 cure=99.33 cure_msp=99.18 cure_energy=99.34 cure_lf=89.47 knn=82.83 oodd=98.93 age_queue=99.76 adaodd=83.07
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Scripts\cure-ood.exe\__main__.py", line 7, in <module>
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\cli.py", line 45, in main
+    run(exp, a.benchmark, a.domain, a.method)
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\eval\runner.py", line 72, in run
+    out = arms[a].score(stream)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\testtime\dynproto.py", line 84, in score
+    lab = Birch(threshold=self.birch_threshold, n_clusters=None).fit_predict(F)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py", line 769, in fit_predict
+    self.fit(X, **kwargs)
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py", line 1403, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\cluster\_birch.py", line 521, in fit
+    return self._fit(X, partial=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\cluster\_birch.py", line 591, in _fit
+    self._global_clustering(X)
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\cluster\_birch.py", line 724, in _global_clustering
+    self.labels_ = self._predict(X)
+                   ^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\cluster\_birch.py", line 662, in _predict
+    argmin = pairwise_distances_argmin(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\utils\_param_validation.py", line 191, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\pairwise.py", line 957, in pairwise_distances_argmin
+    indices = ArgKmin.compute(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_pairwise_distances_reduction\_dispatcher.py", line 289, in compute
+    return ArgKmin32.compute(
+           ^^^^^^^^^^^^^^^^^^
+  File "sklearn/metrics/_pairwise_distances_reduction/_argkmin.pyx", line 550, in sklearn.metrics._pairwise_distances_reduction._argkmin.ArgKmin32.compute
+  File "sklearn/metrics/_pairwise_distances_reduction/_argkmin.pyx", line 568, in sklearn.metrics._pairwise_distances_reduction._argkmin.ArgKmin32.compute
+  File "sklearn/metrics/_pairwise_distances_reduction/_argkmin.pyx", line 839, in sklearn.metrics._pairwise_distances_reduction._argkmin.EuclideanArgKmin32.__init__
+  File "sklearn/metrics/_pairwise_distances_reduction/_middle_term_computer.pyx", line 634, in sklearn.metrics._pairwise_distances_reduction._middle_term_computer.MiddleTermComputer32.get_for
+  File "sklearn/metrics/_pairwise_distances_reduction/_middle_term_computer.pyx", line 802, in sklearn.metrics._pairwise_distances_reduction._middle_term_computer.DenseDenseMiddleTermComputer32.__init__
+MemoryError: bad allocation
+cifar100 svhn pi=0.2 seed=2 energy_aps=83.80 maxlogit=83.59 gen=83.67 mahalanobis=62.91 vim=79.77 react=84.53 nci=82.29 fdbd=81.52 cadref=88.01
+cifar100 svhn pi=0.5 seed=0 energy_aps=83.51 maxlogit=83.30 gen=83.38 mahalanobis=61.63 vim=79.04 react=84.26 nci=81.69 fdbd=80.91 cadref=87.49
+cifar100 svhn pi=0.5 seed=1 energy_aps=83.69 maxlogit=83.47 gen=83.58 mahalanobis=62.26 vim=79.35 react=84.45 nci=82.04 fdbd=81.30 cadref=87.72
+cifar100 svhn pi=0.5 seed=2 energy_aps=83.62 maxlogit=83.40 gen=83.49 mahalanobis=61.68 vim=79.18 react=84.37 nci=81.84 fdbd=81.07 cadref=87.60
+cifar100 svhn pi=0.5 seed=2 cure=99.39 cure_msp=99.19 cure_energy=99.35 cure_lf=89.36
+cifar100 svhn pi=0.5 seed=2 knn=82.67 oodd=98.87 age_queue=99.74 adaodd=82.89
+cifar100 svhn pi=0.2 seed=2 warden_a=83.27 warden_b=83.27 warden_c=83.27
+cifar100 svhn pi=0.5 seed=0 warden_a=82.52 warden_b=82.52 warden_c=82.52
+cifar100 svhn pi=0.5 seed=1 warden_a=82.83 warden_b=82.83 warden_c=82.83
+cifar100 svhn pi=0.5 seed=2 warden_a=82.67 warden_b=82.67 warden_c=82.67
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Scripts\cure-ood.exe\__main__.py", line 7, in <module>
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\cli.py", line 45, in main
+    run(exp, a.benchmark, a.domain, a.method)
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\eval\runner.py", line 72, in run
+    out = arms[a].score(stream)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\testtime\rtl.py", line 34, in score
+    x, y0 = stream.x, -knn_context(stream).b
+            ^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\functools.py", line 998, in __get__
+    val = self.func(instance)
+          ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\data\benchmark.py", line 169, in x
+    return l2(self.feats)
+              ^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\functools.py", line 998, in __get__
+    val = self.func(instance)
+          ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\data\benchmark.py", line 165, in feats
+    return self._gather("feats")
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\data\benchmark.py", line 156, in _gather
+    return np.r_[a_id[self.id_idx], a_ood[self.ood_idx]][self.perm]
+           ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_index_tricks_impl.py", line 435, in __getitem__
+    res = self.concatenate(tuple(objs), axis=axis)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 35.2 MiB for an array with shape (18000, 512) and data type float32
+cifar100 svhn pi=0.2 seed=2 rtl_plus=81.08
+cifar100 svhn pi=0.5 seed=0 rtl_plus=71.52
+cifar100 svhn pi=0.2 seed=2 msp=79.60 energy=84.26
+cifar100 svhn pi=0.5 seed=0 msp=79.03 energy=84.02
+cifar100 svhn pi=0.5 seed=1 msp=79.33 energy=84.18
+cifar100 svhn pi=0.5 seed=2 msp=79.19 energy=84.12
+cifar100 svhn pi=0.2 seed=2 dcac_msp=87.35 dcac_energy=75.86
+cifar100 svhn pi=0.5 seed=0 dcac_msp=89.21 dcac_energy=78.28
+cifar100 svhn pi=0.5 seed=1 dcac_msp=89.95 dcac_energy=78.12
+cifar100 svhn pi=0.5 seed=2 dcac_msp=90.75 dcac_energy=79.08
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Scripts\cure-ood.exe\__main__.py", line 7, in <module>
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\cli.py", line 45, in main
+    run(exp, a.benchmark, a.domain, a.method)
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\eval\runner.py", line 72, in run
+    out = arms[a].score(stream)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\testtime\dynproto.py", line 84, in score
+    lab = Birch(threshold=self.birch_threshold, n_clusters=None).fit_predict(F)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py", line 769, in fit_predict
+    self.fit(X, **kwargs)
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py", line 1403, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\cluster\_birch.py", line 521, in fit
+    return self._fit(X, partial=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\cluster\_birch.py", line 591, in _fit
+    self._global_clustering(X)
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\cluster\_birch.py", line 724, in _global_clustering
+    self.labels_ = self._predict(X)
+                   ^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\cluster\_birch.py", line 662, in _predict
+    argmin = pairwise_distances_argmin(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\utils\_param_validation.py", line 191, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\pairwise.py", line 957, in pairwise_distances_argmin
+    indices = ArgKmin.compute(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\metrics\_pairwise_distances_reduction\_dispatcher.py", line 289, in compute
+    return ArgKmin32.compute(
+           ^^^^^^^^^^^^^^^^^^
+  File "sklearn/metrics/_pairwise_distances_reduction/_argkmin.pyx", line 550, in sklearn.metrics._pairwise_distances_reduction._argkmin.ArgKmin32.compute
+  File "sklearn/metrics/_pairwise_distances_reduction/_argkmin.pyx", line 568, in sklearn.metrics._pairwise_distances_reduction._argkmin.ArgKmin32.compute
+  File "sklearn/metrics/_pairwise_distances_reduction/_argkmin.pyx", line 839, in sklearn.metrics._pairwise_distances_reduction._argkmin.EuclideanArgKmin32.__init__
+  File "sklearn/metrics/_pairwise_distances_reduction/_middle_term_computer.pyx", line 634, in sklearn.metrics._pairwise_distances_reduction._middle_term_computer.MiddleTermComputer32.get_for
+  File "sklearn/metrics/_pairwise_distances_reduction/_middle_term_computer.pyx", line 803, in sklearn.metrics._pairwise_distances_reduction._middle_term_computer.DenseDenseMiddleTermComputer32.__init__
+MemoryError: bad allocation
+cifar100 svhn pi=0.2 seed=2 dynproto=95.47

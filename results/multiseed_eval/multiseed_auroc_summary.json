@@ -1,0 +1,410 @@
+{
+  "r61_resnet20": {
+    "knn": {
+      "auroc": 89.79,
+      "near_auroc": 87.8,
+      "far_auroc": 90.78,
+      "fpr95": 36.26,
+      "tpr5": 48.27,
+      "dcr": 0.0,
+      "delta_knn": 0.0,
+      "harm_rate": 0.0,
+      "worst_delta": 0.0
+    },
+    "cure": {
+      "auroc": 92.16,
+      "near_auroc": 87.75,
+      "far_auroc": 94.36,
+      "fpr95": 29.95,
+      "tpr5": 60.99,
+      "dcr": 5.37,
+      "delta_knn": 2.37,
+      "harm_rate": 3.7,
+      "worst_delta": -1.76
+    },
+    "cure_oebh_b1": {
+      "auroc": 91.69,
+      "near_auroc": 87.8,
+      "far_auroc": 93.63,
+      "fpr95": 31.15,
+      "tpr5": 58.8,
+      "dcr": 0.59,
+      "delta_knn": 1.9,
+      "harm_rate": 0.0,
+      "worst_delta": -0.0
+    },
+    "oodd": {
+      "auroc": 89.97,
+      "near_auroc": 86.51,
+      "far_auroc": 91.7,
+      "fpr95": 37.02,
+      "tpr5": 53.28,
+      "dcr": 39.38,
+      "delta_knn": 0.18,
+      "harm_rate": 44.44,
+      "worst_delta": -5.16
+    },
+    "warden": {
+      "auroc": 90.54,
+      "near_auroc": 84.5,
+      "far_auroc": 93.56,
+      "fpr95": 34.08,
+      "tpr5": 57.3,
+      "dcr": 0.03,
+      "delta_knn": 0.75,
+      "harm_rate": 50.0,
+      "worst_delta": -3.89
+    },
+    "age_queue": {
+      "auroc": 65.84,
+      "near_auroc": 52.14,
+      "far_auroc": 72.69,
+      "fpr95": 77.69,
+      "tpr5": 37.4,
+      "dcr": 69.19,
+      "delta_knn": -23.95,
+      "harm_rate": 83.33,
+      "worst_delta": -61.5
+    }
+  },
+  "r61_resnet20_s1": {
+    "knn": {
+      "auroc": 89.75,
+      "near_auroc": 87.85,
+      "far_auroc": 90.7,
+      "fpr95": 35.64,
+      "tpr5": 47.54,
+      "dcr": 0.0,
+      "delta_knn": 0.0,
+      "harm_rate": 0.0,
+      "worst_delta": 0.0
+    },
+    "cure": {
+      "auroc": 92.16,
+      "near_auroc": 87.89,
+      "far_auroc": 94.29,
+      "fpr95": 29.8,
+      "tpr5": 60.93,
+      "dcr": 2.61,
+      "delta_knn": 2.41,
+      "harm_rate": 0.0,
+      "worst_delta": -0.0
+    },
+    "cure_oebh_b1": {
+      "auroc": 91.64,
+      "near_auroc": 87.85,
+      "far_auroc": 93.54,
+      "fpr95": 30.66,
+      "tpr5": 58.33,
+      "dcr": 0.47,
+      "delta_knn": 1.89,
+      "harm_rate": 0.0,
+      "worst_delta": -0.0
+    },
+    "oodd": {
+      "auroc": 89.45,
+      "near_auroc": 86.26,
+      "far_auroc": 91.04,
+      "fpr95": 38.64,
+      "tpr5": 51.26,
+      "dcr": 39.89,
+      "delta_knn": -0.3,
+      "harm_rate": 55.56,
+      "worst_delta": -6.78
+    },
+    "warden": {
+      "auroc": 90.91,
+      "near_auroc": 85.01,
+      "far_auroc": 93.86,
+      "fpr95": 32.15,
+      "tpr5": 58.75,
+      "dcr": 0.01,
+      "delta_knn": 1.16,
+      "harm_rate": 50.0,
+      "worst_delta": -4.68
+    },
+    "age_queue": {
+      "auroc": 64.84,
+      "near_auroc": 51.56,
+      "far_auroc": 71.48,
+      "fpr95": 78.4,
+      "tpr5": 36.1,
+      "dcr": 69.15,
+      "delta_knn": -24.91,
+      "harm_rate": 83.33,
+      "worst_delta": -59.03
+    }
+  },
+  "r61_resnet20_s2": {
+    "knn": {
+      "auroc": 91.06,
+      "near_auroc": 88.04,
+      "far_auroc": 92.57,
+      "fpr95": 32.73,
+      "tpr5": 53.06,
+      "dcr": 0.0,
+      "delta_knn": 0.0,
+      "harm_rate": 0.0,
+      "worst_delta": 0.0
+    },
+    "cure": {
+      "auroc": 92.9,
+      "near_auroc": 88.28,
+      "far_auroc": 95.21,
+      "fpr95": 27.45,
+      "tpr5": 64.2,
+      "dcr": 2.52,
+      "delta_knn": 1.84,
+      "harm_rate": 0.0,
+      "worst_delta": -0.29
+    },
+    "cure_oebh_b1": {
+      "auroc": 92.38,
+      "near_auroc": 88.11,
+      "far_auroc": 94.52,
+      "fpr95": 28.75,
+      "tpr5": 61.26,
+      "dcr": 0.31,
+      "delta_knn": 1.33,
+      "harm_rate": 0.0,
+      "worst_delta": -0.0
+    },
+    "oodd": {
+      "auroc": 90.31,
+      "near_auroc": 86.49,
+      "far_auroc": 92.22,
+      "fpr95": 36.09,
+      "tpr5": 55.11,
+      "dcr": 37.4,
+      "delta_knn": -0.75,
+      "harm_rate": 55.56,
+      "worst_delta": -7.73
+    },
+    "warden": {
+      "auroc": 91.76,
+      "near_auroc": 85.8,
+      "far_auroc": 94.74,
+      "fpr95": 29.48,
+      "tpr5": 61.03,
+      "dcr": 0.03,
+      "delta_knn": 0.7,
+      "harm_rate": 50.0,
+      "worst_delta": -3.48
+    },
+    "age_queue": {
+      "auroc": 65.11,
+      "near_auroc": 52.0,
+      "far_auroc": 71.66,
+      "fpr95": 77.74,
+      "tpr5": 37.07,
+      "dcr": 69.12,
+      "delta_knn": -25.95,
+      "harm_rate": 87.04,
+      "worst_delta": -62.39
+    }
+  },
+  "r61_mobilenetv2": {
+    "knn": {
+      "auroc": 89.42,
+      "near_auroc": 88.42,
+      "far_auroc": 89.91,
+      "fpr95": 36.35,
+      "tpr5": 45.22,
+      "dcr": 0.0,
+      "delta_knn": 0.0,
+      "harm_rate": 0.0,
+      "worst_delta": 0.0
+    },
+    "cure": {
+      "auroc": 92.58,
+      "near_auroc": 88.66,
+      "far_auroc": 94.55,
+      "fpr95": 28.32,
+      "tpr5": 62.8,
+      "dcr": 2.61,
+      "delta_knn": 3.17,
+      "harm_rate": 0.0,
+      "worst_delta": -0.3
+    },
+    "cure_oebh_b1": {
+      "auroc": 91.76,
+      "near_auroc": 88.42,
+      "far_auroc": 93.43,
+      "fpr95": 30.2,
+      "tpr5": 58.55,
+      "dcr": 0.55,
+      "delta_knn": 2.35,
+      "harm_rate": 0.0,
+      "worst_delta": -0.0
+    },
+    "oodd": {
+      "auroc": 89.89,
+      "near_auroc": 86.17,
+      "far_auroc": 91.75,
+      "fpr95": 37.3,
+      "tpr5": 54.07,
+      "dcr": 39.9,
+      "delta_knn": 0.48,
+      "harm_rate": 50.0,
+      "worst_delta": -5.61
+    },
+    "warden": {
+      "auroc": 79.54,
+      "near_auroc": 73.44,
+      "far_auroc": 82.59,
+      "fpr95": 56.95,
+      "tpr5": 28.66,
+      "dcr": 0.0,
+      "delta_knn": -9.87,
+      "harm_rate": 83.33,
+      "worst_delta": -17.91
+    },
+    "age_queue": {
+      "auroc": 60.35,
+      "near_auroc": 42.79,
+      "far_auroc": 69.13,
+      "fpr95": 79.83,
+      "tpr5": 35.54,
+      "dcr": 69.16,
+      "delta_knn": -29.06,
+      "harm_rate": 83.33,
+      "worst_delta": -69.53
+    }
+  },
+  "r61_mobilenetv2_s1": {
+    "knn": {
+      "auroc": 90.31,
+      "near_auroc": 88.72,
+      "far_auroc": 91.1,
+      "fpr95": 34.36,
+      "tpr5": 48.45,
+      "dcr": 0.0,
+      "delta_knn": 0.0,
+      "harm_rate": 0.0,
+      "worst_delta": 0.0
+    },
+    "cure": {
+      "auroc": 92.56,
+      "near_auroc": 88.46,
+      "far_auroc": 94.6,
+      "fpr95": 28.89,
+      "tpr5": 62.28,
+      "dcr": 2.7,
+      "delta_knn": 2.25,
+      "harm_rate": 5.56,
+      "worst_delta": -1.59
+    },
+    "cure_oebh_b1": {
+      "auroc": 91.91,
+      "near_auroc": 88.72,
+      "far_auroc": 93.51,
+      "fpr95": 30.11,
+      "tpr5": 58.35,
+      "dcr": 0.47,
+      "delta_knn": 1.61,
+      "harm_rate": 0.0,
+      "worst_delta": -0.0
+    },
+    "oodd": {
+      "auroc": 90.1,
+      "near_auroc": 86.68,
+      "far_auroc": 91.82,
+      "fpr95": 35.92,
+      "tpr5": 53.61,
+      "dcr": 38.44,
+      "delta_knn": -0.2,
+      "harm_rate": 55.56,
+      "worst_delta": -4.73
+    },
+    "warden": {
+      "auroc": 81.69,
+      "near_auroc": 74.72,
+      "far_auroc": 85.17,
+      "fpr95": 53.85,
+      "tpr5": 30.98,
+      "dcr": 0.0,
+      "delta_knn": -8.62,
+      "harm_rate": 100.0,
+      "worst_delta": -16.51
+    },
+    "age_queue": {
+      "auroc": 58.41,
+      "near_auroc": 42.44,
+      "far_auroc": 66.4,
+      "fpr95": 83.7,
+      "tpr5": 33.92,
+      "dcr": 69.15,
+      "delta_knn": -31.89,
+      "harm_rate": 83.33,
+      "worst_delta": -69.04
+    }
+  },
+  "r61_mobilenetv2_s2": {
+    "knn": {
+      "auroc": 89.72,
+      "near_auroc": 88.25,
+      "far_auroc": 90.46,
+      "fpr95": 37.31,
+      "tpr5": 49.21,
+      "dcr": 0.0,
+      "delta_knn": 0.0,
+      "harm_rate": 0.0,
+      "worst_delta": 0.0
+    },
+    "cure": {
+      "auroc": 92.29,
+      "near_auroc": 88.54,
+      "far_auroc": 94.16,
+      "fpr95": 29.73,
+      "tpr5": 62.26,
+      "dcr": 1.74,
+      "delta_knn": 2.56,
+      "harm_rate": 1.85,
+      "worst_delta": -0.59
+    },
+    "cure_oebh_b1": {
+      "auroc": 91.58,
+      "near_auroc": 88.25,
+      "far_auroc": 93.24,
+      "fpr95": 31.49,
+      "tpr5": 58.78,
+      "dcr": 0.35,
+      "delta_knn": 1.85,
+      "harm_rate": 0.0,
+      "worst_delta": -0.0
+    },
+    "oodd": {
+      "auroc": 89.66,
+      "near_auroc": 86.24,
+      "far_auroc": 91.37,
+      "fpr95": 37.78,
+      "tpr5": 53.14,
+      "dcr": 39.49,
+      "delta_knn": -0.07,
+      "harm_rate": 46.3,
+      "worst_delta": -4.81
+    },
+    "warden": {
+      "auroc": 78.95,
+      "near_auroc": 73.55,
+      "far_auroc": 81.65,
+      "fpr95": 59.34,
+      "tpr5": 25.21,
+      "dcr": 0.0,
+      "delta_knn": -10.78,
+      "harm_rate": 100.0,
+      "worst_delta": -17.55
+    },
+    "age_queue": {
+      "auroc": 59.3,
+      "near_auroc": 42.84,
+      "far_auroc": 67.53,
+      "fpr95": 82.48,
+      "tpr5": 34.28,
+      "dcr": 69.19,
+      "delta_knn": -30.42,
+      "harm_rate": 83.33,
+      "worst_delta": -67.06
+    }
+  }
+}

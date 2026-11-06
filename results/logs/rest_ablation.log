@@ -1,0 +1,406 @@
+cifar10 cifar100 pi=0.05 seed=0 knn=90.57 cure=90.57 cure_no_review=66.40 cure_oracle=89.56
+cifar10 cifar100 pi=0.05 seed=1 knn=90.80 cure=90.80 cure_no_review=69.42 cure_oracle=88.47
+cifar10 cifar100 pi=0.05 seed=2 knn=90.58 cure=90.58 cure_no_review=70.80 cure_oracle=89.28
+cifar10 cifar100 pi=0.2 seed=0 knn=90.11 cure=90.11 cure_no_review=69.02 cure_oracle=88.79
+cifar10 cifar100 pi=0.2 seed=1 knn=90.39 cure=90.39 cure_no_review=68.52 cure_oracle=89.05
+cifar10 cifar100 pi=0.2 seed=2 knn=90.04 cure=90.04 cure_no_review=71.21 cure_oracle=88.79
+cifar10 cifar100 pi=0.5 seed=0 knn=90.09 cure=89.47 cure_no_review=74.48 cure_oracle=89.07
+cifar10 cifar100 pi=0.5 seed=1 knn=90.09 cure=90.09 cure_no_review=74.12 cure_oracle=89.05
+cifar10 cifar100 pi=0.5 seed=2 knn=90.09 cure=89.51 cure_no_review=74.27 cure_oracle=88.96
+cifar10 cifar100 pi=0.05 seed=0 cure_no_fallback=50.00 cure_fisher=90.57 cure_elond=90.57 cure_w128=90.57
+cifar10 cifar100 pi=0.05 seed=1 cure_no_fallback=50.00 cure_fisher=90.80 cure_elond=90.80 cure_w128=90.80
+cifar10 cifar100 pi=0.05 seed=2 cure_no_fallback=50.00 cure_fisher=90.58 cure_elond=90.58 cure_w128=90.58
+cifar10 cifar100 pi=0.2 seed=0 cure_no_fallback=50.00 cure_fisher=90.11 cure_elond=90.11 cure_w128=90.11
+cifar10 cifar100 pi=0.2 seed=1 cure_no_fallback=50.00 cure_fisher=90.39 cure_elond=90.39 cure_w128=90.39
+cifar10 cifar100 pi=0.2 seed=2 cure_no_fallback=50.00 cure_fisher=90.04 cure_elond=90.04 cure_w128=90.04
+cifar10 cifar100 pi=0.5 seed=0 cure_no_fallback=61.93 cure_fisher=89.65 cure_elond=90.09 cure_w128=90.09
+cifar10 cifar100 pi=0.5 seed=1 cure_no_fallback=50.00 cure_fisher=90.09 cure_elond=90.09 cure_w128=87.87
+cifar10 cifar100 pi=0.5 seed=2 cure_no_fallback=53.25 cure_fisher=89.58 cure_elond=90.09 cure_w128=89.51
+cifar10 cifar100 pi=0.05 seed=0 cure_w512=90.57 cure_cap128=90.57 cure_cap2048=90.57
+cifar10 cifar100 pi=0.05 seed=1 cure_w512=90.80 cure_cap128=90.80 cure_cap2048=90.80
+cifar10 cifar100 pi=0.05 seed=2 cure_w512=90.58 cure_cap128=90.58 cure_cap2048=90.58
+cifar10 cifar100 pi=0.2 seed=0 cure_w512=90.11 cure_cap128=90.11 cure_cap2048=90.11
+cifar10 cifar100 pi=0.2 seed=1 cure_w512=90.39 cure_cap128=90.39 cure_cap2048=90.39
+cifar10 cifar100 pi=0.2 seed=2 cure_w512=90.04 cure_cap128=90.04 cure_cap2048=90.04
+cifar10 cifar100 pi=0.5 seed=0 cure_w512=88.32 cure_cap128=88.94 cure_cap2048=89.47
+cifar10 cifar100 pi=0.5 seed=1 cure_w512=88.71 cure_cap128=88.18 cure_cap2048=90.09
+cifar10 cifar100 pi=0.5 seed=2 cure_w512=89.11 cure_cap128=87.50 cure_cap2048=89.51
+cifar10 tin pi=0.05 seed=0 knn=91.87 cure=91.87 cure_no_review=68.61 cure_oracle=91.67
+cifar10 tin pi=0.05 seed=1 knn=91.70 cure=91.70 cure_no_review=69.30 cure_oracle=91.41
+cifar10 tin pi=0.05 seed=2 knn=92.21 cure=92.21 cure_no_review=70.89 cure_oracle=91.13
+cifar10 tin pi=0.2 seed=0 knn=91.90 cure=91.90 cure_no_review=74.53 cure_oracle=91.86
+cifar10 tin pi=0.2 seed=1 knn=91.88 cure=91.88 cure_no_review=74.22 cure_oracle=91.70
+cifar10 tin pi=0.2 seed=2 knn=91.78 cure=91.78 cure_no_review=74.54 cure_oracle=91.70
+cifar10 tin pi=0.5 seed=0 knn=91.98 cure=91.63 cure_no_review=79.57 cure_oracle=91.77
+cifar10 tin pi=0.5 seed=1 knn=92.06 cure=92.25 cure_no_review=79.88 cure_oracle=91.77
+cifar10 tin pi=0.5 seed=2 knn=92.05 cure=92.24 cure_no_review=80.02 cure_oracle=91.89
+cifar10 tin pi=0.05 seed=0 cure_no_fallback=50.00 cure_fisher=91.87 cure_elond=91.87 cure_w128=91.87
+cifar10 tin pi=0.05 seed=1 cure_no_fallback=50.00 cure_fisher=91.70 cure_elond=91.70 cure_w128=91.70
+cifar10 tin pi=0.05 seed=2 cure_no_fallback=50.00 cure_fisher=92.21 cure_elond=92.21 cure_w128=92.21
+cifar10 tin pi=0.2 seed=0 cure_no_fallback=50.00 cure_fisher=91.90 cure_elond=91.90 cure_w128=91.90
+cifar10 tin pi=0.2 seed=1 cure_no_fallback=50.00 cure_fisher=91.88 cure_elond=91.88 cure_w128=91.88
+cifar10 tin pi=0.2 seed=2 cure_no_fallback=50.00 cure_fisher=91.78 cure_elond=91.78 cure_w128=91.78
+cifar10 tin pi=0.5 seed=0 cure_no_fallback=86.34 cure_fisher=91.94 cure_elond=91.98 cure_w128=91.59
+cifar10 tin pi=0.5 seed=1 cure_no_fallback=86.90 cure_fisher=92.63 cure_elond=92.06 cure_w128=92.15
+cifar10 tin pi=0.5 seed=2 cure_no_fallback=88.04 cure_fisher=92.48 cure_elond=92.05 cure_w128=92.25
+cifar10 tin pi=0.05 seed=0 cure_w512=91.87 cure_cap128=91.87 cure_cap2048=91.87
+cifar10 tin pi=0.05 seed=1 cure_w512=91.70 cure_cap128=91.70 cure_cap2048=91.70
+cifar10 tin pi=0.05 seed=2 cure_w512=92.21 cure_cap128=92.21 cure_cap2048=92.21
+cifar10 tin pi=0.2 seed=0 cure_w512=91.90 cure_cap128=91.27 cure_cap2048=91.90
+cifar10 tin pi=0.2 seed=1 cure_w512=91.88 cure_cap128=91.88 cure_cap2048=91.88
+cifar10 tin pi=0.2 seed=2 cure_w512=91.78 cure_cap128=91.78 cure_cap2048=91.78
+cifar10 tin pi=0.5 seed=0 cure_w512=92.00 cure_cap128=92.17 cure_cap2048=91.63
+cifar10 tin pi=0.5 seed=1 cure_w512=92.13 cure_cap128=92.01 cure_cap2048=92.25
+cifar10 tin pi=0.5 seed=2 cure_w512=92.16 cure_cap128=92.05 cure_cap2048=92.24
+cifar10 mnist pi=0.05 seed=0 knn=93.75 cure=95.87 cure_no_review=85.46 cure_oracle=98.29
+cifar10 mnist pi=0.05 seed=1 knn=94.10 cure=94.10 cure_no_review=85.60 cure_oracle=98.21
+cifar10 mnist pi=0.05 seed=2 knn=94.19 cure=94.19 cure_no_review=86.26 cure_oracle=98.41
+cifar10 mnist pi=0.2 seed=0 knn=94.06 cure=97.60 cure_no_review=93.76 cure_oracle=98.73
+cifar10 mnist pi=0.2 seed=1 knn=93.92 cure=97.49 cure_no_review=93.76 cure_oracle=98.66
+cifar10 mnist pi=0.2 seed=2 knn=93.76 cure=97.51 cure_no_review=93.44 cure_oracle=98.60
+cifar10 mnist pi=0.5 seed=0 knn=94.04 cure=98.18 cure_no_review=96.92 cure_oracle=98.76
+cifar10 mnist pi=0.5 seed=1 knn=94.16 cure=98.23 cure_no_review=96.80 cure_oracle=98.77
+cifar10 mnist pi=0.5 seed=2 knn=94.08 cure=98.12 cure_no_review=96.58 cure_oracle=98.74
+cifar10 mnist pi=0.05 seed=0 cure_no_fallback=66.19 cure_fisher=95.96 cure_elond=93.75 cure_w128=93.89
+cifar10 mnist pi=0.05 seed=1 cure_no_fallback=50.00 cure_fisher=94.10 cure_elond=94.10 cure_w128=94.10
+cifar10 mnist pi=0.05 seed=2 cure_no_fallback=50.00 cure_fisher=94.19 cure_elond=94.19 cure_w128=94.19
+cifar10 mnist pi=0.2 seed=0 cure_no_fallback=94.29 cure_fisher=97.84 cure_elond=97.41 cure_w128=97.52
+cifar10 mnist pi=0.2 seed=1 cure_no_fallback=94.66 cure_fisher=97.78 cure_elond=97.29 cure_w128=97.34
+cifar10 mnist pi=0.2 seed=2 cure_no_fallback=93.83 cure_fisher=97.73 cure_elond=97.36 cure_w128=97.59
+cifar10 mnist pi=0.5 seed=0 cure_no_fallback=96.26 cure_fisher=98.34 cure_elond=98.02 cure_w128=98.16
+cifar10 mnist pi=0.5 seed=1 cure_no_fallback=96.40 cure_fisher=98.38 cure_elond=98.06 cure_w128=98.23
+cifar10 mnist pi=0.5 seed=2 cure_no_fallback=96.26 cure_fisher=98.28 cure_elond=97.97 cure_w128=98.14
+cifar10 mnist pi=0.05 seed=0 cure_w512=95.31 cure_cap128=95.34 cure_cap2048=95.87
+cifar10 mnist pi=0.05 seed=1 cure_w512=95.07 cure_cap128=94.10 cure_cap2048=94.10
+cifar10 mnist pi=0.05 seed=2 cure_w512=96.70 cure_cap128=94.19 cure_cap2048=94.19
+cifar10 mnist pi=0.2 seed=0 cure_w512=97.70 cure_cap128=97.79 cure_cap2048=97.64
+cifar10 mnist pi=0.2 seed=1 cure_w512=97.62 cure_cap128=97.67 cure_cap2048=97.49
+cifar10 mnist pi=0.2 seed=2 cure_w512=97.52 cure_cap128=97.61 cure_cap2048=97.49
+cifar10 mnist pi=0.5 seed=0 cure_w512=98.25 cure_cap128=98.26 cure_cap2048=98.27
+cifar10 mnist pi=0.5 seed=1 cure_w512=98.26 cure_cap128=98.34 cure_cap2048=98.31
+cifar10 mnist pi=0.5 seed=2 cure_w512=98.16 cure_cap128=98.23 cure_cap2048=98.19
+cifar10 svhn pi=0.05 seed=0 knn=92.43 cure=92.43 cure_no_review=86.31 cure_oracle=97.58
+cifar10 svhn pi=0.05 seed=1 knn=92.88 cure=94.12 cure_no_review=86.02 cure_oracle=97.69
+cifar10 svhn pi=0.05 seed=2 knn=92.29 cure=92.29 cure_no_review=85.22 cure_oracle=97.80
+cifar10 svhn pi=0.2 seed=0 knn=92.69 cure=97.19 cure_no_review=92.83 cure_oracle=97.94
+cifar10 svhn pi=0.2 seed=1 knn=92.60 cure=97.44 cure_no_review=92.71 cure_oracle=97.89
+cifar10 svhn pi=0.2 seed=2 knn=92.81 cure=97.15 cure_no_review=92.27 cure_oracle=97.82
+cifar10 svhn pi=0.5 seed=0 knn=92.65 cure=97.53 cure_no_review=95.82 cure_oracle=97.95
+cifar10 svhn pi=0.5 seed=1 knn=92.63 cure=97.54 cure_no_review=95.71 cure_oracle=97.98
+cifar10 svhn pi=0.5 seed=2 knn=92.56 cure=97.55 cure_no_review=95.87 cure_oracle=97.95
+cifar10 svhn pi=0.05 seed=0 cure_no_fallback=50.00 cure_fisher=92.43 cure_elond=92.43 cure_w128=92.43
+cifar10 svhn pi=0.05 seed=1 cure_no_fallback=81.44 cure_fisher=95.22 cure_elond=92.88 cure_w128=92.88
+cifar10 svhn pi=0.05 seed=2 cure_no_fallback=50.00 cure_fisher=92.29 cure_elond=92.29 cure_w128=92.29
+cifar10 svhn pi=0.2 seed=0 cure_no_fallback=95.39 cure_fisher=97.32 cure_elond=97.12 cure_w128=97.08
+cifar10 svhn pi=0.2 seed=1 cure_no_fallback=94.38 cure_fisher=97.49 cure_elond=97.39 cure_w128=97.49
+cifar10 svhn pi=0.2 seed=2 cure_no_fallback=94.34 cure_fisher=97.27 cure_elond=97.15 cure_w128=97.07
+cifar10 svhn pi=0.5 seed=0 cure_no_fallback=96.23 cure_fisher=97.59 cure_elond=97.51 cure_w128=97.48
+cifar10 svhn pi=0.5 seed=1 cure_no_fallback=95.75 cure_fisher=97.61 cure_elond=97.50 cure_w128=97.55
+cifar10 svhn pi=0.5 seed=2 cure_no_fallback=95.70 cure_fisher=97.59 cure_elond=97.44 cure_w128=97.53
+cifar10 svhn pi=0.05 seed=0 cure_w512=92.43 cure_cap128=92.43 cure_cap2048=92.43
+cifar10 svhn pi=0.05 seed=1 cure_w512=95.13 cure_cap128=95.63 cure_cap2048=94.12
+cifar10 svhn pi=0.05 seed=2 cure_w512=92.29 cure_cap128=92.29 cure_cap2048=92.29
+cifar10 svhn pi=0.2 seed=0 cure_w512=96.96 cure_cap128=97.36 cure_cap2048=97.19
+cifar10 svhn pi=0.2 seed=1 cure_w512=97.22 cure_cap128=97.47 cure_cap2048=97.44
+cifar10 svhn pi=0.2 seed=2 cure_w512=97.08 cure_cap128=97.24 cure_cap2048=97.15
+cifar10 svhn pi=0.5 seed=0 cure_w512=97.49 cure_cap128=97.42 cure_cap2048=97.53
+cifar10 svhn pi=0.5 seed=1 cure_w512=97.52 cure_cap128=97.44 cure_cap2048=97.51
+cifar10 svhn pi=0.5 seed=2 cure_w512=97.50 cure_cap128=97.41 cure_cap2048=97.51
+cifar10 texture pi=0.05 seed=0 knn=93.56 cure=93.56 cure_no_review=76.90 cure_oracle=95.46
+cifar10 texture pi=0.05 seed=1 knn=94.13 cure=94.13 cure_no_review=78.44 cure_oracle=96.01
+cifar10 texture pi=0.05 seed=2 knn=93.61 cure=93.61 cure_no_review=76.02 cure_oracle=95.64
+cifar10 texture pi=0.2 seed=0 knn=93.70 cure=95.59 cure_no_review=83.12 cure_oracle=95.93
+cifar10 texture pi=0.2 seed=1 knn=93.57 cure=95.12 cure_no_review=83.48 cure_oracle=95.70
+cifar10 texture pi=0.2 seed=2 knn=93.67 cure=95.13 cure_no_review=83.16 cure_oracle=95.91
+cifar10 texture pi=0.5 seed=0 knn=93.84 cure=96.00 cure_no_review=88.93 cure_oracle=96.06
+cifar10 texture pi=0.5 seed=1 knn=93.77 cure=95.84 cure_no_review=89.17 cure_oracle=95.96
+cifar10 texture pi=0.5 seed=2 knn=93.87 cure=96.02 cure_no_review=89.13 cure_oracle=96.10
+cifar10 texture pi=0.05 seed=0 cure_no_fallback=50.00 cure_fisher=93.56 cure_elond=93.56 cure_w128=93.56
+cifar10 texture pi=0.05 seed=1 cure_no_fallback=50.00 cure_fisher=94.13 cure_elond=94.13 cure_w128=94.13
+cifar10 texture pi=0.05 seed=2 cure_no_fallback=50.00 cure_fisher=93.61 cure_elond=93.61 cure_w128=93.61
+cifar10 texture pi=0.2 seed=0 cure_no_fallback=89.56 cure_fisher=95.68 cure_elond=93.70 cure_w128=95.38
+cifar10 texture pi=0.2 seed=1 cure_no_fallback=73.68 cure_fisher=95.15 cure_elond=93.57 cure_w128=95.10
+cifar10 texture pi=0.2 seed=2 cure_no_fallback=75.31 cure_fisher=95.26 cure_elond=93.67 cure_w128=94.33
+cifar10 texture pi=0.5 seed=0 cure_no_fallback=92.92 cure_fisher=96.13 cure_elond=96.08 cure_w128=96.04
+cifar10 texture pi=0.5 seed=1 cure_no_fallback=92.85 cure_fisher=95.95 cure_elond=95.90 cure_w128=95.80
+cifar10 texture pi=0.5 seed=2 cure_no_fallback=94.04 cure_fisher=96.15 cure_elond=96.06 cure_w128=96.10
+cifar10 texture pi=0.05 seed=0 cure_w512=93.56 cure_cap128=93.56 cure_cap2048=93.56
+cifar10 texture pi=0.05 seed=1 cure_w512=94.13 cure_cap128=94.13 cure_cap2048=94.13
+cifar10 texture pi=0.05 seed=2 cure_w512=93.61 cure_cap128=93.61 cure_cap2048=93.61
+cifar10 texture pi=0.2 seed=0 cure_w512=95.71 cure_cap128=95.67 cure_cap2048=95.59
+cifar10 texture pi=0.2 seed=1 cure_w512=95.51 cure_cap128=95.12 cure_cap2048=95.12
+cifar10 texture pi=0.2 seed=2 cure_w512=95.46 cure_cap128=95.17 cure_cap2048=95.13
+cifar10 texture pi=0.5 seed=0 cure_w512=95.98 cure_cap128=96.03 cure_cap2048=96.02
+cifar10 texture pi=0.5 seed=1 cure_w512=95.83 cure_cap128=95.94 cure_cap2048=95.85
+cifar10 texture pi=0.5 seed=2 cure_w512=96.06 cure_cap128=96.07 cure_cap2048=96.03
+cifar10 places365 pi=0.05 seed=0 knn=92.06 cure=92.06 cure_no_review=71.84 cure_oracle=94.18
+cifar10 places365 pi=0.05 seed=1 knn=91.49 cure=91.49 cure_no_review=74.05 cure_oracle=94.22
+cifar10 places365 pi=0.05 seed=2 knn=91.83 cure=91.83 cure_no_review=74.10 cure_oracle=94.20
+cifar10 places365 pi=0.2 seed=0 knn=92.11 cure=92.48 cure_no_review=79.98 cure_oracle=94.34
+cifar10 places365 pi=0.2 seed=1 knn=92.07 cure=93.27 cure_no_review=79.16 cure_oracle=94.48
+cifar10 places365 pi=0.2 seed=2 knn=91.50 cure=93.77 cure_no_review=78.74 cure_oracle=94.01
+cifar10 places365 pi=0.5 seed=0 knn=91.88 cure=93.03 cure_no_review=85.36 cure_oracle=94.25
+cifar10 places365 pi=0.5 seed=1 knn=91.79 cure=93.03 cure_no_review=85.35 cure_oracle=94.26
+cifar10 places365 pi=0.5 seed=2 knn=91.60 cure=92.88 cure_no_review=85.30 cure_oracle=94.04
+cifar10 places365 pi=0.05 seed=0 cure_no_fallback=50.00 cure_fisher=92.06 cure_elond=92.06 cure_w128=92.06
+cifar10 places365 pi=0.05 seed=1 cure_no_fallback=50.00 cure_fisher=91.49 cure_elond=91.49 cure_w128=91.49
+cifar10 places365 pi=0.05 seed=2 cure_no_fallback=50.00 cure_fisher=91.83 cure_elond=91.83 cure_w128=91.83
+cifar10 places365 pi=0.2 seed=0 cure_no_fallback=89.85 cure_fisher=93.98 cure_elond=93.95 cure_w128=92.04
+cifar10 places365 pi=0.2 seed=1 cure_no_fallback=86.69 cure_fisher=94.29 cure_elond=92.07 cure_w128=92.87
+cifar10 places365 pi=0.2 seed=2 cure_no_fallback=83.85 cure_fisher=94.26 cure_elond=91.50 cure_w128=91.50
+cifar10 places365 pi=0.5 seed=0 cure_no_fallback=91.19 cure_fisher=94.26 cure_elond=93.92 cure_w128=93.06
+cifar10 places365 pi=0.5 seed=1 cure_no_fallback=91.13 cure_fisher=94.25 cure_elond=93.90 cure_w128=93.02
+cifar10 places365 pi=0.5 seed=2 cure_no_fallback=91.60 cure_fisher=94.12 cure_elond=93.86 cure_w128=93.18
+cifar10 places365 pi=0.05 seed=0 cure_w512=92.06 cure_cap128=92.06 cure_cap2048=92.06
+cifar10 places365 pi=0.05 seed=1 cure_w512=91.49 cure_cap128=91.49 cure_cap2048=91.49
+cifar10 places365 pi=0.05 seed=2 cure_w512=91.83 cure_cap128=91.83 cure_cap2048=91.83
+cifar10 places365 pi=0.2 seed=0 cure_w512=93.11 cure_cap128=94.26 cure_cap2048=92.48
+cifar10 places365 pi=0.2 seed=1 cure_w512=92.94 cure_cap128=93.99 cure_cap2048=93.27
+cifar10 places365 pi=0.2 seed=2 cure_w512=93.17 cure_cap128=93.32 cure_cap2048=93.77
+cifar10 places365 pi=0.5 seed=0 cure_w512=93.86 cure_cap128=94.74 cure_cap2048=93.44
+cifar10 places365 pi=0.5 seed=1 cure_w512=93.97 cure_cap128=94.84 cure_cap2048=93.59
+cifar10 places365 pi=0.5 seed=2 cure_w512=93.89 cure_cap128=94.73 cure_cap2048=93.47
+cifar100 cifar10 pi=0.05 seed=0 knn=77.04 cure=77.04 cure_no_review=77.56 cure_oracle=86.78
+cifar100 cifar10 pi=0.05 seed=1 knn=78.03 cure=78.03 cure_no_review=78.76 cure_oracle=88.00
+cifar100 cifar10 pi=0.05 seed=2 knn=77.22 cure=77.22 cure_no_review=78.19 cure_oracle=87.50
+cifar100 cifar10 pi=0.2 seed=0 knn=77.79 cure=77.79 cure_no_review=83.13 cure_oracle=88.30
+cifar100 cifar10 pi=0.2 seed=1 knn=77.56 cure=77.56 cure_no_review=82.21 cure_oracle=87.89
+cifar100 cifar10 pi=0.2 seed=2 knn=77.57 cure=77.57 cure_no_review=82.87 cure_oracle=88.12
+cifar100 cifar10 pi=0.5 seed=0 knn=77.56 cure=78.71 cure_no_review=86.67 cure_oracle=88.35
+cifar100 cifar10 pi=0.5 seed=1 knn=77.60 cure=79.77 cure_no_review=86.73 cure_oracle=88.37
+cifar100 cifar10 pi=0.5 seed=2 knn=77.64 cure=78.27 cure_no_review=86.70 cure_oracle=88.33
+cifar100 cifar10 pi=0.05 seed=0 cure_no_fallback=50.00 cure_fisher=77.04 cure_elond=77.04 cure_w128=77.04
+cifar100 cifar10 pi=0.05 seed=1 cure_no_fallback=50.00 cure_fisher=78.03 cure_elond=78.03 cure_w128=78.03
+cifar100 cifar10 pi=0.05 seed=2 cure_no_fallback=50.00 cure_fisher=77.22 cure_elond=77.22 cure_w128=77.22
+cifar100 cifar10 pi=0.2 seed=0 cure_no_fallback=50.00 cure_fisher=77.79 cure_elond=77.79 cure_w128=77.79
+cifar100 cifar10 pi=0.2 seed=1 cure_no_fallback=50.00 cure_fisher=77.56 cure_elond=77.56 cure_w128=77.56
+cifar100 cifar10 pi=0.2 seed=2 cure_no_fallback=50.00 cure_fisher=77.57 cure_elond=77.57 cure_w128=77.57
+cifar100 cifar10 pi=0.5 seed=0 cure_no_fallback=69.71 cure_fisher=78.64 cure_elond=77.56 cure_w128=77.56
+cifar100 cifar10 pi=0.5 seed=1 cure_no_fallback=77.36 cure_fisher=79.52 cure_elond=77.60 cure_w128=77.60
+cifar100 cifar10 pi=0.5 seed=2 cure_no_fallback=53.13 cure_fisher=78.21 cure_elond=77.64 cure_w128=77.64
+cifar100 cifar10 pi=0.05 seed=0 cure_w512=77.04 cure_cap128=77.04 cure_cap2048=77.04
+cifar100 cifar10 pi=0.05 seed=1 cure_w512=78.03 cure_cap128=78.03 cure_cap2048=78.03
+cifar100 cifar10 pi=0.05 seed=2 cure_w512=77.22 cure_cap128=77.22 cure_cap2048=77.22
+cifar100 cifar10 pi=0.2 seed=0 cure_w512=77.79 cure_cap128=77.79 cure_cap2048=77.79
+cifar100 cifar10 pi=0.2 seed=1 cure_w512=79.48 cure_cap128=77.56 cure_cap2048=77.56
+cifar100 cifar10 pi=0.2 seed=2 cure_w512=77.57 cure_cap128=77.59 cure_cap2048=77.57
+cifar100 cifar10 pi=0.5 seed=0 cure_w512=80.33 cure_cap128=77.44 cure_cap2048=78.71
+cifar100 cifar10 pi=0.5 seed=1 cure_w512=80.07 cure_cap128=79.50 cure_cap2048=79.77
+cifar100 cifar10 pi=0.5 seed=2 cure_w512=80.28 cure_cap128=78.72 cure_cap2048=78.27
+cifar100 tin pi=0.05 seed=0 knn=83.12 cure=83.12 cure_no_review=80.47 cure_oracle=84.94
+cifar100 tin pi=0.05 seed=1 knn=82.25 cure=82.25 cure_no_review=80.18 cure_oracle=83.93
+cifar100 tin pi=0.05 seed=2 knn=82.62 cure=82.62 cure_no_review=80.14 cure_oracle=84.67
+cifar100 tin pi=0.2 seed=0 knn=83.80 cure=83.80 cure_no_review=83.03 cure_oracle=85.71
+cifar100 tin pi=0.2 seed=1 knn=83.19 cure=83.17 cure_no_review=82.24 cure_oracle=85.22
+cifar100 tin pi=0.2 seed=2 knn=83.92 cure=83.62 cure_no_review=82.78 cure_oracle=85.92
+cifar100 tin pi=0.5 seed=0 knn=83.67 cure=83.67 cure_no_review=84.52 cure_oracle=85.83
+cifar100 tin pi=0.5 seed=1 knn=83.49 cure=83.53 cure_no_review=84.26 cure_oracle=85.65
+cifar100 tin pi=0.5 seed=2 knn=83.33 cure=83.31 cure_no_review=84.26 cure_oracle=85.56
+cifar100 tin pi=0.05 seed=0 cure_no_fallback=50.00 cure_fisher=83.12 cure_elond=83.12 cure_w128=83.12
+cifar100 tin pi=0.05 seed=1 cure_no_fallback=50.00 cure_fisher=82.25 cure_elond=82.25 cure_w128=82.25
+cifar100 tin pi=0.05 seed=2 cure_no_fallback=50.00 cure_fisher=82.62 cure_elond=82.62 cure_w128=82.62
+cifar100 tin pi=0.2 seed=0 cure_no_fallback=50.00 cure_fisher=83.80 cure_elond=83.80 cure_w128=83.80
+cifar100 tin pi=0.2 seed=1 cure_no_fallback=50.00 cure_fisher=83.17 cure_elond=83.19 cure_w128=83.19
+cifar100 tin pi=0.2 seed=2 cure_no_fallback=50.32 cure_fisher=83.67 cure_elond=83.92 cure_w128=83.92
+cifar100 tin pi=0.5 seed=0 cure_no_fallback=50.00 cure_fisher=83.67 cure_elond=83.67 cure_w128=83.67
+cifar100 tin pi=0.5 seed=1 cure_no_fallback=51.20 cure_fisher=83.55 cure_elond=83.49 cure_w128=83.49
+cifar100 tin pi=0.5 seed=2 cure_no_fallback=50.19 cure_fisher=83.32 cure_elond=83.33 cure_w128=83.33
+cifar100 tin pi=0.05 seed=0 cure_w512=83.12 cure_cap128=82.28 cure_cap2048=83.12
+cifar100 tin pi=0.05 seed=1 cure_w512=82.25 cure_cap128=82.25 cure_cap2048=82.25
+cifar100 tin pi=0.05 seed=2 cure_w512=82.62 cure_cap128=82.62 cure_cap2048=82.62
+cifar100 tin pi=0.2 seed=0 cure_w512=83.80 cure_cap128=83.80 cure_cap2048=83.80
+cifar100 tin pi=0.2 seed=1 cure_w512=83.19 cure_cap128=83.19 cure_cap2048=83.17
+cifar100 tin pi=0.2 seed=2 cure_w512=83.92 cure_cap128=83.92 cure_cap2048=83.62
+cifar100 tin pi=0.5 seed=0 cure_w512=82.96 cure_cap128=83.66 cure_cap2048=83.67
+cifar100 tin pi=0.5 seed=1 cure_w512=83.33 cure_cap128=83.49 cure_cap2048=83.53
+cifar100 tin pi=0.5 seed=2 cure_w512=83.48 cure_cap128=83.58 cure_cap2048=83.31
+cifar100 mnist pi=0.05 seed=0 knn=82.81 cure=98.02 cure_no_review=97.13 cure_oracle=99.23
+cifar100 mnist pi=0.05 seed=1 knn=82.50 cure=97.29 cure_no_review=97.01 cure_oracle=99.29
+cifar100 mnist pi=0.05 seed=2 knn=82.21 cure=95.58 cure_no_review=96.83 cure_oracle=99.12
+cifar100 mnist pi=0.2 seed=0 knn=82.88 cure=99.39 cure_no_review=99.21 cure_oracle=99.39
+cifar100 mnist pi=0.2 seed=1 knn=83.40 cure=99.42 cure_no_review=99.26 cure_oracle=99.42
+cifar100 mnist pi=0.2 seed=2 knn=82.80 cure=99.28 cure_no_review=98.98 cure_oracle=99.28
+cifar100 mnist pi=0.5 seed=0 knn=82.92 cure=99.67 cure_no_review=99.66 cure_oracle=99.67
+cifar100 mnist pi=0.5 seed=1 knn=83.09 cure=99.68 cure_no_review=99.66 cure_oracle=99.68
+cifar100 mnist pi=0.5 seed=2 knn=82.62 cure=99.59 cure_no_review=99.55 cure_oracle=99.59
+cifar100 mnist pi=0.05 seed=0 cure_no_fallback=92.09 cure_fisher=97.08 cure_elond=82.81 cure_w128=83.99
+cifar100 mnist pi=0.05 seed=1 cure_no_fallback=86.12 cure_fisher=96.50 cure_elond=82.50 cure_w128=82.50
+cifar100 mnist pi=0.05 seed=2 cure_no_fallback=84.69 cure_fisher=94.75 cure_elond=82.21 cure_w128=85.23
+cifar100 mnist pi=0.2 seed=0 cure_no_fallback=96.35 cure_fisher=99.08 cure_elond=99.39 cure_w128=99.51
+cifar100 mnist pi=0.2 seed=1 cure_no_fallback=96.84 cure_fisher=99.08 cure_elond=99.42 cure_w128=99.55
+cifar100 mnist pi=0.2 seed=2 cure_no_fallback=95.91 cure_fisher=98.92 cure_elond=99.28 cure_w128=99.50
+cifar100 mnist pi=0.5 seed=0 cure_no_fallback=98.57 cure_fisher=99.29 cure_elond=99.67 cure_w128=99.78
+cifar100 mnist pi=0.5 seed=1 cure_no_fallback=98.68 cure_fisher=99.28 cure_elond=99.68 cure_w128=99.79
+cifar100 mnist pi=0.5 seed=2 cure_no_fallback=97.93 cure_fisher=99.21 cure_elond=99.59 cure_w128=99.73
+cifar100 mnist pi=0.05 seed=0 cure_w512=97.99 cure_cap128=98.93 cure_cap2048=98.02
+cifar100 mnist pi=0.05 seed=1 cure_w512=97.57 cure_cap128=97.39 cure_cap2048=97.29
+cifar100 mnist pi=0.05 seed=2 cure_w512=97.07 cure_cap128=96.80 cure_cap2048=95.58
+cifar100 mnist pi=0.2 seed=0 cure_w512=99.01 cure_cap128=99.25 cure_cap2048=99.40
+cifar100 mnist pi=0.2 seed=1 cure_w512=99.03 cure_cap128=99.32 cure_cap2048=99.42
+cifar100 mnist pi=0.2 seed=2 cure_w512=98.90 cure_cap128=99.14 cure_cap2048=99.29
+cifar100 mnist pi=0.5 seed=0 cure_w512=99.46 cure_cap128=99.47 cure_cap2048=99.69
+cifar100 mnist pi=0.5 seed=1 cure_w512=99.42 cure_cap128=99.49 cure_cap2048=99.68
+cifar100 mnist pi=0.5 seed=2 cure_w512=99.37 cure_cap128=99.39 cure_cap2048=99.60
+cifar100 svhn pi=0.05 seed=0 knn=81.77 cure=95.77 cure_no_review=95.52 cure_oracle=99.10
+cifar100 svhn pi=0.05 seed=1 knn=83.38 cure=96.60 cure_no_review=94.71 cure_oracle=98.93
+cifar100 svhn pi=0.05 seed=2 knn=83.30 cure=95.99 cure_no_review=95.87 cure_oracle=99.15
+cifar100 svhn pi=0.2 seed=0 knn=82.44 cure=99.29 cure_no_review=98.70 cure_oracle=99.38
+cifar100 svhn pi=0.2 seed=1 knn=82.97 cure=99.08 cure_no_review=98.39 cure_oracle=99.17
+cifar100 svhn pi=0.2 seed=2 knn=83.27 cure=99.13 cure_no_review=98.40 cure_oracle=99.21
+cifar100 svhn pi=0.5 seed=0 knn=82.52 cure=99.37 cure_no_review=99.23 cure_oracle=99.37
+cifar100 svhn pi=0.5 seed=1 knn=82.83 cure=99.33 cure_no_review=99.14 cure_oracle=99.35
+cifar100 svhn pi=0.5 seed=2 knn=82.67 cure=99.39 cure_no_review=99.21 cure_oracle=99.40
+cifar100 svhn pi=0.05 seed=0 cure_no_fallback=80.71 cure_fisher=94.97 cure_elond=81.77 cure_w128=81.77
+cifar100 svhn pi=0.05 seed=1 cure_no_fallback=85.01 cure_fisher=95.77 cure_elond=83.38 cure_w128=92.04
+cifar100 svhn pi=0.05 seed=2 cure_no_fallback=81.38 cure_fisher=95.42 cure_elond=83.30 cure_w128=89.73
+cifar100 svhn pi=0.2 seed=0 cure_no_fallback=97.58 cure_fisher=98.97 cure_elond=99.34 cure_w128=99.49
+cifar100 svhn pi=0.2 seed=1 cure_no_fallback=96.20 cure_fisher=98.77 cure_elond=99.13 cure_w128=99.35
+cifar100 svhn pi=0.2 seed=2 cure_no_fallback=96.45 cure_fisher=98.83 cure_elond=99.17 cure_w128=99.28
+cifar100 svhn pi=0.5 seed=0 cure_no_fallback=98.15 cure_fisher=98.92 cure_elond=99.37 cure_w128=99.49
+cifar100 svhn pi=0.5 seed=1 cure_no_fallback=97.72 cure_fisher=98.89 cure_elond=99.33 cure_w128=99.45
+cifar100 svhn pi=0.5 seed=2 cure_no_fallback=97.62 cure_fisher=98.95 cure_elond=99.38 cure_w128=99.45
+cifar100 svhn pi=0.05 seed=0 cure_w512=97.17 cure_cap128=98.28 cure_cap2048=95.77
+cifar100 svhn pi=0.05 seed=1 cure_w512=96.58 cure_cap128=98.16 cure_cap2048=96.60
+cifar100 svhn pi=0.05 seed=2 cure_w512=97.95 cure_cap128=95.81 cure_cap2048=95.99
+cifar100 svhn pi=0.2 seed=0 cure_w512=98.96 cure_cap128=99.02 cure_cap2048=99.28
+cifar100 svhn pi=0.2 seed=1 cure_w512=98.73 cure_cap128=98.95 cure_cap2048=99.12
+cifar100 svhn pi=0.2 seed=2 cure_w512=98.78 cure_cap128=98.98 cure_cap2048=99.16
+cifar100 svhn pi=0.5 seed=0 cure_w512=99.11 cure_cap128=98.85 cure_cap2048=99.39
+cifar100 svhn pi=0.5 seed=1 cure_w512=99.15 cure_cap128=98.87 cure_cap2048=99.35
+cifar100 svhn pi=0.5 seed=2 cure_w512=99.18 cure_cap128=98.93 cure_cap2048=99.41
+cifar100 texture pi=0.05 seed=0 knn=78.42 cure=78.42 cure_no_review=75.42 cure_oracle=90.87
+cifar100 texture pi=0.05 seed=1 knn=80.97 cure=80.97 cure_no_review=78.34 cure_oracle=91.94
+cifar100 texture pi=0.05 seed=2 knn=80.44 cure=80.44 cure_no_review=77.52 cure_oracle=93.25
+cifar100 texture pi=0.2 seed=0 knn=80.04 cure=91.97 cure_no_review=84.18 cure_oracle=93.58
+cifar100 texture pi=0.2 seed=1 knn=80.38 cure=92.35 cure_no_review=84.56 cure_oracle=93.50
+cifar100 texture pi=0.2 seed=2 knn=80.27 cure=92.86 cure_no_review=84.53 cure_oracle=93.86
+cifar100 texture pi=0.5 seed=0 knn=80.32 cure=94.12 cure_no_review=90.81 cure_oracle=93.78
+cifar100 texture pi=0.5 seed=1 knn=80.79 cure=94.21 cure_no_review=91.12 cure_oracle=93.98
+cifar100 texture pi=0.5 seed=2 knn=80.38 cure=94.39 cure_no_review=90.78 cure_oracle=93.97
+cifar100 texture pi=0.05 seed=0 cure_no_fallback=50.00 cure_fisher=78.42 cure_elond=78.42 cure_w128=78.42
+cifar100 texture pi=0.05 seed=1 cure_no_fallback=50.00 cure_fisher=80.97 cure_elond=80.97 cure_w128=80.97
+cifar100 texture pi=0.05 seed=2 cure_no_fallback=50.00 cure_fisher=80.44 cure_elond=80.44 cure_w128=80.44
+cifar100 texture pi=0.2 seed=0 cure_no_fallback=90.04 cure_fisher=91.29 cure_elond=88.25 cure_w128=90.57
+cifar100 texture pi=0.2 seed=1 cure_no_fallback=89.60 cure_fisher=91.79 cure_elond=80.38 cure_w128=88.13
+cifar100 texture pi=0.2 seed=2 cure_no_fallback=89.70 cure_fisher=92.18 cure_elond=80.27 cure_w128=88.32
+cifar100 texture pi=0.5 seed=0 cure_no_fallback=91.54 cure_fisher=93.72 cure_elond=94.06 cure_w128=94.33
+cifar100 texture pi=0.5 seed=1 cure_no_fallback=91.75 cure_fisher=93.80 cure_elond=94.08 cure_w128=94.38
+cifar100 texture pi=0.5 seed=2 cure_no_fallback=92.75 cure_fisher=93.95 cure_elond=94.34 cure_w128=94.50
+cifar100 texture pi=0.05 seed=0 cure_w512=78.42 cure_cap128=78.42 cure_cap2048=78.42
+cifar100 texture pi=0.05 seed=1 cure_w512=80.97 cure_cap128=80.97 cure_cap2048=80.97
+cifar100 texture pi=0.05 seed=2 cure_w512=80.44 cure_cap128=80.44 cure_cap2048=80.44
+cifar100 texture pi=0.2 seed=0 cure_w512=92.71 cure_cap128=91.37 cure_cap2048=91.97
+cifar100 texture pi=0.2 seed=1 cure_w512=93.20 cure_cap128=91.86 cure_cap2048=92.35
+cifar100 texture pi=0.2 seed=2 cure_w512=93.45 cure_cap128=92.98 cure_cap2048=92.86
+cifar100 texture pi=0.5 seed=0 cure_w512=94.21 cure_cap128=92.21 cure_cap2048=94.28
+cifar100 texture pi=0.5 seed=1 cure_w512=94.24 cure_cap128=92.27 cure_cap2048=94.49
+cifar100 texture pi=0.5 seed=2 cure_w512=94.40 cure_cap128=92.34 cure_cap2048=94.63
+cifar100 places365 pi=0.05 seed=0 knn=80.78 cure=80.78 cure_no_review=80.23 cure_oracle=87.84
+cifar100 places365 pi=0.05 seed=1 knn=79.47 cure=79.47 cure_no_review=78.99 cure_oracle=88.36
+cifar100 places365 pi=0.05 seed=2 knn=79.32 cure=79.32 cure_no_review=78.26 cure_oracle=88.26
+cifar100 places365 pi=0.2 seed=0 knn=79.54 cure=84.04 cure_no_review=82.74 cure_oracle=89.16
+cifar100 places365 pi=0.2 seed=1 knn=79.00 cure=83.33 cure_no_review=82.69 cure_oracle=89.16
+cifar100 places365 pi=0.2 seed=2 knn=79.25 cure=84.84 cure_no_review=82.04 cure_oracle=88.74
+cifar100 places365 pi=0.5 seed=0 knn=79.47 cure=89.90 cure_no_review=87.31 cure_oracle=89.61
+cifar100 places365 pi=0.5 seed=1 knn=79.75 cure=89.69 cure_no_review=87.15 cure_oracle=89.51
+cifar100 places365 pi=0.5 seed=2 knn=79.55 cure=89.83 cure_no_review=87.19 cure_oracle=89.64
+cifar100 places365 pi=0.05 seed=0 cure_no_fallback=50.00 cure_fisher=80.78 cure_elond=80.78 cure_w128=80.78
+cifar100 places365 pi=0.05 seed=1 cure_no_fallback=50.00 cure_fisher=79.47 cure_elond=79.47 cure_w128=79.47
+cifar100 places365 pi=0.05 seed=2 cure_no_fallback=50.00 cure_fisher=79.32 cure_elond=79.32 cure_w128=79.32
+cifar100 places365 pi=0.2 seed=0 cure_no_fallback=82.71 cure_fisher=83.90 cure_elond=79.54 cure_w128=79.54
+cifar100 places365 pi=0.2 seed=1 cure_no_fallback=67.80 cure_fisher=83.21 cure_elond=79.00 cure_w128=79.00
+cifar100 places365 pi=0.2 seed=2 cure_no_fallback=80.47 cure_fisher=84.78 cure_elond=79.25 cure_w128=79.25
+cifar100 places365 pi=0.5 seed=0 cure_no_fallback=88.40 cure_fisher=89.85 cure_elond=87.46 cure_w128=89.07
+cifar100 places365 pi=0.5 seed=1 cure_no_fallback=88.13 cure_fisher=89.71 cure_elond=87.65 cure_w128=89.20
+cifar100 places365 pi=0.5 seed=2 cure_no_fallback=88.80 cure_fisher=89.82 cure_elond=88.13 cure_w128=89.82
+cifar100 places365 pi=0.05 seed=0 cure_w512=80.78 cure_cap128=80.78 cure_cap2048=80.78
+cifar100 places365 pi=0.05 seed=1 cure_w512=79.47 cure_cap128=79.47 cure_cap2048=79.47
+cifar100 places365 pi=0.05 seed=2 cure_w512=79.32 cure_cap128=79.32 cure_cap2048=79.32
+cifar100 places365 pi=0.2 seed=0 cure_w512=85.05 cure_cap128=84.76 cure_cap2048=84.04
+cifar100 places365 pi=0.2 seed=1 cure_w512=85.55 cure_cap128=83.46 cure_cap2048=83.33
+cifar100 places365 pi=0.2 seed=2 cure_w512=85.32 cure_cap128=85.50 cure_cap2048=84.84
+cifar100 places365 pi=0.5 seed=0 cure_w512=90.15 cure_cap128=87.71 cure_cap2048=90.07
+cifar100 places365 pi=0.5 seed=1 cure_w512=90.21 cure_cap128=88.03 cure_cap2048=89.67
+cifar100 places365 pi=0.5 seed=2 cure_w512=90.25 cure_cap128=88.00 cure_cap2048=89.99
+imagenet200 ssb_hard pi=0.05 seed=0 knn=77.78 cure=77.78 cure_no_review=78.75 cure_oracle=83.28
+imagenet200 ssb_hard pi=0.05 seed=1 knn=73.96 cure=73.96 cure_no_review=76.56 cure_oracle=81.43
+imagenet200 ssb_hard pi=0.05 seed=2 knn=73.96 cure=73.96 cure_no_review=74.29 cure_oracle=80.54
+imagenet200 ssb_hard pi=0.2 seed=0 knn=75.59 cure=77.89 cure_no_review=80.49 cure_oracle=84.27
+imagenet200 ssb_hard pi=0.2 seed=1 knn=76.15 cure=76.15 cure_no_review=81.06 cure_oracle=85.16
+imagenet200 ssb_hard pi=0.2 seed=2 knn=74.45 cure=76.46 cure_no_review=79.36 cure_oracle=83.44
+imagenet200 ssb_hard pi=0.5 seed=0 knn=75.09 cure=79.05 cure_no_review=83.42 cure_oracle=84.86
+imagenet200 ssb_hard pi=0.5 seed=1 knn=74.67 cure=78.45 cure_no_review=83.48 cure_oracle=85.13
+imagenet200 ssb_hard pi=0.5 seed=2 knn=74.74 cure=79.13 cure_no_review=83.33 cure_oracle=85.03
+imagenet200 ssb_hard pi=0.05 seed=0 cure_no_fallback=50.00 cure_fisher=77.78 cure_elond=77.78 cure_w128=77.78
+imagenet200 ssb_hard pi=0.05 seed=1 cure_no_fallback=50.00 cure_fisher=73.96 cure_elond=73.96 cure_w128=73.96
+imagenet200 ssb_hard pi=0.05 seed=2 cure_no_fallback=50.00 cure_fisher=73.96 cure_elond=73.96 cure_w128=73.96
+imagenet200 ssb_hard pi=0.2 seed=0 cure_no_fallback=75.26 cure_fisher=77.95 cure_elond=75.59 cure_w128=75.59
+imagenet200 ssb_hard pi=0.2 seed=1 cure_no_fallback=50.00 cure_fisher=76.15 cure_elond=76.15 cure_w128=76.15
+imagenet200 ssb_hard pi=0.2 seed=2 cure_no_fallback=58.37 cure_fisher=76.42 cure_elond=74.45 cure_w128=74.45
+imagenet200 ssb_hard pi=0.5 seed=0 cure_no_fallback=76.54 cure_fisher=79.14 cure_elond=79.28 cure_w128=77.45
+imagenet200 ssb_hard pi=0.5 seed=1 cure_no_fallback=76.74 cure_fisher=78.57 cure_elond=74.67 cure_w128=77.21
+imagenet200 ssb_hard pi=0.5 seed=2 cure_no_fallback=77.01 cure_fisher=79.16 cure_elond=78.21 cure_w128=78.01
+imagenet200 ssb_hard pi=0.05 seed=0 cure_w512=77.78 cure_cap128=77.78 cure_cap2048=77.78
+imagenet200 ssb_hard pi=0.05 seed=1 cure_w512=73.96 cure_cap128=73.96 cure_cap2048=73.96
+imagenet200 ssb_hard pi=0.05 seed=2 cure_w512=73.96 cure_cap128=73.96 cure_cap2048=73.96
+imagenet200 ssb_hard pi=0.2 seed=0 cure_w512=77.78 cure_cap128=77.89 cure_cap2048=77.89
+imagenet200 ssb_hard pi=0.2 seed=1 cure_w512=77.66 cure_cap128=76.15 cure_cap2048=76.15
+imagenet200 ssb_hard pi=0.2 seed=2 cure_w512=75.92 cure_cap128=75.95 cure_cap2048=76.46
+imagenet200 ssb_hard pi=0.5 seed=0 cure_w512=79.29 cure_cap128=79.32 cure_cap2048=79.05
+imagenet200 ssb_hard pi=0.5 seed=1 cure_w512=79.22 cure_cap128=78.27 cure_cap2048=78.45
+imagenet200 ssb_hard pi=0.5 seed=2 cure_w512=79.83 cure_cap128=79.71 cure_cap2048=79.13
+imagenet200 ninco pi=0.05 seed=0 knn=81.14 cure=81.14 cure_no_review=82.16 cure_oracle=87.35
+imagenet200 ninco pi=0.05 seed=1 knn=83.14 cure=83.14 cure_no_review=84.55 cure_oracle=88.81
+imagenet200 ninco pi=0.05 seed=2 knn=82.29 cure=82.29 cure_no_review=82.74 cure_oracle=88.27
+imagenet200 ninco pi=0.2 seed=0 knn=82.63 cure=82.63 cure_no_review=86.32 cure_oracle=90.53
+imagenet200 ninco pi=0.2 seed=1 knn=82.95 cure=82.95 cure_no_review=87.08 cure_oracle=91.07
+imagenet200 ninco pi=0.2 seed=2 knn=83.00 cure=83.00 cure_no_review=86.73 cure_oracle=90.82
+imagenet200 ninco pi=0.5 seed=0 knn=83.17 cure=85.23 cure_no_review=90.40 cure_oracle=91.95
+imagenet200 ninco pi=0.5 seed=1 knn=83.11 cure=85.34 cure_no_review=89.86 cure_oracle=91.68
+imagenet200 ninco pi=0.5 seed=2 knn=83.23 cure=84.00 cure_no_review=90.24 cure_oracle=92.00
+imagenet200 ninco pi=0.05 seed=0 cure_no_fallback=50.00 cure_fisher=81.14 cure_elond=81.14 cure_w128=81.14
+imagenet200 ninco pi=0.05 seed=1 cure_no_fallback=50.00 cure_fisher=83.14 cure_elond=83.14 cure_w128=83.14
+imagenet200 ninco pi=0.05 seed=2 cure_no_fallback=50.00 cure_fisher=82.29 cure_elond=82.29 cure_w128=82.29
+imagenet200 ninco pi=0.2 seed=0 cure_no_fallback=50.00 cure_fisher=82.63 cure_elond=82.63 cure_w128=82.63
+imagenet200 ninco pi=0.2 seed=1 cure_no_fallback=50.00 cure_fisher=82.95 cure_elond=82.95 cure_w128=82.95
+imagenet200 ninco pi=0.2 seed=2 cure_no_fallback=50.00 cure_fisher=83.00 cure_elond=83.00 cure_w128=83.00
+imagenet200 ninco pi=0.5 seed=0 cure_no_fallback=80.46 cure_fisher=85.28 cure_elond=83.17 cure_w128=83.17
+imagenet200 ninco pi=0.5 seed=1 cure_no_fallback=78.61 cure_fisher=85.36 cure_elond=83.11 cure_w128=83.09
+imagenet200 ninco pi=0.5 seed=2 cure_no_fallback=56.46 cure_fisher=84.01 cure_elond=83.23 cure_w128=84.10
+imagenet200 ninco pi=0.05 seed=0 cure_w512=81.14 cure_cap128=81.14 cure_cap2048=81.14
+imagenet200 ninco pi=0.05 seed=1 cure_w512=83.14 cure_cap128=83.14 cure_cap2048=83.14
+imagenet200 ninco pi=0.05 seed=2 cure_w512=82.29 cure_cap128=82.29 cure_cap2048=82.29
+imagenet200 ninco pi=0.2 seed=0 cure_w512=82.63 cure_cap128=82.63 cure_cap2048=82.63
+imagenet200 ninco pi=0.2 seed=1 cure_w512=82.95 cure_cap128=82.95 cure_cap2048=82.95
+imagenet200 ninco pi=0.2 seed=2 cure_w512=83.00 cure_cap128=83.00 cure_cap2048=83.00
+imagenet200 ninco pi=0.5 seed=0 cure_w512=85.64 cure_cap128=85.87 cure_cap2048=85.23
+imagenet200 ninco pi=0.5 seed=1 cure_w512=85.72 cure_cap128=85.02 cure_cap2048=85.34
+imagenet200 ninco pi=0.5 seed=2 cure_w512=85.24 cure_cap128=84.45 cure_cap2048=84.00
+imagenet200 textures pi=0.05 seed=0 knn=94.72 cure=94.72 cure_no_review=93.19 cure_oracle=95.91
+imagenet200 textures pi=0.05 seed=1 knn=93.78 cure=93.78 cure_no_review=92.80 cure_oracle=94.71
+imagenet200 textures pi=0.05 seed=2 knn=94.23 cure=94.23 cure_no_review=92.89 cure_oracle=95.39
+imagenet200 textures pi=0.2 seed=0 knn=94.01 cure=94.89 cure_no_review=93.93 cure_oracle=96.44
+imagenet200 textures pi=0.2 seed=1 knn=94.77 cure=95.41 cure_no_review=94.52 cure_oracle=96.73
+imagenet200 textures pi=0.2 seed=2 knn=94.17 cure=94.82 cure_no_review=94.25 cure_oracle=96.65
+imagenet200 textures pi=0.5 seed=0 knn=94.42 cure=95.71 cure_no_review=95.84 cure_oracle=96.89
+imagenet200 textures pi=0.5 seed=1 knn=94.49 cure=95.82 cure_no_review=96.01 cure_oracle=96.99
+imagenet200 textures pi=0.5 seed=2 knn=94.52 cure=95.83 cure_no_review=95.86 cure_oracle=96.89
+imagenet200 textures pi=0.05 seed=0 cure_no_fallback=50.00 cure_fisher=94.72 cure_elond=94.72 cure_w128=94.72
+imagenet200 textures pi=0.05 seed=1 cure_no_fallback=50.00 cure_fisher=93.78 cure_elond=93.78 cure_w128=93.78
+imagenet200 textures pi=0.05 seed=2 cure_no_fallback=50.00 cure_fisher=94.23 cure_elond=94.23 cure_w128=94.23
+imagenet200 textures pi=0.2 seed=0 cure_no_fallback=88.23 cure_fisher=94.98 cure_elond=94.65 cure_w128=94.16
+imagenet200 textures pi=0.2 seed=1 cure_no_fallback=87.77 cure_fisher=95.55 cure_elond=95.73 cure_w128=95.41
+imagenet200 textures pi=0.2 seed=2 cure_no_fallback=77.10 cure_fisher=94.92 cure_elond=94.17 cure_w128=94.17
+imagenet200 textures pi=0.5 seed=0 cure_no_fallback=91.77 cure_fisher=95.89 cure_elond=95.50 cure_w128=95.65
+imagenet200 textures pi=0.5 seed=1 cure_no_fallback=92.48 cure_fisher=96.02 cure_elond=95.65 cure_w128=95.81
+imagenet200 textures pi=0.5 seed=2 cure_no_fallback=92.17 cure_fisher=96.05 cure_elond=95.65 cure_w128=95.75
+imagenet200 textures pi=0.05 seed=0 cure_w512=94.72 cure_cap128=94.72 cure_cap2048=94.72
+imagenet200 textures pi=0.05 seed=1 cure_w512=93.78 cure_cap128=93.78 cure_cap2048=93.78
+imagenet200 textures pi=0.05 seed=2 cure_w512=94.23 cure_cap128=94.23 cure_cap2048=94.23
+imagenet200 textures pi=0.2 seed=0 cure_w512=94.98 cure_cap128=94.91 cure_cap2048=94.89
+imagenet200 textures pi=0.2 seed=1 cure_w512=95.66 cure_cap128=95.75 cure_cap2048=95.41
+imagenet200 textures pi=0.2 seed=2 cure_w512=95.18 cure_cap128=94.91 cure_cap2048=94.82
+imagenet200 textures pi=0.5 seed=0 cure_w512=95.75 cure_cap128=95.68 cure_cap2048=95.72
+imagenet200 textures pi=0.5 seed=1 cure_w512=95.92 cure_cap128=95.78 cure_cap2048=95.82
+imagenet200 textures pi=0.5 seed=2 cure_w512=95.87 cure_cap128=95.79 cure_cap2048=95.85
+[run_all] xong

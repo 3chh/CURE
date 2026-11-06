@@ -1,0 +1,40 @@
+
+ Estimating mean and variance from training set...
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup:  82%|########2 | 205/250 [00:00<00:00, 2030.98it/s]Setup: 100%|##########| 250/250 [00:00<00:00, 1966.68it/s]
+ Train acc: 100.00%
+Extracting id training feature
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup: 100%|##########| 250/250 [00:00<00:00, 2837.87it/s]
+C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\static\_openood\postprocessors\vim_postprocessor.py:63: RuntimeWarning: divide by zero encountered in scalar divide
+  self.alpha = self.logit_id_train.max(
+C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\static\_openood\postprocessors\vim_postprocessor.py:74: RuntimeWarning: invalid value encountered in multiply
+  vlogit_ood = norm(np.matmul(feature_ood.numpy() - self.u, self.NS),
+dim=256, self.alpha=81.3467
+dim=256, self.alpha=81.3467
+dim=1000, self.alpha=inf
+dim=256, self.alpha=81.3467
+Setup:   0%|          | 0/5 [00:00<?, ?it/s]Setup: 100%|##########| 5/5 [00:00<00:00, 1676.92it/s]
+Threshold at percentile 85 over id data is: 0.389066219329834
+Threshold at percentile 90 over id data is: 0.47976747155189514
+Threshold at percentile 95 over id data is: 0.6117018461227417
+Threshold at percentile 99 over id data is: 0.8843927383422852
+Threshold at percentile 90 over id data is: 0.47976747155189514
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup: 100%|##########| 250/250 [00:00<00:00, 2820.24it/s]
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup: 100%|##########| 250/250 [00:00<00:00, 2964.37it/s]
+  0%|          | 0/48 [00:00<?, ?it/s]100%|##########| 48/48 [00:00<00:00, 923.22it/s]
+cifar10 texture pi=0.05 seed=0 cure=93.56 cure_msp=90.57 cure_energy=89.71 knn=93.56 oodd=88.26 oodd_tout=90.27 oodd_protocol=87.57 adaodd=93.64 warden=95.33 age_queue=25.18 msp=90.57 energy=89.71 rtl_plus=79.63 rtl_plus_protocol=80.04 dcac_msp=55.55 dcac_energy=86.71 dcac_msp_protocol=55.73 dcac_energy_protocol=85.16 dynproto=87.16 maxlogit=89.68 gen=90.77 mahalanobis=93.27 vim=95.60 react=89.70 nci=91.82 fdbd=93.09 cadref=91.60
+  0%|          | 0/48 [00:00<?, ?it/s]100%|##########| 48/48 [00:00<00:00, 824.74it/s]
+cifar10 texture pi=0.05 seed=1 cure=94.13 cure_msp=91.58 cure_energy=91.02 knn=94.13 oodd=90.09 oodd_tout=91.92 oodd_protocol=89.69 adaodd=94.29 warden=95.15 age_queue=26.62 msp=91.58 energy=91.02 rtl_plus=83.63 rtl_plus_protocol=82.31 dcac_msp=53.30 dcac_energy=86.02 dcac_msp_protocol=53.21 dcac_energy_protocol=84.36 dynproto=88.96 maxlogit=90.96 gen=91.89 mahalanobis=92.80 vim=95.61 react=91.15 nci=92.31 fdbd=93.88 cadref=92.07
+  0%|          | 0/48 [00:00<?, ?it/s]100%|##########| 48/48 [00:00<00:00, 808.87it/s]
+cifar10 texture pi=0.05 seed=2 cure=93.61 cure_msp=90.13 cure_energy=89.53 knn=93.61 oodd=89.05 oodd_tout=90.90 oodd_protocol=88.51 adaodd=93.72 warden=95.16 age_queue=23.21 msp=90.13 energy=89.53 rtl_plus=82.24 rtl_plus_protocol=81.86 dcac_msp=52.82 dcac_energy=85.95 dcac_msp_protocol=53.45 dcac_energy_protocol=84.12 dynproto=87.27 maxlogit=89.49 gen=90.36 mahalanobis=93.00 vim=95.45 react=89.42 nci=92.17 fdbd=93.22 cadref=91.66
+  0%|          | 0/57 [00:00<?, ?it/s]100%|##########| 57/57 [00:00<00:00, 948.32it/s]
+cifar10 texture pi=0.2 seed=0 cure=95.59 cure_msp=94.11 cure_energy=93.87 knn=93.70 oodd=91.93 oodd_tout=92.91 oodd_protocol=91.65 adaodd=94.26 warden=95.07 age_queue=50.57 msp=90.78 energy=90.31 rtl_plus=80.73 rtl_plus_protocol=81.44 dcac_msp=62.89 dcac_energy=90.02 dcac_msp_protocol=63.28 dcac_energy_protocol=89.03 dynproto=91.90 maxlogit=90.26 gen=91.12 mahalanobis=92.93 vim=95.41 react=90.25 nci=92.01 fdbd=93.41 cadref=91.61
+  0%|          | 0/57 [00:00<?, ?it/s]100%|##########| 57/57 [00:00<00:00, 819.39it/s]
+cifar10 texture pi=0.2 seed=1 cure=95.12 cure_msp=93.25 cure_energy=92.64 knn=93.57 oodd=91.71 oodd_tout=92.73 oodd_protocol=91.31 adaodd=93.98 warden=95.01 age_queue=49.56 msp=90.44 energy=89.67 rtl_plus=80.28 rtl_plus_protocol=81.63 dcac_msp=60.70 dcac_energy=88.92 dcac_msp_protocol=61.49 dcac_energy_protocol=87.78 dynproto=91.56 maxlogit=89.65 gen=90.72 mahalanobis=92.95 vim=95.37 react=90.07 nci=91.98 fdbd=93.22 cadref=91.59
+  0%|          | 0/57 [00:00<?, ?it/s]100%|##########| 57/57 [00:00<00:00, 723.79it/s]
+cifar10 texture pi=0.2 seed=2 cure=95.13 cure_msp=93.30 cure_energy=92.91 knn=93.67 oodd=91.80 oodd_tout=92.75 oodd_protocol=91.48 adaodd=94.25 warden=95.17 age_queue=50.53 msp=90.82 energy=90.19 rtl_plus=79.99 rtl_plus_protocol=82.69 dcac_msp=61.68 dcac_energy=88.39 dcac_msp_protocol=62.94 dcac_energy_protocol=86.99 dynproto=91.05 maxlogit=90.16 gen=91.15 mahalanobis=93.01 vim=95.54 react=90.34 nci=92.17 fdbd=93.32 cadref=91.76
+  0%|          | 0/57 [00:00<?, ?it/s]100%|##########| 57/57 [00:00<00:00, 655.39it/s]
+cifar10 texture pi=0.5 seed=0 cure=96.00 cure_msp=94.61 cure_energy=94.40 knn=93.84 oodd=93.36 oodd_tout=94.07 oodd_protocol=93.11 adaodd=94.42 warden=95.34 age_queue=76.44 msp=90.80 energy=90.33 rtl_plus=77.89 rtl_plus_protocol=79.29 dcac_msp=69.10 dcac_energy=90.71 dcac_msp_protocol=69.65 dcac_energy_protocol=89.22 dynproto=94.14 maxlogit=90.29 gen=91.15 mahalanobis=93.14 vim=95.68 react=90.28 nci=92.16 fdbd=93.53 cadref=91.69
+  0%|          | 0/57 [00:00<?, ?it/s]100%|##########| 57/57 [00:00<00:00, 911.09it/s]
+cifar10 texture pi=0.5 seed=1 cure=95.84 cure_msp=94.49 cure_energy=94.32 knn=93.77 oodd=93.23 oodd_tout=93.93 oodd_protocol=92.88 adaodd=94.35 warden=95.25 age_queue=75.64 msp=90.88 energy=90.38 rtl_plus=77.81 rtl_plus_protocol=79.76 dcac_msp=73.44 dcac_energy=91.48 dcac_msp_protocol=73.45 dcac_energy_protocol=89.81 dynproto=93.42 maxlogit=90.34 gen=91.19 mahalanobis=92.93 vim=95.55 react=90.30 nci=92.10 fdbd=93.48 cadref=91.78
+  0%|          | 0/57 [00:00<?, ?it/s]100%|##########| 57/57 [00:00<00:00, 1041.08it/s]
+cifar10 texture pi=0.5 seed=2 cure=96.02 cure_msp=94.69 cure_energy=94.43 knn=93.87 oodd=93.20 oodd_tout=93.96 oodd_protocol=92.84 adaodd=94.51 warden=95.29 age_queue=75.86 msp=90.94 energy=90.38 rtl_plus=78.69 rtl_plus_protocol=79.53 dcac_msp=72.00 dcac_energy=88.76 dcac_msp_protocol=72.22 dcac_energy_protocol=87.62 dynproto=94.21 maxlogit=90.35 gen=91.25 mahalanobis=93.12 vim=95.60 react=90.40 nci=92.25 fdbd=93.57 cadref=91.85

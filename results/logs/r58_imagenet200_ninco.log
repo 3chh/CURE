@@ -1,0 +1,28 @@
+
+ Estimating mean and variance from training set...
+Setup:   0%|          | 0/18 [00:00<?, ?it/s]Setup: 100%|##########| 18/18 [00:00<00:00, 1186.34it/s]
+ Train acc: 85.77%
+Extracting id training feature
+Setup:   0%|          | 0/18 [00:00<?, ?it/s]Setup: 100%|##########| 18/18 [00:00<00:00, 1360.02it/s]
+dim=256, self.alpha=11.2983
+Setup:   0%|          | 0/5 [00:00<?, ?it/s]Setup: 100%|##########| 5/5 [00:00<00:00, 583.63it/s]
+Setup:   0%|          | 0/18 [00:00<?, ?it/s]Setup: 100%|##########| 18/18 [00:00<00:00, 2545.77it/s]
+Setup:   0%|          | 0/18 [00:00<?, ?it/s]Setup: 100%|##########| 18/18 [00:00<00:00, 3511.84it/s]
+  0%|          | 0/25 [00:00<?, ?it/s]100%|##########| 25/25 [00:00<00:00, 680.30it/s]
+imagenet200 ninco pi=0.05 seed=0 cure=81.14 cure_msp=84.70 cure_energy=84.13 knn=81.14 oodd=65.51 oodd_tout=68.63 oodd_protocol=66.35 adaodd=83.26 warden=78.64 age_queue=77.31 msp=84.70 energy=84.13 rtl_plus=72.00 rtl_plus_protocol=73.47 dcac_msp=84.95 dcac_energy=84.14 dcac_msp_protocol=84.93 dcac_energy_protocol=84.13 dynproto=81.04 maxlogit=84.57 gen=84.62 mahalanobis=62.08 vim=82.96 react=77.05 nci=85.14 fdbd=86.78 cadref=88.06
+  0%|          | 0/25 [00:00<?, ?it/s]100%|##########| 25/25 [00:00<00:00, 719.63it/s]
+imagenet200 ninco pi=0.05 seed=1 cure=83.14 cure_msp=86.84 cure_energy=85.67 knn=83.14 oodd=68.21 oodd_tout=70.98 oodd_protocol=68.37 adaodd=84.53 warden=79.42 age_queue=78.50 msp=86.84 energy=85.67 rtl_plus=74.12 rtl_plus_protocol=72.10 dcac_msp=86.92 dcac_energy=85.84 dcac_msp_protocol=86.94 dcac_energy_protocol=85.83 dynproto=86.66 maxlogit=86.14 gen=86.17 mahalanobis=60.83 vim=83.41 react=75.97 nci=87.01 fdbd=88.43 cadref=89.48
+  0%|          | 0/25 [00:00<?, ?it/s]100%|##########| 25/25 [00:00<00:00, 691.94it/s]
+imagenet200 ninco pi=0.05 seed=2 cure=82.29 cure_msp=85.77 cure_energy=85.81 knn=82.29 oodd=66.49 oodd_tout=69.28 oodd_protocol=67.88 adaodd=83.71 warden=76.94 age_queue=80.37 msp=85.77 energy=85.81 rtl_plus=72.88 rtl_plus_protocol=70.49 dcac_msp=86.03 dcac_energy=86.02 dcac_msp_protocol=86.01 dcac_energy_protocol=86.01 dynproto=84.67 maxlogit=86.18 gen=86.23 mahalanobis=58.92 vim=82.14 react=75.98 nci=86.11 fdbd=87.85 cadref=89.61
+  0%|          | 0/29 [00:00<?, ?it/s]100%|##########| 29/29 [00:00<00:00, 779.61it/s]
+imagenet200 ninco pi=0.2 seed=0 cure=82.63 cure_msp=85.62 cure_energy=84.66 knn=82.63 oodd=69.82 oodd_tout=71.29 oodd_protocol=70.51 adaodd=83.44 warden=78.83 age_queue=85.30 msp=85.62 energy=84.66 rtl_plus=73.61 rtl_plus_protocol=75.84 dcac_msp=85.93 dcac_energy=85.06 dcac_msp_protocol=85.92 dcac_energy_protocol=85.02 dynproto=86.60 maxlogit=85.10 gen=85.17 mahalanobis=60.63 vim=82.77 react=76.04 nci=86.07 fdbd=87.49 cadref=88.75
+  0%|          | 0/29 [00:00<?, ?it/s]100%|##########| 29/29 [00:00<00:00, 703.73it/s]
+imagenet200 ninco pi=0.2 seed=1 cure=82.95 cure_msp=86.83 cure_energy=85.60 knn=82.95 oodd=71.08 oodd_tout=72.79 oodd_protocol=72.06 adaodd=83.16 warden=78.97 age_queue=85.67 msp=86.83 energy=85.60 rtl_plus=74.78 rtl_plus_protocol=76.04 dcac_msp=87.40 dcac_energy=86.13 dcac_msp_protocol=87.38 dcac_energy_protocol=86.08 dynproto=87.25 maxlogit=86.11 gen=86.14 mahalanobis=60.95 vim=83.45 react=76.43 nci=86.90 fdbd=88.50 cadref=89.58
+  0%|          | 0/29 [00:00<?, ?it/s]100%|##########| 29/29 [00:00<00:00, 755.45it/s]
+imagenet200 ninco pi=0.2 seed=2 cure=83.00 cure_msp=86.50 cure_energy=85.74 knn=83.00 oodd=71.15 oodd_tout=72.48 oodd_protocol=71.74 adaodd=84.36 warden=78.65 age_queue=86.20 msp=86.50 energy=85.74 rtl_plus=73.52 rtl_plus_protocol=74.95 dcac_msp=86.90 dcac_energy=86.27 dcac_msp_protocol=86.90 dcac_energy_protocol=86.23 dynproto=89.00 maxlogit=86.21 gen=86.26 mahalanobis=60.42 vim=83.31 react=75.88 nci=86.77 fdbd=88.26 cadref=89.34
+  0%|          | 0/46 [00:00<?, ?it/s]100%|##########| 46/46 [00:00<00:00, 701.36it/s]
+imagenet200 ninco pi=0.5 seed=0 cure=85.23 cure_msp=88.22 cure_energy=87.66 knn=83.17 oodd=74.84 oodd_tout=75.45 oodd_protocol=75.17 adaodd=83.76 warden=79.33 age_queue=91.91 msp=86.30 energy=85.42 rtl_plus=74.09 rtl_plus_protocol=75.82 dcac_msp=87.12 dcac_energy=85.74 dcac_msp_protocol=87.08 dcac_energy_protocol=85.67 dynproto=89.61 maxlogit=85.87 gen=85.91 mahalanobis=60.61 vim=83.23 react=76.14 nci=86.56 fdbd=88.11 cadref=89.44
+  0%|          | 0/46 [00:00<?, ?it/s] 93%|#########3| 43/46 [00:00<00:00, 427.01it/s]100%|##########| 46/46 [00:00<00:00, 441.42it/s]
+imagenet200 ninco pi=0.5 seed=1 cure=85.34 cure_msp=88.12 cure_energy=87.50 knn=83.11 oodd=73.59 oodd_tout=74.45 oodd_protocol=74.25 adaodd=82.09 warden=79.27 age_queue=91.69 msp=86.14 energy=85.31 rtl_plus=72.84 rtl_plus_protocol=75.95 dcac_msp=87.30 dcac_energy=85.75 dcac_msp_protocol=87.26 dcac_energy_protocol=85.66 dynproto=88.89 maxlogit=85.77 gen=85.82 mahalanobis=60.68 vim=83.13 react=75.76 nci=86.48 fdbd=87.98 cadref=89.34
+  0%|          | 0/46 [00:00<?, ?it/s]100%|##########| 46/46 [00:00<00:00, 622.59it/s]
+imagenet200 ninco pi=0.5 seed=2 cure=84.00 cure_msp=87.06 cure_energy=86.39 knn=83.23 oodd=74.11 oodd_tout=74.95 oodd_protocol=74.64 adaodd=84.09 warden=79.29 age_queue=91.80 msp=86.29 energy=85.52 rtl_plus=73.49 rtl_plus_protocol=75.68 dcac_msp=87.38 dcac_energy=86.15 dcac_msp_protocol=87.35 dcac_energy_protocol=86.09 dynproto=89.62 maxlogit=85.95 gen=86.00 mahalanobis=60.45 vim=83.18 react=76.24 nci=86.62 fdbd=88.11 cadref=89.44

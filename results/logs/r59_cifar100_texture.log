@@ -1,0 +1,63 @@
+cifar100 texture pi=0.05 seed=0 knn=78.42 knn_b1=78.42 knn_b8=78.42 knn_b32=78.42 knn_b128=78.42
+cifar100 texture pi=0.05 seed=1 knn=80.97 knn_b1=80.97 knn_b8=80.97 knn_b32=80.97 knn_b128=80.97
+cifar100 texture pi=0.05 seed=2 knn=80.44 knn_b1=80.44 knn_b8=80.44 knn_b32=80.44 knn_b128=80.44
+cifar100 texture pi=0.2 seed=0 knn=80.04 knn_b1=80.04 knn_b8=80.04 knn_b32=80.04 knn_b128=80.04
+cifar100 texture pi=0.2 seed=1 knn=80.38 knn_b1=80.38 knn_b8=80.38 knn_b32=80.38 knn_b128=80.38
+cifar100 texture pi=0.2 seed=2 knn=80.27 knn_b1=80.27 knn_b8=80.27 knn_b32=80.27 knn_b128=80.27
+cifar100 texture pi=0.5 seed=0 knn=80.32 knn_b1=80.32 knn_b8=80.32 knn_b32=80.32 knn_b128=80.32
+cifar100 texture pi=0.5 seed=1 knn=80.79 knn_b1=80.79 knn_b8=80.79 knn_b32=80.79 knn_b128=80.79
+cifar100 texture pi=0.5 seed=2 knn=80.38 knn_b1=80.38 knn_b8=80.38 knn_b32=80.38 knn_b128=80.38
+cifar100 texture pi=0.05 seed=0 cure_b1=85.27 cure_b8=78.42 cure_b32=78.42 cure_b128=78.42
+cifar100 texture pi=0.05 seed=1 cure_b1=84.58 cure_b8=87.44 cure_b32=80.97 cure_b128=80.97
+cifar100 texture pi=0.05 seed=2 cure_b1=86.00 cure_b8=80.70 cure_b32=80.44 cure_b128=80.44
+cifar100 texture pi=0.2 seed=0 cure_b1=92.92 cure_b8=93.01 cure_b32=92.51 cure_b128=91.97
+cifar100 texture pi=0.2 seed=1 cure_b1=93.32 cure_b8=93.17 cure_b32=92.87 cure_b128=92.35
+cifar100 texture pi=0.2 seed=2 cure_b1=93.26 cure_b8=93.45 cure_b32=93.34 cure_b128=92.86
+cifar100 texture pi=0.5 seed=0 cure_b1=94.19 cure_b8=94.25 cure_b32=94.24 cure_b128=94.12
+cifar100 texture pi=0.5 seed=1 cure_b1=94.30 cure_b8=94.32 cure_b32=94.29 cure_b128=94.21
+cifar100 texture pi=0.5 seed=2 cure_b1=94.40 cure_b8=94.47 cure_b32=94.44 cure_b128=94.39
+cifar100 texture pi=0.05 seed=0 cure_elond_b1=78.42 cure_elond_b8=78.42 cure_elond_b32=78.42 cure_elond_b128=78.42
+cifar100 texture pi=0.05 seed=1 cure_elond_b1=80.97 cure_elond_b8=80.97 cure_elond_b32=80.97 cure_elond_b128=80.97
+cifar100 texture pi=0.05 seed=2 cure_elond_b1=80.44 cure_elond_b8=80.44 cure_elond_b32=80.44 cure_elond_b128=80.44
+cifar100 texture pi=0.2 seed=0 cure_elond_b1=80.04 cure_elond_b8=80.04 cure_elond_b32=80.04 cure_elond_b128=88.25
+cifar100 texture pi=0.2 seed=1 cure_elond_b1=80.38 cure_elond_b8=80.38 cure_elond_b32=80.38 cure_elond_b128=80.38
+cifar100 texture pi=0.2 seed=2 cure_elond_b1=80.27 cure_elond_b8=80.27 cure_elond_b32=80.27 cure_elond_b128=80.27
+cifar100 texture pi=0.5 seed=0 cure_elond_b1=94.17 cure_elond_b8=94.15 cure_elond_b32=94.13 cure_elond_b128=94.06
+cifar100 texture pi=0.5 seed=1 cure_elond_b1=94.17 cure_elond_b8=94.17 cure_elond_b32=94.15 cure_elond_b128=94.08
+cifar100 texture pi=0.5 seed=2 cure_elond_b1=94.38 cure_elond_b8=94.39 cure_elond_b32=94.39 cure_elond_b128=94.34
+cifar100 texture pi=0.05 seed=0 oodd_b1=82.98 oodd_b8=83.05 oodd_b32=83.07 oodd_b128=83.27
+cifar100 texture pi=0.05 seed=1 oodd_b1=86.72 oodd_b8=86.74 oodd_b32=86.79 oodd_b128=86.80
+cifar100 texture pi=0.05 seed=2 oodd_b1=84.92 oodd_b8=84.89 oodd_b32=84.93 oodd_b128=84.96
+cifar100 texture pi=0.2 seed=0 oodd_b1=89.93 oodd_b8=89.95 oodd_b32=89.98 oodd_b128=90.08
+cifar100 texture pi=0.2 seed=1 oodd_b1=90.02 oodd_b8=90.07 oodd_b32=90.10 oodd_b128=90.16
+cifar100 texture pi=0.2 seed=2 oodd_b1=90.36 oodd_b8=90.40 oodd_b32=90.46 oodd_b128=90.59
+cifar100 texture pi=0.5 seed=0 oodd_b1=91.95 oodd_b8=91.99 oodd_b32=92.05 oodd_b128=92.13
+cifar100 texture pi=0.5 seed=1 oodd_b1=92.26 oodd_b8=92.28 oodd_b32=92.32 oodd_b128=92.36
+cifar100 texture pi=0.5 seed=2 oodd_b1=92.18 oodd_b8=92.19 oodd_b32=92.20 oodd_b128=92.25
+cifar100 texture pi=0.05 seed=0 dcac_msp_b1=73.90 dcac_msp_b8=73.87 dcac_msp_b32=73.82 dcac_msp_b128=73.79
+cifar100 texture pi=0.05 seed=1 dcac_msp_b1=75.63 dcac_msp_b8=75.65 dcac_msp_b32=75.58 dcac_msp_b128=75.65
+cifar100 texture pi=0.05 seed=2 dcac_msp_b1=73.44 dcac_msp_b8=73.37 dcac_msp_b32=73.43 dcac_msp_b128=73.45
+cifar100 texture pi=0.2 seed=0 dcac_msp_b1=78.72 dcac_msp_b8=78.70 dcac_msp_b32=78.75 dcac_msp_b128=78.82
+cifar100 texture pi=0.2 seed=1 dcac_msp_b1=80.17 dcac_msp_b8=80.19 dcac_msp_b32=80.17 dcac_msp_b128=80.10
+cifar100 texture pi=0.2 seed=2 dcac_msp_b1=78.73 dcac_msp_b8=78.75 dcac_msp_b32=78.75 dcac_msp_b128=78.85
+cifar100 texture pi=0.5 seed=0 dcac_msp_b1=83.37 dcac_msp_b8=83.36 dcac_msp_b32=83.40 dcac_msp_b128=83.49
+cifar100 texture pi=0.5 seed=1 dcac_msp_b1=84.25 dcac_msp_b8=84.25 dcac_msp_b32=84.24 dcac_msp_b128=84.32
+cifar100 texture pi=0.5 seed=2 dcac_msp_b1=83.29 dcac_msp_b8=83.31 dcac_msp_b32=83.30 dcac_msp_b128=83.37
+cifar100 texture pi=0.05 seed=0 dcac_energy_b1=67.08 dcac_energy_b8=67.08 dcac_energy_b32=67.10 dcac_energy_b128=67.16
+cifar100 texture pi=0.05 seed=1 dcac_energy_b1=67.06 dcac_energy_b8=67.07 dcac_energy_b32=67.08 dcac_energy_b128=67.23
+cifar100 texture pi=0.05 seed=2 dcac_energy_b1=67.20 dcac_energy_b8=67.20 dcac_energy_b32=67.25 dcac_energy_b128=67.37
+cifar100 texture pi=0.2 seed=0 dcac_energy_b1=70.90 dcac_energy_b8=70.91 dcac_energy_b32=70.96 dcac_energy_b128=71.05
+cifar100 texture pi=0.2 seed=1 dcac_energy_b1=71.45 dcac_energy_b8=71.47 dcac_energy_b32=71.50 dcac_energy_b128=71.61
+cifar100 texture pi=0.2 seed=2 dcac_energy_b1=70.52 dcac_energy_b8=70.53 dcac_energy_b32=70.56 dcac_energy_b128=70.72
+cifar100 texture pi=0.5 seed=0 dcac_energy_b1=74.26 dcac_energy_b8=74.27 dcac_energy_b32=74.30 dcac_energy_b128=74.46
+cifar100 texture pi=0.5 seed=1 dcac_energy_b1=75.53 dcac_energy_b8=75.54 dcac_energy_b32=75.57 dcac_energy_b128=75.71
+cifar100 texture pi=0.5 seed=2 dcac_energy_b1=75.01 dcac_energy_b8=75.02 dcac_energy_b32=75.05 dcac_energy_b128=75.19
+cifar100 texture pi=0.05 seed=0 adaodd_b1=82.15 adaodd_b8=82.15 adaodd_b32=82.15 adaodd_b128=82.15
+cifar100 texture pi=0.05 seed=1 adaodd_b1=84.51 adaodd_b8=84.51 adaodd_b32=84.51 adaodd_b128=84.51
+cifar100 texture pi=0.05 seed=2 adaodd_b1=84.15 adaodd_b8=84.15 adaodd_b32=84.15 adaodd_b128=84.15
+cifar100 texture pi=0.2 seed=0 adaodd_b1=83.57 adaodd_b8=83.57 adaodd_b32=83.57 adaodd_b128=83.57
+cifar100 texture pi=0.2 seed=1 adaodd_b1=83.83 adaodd_b8=83.83 adaodd_b32=83.83 adaodd_b128=83.84
+cifar100 texture pi=0.2 seed=2 adaodd_b1=84.16 adaodd_b8=84.16 adaodd_b32=84.16 adaodd_b128=84.16
+cifar100 texture pi=0.5 seed=0 adaodd_b1=83.84 adaodd_b8=83.84 adaodd_b32=83.84 adaodd_b128=83.85
+cifar100 texture pi=0.5 seed=1 adaodd_b1=84.19 adaodd_b8=84.19 adaodd_b32=84.19 adaodd_b128=84.19
+cifar100 texture pi=0.5 seed=2 adaodd_b1=83.81 adaodd_b8=83.81 adaodd_b32=83.82 adaodd_b128=83.82

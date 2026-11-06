@@ -1,0 +1,4 @@
+retry cifar100 cifar10 1
+retry cifar100 cifar10 2
+retry cifar100 cifar10 3
+retry cifar100 places365 [oodd_b1 oodd_b8 oodd_b32 oodd_b128] 1

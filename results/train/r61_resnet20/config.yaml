@@ -1,0 +1,35 @@
+amp: true
+data:
+  cache: true
+  image_root: images_classic
+  imglists: cifar10
+  norm: cifar10
+  num_workers: 4
+  resize: 32
+  size: 32
+  train: train_cifar10
+  val: val_cifar10
+export:
+  extract: cifar10_resnet18
+  benchmark: cifar10
+model:
+  name: resnet20_32x32
+run: r61_resnet20
+seed: 0
+select: best
+stages:
+- augment: openood
+  batch_size: 128
+  epochs: 100
+  loss:
+    name: ce
+  name: ce
+  optimizer:
+    lr: 0.1
+    momentum: 0.9
+    nesterov: true
+    weight_decay: 0.0005
+  schedule:
+    min_lr: 1.0e-06
+    name: cosine
+    per: step

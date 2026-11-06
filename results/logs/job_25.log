@@ -1,0 +1,32 @@
+bỏ qua cure_msp trên cifar10_dinov2: benchmark ko có logit
+bỏ qua cure_energy trên cifar10_dinov2: benchmark ko có logit
+bỏ qua oodd_tout trên cifar10_dinov2: ko có danh sách T-out chính thức khớp với file đặc trưng (khai báo t_out trong config benchmark)
+bỏ qua msp trên cifar10_dinov2: benchmark ko có logit
+bỏ qua energy trên cifar10_dinov2: benchmark ko có logit
+bỏ qua rtl_plus trên cifar10_dinov2: benchmark ko có logit
+bỏ qua rtl_plus_protocol trên cifar10_dinov2: benchmark ko có logit
+bỏ qua dcac_msp trên cifar10_dinov2: benchmark ko có logit
+bỏ qua dcac_energy trên cifar10_dinov2: benchmark ko có logit
+bỏ qua dcac_msp_protocol trên cifar10_dinov2: benchmark ko có logit
+bỏ qua dcac_energy_protocol trên cifar10_dinov2: benchmark ko có logit
+bỏ qua dynproto trên cifar10_dinov2: benchmark ko có logit
+bỏ qua maxlogit trên cifar10_dinov2: benchmark ko có logit
+bỏ qua gen trên cifar10_dinov2: benchmark ko có logit
+bỏ qua mahalanobis trên cifar10_dinov2: benchmark ko có logit
+bỏ qua vim trên cifar10_dinov2: benchmark ko có logit
+bỏ qua react trên cifar10_dinov2: benchmark ko có logit
+bỏ qua nci trên cifar10_dinov2: benchmark ko có logit
+bỏ qua fdbd trên cifar10_dinov2: benchmark ko có logit
+bỏ qua cadref trên cifar10_dinov2: benchmark ko có logit
+cifar10_dinov2 texture pi=0.05 seed=6 cure=99.96 knn=99.96 oodd=99.72 oodd_protocol=99.65 adaodd=99.97 warden=99.99 age_queue=98.29
+cifar10_dinov2 texture pi=0.05 seed=7 cure=99.99 knn=99.99 oodd=99.88 oodd_protocol=99.84 adaodd=100.00 warden=100.00 age_queue=98.61
+cifar10_dinov2 texture pi=0.05 seed=8 cure=99.94 knn=99.97 oodd=99.79 oodd_protocol=99.76 adaodd=99.98 warden=99.99 age_queue=98.09
+cifar10_dinov2 texture pi=0.05 seed=9 cure=99.97 knn=99.97 oodd=99.81 oodd_protocol=99.79 adaodd=99.97 warden=99.98 age_queue=98.80
+cifar10_dinov2 texture pi=0.2 seed=6 cure=99.99 knn=99.98 oodd=99.83 oodd_protocol=99.84 adaodd=99.99 warden=99.99 age_queue=99.53
+cifar10_dinov2 texture pi=0.2 seed=7 cure=99.98 knn=99.98 oodd=99.83 oodd_protocol=99.84 adaodd=99.98 warden=99.99 age_queue=99.52
+cifar10_dinov2 texture pi=0.2 seed=8 cure=99.98 knn=99.98 oodd=99.88 oodd_protocol=99.88 adaodd=99.98 warden=99.99 age_queue=99.59
+cifar10_dinov2 texture pi=0.2 seed=9 cure=99.98 knn=99.98 oodd=99.81 oodd_protocol=99.81 adaodd=99.98 warden=99.99 age_queue=99.47
+cifar10_dinov2 texture pi=0.5 seed=6 cure=99.98 knn=99.97 oodd=99.90 oodd_protocol=99.91 adaodd=99.98 warden=99.99 age_queue=99.87
+cifar10_dinov2 texture pi=0.5 seed=7 cure=99.98 knn=99.98 oodd=99.89 oodd_protocol=99.92 adaodd=99.98 warden=99.99 age_queue=99.86
+cifar10_dinov2 texture pi=0.5 seed=8 cure=99.98 knn=99.98 oodd=99.92 oodd_protocol=99.93 adaodd=99.98 warden=99.99 age_queue=99.85
+cifar10_dinov2 texture pi=0.5 seed=9 cure=99.98 knn=99.97 oodd=99.91 oodd_protocol=99.93 adaodd=99.98 warden=99.99 age_queue=99.85

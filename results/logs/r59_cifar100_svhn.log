@@ -1,0 +1,63 @@
+cifar100 svhn pi=0.05 seed=0 knn=81.77 knn_b1=81.77 knn_b8=81.77 knn_b32=81.77 knn_b128=81.77
+cifar100 svhn pi=0.05 seed=1 knn=83.38 knn_b1=83.38 knn_b8=83.38 knn_b32=83.38 knn_b128=83.38
+cifar100 svhn pi=0.05 seed=2 knn=83.30 knn_b1=83.30 knn_b8=83.30 knn_b32=83.30 knn_b128=83.30
+cifar100 svhn pi=0.2 seed=0 knn=82.44 knn_b1=82.44 knn_b8=82.44 knn_b32=82.44 knn_b128=82.44
+cifar100 svhn pi=0.2 seed=1 knn=82.97 knn_b1=82.97 knn_b8=82.97 knn_b32=82.97 knn_b128=82.97
+cifar100 svhn pi=0.2 seed=2 knn=83.27 knn_b1=83.27 knn_b8=83.27 knn_b32=83.27 knn_b128=83.27
+cifar100 svhn pi=0.5 seed=0 knn=82.52 knn_b1=82.52 knn_b8=82.52 knn_b32=82.52 knn_b128=82.52
+cifar100 svhn pi=0.5 seed=1 knn=82.83 knn_b1=82.83 knn_b8=82.83 knn_b32=82.83 knn_b128=82.83
+cifar100 svhn pi=0.5 seed=2 knn=82.67 knn_b1=82.67 knn_b8=82.67 knn_b32=82.67 knn_b128=82.67
+cifar100 svhn pi=0.05 seed=0 cure_b1=99.11 cure_b8=98.88 cure_b32=98.45 cure_b128=95.77
+cifar100 svhn pi=0.05 seed=1 cure_b1=98.99 cure_b8=98.83 cure_b32=98.07 cure_b128=96.60
+cifar100 svhn pi=0.05 seed=2 cure_b1=98.27 cure_b8=98.22 cure_b32=95.67 cure_b128=95.99
+cifar100 svhn pi=0.2 seed=0 cure_b1=99.25 cure_b8=99.29 cure_b32=99.30 cure_b128=99.29
+cifar100 svhn pi=0.2 seed=1 cure_b1=99.23 cure_b8=99.24 cure_b32=99.21 cure_b128=99.08
+cifar100 svhn pi=0.2 seed=2 cure_b1=99.23 cure_b8=99.25 cure_b32=99.22 cure_b128=99.13
+cifar100 svhn pi=0.5 seed=0 cure_b1=99.45 cure_b8=99.45 cure_b32=99.45 cure_b128=99.37
+cifar100 svhn pi=0.5 seed=1 cure_b1=99.44 cure_b8=99.44 cure_b32=99.40 cure_b128=99.33
+cifar100 svhn pi=0.5 seed=2 cure_b1=99.48 cure_b8=99.47 cure_b32=99.47 cure_b128=99.39
+cifar100 svhn pi=0.05 seed=0 cure_elond_b1=81.77 cure_elond_b8=81.77 cure_elond_b32=81.77 cure_elond_b128=81.77
+cifar100 svhn pi=0.05 seed=1 cure_elond_b1=83.38 cure_elond_b8=83.38 cure_elond_b32=83.38 cure_elond_b128=83.38
+cifar100 svhn pi=0.05 seed=2 cure_elond_b1=83.30 cure_elond_b8=83.30 cure_elond_b32=83.30 cure_elond_b128=83.30
+cifar100 svhn pi=0.2 seed=0 cure_elond_b1=99.35 cure_elond_b8=99.35 cure_elond_b32=99.34 cure_elond_b128=99.34
+cifar100 svhn pi=0.2 seed=1 cure_elond_b1=99.28 cure_elond_b8=99.28 cure_elond_b32=99.25 cure_elond_b128=99.13
+cifar100 svhn pi=0.2 seed=2 cure_elond_b1=99.29 cure_elond_b8=99.29 cure_elond_b32=99.26 cure_elond_b128=99.17
+cifar100 svhn pi=0.5 seed=0 cure_elond_b1=99.45 cure_elond_b8=99.44 cure_elond_b32=99.44 cure_elond_b128=99.37
+cifar100 svhn pi=0.5 seed=1 cure_elond_b1=99.44 cure_elond_b8=99.44 cure_elond_b32=99.41 cure_elond_b128=99.33
+cifar100 svhn pi=0.5 seed=2 cure_elond_b1=99.49 cure_elond_b8=99.48 cure_elond_b32=99.47 cure_elond_b128=99.38
+cifar100 svhn pi=0.05 seed=0 oodd_b1=95.13 oodd_b8=95.22 oodd_b32=95.27 oodd_b128=95.50
+cifar100 svhn pi=0.05 seed=1 oodd_b1=95.61 oodd_b8=95.64 oodd_b32=95.71 oodd_b128=95.93
+cifar100 svhn pi=0.05 seed=2 oodd_b1=96.03 oodd_b8=95.94 oodd_b32=96.03 oodd_b128=96.24
+cifar100 svhn pi=0.2 seed=0 oodd_b1=97.52 oodd_b8=97.49 oodd_b32=97.60 oodd_b128=97.60
+cifar100 svhn pi=0.2 seed=1 oodd_b1=97.60 oodd_b8=97.64 oodd_b32=97.69 oodd_b128=97.76
+cifar100 svhn pi=0.2 seed=2 oodd_b1=97.53 oodd_b8=97.55 oodd_b32=97.64 oodd_b128=97.70
+cifar100 svhn pi=0.5 seed=0 oodd_b1=97.81 oodd_b8=97.83 oodd_b32=97.86 oodd_b128=97.86
+cifar100 svhn pi=0.5 seed=1 oodd_b1=97.87 oodd_b8=97.90 oodd_b32=97.92 oodd_b128=97.92
+cifar100 svhn pi=0.5 seed=2 oodd_b1=97.76 oodd_b8=97.79 oodd_b32=97.80 oodd_b128=97.79
+cifar100 svhn pi=0.05 seed=0 dcac_msp_b1=84.55 dcac_msp_b8=84.52 dcac_msp_b32=84.54 dcac_msp_b128=84.56
+cifar100 svhn pi=0.05 seed=1 dcac_msp_b1=87.52 dcac_msp_b8=87.56 dcac_msp_b32=87.50 dcac_msp_b128=87.50
+cifar100 svhn pi=0.05 seed=2 dcac_msp_b1=83.30 dcac_msp_b8=83.32 dcac_msp_b32=83.36 dcac_msp_b128=83.52
+cifar100 svhn pi=0.2 seed=0 dcac_msp_b1=88.36 dcac_msp_b8=88.37 dcac_msp_b32=88.44 dcac_msp_b128=88.60
+cifar100 svhn pi=0.2 seed=1 dcac_msp_b1=90.54 dcac_msp_b8=90.55 dcac_msp_b32=90.55 dcac_msp_b128=90.66
+cifar100 svhn pi=0.2 seed=2 dcac_msp_b1=87.38 dcac_msp_b8=87.38 dcac_msp_b32=87.36 dcac_msp_b128=87.35
+cifar100 svhn pi=0.5 seed=0 dcac_msp_b1=89.17 dcac_msp_b8=89.17 dcac_msp_b32=89.17 dcac_msp_b128=89.21
+cifar100 svhn pi=0.5 seed=1 dcac_msp_b1=89.93 dcac_msp_b8=89.94 dcac_msp_b32=89.95 dcac_msp_b128=89.95
+cifar100 svhn pi=0.5 seed=2 dcac_msp_b1=90.61 dcac_msp_b8=90.61 dcac_msp_b32=90.65 dcac_msp_b128=90.75
+cifar100 svhn pi=0.05 seed=0 dcac_energy_b1=70.50 dcac_energy_b8=70.50 dcac_energy_b32=70.54 dcac_energy_b128=70.66
+cifar100 svhn pi=0.05 seed=1 dcac_energy_b1=74.28 dcac_energy_b8=74.29 dcac_energy_b32=74.32 dcac_energy_b128=74.47
+cifar100 svhn pi=0.05 seed=2 dcac_energy_b1=70.93 dcac_energy_b8=70.94 dcac_energy_b32=70.99 dcac_energy_b128=71.13
+cifar100 svhn pi=0.2 seed=0 dcac_energy_b1=75.89 dcac_energy_b8=75.90 dcac_energy_b32=75.94 dcac_energy_b128=76.07
+cifar100 svhn pi=0.2 seed=1 dcac_energy_b1=75.97 dcac_energy_b8=75.98 dcac_energy_b32=76.02 dcac_energy_b128=76.16
+cifar100 svhn pi=0.2 seed=2 dcac_energy_b1=75.66 dcac_energy_b8=75.67 dcac_energy_b32=75.71 dcac_energy_b128=75.86
+cifar100 svhn pi=0.5 seed=0 dcac_energy_b1=78.14 dcac_energy_b8=78.14 dcac_energy_b32=78.17 dcac_energy_b128=78.28
+cifar100 svhn pi=0.5 seed=1 dcac_energy_b1=78.00 dcac_energy_b8=78.01 dcac_energy_b32=78.03 dcac_energy_b128=78.12
+cifar100 svhn pi=0.5 seed=2 dcac_energy_b1=78.93 dcac_energy_b8=78.94 dcac_energy_b32=78.97 dcac_energy_b128=79.08
+cifar100 svhn pi=0.05 seed=0 adaodd_b1=80.93 adaodd_b8=80.93 adaodd_b32=80.93 adaodd_b128=80.93
+cifar100 svhn pi=0.05 seed=1 adaodd_b1=83.02 adaodd_b8=83.02 adaodd_b32=83.02 adaodd_b128=83.02
+cifar100 svhn pi=0.05 seed=2 adaodd_b1=83.09 adaodd_b8=83.09 adaodd_b32=83.09 adaodd_b128=83.10
+cifar100 svhn pi=0.2 seed=0 adaodd_b1=80.82 adaodd_b8=80.82 adaodd_b32=80.83 adaodd_b128=80.84
+cifar100 svhn pi=0.2 seed=1 adaodd_b1=81.33 adaodd_b8=81.34 adaodd_b32=81.34 adaodd_b128=81.36
+cifar100 svhn pi=0.2 seed=2 adaodd_b1=81.06 adaodd_b8=81.07 adaodd_b32=81.07 adaodd_b128=81.11
+cifar100 svhn pi=0.5 seed=0 adaodd_b1=69.23 adaodd_b8=69.24 adaodd_b32=69.30 adaodd_b128=69.49
+cifar100 svhn pi=0.5 seed=1 adaodd_b1=69.21 adaodd_b8=69.21 adaodd_b32=69.24 adaodd_b128=69.97
+cifar100 svhn pi=0.5 seed=2 adaodd_b1=68.71 adaodd_b8=68.72 adaodd_b32=68.74 adaodd_b128=68.95

@@ -1,0 +1,36 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Scripts\cure-ood.exe\__main__.py", line 7, in <module>
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\cli.py", line 45, in main
+    run(exp, a.benchmark, a.domain, a.method)
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\eval\runner.py", line 72, in run
+    out = arms[a].score(stream)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\testtime\rtl.py", line 41, in score
+    Xh = np.eye(len(X)) - X @ np.linalg.pinv(X.T @ X) @ X.T
+         ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 2.00 MiB for an array with shape (512, 512) and data type float64
+cifar100 texture pi=0.05 seed=0 cure=78.42 cure_msp=76.04 cure_energy=77.76 cure_lf=78.31 knn=78.42 oodd=79.06 age_queue=72.07 adaodd=81.66 warden_a=78.42 warden_b=78.42 warden_c=78.42 rtl_plus=74.73 msp=76.04 energy=77.76 dcac_msp=73.79 dcac_energy=67.16 dynproto=81.45 energy_aps=77.72 maxlogit=77.65 gen=78.24 mahalanobis=75.17 vim=84.38 react=78.72 nci=82.53 fdbd=81.24 cadref=82.29
+cifar100 texture pi=0.05 seed=1 cure=80.97 cure_msp=78.82 cure_energy=79.58 cure_lf=80.85 knn=80.97 oodd=83.80 age_queue=73.74 adaodd=84.02 warden_a=80.97 warden_b=80.97 warden_c=80.97 rtl_plus=77.55 msp=78.82 energy=79.58 dcac_msp=75.65 dcac_energy=67.23 dynproto=83.63 energy_aps=79.72 maxlogit=79.76 gen=80.18 mahalanobis=75.43 vim=85.93 react=80.46 nci=84.41 fdbd=83.51 cadref=83.87
+cifar100 texture pi=0.05 seed=2 cure=80.44 cure_msp=77.82 cure_energy=78.32 cure_lf=80.31 knn=80.44 oodd=81.25 age_queue=72.02 adaodd=83.54
+cifar100 texture pi=0.2 seed=0 cure=91.97 cure_msp=91.67 cure_energy=91.87 cure_lf=81.71 knn=80.04 oodd=88.31 age_queue=86.52 adaodd=83.05
+cifar100 texture pi=0.2 seed=1 cure=92.35 cure_msp=91.88 cure_energy=92.13 cure_lf=81.92 knn=80.38 oodd=88.33 age_queue=85.79 adaodd=83.34
+cifar100 texture pi=0.2 seed=2 cure=92.86 cure_msp=92.47 cure_energy=92.59 cure_lf=82.10 knn=80.27 oodd=88.31 age_queue=85.83 adaodd=83.60
+cifar100 texture pi=0.5 seed=0 cure=94.12 cure_msp=93.68 cure_energy=93.86 cure_lf=84.62 knn=80.32 oodd=90.89 age_queue=92.84 adaodd=83.38
+cifar100 texture pi=0.5 seed=1 cure=94.21 cure_msp=93.81 cure_energy=93.95 cure_lf=85.07 knn=80.79 oodd=91.14 age_queue=93.19 adaodd=83.78
+cifar100 texture pi=0.5 seed=2 cure=94.39 cure_msp=93.98 cure_energy=94.21 cure_lf=84.73 knn=80.38 oodd=90.99 age_queue=92.99 adaodd=83.40
+cifar100 texture pi=0.05 seed=2 warden_a=80.44 warden_b=80.44 warden_c=80.44 rtl_plus=76.08 msp=77.82 energy=78.32 dcac_msp=73.45 dcac_energy=67.37 dynproto=82.62
+cifar100 texture pi=0.2 seed=0 warden_a=80.04 warden_b=80.04 warden_c=80.04 rtl_plus=76.52 msp=77.29 energy=78.08 dcac_msp=78.82 dcac_energy=71.05 dynproto=88.10
+cifar100 texture pi=0.2 seed=1 warden_a=80.38 warden_b=80.38 warden_c=80.38 rtl_plus=76.20 msp=77.53 energy=78.71 dcac_msp=80.10 dcac_energy=71.61 dynproto=87.87
+cifar100 texture pi=0.2 seed=2 warden_a=80.27 warden_b=80.27 warden_c=80.27 rtl_plus=75.98 msp=77.60 energy=78.29 dcac_msp=78.85 dcac_energy=70.72 dynproto=87.91
+cifar100 texture pi=0.5 seed=0 warden_a=80.32 warden_b=80.32 warden_c=80.32 rtl_plus=69.92 msp=77.54 energy=78.44 dcac_msp=83.49 dcac_energy=74.46 dynproto=90.67
+cifar100 texture pi=0.5 seed=1 warden_a=80.79 warden_b=80.79 warden_c=80.79 rtl_plus=70.21 msp=77.97 energy=78.79 dcac_msp=84.32 dcac_energy=75.71 dynproto=90.58
+cifar100 texture pi=0.5 seed=2 warden_a=80.38 warden_b=80.38 warden_c=80.38 rtl_plus=70.25 msp=77.60 energy=78.55 dcac_msp=83.37 dcac_energy=75.19 dynproto=90.25
+cifar100 texture pi=0.05 seed=2 energy_aps=78.48 maxlogit=78.51 gen=78.96 mahalanobis=77.50 vim=85.67 react=79.24 nci=84.20 fdbd=82.89 cadref=83.80
+cifar100 texture pi=0.2 seed=0 energy_aps=78.16 maxlogit=78.16 gen=78.70 mahalanobis=76.75 vim=85.47 react=79.11 nci=83.65 fdbd=82.49 cadref=83.04
+cifar100 texture pi=0.2 seed=1 energy_aps=78.77 maxlogit=78.73 gen=79.30 mahalanobis=76.50 vim=85.55 react=79.64 nci=83.92 fdbd=82.77 cadref=83.51
+cifar100 texture pi=0.2 seed=2 energy_aps=78.41 maxlogit=78.41 gen=78.97 mahalanobis=77.36 vim=85.88 react=79.35 nci=84.13 fdbd=83.01 cadref=83.79
+cifar100 texture pi=0.5 seed=0 energy_aps=78.54 maxlogit=78.53 gen=79.08 mahalanobis=77.08 vim=85.80 react=79.44 nci=84.00 fdbd=82.87 cadref=83.45
+cifar100 texture pi=0.5 seed=1 energy_aps=78.89 maxlogit=78.88 gen=79.44 mahalanobis=77.09 vim=86.18 react=79.81 nci=84.39 fdbd=83.26 cadref=83.72
+cifar100 texture pi=0.5 seed=2 energy_aps=78.65 maxlogit=78.62 gen=79.20 mahalanobis=76.96 vim=85.63 react=79.55 nci=84.01 fdbd=82.87 cadref=83.53

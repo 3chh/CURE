@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\cli.py", line 75, in <module>
+    main()
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\cli.py", line 63, in main
+    run(exp, a.benchmark, a.domain, a.method, force=a.force)
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\eval\runner.py", line 80, in run
+    out = arms[a].score(stream)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\testtime\oodd.py", line 74, in score
+    s, trace = official.conf_postprocess(self.activation_log, self.idx, feats, self.K1, self.K2, self.alpha,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\testtime\_official\oodd_knn.py", line 155, in conf_postprocess
+    new_food = pool[np.array(data_list)]
+               ~~~~^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.00 MiB for an array with shape (512, 512) and data type float32
+cifar10_supcon cifar100 pi=0.05 seed=0 oodd_tout=84.46 oodd_protocol=82.58 adaodd=91.12 warden=91.80 age_queue=14.37
+cifar10_supcon cifar100 pi=0.05 seed=1 oodd_tout=84.71 oodd_protocol=82.80 adaodd=91.44 warden=91.85 age_queue=13.45
+cifar10_supcon cifar100 pi=0.05 seed=2 oodd_tout=84.84 oodd_protocol=83.20 adaodd=91.67 warden=91.92 age_queue=13.51
+cifar10_supcon cifar100 pi=0.2 seed=0 oodd_tout=86.85 oodd_protocol=85.14 adaodd=91.50 warden=91.75 age_queue=17.43
+[run_all] lỗi cifar10_supcon/cifar100 ['oodd_tout', 'oodd_protocol', 'adaodd', 'warden', 'age_queue'] (lần 1)

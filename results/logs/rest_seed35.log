@@ -1,0 +1,179 @@
+cifar10 cifar100 pi=0.05 seed=3 cure=89.55 cure_msp=87.10 cure_energy=86.32 knn=89.55 oodd=82.33
+cifar10 cifar100 pi=0.05 seed=4 cure=89.04 cure_msp=86.01 cure_energy=84.84 knn=89.04 oodd=82.15
+cifar10 cifar100 pi=0.05 seed=5 cure=90.62 cure_msp=88.19 cure_energy=87.51 knn=90.62 oodd=83.93
+cifar10 cifar100 pi=0.2 seed=3 cure=90.19 cure_msp=87.60 cure_energy=86.82 knn=90.19 oodd=86.14
+cifar10 cifar100 pi=0.2 seed=4 cure=90.49 cure_msp=87.63 cure_energy=86.75 knn=90.49 oodd=86.53
+cifar10 cifar100 pi=0.2 seed=5 cure=90.34 cure_msp=87.66 cure_energy=87.09 knn=90.34 oodd=85.55
+cifar10 cifar100 pi=0.5 seed=3 cure=89.38 cure_msp=86.97 cure_energy=86.48 knn=90.09 oodd=88.04
+cifar10 cifar100 pi=0.5 seed=4 cure=90.09 cure_msp=87.40 cure_energy=86.66 knn=90.09 oodd=88.06
+cifar10 cifar100 pi=0.5 seed=5 cure=88.74 cure_msp=87.01 cure_energy=86.70 knn=90.09 oodd=88.10
+cifar10 cifar100 pi=0.05 seed=3 oodd_tout=84.09 oodd_protocol=81.84 adaodd=89.57 warden=87.52 age_queue=18.36
+cifar10 cifar100 pi=0.05 seed=4 oodd_tout=83.77 oodd_protocol=81.68 adaodd=88.92 warden=87.25 age_queue=20.10
+cifar10 cifar100 pi=0.05 seed=5 oodd_tout=85.22 oodd_protocol=83.44 adaodd=90.50 warden=88.52 age_queue=20.45
+cifar10 cifar100 pi=0.2 seed=3 oodd_tout=87.07 oodd_protocol=85.66 adaodd=90.25 warden=88.36 age_queue=28.67
+cifar10 cifar100 pi=0.2 seed=4 oodd_tout=87.42 oodd_protocol=86.13 adaodd=90.56 warden=88.38 age_queue=30.24
+cifar10 cifar100 pi=0.2 seed=5 oodd_tout=86.45 oodd_protocol=85.09 adaodd=90.37 warden=88.50 age_queue=29.60
+cifar10 cifar100 pi=0.5 seed=3 oodd_tout=88.50 oodd_protocol=87.74 adaodd=90.01 warden=88.10 age_queue=53.60
+cifar10 cifar100 pi=0.5 seed=4 oodd_tout=88.52 oodd_protocol=87.77 adaodd=89.96 warden=88.10 age_queue=54.55
+cifar10 cifar100 pi=0.5 seed=5 oodd_tout=88.54 oodd_protocol=87.80 adaodd=89.96 warden=88.10 age_queue=54.28
+cifar10 cifar100 pi=0.05 seed=3 msp=87.10 energy=86.32 rtl_plus=75.22 rtl_plus_protocol=74.65 dcac_msp=55.52
+cifar10 cifar100 pi=0.05 seed=4 msp=86.01 energy=84.84 rtl_plus=73.40 rtl_plus_protocol=71.49 dcac_msp=55.48
+cifar10 cifar100 pi=0.05 seed=5 msp=88.19 energy=87.51 rtl_plus=75.58 rtl_plus_protocol=76.18 dcac_msp=57.65
+cifar10 cifar100 pi=0.2 seed=3 msp=87.60 energy=86.82 rtl_plus=76.19 rtl_plus_protocol=76.35 dcac_msp=64.11
+cifar10 cifar100 pi=0.2 seed=4 msp=87.63 energy=86.75 rtl_plus=75.07 rtl_plus_protocol=75.79 dcac_msp=63.55
+cifar10 cifar100 pi=0.2 seed=5 msp=87.66 energy=87.09 rtl_plus=74.98 rtl_plus_protocol=76.56 dcac_msp=64.80
+cifar10 cifar100 pi=0.5 seed=3 msp=87.40 energy=86.66 rtl_plus=74.61 rtl_plus_protocol=74.97 dcac_msp=70.37
+cifar10 cifar100 pi=0.5 seed=4 msp=87.40 energy=86.66 rtl_plus=74.42 rtl_plus_protocol=75.28 dcac_msp=70.48
+cifar10 cifar100 pi=0.5 seed=5 msp=87.40 energy=86.66 rtl_plus=74.26 rtl_plus_protocol=75.30 dcac_msp=70.94
+cifar10 cifar100 pi=0.05 seed=3 dcac_energy=82.06 dcac_msp_protocol=55.66 dcac_energy_protocol=81.06 dynproto=81.47 maxlogit=86.25
+cifar10 cifar100 pi=0.05 seed=4 dcac_energy=81.28 dcac_msp_protocol=55.77 dcac_energy_protocol=80.05 dynproto=80.40 maxlogit=84.83
+cifar10 cifar100 pi=0.05 seed=5 dcac_energy=83.13 dcac_msp_protocol=56.76 dcac_energy_protocol=81.96 dynproto=81.92 maxlogit=87.45
+cifar10 cifar100 pi=0.2 seed=3 dcac_energy=84.24 dcac_msp_protocol=64.79 dcac_energy_protocol=83.35 dynproto=86.09 maxlogit=86.76
+cifar10 cifar100 pi=0.2 seed=4 dcac_energy=84.49 dcac_msp_protocol=63.95 dcac_energy_protocol=83.47 dynproto=86.04 maxlogit=86.70
+cifar10 cifar100 pi=0.2 seed=5 dcac_energy=85.12 dcac_msp_protocol=65.11 dcac_energy_protocol=84.13 dynproto=86.34 maxlogit=87.03
+cifar10 cifar100 pi=0.5 seed=3 dcac_energy=86.10 dcac_msp_protocol=70.56 dcac_energy_protocol=85.49 dynproto=88.79 maxlogit=86.60
+cifar10 cifar100 pi=0.5 seed=4 dcac_energy=86.15 dcac_msp_protocol=70.05 dcac_energy_protocol=85.23 dynproto=88.78 maxlogit=86.60
+cifar10 cifar100 pi=0.5 seed=5 dcac_energy=85.91 dcac_msp_protocol=70.63 dcac_energy_protocol=85.09 dynproto=88.73 maxlogit=86.60
+
+ Estimating mean and variance from training set...
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup:  54%|#####3    | 134/250 [00:00<00:00, 1319.72it/s]Setup: 100%|##########| 250/250 [00:00<00:00, 1386.06it/s]
+ Train acc: 100.00%
+Extracting id training feature
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup:  55%|#####5    | 138/250 [00:00<00:00, 1366.71it/s]Setup: 100%|##########| 250/250 [00:00<00:00, 1557.04it/s]
+C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\static\_openood\postprocessors\vim_postprocessor.py:63: RuntimeWarning: divide by zero encountered in scalar divide
+  self.alpha = self.logit_id_train.max(
+C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\static\_openood\postprocessors\vim_postprocessor.py:74: RuntimeWarning: invalid value encountered in multiply
+  vlogit_ood = norm(np.matmul(feature_ood.numpy() - self.u, self.NS),
+dim=256, self.alpha=81.3467
+dim=256, self.alpha=81.3467
+dim=1000, self.alpha=inf
+dim=256, self.alpha=81.3467
+Setup:   0%|          | 0/5 [00:00<?, ?it/s]Setup: 100%|##########| 5/5 [00:00<00:00, 576.05it/s]
+Threshold at percentile 85 over id data is: 0.389066219329834
+Threshold at percentile 90 over id data is: 0.47976747155189514
+Threshold at percentile 95 over id data is: 0.6117018461227417
+Threshold at percentile 99 over id data is: 0.8843927383422852
+Threshold at percentile 90 over id data is: 0.47976747155189514
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup:  54%|#####4    | 136/250 [00:00<00:00, 1330.55it/s]Setup: 100%|##########| 250/250 [00:00<00:00, 1424.09it/s]
+cifar10 cifar100 pi=0.05 seed=3 gen=87.30 mahalanobis=83.62 vim=87.52 react=85.28 nci=87.82
+cifar10 cifar100 pi=0.05 seed=4 gen=85.93 mahalanobis=83.50 vim=87.30 react=83.57 nci=86.68
+cifar10 cifar100 pi=0.05 seed=5 gen=88.35 mahalanobis=85.04 vim=88.88 react=86.32 nci=88.76
+cifar10 cifar100 pi=0.2 seed=3 gen=87.75 mahalanobis=84.51 vim=88.51 react=85.75 nci=88.33
+cifar10 cifar100 pi=0.2 seed=4 gen=87.71 mahalanobis=84.98 vim=88.51 react=86.01 nci=88.57
+cifar10 cifar100 pi=0.2 seed=5 gen=87.88 mahalanobis=84.60 vim=88.50 react=85.86 nci=88.23
+cifar10 cifar100 pi=0.5 seed=3 gen=87.54 mahalanobis=84.30 vim=88.12 react=85.46 nci=87.98
+cifar10 cifar100 pi=0.5 seed=4 gen=87.54 mahalanobis=84.30 vim=88.12 react=85.46 nci=87.98
+cifar10 cifar100 pi=0.5 seed=5 gen=87.54 mahalanobis=84.30 vim=88.12 react=85.46 nci=87.98
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup:  32%|###2      | 80/250 [00:00<00:00, 716.71it/s]Setup: 100%|##########| 250/250 [00:00<00:00, 1434.73it/s]
+  0%|          | 0/48 [00:00<?, ?it/s]100%|##########| 48/48 [00:00<00:00, 574.81it/s]
+cifar10 cifar100 pi=0.05 seed=3 fdbd=89.02 cadref=88.13
+  0%|          | 0/48 [00:00<?, ?it/s]100%|##########| 48/48 [00:00<00:00, 765.73it/s]
+cifar10 cifar100 pi=0.05 seed=4 fdbd=88.46 cadref=87.37
+  0%|          | 0/48 [00:00<?, ?it/s]100%|##########| 48/48 [00:00<00:00, 685.38it/s]
+cifar10 cifar100 pi=0.05 seed=5 fdbd=90.34 cadref=88.85
+  0%|          | 0/57 [00:00<?, ?it/s]100%|##########| 57/57 [00:00<00:00, 706.32it/s]
+cifar10 cifar100 pi=0.2 seed=3 fdbd=89.77 cadref=88.62
+  0%|          | 0/57 [00:00<?, ?it/s]100%|##########| 57/57 [00:00<00:00, 905.87it/s]
+cifar10 cifar100 pi=0.2 seed=4 fdbd=90.04 cadref=88.83
+  0%|          | 0/57 [00:00<?, ?it/s]100%|##########| 57/57 [00:00<00:00, 911.80it/s]
+cifar10 cifar100 pi=0.2 seed=5 fdbd=89.92 cadref=88.74
+  0%|          | 0/90 [00:00<?, ?it/s] 71%|#######1  | 64/90 [00:00<00:00, 613.78it/s]100%|##########| 90/90 [00:00<00:00, 663.67it/s]
+cifar10 cifar100 pi=0.5 seed=3 fdbd=89.66 cadref=88.45
+  0%|          | 0/90 [00:00<?, ?it/s] 68%|######7   | 61/90 [00:00<00:00, 571.01it/s]100%|##########| 90/90 [00:00<00:00, 629.21it/s]
+cifar10 cifar100 pi=0.5 seed=4 fdbd=89.66 cadref=88.45
+  0%|          | 0/90 [00:00<?, ?it/s] 74%|#######4  | 67/90 [00:00<00:00, 656.48it/s]100%|##########| 90/90 [00:00<00:00, 674.71it/s]
+cifar10 cifar100 pi=0.5 seed=5 fdbd=89.66 cadref=88.45
+cifar10 tin pi=0.05 seed=3 cure=90.85 cure_msp=87.66 cure_energy=87.79 knn=90.85 oodd=85.18
+cifar10 tin pi=0.05 seed=4 cure=92.58 cure_msp=90.13 cure_energy=90.33 knn=92.58 oodd=86.11
+cifar10 tin pi=0.05 seed=5 cure=91.93 cure_msp=89.10 cure_energy=89.34 knn=91.93 oodd=85.70
+cifar10 tin pi=0.2 seed=3 cure=91.77 cure_msp=89.35 cure_energy=89.73 knn=92.06 oodd=88.17
+cifar10 tin pi=0.2 seed=4 cure=92.20 cure_msp=89.13 cure_energy=89.15 knn=92.20 oodd=88.41
+cifar10 tin pi=0.2 seed=5 cure=92.01 cure_msp=88.84 cure_energy=88.81 knn=92.01 oodd=88.35
+cifar10 tin pi=0.5 seed=3 cure=91.81 cure_msp=90.43 cure_energy=90.55 knn=92.09 oodd=90.31
+cifar10 tin pi=0.5 seed=4 cure=92.13 cure_msp=90.83 cure_energy=91.02 knn=92.04 oodd=90.43
+cifar10 tin pi=0.5 seed=5 cure=92.02 cure_msp=90.73 cure_energy=90.92 knn=92.15 oodd=90.44
+cifar10 tin pi=0.05 seed=3 oodd_tout=86.50 oodd_protocol=84.62 adaodd=90.95 warden=88.26 age_queue=18.84
+cifar10 tin pi=0.05 seed=4 oodd_tout=87.74 oodd_protocol=85.55 adaodd=92.51 warden=90.18 age_queue=16.76
+cifar10 tin pi=0.05 seed=5 oodd_tout=87.40 oodd_protocol=85.03 adaodd=91.91 warden=89.67 age_queue=18.16
+cifar10 tin pi=0.2 seed=3 oodd_tout=89.19 oodd_protocol=87.70 adaodd=92.10 warden=89.67 age_queue=31.75
+cifar10 tin pi=0.2 seed=4 oodd_tout=89.43 oodd_protocol=88.02 adaodd=92.12 warden=89.87 age_queue=32.45
+cifar10 tin pi=0.2 seed=5 oodd_tout=89.32 oodd_protocol=87.88 adaodd=92.05 warden=89.54 age_queue=31.37
+cifar10 tin pi=0.5 seed=3 oodd_tout=90.84 oodd_protocol=90.05 adaodd=92.13 warden=89.64 age_queue=59.32
+cifar10 tin pi=0.5 seed=4 oodd_tout=91.04 oodd_protocol=90.09 adaodd=92.11 warden=89.58 age_queue=60.07
+cifar10 tin pi=0.5 seed=5 oodd_tout=90.94 oodd_protocol=90.18 adaodd=92.15 warden=89.75 age_queue=60.01
+cifar10 tin pi=0.05 seed=3 msp=87.66 energy=87.79 rtl_plus=76.69 rtl_plus_protocol=76.63 dcac_msp=55.09
+cifar10 tin pi=0.05 seed=4 msp=90.13 energy=90.33 rtl_plus=78.29 rtl_plus_protocol=75.95 dcac_msp=59.77
+cifar10 tin pi=0.05 seed=5 msp=89.10 energy=89.34 rtl_plus=78.38 rtl_plus_protocol=78.66 dcac_msp=58.21
+cifar10 tin pi=0.2 seed=3 msp=89.25 energy=89.46 rtl_plus=77.08 rtl_plus_protocol=78.68 dcac_msp=62.79
+cifar10 tin pi=0.2 seed=4 msp=89.13 energy=89.15 rtl_plus=77.79 rtl_plus_protocol=78.44 dcac_msp=65.54
+cifar10 tin pi=0.2 seed=5 msp=88.84 energy=88.81 rtl_plus=77.48 rtl_plus_protocol=77.44 dcac_msp=65.04
+cifar10 tin pi=0.5 seed=3 msp=89.21 energy=89.20 rtl_plus=77.04 rtl_plus_protocol=77.06 dcac_msp=72.42
+cifar10 tin pi=0.5 seed=4 msp=89.17 energy=89.22 rtl_plus=76.53 rtl_plus_protocol=77.18 dcac_msp=70.15
+cifar10 tin pi=0.5 seed=5 msp=89.21 energy=89.28 rtl_plus=76.80 rtl_plus_protocol=77.38 dcac_msp=72.50
+cifar10 tin pi=0.05 seed=3 dcac_energy=81.76 dcac_msp_protocol=54.85 dcac_energy_protocol=80.12 dynproto=83.52 maxlogit=87.72
+cifar10 tin pi=0.05 seed=4 dcac_energy=86.85 dcac_msp_protocol=60.02 dcac_energy_protocol=85.99 dynproto=86.52 maxlogit=90.24
+cifar10 tin pi=0.05 seed=5 dcac_energy=84.15 dcac_msp_protocol=57.47 dcac_energy_protocol=81.95 dynproto=83.55 maxlogit=89.24
+cifar10 tin pi=0.2 seed=3 dcac_energy=86.76 dcac_msp_protocol=63.17 dcac_energy_protocol=85.12 dynproto=88.94 maxlogit=89.37
+cifar10 tin pi=0.2 seed=4 dcac_energy=86.92 dcac_msp_protocol=65.82 dcac_energy_protocol=85.81 dynproto=89.69 maxlogit=89.06
+cifar10 tin pi=0.2 seed=5 dcac_energy=87.67 dcac_msp_protocol=65.71 dcac_energy_protocol=86.28 dynproto=89.33 maxlogit=88.72
+cifar10 tin pi=0.5 seed=3 dcac_energy=89.04 dcac_msp_protocol=71.45 dcac_energy_protocol=87.95 dynproto=91.43 maxlogit=89.11
+cifar10 tin pi=0.5 seed=4 dcac_energy=87.08 dcac_msp_protocol=70.38 dcac_energy_protocol=86.39 dynproto=91.31 maxlogit=89.13
+cifar10 tin pi=0.5 seed=5 dcac_energy=89.36 dcac_msp_protocol=72.83 dcac_energy_protocol=88.04 dynproto=91.20 maxlogit=89.20
+
+ Estimating mean and variance from training set...
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup:  63%|######3   | 158/250 [00:00<00:00, 1472.66it/s]Setup: 100%|##########| 250/250 [00:00<00:00, 1260.74it/s]
+ Train acc: 100.00%
+Extracting id training feature
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup:  36%|###6      | 90/250 [00:00<00:00, 851.05it/s]Setup: 100%|##########| 250/250 [00:00<00:00, 1350.94it/s]
+C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\static\_openood\postprocessors\vim_postprocessor.py:63: RuntimeWarning: divide by zero encountered in scalar divide
+  self.alpha = self.logit_id_train.max(
+C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\static\_openood\postprocessors\vim_postprocessor.py:74: RuntimeWarning: invalid value encountered in multiply
+  vlogit_ood = norm(np.matmul(feature_ood.numpy() - self.u, self.NS),
+dim=256, self.alpha=81.3467
+dim=256, self.alpha=81.3467
+dim=1000, self.alpha=inf
+dim=256, self.alpha=81.3467
+Setup:   0%|          | 0/5 [00:00<?, ?it/s]Setup: 100%|##########| 5/5 [00:00<00:00, 307.28it/s]
+Threshold at percentile 85 over id data is: 0.389066219329834
+Threshold at percentile 90 over id data is: 0.47976747155189514
+Threshold at percentile 95 over id data is: 0.6117018461227417
+Threshold at percentile 99 over id data is: 0.8843927383422852
+Threshold at percentile 90 over id data is: 0.47976747155189514
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup:  23%|##3       | 58/250 [00:00<00:00, 529.19it/s]Setup:  44%|####4     | 111/250 [00:00<00:00, 498.84it/s]Setup:  94%|#########3| 234/250 [00:00<00:00, 804.12it/s]Setup: 100%|##########| 250/250 [00:00<00:00, 748.65it/s]
+cifar10 tin pi=0.05 seed=3 gen=87.98 mahalanobis=84.39 vim=88.50 react=86.42 nci=88.09
+cifar10 tin pi=0.05 seed=4 gen=90.57 mahalanobis=86.17 vim=90.55 react=89.37 nci=90.48
+cifar10 tin pi=0.05 seed=5 gen=89.50 mahalanobis=85.02 vim=89.69 react=88.21 nci=89.62
+cifar10 tin pi=0.2 seed=3 gen=89.64 mahalanobis=85.35 vim=90.13 react=88.54 nci=89.87
+cifar10 tin pi=0.2 seed=4 gen=89.48 mahalanobis=85.64 vim=90.18 react=88.21 nci=89.91
+cifar10 tin pi=0.2 seed=5 gen=89.18 mahalanobis=85.56 vim=90.00 react=88.18 nci=89.81
+cifar10 tin pi=0.5 seed=3 gen=89.54 mahalanobis=85.63 vim=90.07 react=88.50 nci=89.88
+cifar10 tin pi=0.5 seed=4 gen=89.52 mahalanobis=85.44 vim=90.00 react=88.52 nci=89.84
+cifar10 tin pi=0.5 seed=5 gen=89.56 mahalanobis=85.59 vim=90.16 react=88.49 nci=89.90
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup:  19%|#8        | 47/250 [00:00<00:00, 420.14it/s]Setup: 100%|##########| 250/250 [00:00<00:00, 1270.41it/s]
+  0%|          | 0/48 [00:00<?, ?it/s]100%|##########| 48/48 [00:00<00:00, 649.33it/s]
+cifar10 tin pi=0.05 seed=3 fdbd=90.41 cadref=88.95
+  0%|          | 0/48 [00:00<?, ?it/s]100%|##########| 48/48 [00:00<00:00, 746.25it/s]
+cifar10 tin pi=0.05 seed=4 fdbd=92.53 cadref=90.63
+  0%|          | 0/48 [00:00<?, ?it/s]100%|##########| 48/48 [00:00<00:00, 536.86it/s]
+cifar10 tin pi=0.05 seed=5 fdbd=91.71 cadref=89.83
+  0%|          | 0/57 [00:00<?, ?it/s]100%|##########| 57/57 [00:00<00:00, 679.41it/s]
+cifar10 tin pi=0.2 seed=3 fdbd=92.01 cadref=90.18
+  0%|          | 0/57 [00:00<?, ?it/s]100%|##########| 57/57 [00:00<00:00, 625.96it/s]
+cifar10 tin pi=0.2 seed=4 fdbd=91.96 cadref=90.21
+  0%|          | 0/57 [00:00<?, ?it/s]100%|##########| 57/57 [00:00<00:00, 571.08it/s]
+cifar10 tin pi=0.2 seed=5 fdbd=91.75 cadref=89.95
+  0%|          | 0/78 [00:00<?, ?it/s] 76%|#######5  | 59/78 [00:00<00:00, 523.70it/s]100%|##########| 78/78 [00:00<00:00, 554.03it/s]
+cifar10 tin pi=0.5 seed=3 fdbd=91.92 cadref=90.20
+  0%|          | 0/78 [00:00<?, ?it/s] 85%|########4 | 66/78 [00:00<00:00, 630.68it/s]100%|##########| 78/78 [00:00<00:00, 646.73it/s]
+cifar10 tin pi=0.5 seed=4 fdbd=91.88 cadref=90.15
+  0%|          | 0/78 [00:00<?, ?it/s] 88%|########8 | 69/78 [00:00<00:00, 622.44it/s]100%|##########| 78/78 [00:00<00:00, 703.63it/s]
+cifar10 tin pi=0.5 seed=5 fdbd=91.97 cadref=90.20
+cifar10 mnist pi=0.05 seed=3 cure=93.51 cure_msp=89.76 cure_energy=89.80 knn=93.51 oodd=92.08
+cifar10 mnist pi=0.05 seed=4 cure=95.34 cure_msp=94.02 cure_energy=94.18 knn=93.65 oodd=92.21
+cifar10 mnist pi=0.05 seed=5 cure=95.47 cure_msp=93.67 cure_energy=93.99 knn=93.94 oodd=92.68
+cifar10 mnist pi=0.2 seed=3 cure=97.67 cure_msp=97.27 cure_energy=97.26 knn=94.21 oodd=95.75
+cifar10 mnist pi=0.2 seed=4 cure=97.60 cure_msp=97.25 cure_energy=97.26 knn=94.05 oodd=95.46
+cifar10 mnist pi=0.2 seed=5 cure=97.71 cure_msp=97.33 cure_energy=97.37 knn=94.02 oodd=95.27
+cifar10 mnist pi=0.5 seed=3 cure=98.22 cure_msp=97.96 cure_energy=98.01 knn=94.07 oodd=96.99
+cifar10 mnist pi=0.5 seed=4 cure=98.19 cure_msp=97.90 cure_energy=97.97 knn=94.12 oodd=97.00
+cifar10 mnist pi=0.5 seed=5 cure=98.16 cure_msp=97.87 cure_energy=97.95 knn=94.06 oodd=96.88

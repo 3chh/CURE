@@ -1,0 +1,94 @@
+# =============================================================================
+# CURE FIGURES DATA PROVENANCE REGISTRY
+# Declares exact input data source, output file, and metrics for each figure.
+# =============================================================================
+
+figures:
+  fig1:
+    title: "Training Dynamics across 4 Backbones"
+    output: "fig1_training_dynamics.png"
+    inputs:
+      - "results/train/r61_resnet20/log.jsonl"
+      - "results/train/r61_resnet18_s0/log.jsonl"
+      - "results/train/r61_resnet50/log.jsonl"
+      - "results/train/r61_mobilenetv2/log.jsonl"
+    metrics: ["epoch", "loss", "val_acc"]
+
+  fig2:
+    title: "Operational Trade-off Pareto Frontier: CPU Latency vs. Global AUROC"
+    output: "fig2_tradeoff_latency_vs_auroc.png"
+    inputs:
+      - "results/backbone_sota_tradeoff.json"
+      - "results/backbone_sota_tradeoff.md"
+    metrics: ["latency_ms", "auroc", "checkpoint_size_mb"]
+
+  fig3:
+    title: "Diminishing Marginal Returns across Model Capacities"
+    output: "fig3_cure_gain_vs_capacity.png"
+    inputs:
+      - "results/multiseed_eval/multiseed_auroc_summary.json"
+      - "results/backbone_sota_tradeoff.json"
+    metrics: ["knn_auroc", "cure_auroc", "delta_auroc"]
+
+  fig4:
+    title: "Multi-Seed Variance Reduction under Online e-BH Certification"
+    output: "fig4_variance_reduction.png"
+    inputs:
+      - "results/multiseed_eval/multiseed_auroc_summary.json"
+    metrics: ["knn_mean", "knn_std", "cure_mean", "cure_std"]
+
+  fig5:
+    title: "Cross-Domain AUROC Profile on OpenOOD Benchmarks"
+    output: "fig5_dataset_breakdown_auroc.png"
+    inputs:
+      - "results/round61/r61_resnet18_s0_ivf4__cifar100.jsonl"
+      - "results/round61/r61_resnet18_s0_ivf4__tin.jsonl"
+      - "results/round61/r61_resnet18_s0_ivf4__mnist.jsonl"
+      - "results/round61/r61_resnet18_s0_ivf4__svhn.jsonl"
+      - "results/round61/r61_resnet18_s0_ivf4__texture.jsonl"
+      - "results/round61/r61_resnet18_s0_ivf4__places365.jsonl"
+    metrics: ["domain", "knn_auroc", "cure_auroc"]
+
+  fig6:
+    title: "Harm Rate Safety Audit across Test Streams"
+    output: "fig6_harm_rate_safety_audit.png"
+    inputs:
+      - "results/backbone_sota_tradeoff.json"
+    metrics: ["harm_rate", "worst_delta"]
+
+  fig8:
+    title: "Industrial SCADA (Westermo) and Semiconductor (WM-811K) Benchmarks"
+    output: "fig8_industrial_scada_semiconductor.png"
+    inputs:
+      - "results/cyber_and_realworld_sota.json"
+    metrics: ["scenario", "knn_auroc", "cure_auroc", "dcr"]
+
+  fig9:
+    title: "Ablation of Verification Batch Size B and Safety Risk"
+    output: "fig9_ablation_batch_size_and_quarantine.png"
+    inputs:
+      - "results/ablation/ablation_quarantine_delay.json"
+      - "results/realtime/summary.json"
+    metrics: ["batch_size", "auroc", "harm_rate", "worst_drop"]
+
+  fig10:
+    title: "Penultimate Feature Manifold and Decision Boundary Visualization"
+    output: "fig10_feature_space_tsne_manifold.png"
+    inputs:
+      - "results/round61/r61_resnet20_ivf4__cifar100.jsonl"
+      - "data/features/r61_resnet20.npz"
+    metrics: ["tsne_coords", "labels"]
+
+  fig11:
+    title: "Million-Scale ImageNet-1K Scalability & Latency"
+    output: "fig11_imagenet1k_scalability.png"
+    inputs:
+      - "results/edge_gallery_in1k/summary_imagenet1k.md"
+    metrics: ["config", "auroc", "latency_ms"]
+
+  fig12:
+    title: "Rigorous Statistical Significance Tests (Forest Plot)"
+    output: "fig12_statistical_significance_forest.png"
+    inputs:
+      - "results/rigorous_statistical_tests.json"
+    metrics: ["mean_delta", "ci95", "p_value"]

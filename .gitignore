@@ -6,10 +6,9 @@ __pycache__/
 .ruff_cache/
 .ipynb_checkpoints/
 
-# Dữ liệu, checkpoint, kết quả: tải từ Hugging Face hoặc sinh lại, ko đưa lên git
+# Dữ liệu và trọng số nhị phân nặng: tải từ Hugging Face Hub, không đưa vào Git
 /data/
 /checkpoints/
-/results/
 *.npz
 *.npy
 *.pt
@@ -18,3 +17,18 @@ __pycache__/
 *.zip
 *.tar
 *.bak
+
+# Bỏ qua các tệp raw rất lớn hoặc tệp zip tải từ Kaggle
+/results/kaggle/
+/results/train/*/*.ckpt
+/results/train/*/*.pt
+/results/train/*/*.pth
+
+# ALLOWLIST: Giữ lại các tệp JSON, MD và log.jsonl (~4 MB) để repo tự chứa và vẽ lại được toàn bộ biểu đồ
+!/results/*.json
+!/results/*.md
+!/results/train/*/log.jsonl
+!/results/train/*/config.yaml
+!/results/round61/*.jsonl
+!/results/multiseed_eval/*.json
+!/results/derived/

@@ -1,0 +1,40 @@
+
+ Estimating mean and variance from training set...
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup:  62%|######1   | 154/250 [00:00<00:00, 1538.81it/s]Setup: 100%|##########| 250/250 [00:00<00:00, 1602.16it/s]
+ Train acc: 100.00%
+Extracting id training feature
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup:  91%|######### | 227/250 [00:00<00:00, 2248.86it/s]Setup: 100%|##########| 250/250 [00:00<00:00, 2312.09it/s]
+C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\static\_openood\postprocessors\vim_postprocessor.py:63: RuntimeWarning: divide by zero encountered in scalar divide
+  self.alpha = self.logit_id_train.max(
+C:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_repo\src\cure_ood\methods\static\_openood\postprocessors\vim_postprocessor.py:74: RuntimeWarning: invalid value encountered in multiply
+  vlogit_ood = norm(np.matmul(feature_ood.numpy() - self.u, self.NS),
+dim=256, self.alpha=81.3467
+dim=256, self.alpha=81.3467
+dim=1000, self.alpha=inf
+dim=256, self.alpha=81.3467
+Setup:   0%|          | 0/5 [00:00<?, ?it/s]Setup: 100%|##########| 5/5 [00:00<00:00, 1665.73it/s]
+Threshold at percentile 85 over id data is: 0.389066219329834
+Threshold at percentile 90 over id data is: 0.47976747155189514
+Threshold at percentile 95 over id data is: 0.6117018461227417
+Threshold at percentile 99 over id data is: 0.8843927383422852
+Threshold at percentile 90 over id data is: 0.47976747155189514
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup:  77%|#######7  | 193/250 [00:00<00:00, 1910.92it/s]Setup: 100%|##########| 250/250 [00:00<00:00, 1871.50it/s]
+Setup:   0%|          | 0/250 [00:00<?, ?it/s]Setup: 100%|##########| 250/250 [00:00<00:00, 3081.10it/s]
+  0%|          | 0/48 [00:00<?, ?it/s]100%|##########| 48/48 [00:00<00:00, 747.04it/s]
+cifar10 cifar100 pi=0.05 seed=0 cure=90.57 cure_msp=88.08 cure_energy=87.44 knn=90.57 oodd=83.15 oodd_tout=84.68 oodd_protocol=82.57 adaodd=90.62 warden=88.88 age_queue=17.47 msp=88.08 energy=87.44 rtl_plus=77.25 rtl_plus_protocol=74.66 dcac_msp=58.64 dcac_energy=83.61 dcac_msp_protocol=59.64 dcac_energy_protocol=82.76 dynproto=81.77 maxlogit=87.37 gen=88.30 mahalanobis=85.21 vim=88.89 react=85.85 nci=88.48 fdbd=90.31 cadref=89.03
+  0%|          | 0/48 [00:00<?, ?it/s]100%|##########| 48/48 [00:00<00:00, 1067.09it/s]
+cifar10 cifar100 pi=0.05 seed=1 cure=90.80 cure_msp=88.05 cure_energy=87.35 knn=90.80 oodd=84.15 oodd_tout=85.52 oodd_protocol=83.65 adaodd=90.69 warden=88.76 age_queue=21.19 msp=88.05 energy=87.35 rtl_plus=77.17 rtl_plus_protocol=75.50 dcac_msp=58.72 dcac_energy=82.74 dcac_msp_protocol=58.88 dcac_energy_protocol=81.65 dynproto=83.30 maxlogit=87.29 gen=88.14 mahalanobis=84.56 vim=88.67 react=86.17 nci=88.15 fdbd=90.21 cadref=88.98
+  0%|          | 0/48 [00:00<?, ?it/s] 96%|#########5| 46/48 [00:00<00:00, 452.82it/s]100%|##########| 48/48 [00:00<00:00, 456.69it/s]
+cifar10 cifar100 pi=0.05 seed=2 cure=90.58 cure_msp=87.96 cure_energy=87.15 knn=90.58 oodd=82.59 oodd_tout=83.84 oodd_protocol=82.19 adaodd=90.53 warden=88.91 age_queue=18.65 msp=87.96 energy=87.15 rtl_plus=75.90 rtl_plus_protocol=74.31 dcac_msp=56.52 dcac_energy=82.67 dcac_msp_protocol=56.98 dcac_energy_protocol=81.16 dynproto=83.24 maxlogit=87.08 gen=88.12 mahalanobis=85.20 vim=88.83 react=85.63 nci=87.91 fdbd=90.02 cadref=88.83
+  0%|          | 0/57 [00:00<?, ?it/s]100%|##########| 57/57 [00:00<00:00, 622.83it/s]
+cifar10 cifar100 pi=0.2 seed=0 cure=90.11 cure_msp=87.40 cure_energy=86.37 knn=90.11 oodd=85.64 oodd_tout=86.67 oodd_protocol=85.10 adaodd=90.11 warden=88.06 age_queue=28.22 msp=87.40 energy=86.37 rtl_plus=74.93 rtl_plus_protocol=76.17 dcac_msp=64.47 dcac_energy=84.13 dcac_msp_protocol=64.14 dcac_energy_protocol=82.80 dynproto=86.34 maxlogit=86.33 gen=87.47 mahalanobis=84.48 vim=88.15 react=85.18 nci=87.84 fdbd=89.54 cadref=88.40
+  0%|          | 0/57 [00:00<?, ?it/s] 65%|######4   | 37/57 [00:00<00:00, 367.15it/s]100%|##########| 57/57 [00:00<00:00, 463.82it/s]
+cifar10 cifar100 pi=0.2 seed=1 cure=90.39 cure_msp=87.66 cure_energy=87.02 knn=90.39 oodd=85.66 oodd_tout=86.56 oodd_protocol=85.23 adaodd=90.42 warden=88.29 age_queue=29.27 msp=87.66 energy=87.02 rtl_plus=75.43 rtl_plus_protocol=77.15 dcac_msp=65.91 dcac_energy=85.00 dcac_msp_protocol=65.76 dcac_energy_protocol=83.66 dynproto=86.20 maxlogit=86.96 gen=87.81 mahalanobis=84.54 vim=88.37 react=85.97 nci=88.30 fdbd=89.92 cadref=88.74
+  0%|          | 0/57 [00:00<?, ?it/s]100%|##########| 57/57 [00:00<00:00, 868.07it/s]
+cifar10 cifar100 pi=0.2 seed=2 cure=90.04 cure_msp=87.40 cure_energy=86.56 knn=90.04 oodd=85.96 oodd_tout=86.94 oodd_protocol=85.49 adaodd=90.01 warden=87.95 age_queue=29.11 msp=87.40 energy=86.56 rtl_plus=75.56 rtl_plus_protocol=75.03 dcac_msp=62.45 dcac_energy=84.37 dcac_msp_protocol=63.35 dcac_energy_protocol=83.40 dynproto=84.88 maxlogit=86.51 gen=87.53 mahalanobis=84.29 vim=88.06 react=85.44 nci=88.04 fdbd=89.54 cadref=88.49
+  0%|          | 0/90 [00:00<?, ?it/s] 71%|#######1  | 64/90 [00:00<00:00, 635.85it/s]100%|##########| 90/90 [00:00<00:00, 685.71it/s]
+cifar10 cifar100 pi=0.5 seed=0 cure=89.47 cure_msp=87.67 cure_energy=87.15 knn=90.09 oodd=87.87 oodd_tout=88.36 oodd_protocol=87.61 adaodd=89.94 warden=88.10 age_queue=54.14 msp=87.40 energy=86.66 rtl_plus=74.55 rtl_plus_protocol=74.81 dcac_msp=70.93 dcac_energy=86.37 dcac_msp_protocol=71.36 dcac_energy_protocol=85.64 dynproto=88.72 maxlogit=86.60 gen=87.54 mahalanobis=84.30 vim=88.12 react=85.46 nci=87.98 fdbd=89.66 cadref=88.45
+  0%|          | 0/90 [00:00<?, ?it/s] 97%|#########6| 87/90 [00:00<00:00, 868.95it/s]100%|##########| 90/90 [00:00<00:00, 881.24it/s]
+cifar10 cifar100 pi=0.5 seed=1 cure=90.09 cure_msp=87.40 cure_energy=86.66 knn=90.09 oodd=88.20 oodd_tout=88.67 oodd_protocol=87.88 adaodd=90.02 warden=88.10 age_queue=53.94 msp=87.40 energy=86.66 rtl_plus=74.87 rtl_plus_protocol=74.62 dcac_msp=70.36 dcac_energy=85.58 dcac_msp_protocol=70.26 dcac_energy_protocol=85.09 dynproto=88.84 maxlogit=86.60 gen=87.54 mahalanobis=84.30 vim=88.12 react=85.46 nci=87.98 fdbd=89.66 cadref=88.45
+  0%|          | 0/90 [00:00<?, ?it/s] 96%|#########5| 86/90 [00:00<00:00, 852.50it/s]100%|##########| 90/90 [00:00<00:00, 854.00it/s]
+cifar10 cifar100 pi=0.5 seed=2 cure=89.51 cure_msp=87.23 cure_energy=86.65 knn=90.09 oodd=87.96 oodd_tout=88.49 oodd_protocol=87.60 adaodd=90.01 warden=88.10 age_queue=54.05 msp=87.40 energy=86.66 rtl_plus=75.05 rtl_plus_protocol=74.68 dcac_msp=68.74 dcac_energy=85.32 dcac_msp_protocol=68.69 dcac_energy_protocol=84.86 dynproto=88.66 maxlogit=86.60 gen=87.54 mahalanobis=84.30 vim=88.12 react=85.46 nci=87.98 fdbd=89.66 cadref=88.45
