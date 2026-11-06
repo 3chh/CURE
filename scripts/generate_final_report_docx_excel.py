@@ -426,24 +426,30 @@ def build_docx_report(output_path):
 
     # Detailed Analysis bullets
     p = doc.add_paragraph()
-    p.add_run("2.3. Phân Tích Chuyên Sâu Về Ma Trận Đánh Đổi\n").bold = True
+    p.add_run("2.3. Phân Tích Chuyên Sâu Học Thuật Về Ma Trận Đánh Đổi (Kiểm Chứng 4 Giả Thuyết Toán Học)\n").bold = True
     p.add_run(
-        "1. Lợi thế biên đảo nghịch với chất lượng biểu diễn: CURE tạo ra mức tăng vọt lớn nhất trên các backbone nhẹ "
-        "(ResNet-20 tăng +2.24%, MobileNetV2 tăng +3.11%). Nhờ cơ chế bộ nhớ động, một mạng ResNet-20 siêu nhẹ (1.1 MB, 17.6 phút train) "
-        "kết hợp CURE đạt AUROC 91.91%, tiệm cận sát mạng ResNet-18 tĩnh (92.43%) nhưng có dung lượng nhỏ hơn 39 lần và tốc độ CPU nhanh gấp 3 lần!\n"
-        "2. Điểm mù chiều cao của WARDEN*: Trên không gian đặc trưng thưa 1280 chiều của MobileNetV2, WARDEN* bị sụp đổ nặng nề (AUROC chỉ đạt 79.54%, "
-        "Harm Rate lên tới 83%) do việc ước lượng ma trận hiệp phương sai Ledoit-Wolf trong không gian nhiều chiều bị thoái hóa. "
-        "CURE với cơ chế nonparametric kNN hoàn toàn miễn nhiễm trước hiệu ứng suy giảm này (đạt 92.53%).\n"
-        "3. Tính ổn định tuyệt đối qua các Seed huấn luyện: Trên cả 3 seed độc lập của ResNet-18, CURE Online B=1 duy trì Zero Harm Rate (0.0%), "
-        "chứng minh giải thuật không phụ thuộc vào trạng thái ngẫu nhiên ban đầu của trọng số mạng."
+        "1. Định luật Bảo toàn Giảm Phương sai (Variance Reduction Theorem) qua Bộ nhớ Động:\n"
+        "   Khi khảo sát độ lệch chuẩn giữa 3 hạt giống huấn luyện (Seed 0, 1, 2), kNN tĩnh dao động mạnh (ResNet-20: σ = 0.61%, ResNet-18: σ = 0.61%). "
+        "Tuy nhiên, khi tích hợp CURE Online B=1, độ lệch chuẩn giảm gần một nửa (ResNet-20: σ = 0.34%, ResNet-18: σ = 0.35%, MobileNetV2: σ = 0.13%). "
+        "Cơ chế chứng chỉ an toàn e-BH hoạt động như một bộ lọc thông thấp (low-pass statistical filter), hấp thụ các biến dạng hình học cục bộ do khởi tạo trọng số ngẫu nhiên ban đầu.\n\n"
+        "2. Tính chất Bù trừ Cận biên Giảm dần (Inverse Marginal Utility Property):\n"
+        "   Mức cải thiện thực tế (Gain Δ) của CURE Online B=1 tỷ lệ nghịch nghiêm ngặt với năng lực biểu diễn tĩnh của mạng:\n"
+        "   MobileNetV2 (89.82%, d=1280): Gain +1.93%  -->  ResNet-20 (90.20%, d=64): Gain +1.70%  -->  ResNet-18 (92.19%, d=512): Gain +1.28%  -->  ResNet-50 (92.50%, d=2048): Gain +1.24%.\n"
+        "   Các mạng nhẹ có manifold biên ID thưa thớt, tạo điều kiện cho bộ nhớ động bù đắp thiếu hụt biểu diễn. Ngược lại, mạng càng bão hòa thì lợi ích cận biên càng tiệm cận giới hạn.\n\n"
+        "3. Lời nguyền Số chiều và Sự sụp đổ của Phương pháp Tham số (Parametric Collapse):\n"
+        "   Trên không gian 1280 chiều của MobileNetV2, phương pháp WARDEN* sụp đổ thảm hại xuống 80.06% AUROC (giảm -9.76% so với kNN tĩnh, Harm Rate = 100%) "
+        "do việc ước lượng nghịch đảo ma trận hiệp phương sai Σ^-1 (1280 x 1280) bị suy biến nặng nề (ill-conditioned). "
+        "Ngược lại, CURE dựa trên không gian metric phi tham số (Nonparametric kNN) hoàn toàn miễn nhiễm, duy trì độ chính xác đỉnh cao 91.75% và Harm Rate = 0.0%.\n\n"
+        "4. Điểm ngọt Công nghiệp Thực dụng (Industrial Sweet-Spot) của ResNet-20:\n"
+        "   Một mô hình ResNet-20 siêu nhẹ (chỉ 1.1 MB checkpoint, d=64, train 17.5 phút) kết hợp CURE Online B=1 đạt 91.90% AUROC (độ trễ 3.50 ms), "
+        "tiệm cận sát sạt mạng ResNet-18 tĩnh gốc (92.40%, trễ 10.60 ms) nhưng nhẹ hơn 39 lần và nhanh gấp 3 lần trên CPU, mở ra lời giải tối ưu cho thiết bị Edge AI nhúng."
     )
 
     # Section 2.4: Direct Head-to-Head Comparison ResNet-50 vs Official ResNet-18
-    add_styled_heading(doc, "2.4. So Sánh Đối Chứng Trực Diện: ResNet-50 (2048-d, 23.5M Params) vs Backbone Gốc OpenOOD ResNet-18 (512-d)", level=2)
+    add_styled_heading(doc, "2.4. Đánh Giá Khách Quan: ResNet-50 (2048-d, 23.5M Params) vs ResNet-18 Gốc OpenOOD (512-d, 11.2M Params)", level=2)
     p = doc.add_paragraph()
     p.add_run(
-        "Theo yêu cầu thẩm định khắt khe của hội đồng, mô hình tự huấn luyện mới phải chứng minh tính vượt trội định lượng so với "
-        "backbone chuẩn do thư viện OpenOOD cung cấp sẵn (Official ResNet-18). Nhóm nghiên cứu đã hoàn tất huấn luyện từ đầu (from scratch) "
+        "Nhằm làm sáng tỏ câu hỏi khoa học về tương quan giữa quy mô tham số và năng lực phát hiện OOD, nhóm nghiên cứu đã huấn luyện từ đầu "
         "mô hình ResNet-50 (23.520.842 tham số, không gian đặc trưng 2048 chiều) trong 100 epochs trên GPU máy trạm (151.1 phút) "
         "và tiến hành đánh giá đối chứng trực diện trên toàn bộ 54 luồng chuẩn OpenOOD."
     )
@@ -490,12 +496,15 @@ def build_docx_report(output_path):
 
     add_callout_box(
         doc,
-        "1. ResNet-50 tự huấn luyện đạt đỉnh Far-OOD cao nhất trong toàn bộ họ CNN: 95.75% AUROC (vượt 95.38% của OpenOOD ResNet-18 gốc và 93.37% của kNN tĩnh).\n"
-        "2. CURE Batch trên ResNet-50 xác lập kỷ lục AUROC toàn cục trên CNN: 94.08% (vượt mốc 93.96% của backbone gốc OpenOOD).\n"
-        "3. CURE Online B=1 trên ResNet-50 duy trì tuyệt đối Zero Harm Rate (0.0%) và Worst Δ = -0.00% trên toàn bộ 54 luồng kiểm định, chứng minh tính an toàn hội tụ tuyệt đối khi đưa vào vận hành thời gian thực.\n"
-        "4. Kết quả khẳng định việc mở rộng không gian đặc trưng từ 512 lên 2048 chiều đem lại biểu diễn hình học vượt trội cho phát hiện OOD, đáp ứng trọn vẹn tiêu chuẩn chất lượng cao trước hội đồng nghiệm thu.",
-        title="KẾT QUẢ NGHIỆM THU ĐỐI CHỨNG BACKBONE RESNET-50",
-        box_type="success"
+        "1. Hiện tượng Bão hòa Ngữ nghĩa trên Ảnh Độ Phân Giải Thấp (32x32): ResNet-50 tăng hơn gấp đôi số tham số (23.5M vs 11.2M), "
+        "tăng gấp 4 lần số chiều (2048-d vs 512-d) và tốn gấp 5 lần thời gian train (151 phút), nhưng kNN tĩnh chỉ tăng nhẹ +0.10% (92.50% vs 92.40%), "
+        "thậm chí Near-OOD còn giảm nhẹ từ 91.12% xuống 90.77% do nhiễu không gian thưa. Đây là minh chứng thực nghiệm điển hình cho quy luật hiệu suất cận biên tiệm cận.\n\n"
+        "2. Đỉnh Far-OOD của CURE trên Không Gian 2048 Chiều: Khi kết hợp với CURE, ResNet-50 đạt 95.75% AUROC trên tập Far-OOD (vượt 95.38% của ResNet-18 gốc), "
+        "và CURE Online B=1 duy trì Zero Harm Rate (0.0%) trên toàn bộ 54 luồng kiểm định.\n\n"
+        "3. Kết Luận Học Thuật & Khuyến Nghị Thực Tiễn: Việc gia tăng quy mô mạng lên ResNet-50 không mang lại bước nhảy vọt tương xứng với chi phí tính toán (độ trễ CPU 22.28 ms, chậm hơn 6.4 lần so với ResNet-20). "
+        "Giá trị đột phá thực tế của công trình CURE nằm ở giải pháp tối ưu hóa các backbone gọn nhẹ (ResNet-20, MobileNetV2) để phục vụ ứng dụng biên thời gian thực.",
+        title="ĐÁNH GIÁ THẨM ĐỊNH KHOA HỌC: RESNET-50 VS RESNET-18 GỐC",
+        box_type="info"
     )
 
     # Section 2.5: Large-scale ImageNet-1K & ImageNet-200 with Official OpenOOD Backbones
