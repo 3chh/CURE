@@ -23,6 +23,13 @@ def _download(repo: str, repo_type: str, name: str) -> Path | None:
         return Path(hf_hub_download(repo, name, repo_type=repo_type))
     except EntryNotFoundError:
         return None
+    except Exception as e:
+        import warnings
+        warnings.warn(
+            f"[CURE Hub] Không thể tải {name} từ {repo}: {e}. "
+            "Vui lòng thiết lập biến môi trường HF_TOKEN hoặc đặt file trực tiếp vào data/features/."
+        )
+        return None
 
 
 def feature_file(name: str, local: Path) -> Path | None:
@@ -35,15 +42,23 @@ def feature_file(name: str, local: Path) -> Path | None:
 @lru_cache(maxsize=1)
 def _checkpoint_index() -> dict[str, str]:
     from huggingface_hub import list_repo_files
-    return {Path(f).name: f for f in list_repo_files(CKPT_REPO, repo_type="model")}
+    try:
+        return {Path(f).name: f for f in list_repo_files(CKPT_REPO, repo_type="model")}
+    except Exception:
+        return {}
 
 
 def checkpoint_file(name: str) -> Path | None:
-    """Checkpoint theo tên file; repo HF xếp theo thư mục con nên tra theo basename."""
+    """Checkpoint theo tên file: ưu tiên thư mục local checkpoints/, sau đó tra repo HF."""
+    local_root = Path(__file__).resolve().parents[3]
+    candidate = local_root / "checkpoints" / Path(name).name
+    if candidate.exists():
+        return candidate
+
     if not enabled():
         return None
     try:
         path = _checkpoint_index().get(Path(name).name)
-    except ImportError:
+    except Exception:
         return None
     return _download(CKPT_REPO, "model", path) if path else None

@@ -8,7 +8,8 @@ __pycache__/
 
 # Dữ liệu và trọng số nhị phân nặng: tải từ Hugging Face Hub, không đưa vào Git
 /data/
-/checkpoints/
+/checkpoints/*
+!/checkpoints/resnet20_cifar10.ckpt
 *.npz
 *.npy
 *.pt
@@ -24,7 +25,8 @@ __pycache__/
 /results/train/*/*.pt
 /results/train/*/*.pth
 
-# ALLOWLIST: Giữ lại các tệp JSON, MD và log.jsonl (~4 MB) để repo tự chứa và vẽ lại được toàn bộ biểu đồ
+# ALLOWLIST: Giữ lại checkpoint ResNet-20 (1.08MB), các tệp JSON, MD và log.jsonl (~4 MB) để repo tự chứa
+!/checkpoints/resnet20_cifar10.ckpt
 !/results/*.json
 !/results/*.md
 !/results/train/*/log.jsonl
