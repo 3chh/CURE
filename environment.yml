@@ -25,3 +25,4 @@ dependencies:
       - nbconvert>=7.10.0
       - ipykernel>=6.25.0
       - -e .
+

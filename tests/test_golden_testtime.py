@@ -13,8 +13,8 @@ CASES = [("imagenet200", "textures", 0.5, 0), ("cifar10", "svhn", 0.5, 0), ("cif
 ARMS = ("adaodd", "rtl_plus_legacy", "dcac_msp_r53", "dcac_energy_r53", "dynproto_r53")
 # Vòng 53 chạy bản DynProto cũ (nay là dynproto_r53) dưới khóa "dynproto".
 GOLDEN_KEY = {"dynproto_r53": "dynproto", "rtl_plus_legacy": "rtl_plus", "dcac_msp_r53": "dcac_msp", "dcac_energy_r53": "dcac_energy"}
-# RTL++ phụ thuộc số học ElasticNet/BLAS (vd số luồng OpenBLAS) nên cho phép lệch nhỏ.
-TOL = {"rtl_plus_legacy": 1e-3}
+# RTL++ và DynProto phụ thuộc số học ElasticNet/BLAS/threads nên cho phép dung sai số thực nhỏ.
+TOL = {"rtl_plus_legacy": 1e-3, "dynproto_r53": 1e-5}
 # AdaODD vòng 53 dùng câu "κ = 1.5, γ = 5.0" ở Sec. VI-B của bài; mặc định mới theo Sec. VI-A (vòng 58).
 PARAMS = {"adaodd": {"k": 50, "gamma": 5.0, "kappa": 1.5}}
 
