@@ -101,17 +101,15 @@ def plot_figure_1():
 def plot_figure_2():
     fig, ax = plt.subplots(figsize=(12.0, 6.5))
     
-    # Base scatter points
-    # (name, lat, auroc, size_mb, color, marker)
+    # Canonical verified evaluation metrics matching results/backbone_sota_tradeoff.md
+    # Format: (name, latency_ms, auroc_pct, size_mb, color, marker)
     pts = [
-        ("ResNet-20 (kNN)", 3.50, 90.20, 1.1, "#95A5A6", "o"),
-        ("ResNet-20 (CURE B=1)", 3.50, 91.90, 1.1, "#2E86AB", "s"),
-        ("MobileNetV2 (kNN)", 11.32, 89.82, 9.0, "#95A5A6", "o"),
-        ("MobileNetV2 (CURE B=1)", 11.32, 91.75, 9.0, "#F39C12", "s"),
-        ("ResNet-18 (kNN)", 10.60, 92.19, 42.7, "#95A5A6", "o"),
-        ("ResNet-18 (CURE B=1)", 10.60, 93.47, 42.7, "#2BAE66", "s"),
-        ("Official RN18 (kNN)", 10.60, 92.40, 42.7, "#7F8C8D", "D"),
-        ("Official RN18 (CURE B=1)", 10.60, 93.69, 42.7, "#1B365D", "*"),
+        ("ResNet-20 (kNN)", 3.50, 89.67, 1.1, "#95A5A6", "o"),
+        ("ResNet-20 (CURE B=1)", 3.50, 91.54, 1.1, "#2E86AB", "s"),
+        ("MobileNetV2 (kNN)", 11.32, 89.42, 9.0, "#95A5A6", "o"),
+        ("MobileNetV2 (CURE B=1)", 11.32, 91.74, 9.0, "#F39C12", "s"),
+        ("ResNet-18 (kNN)", 10.60, 92.43, 42.7, "#95A5A6", "o"),
+        ("ResNet-18 (CURE B=1)", 10.60, 93.61, 42.7, "#2BAE66", "s"),
         ("ResNet-50 (kNN)", 22.28, 92.50, 90.0, "#95A5A6", "o"),
         ("ResNet-50 (CURE B=1)", 22.28, 93.74, 90.0, "#E74C3C", "s")
     ]
@@ -121,59 +119,49 @@ def plot_figure_2():
         ax.scatter(lat, auroc, s=marker_size, color=color, alpha=0.88, edgecolors='black', linewidth=1.2, marker=marker, zorder=5)
 
     # DEDICATED, NON-OVERLAPPING ANNOTATIONS WITH CLEAN LEADER LINES
-    # 1. ResNet-20 kNN
-    ax.annotate("ResNet-20 (kNN)\n(90.20%)", xy=(3.50, 90.20), xytext=(3.50, 89.50),
+    # 1. ResNet-20 kNN (Placed bottom-left)
+    ax.annotate("ResNet-20 (kNN)\n(89.67%)", xy=(3.50, 89.67), xytext=(2.20, 88.90),
                 ha='center', va='top', fontsize=8.5, color="#555555",
                 arrowprops=dict(arrowstyle="->", color="#888888", lw=0.9))
                 
-    # 2. ResNet-20 CURE B=1
-    ax.annotate("ResNet-20 (CURE B=1)\n(91.90%)", xy=(3.50, 91.90), xytext=(3.50, 92.50),
+    # 2. ResNet-20 CURE B=1 (Placed top-left)
+    ax.annotate("ResNet-20 (CURE B=1)\n(91.54%)", xy=(3.50, 91.54), xytext=(2.20, 92.40),
                 ha='center', va='bottom', fontsize=8.8, fontweight='bold', color="#2E86AB",
                 arrowprops=dict(arrowstyle="->", color="#2E86AB", lw=1.1))
 
-    # 3. MobileNetV2 kNN
-    ax.annotate("MobileNetV2 (kNN)\n(89.82%)", xy=(11.32, 89.82), xytext=(11.32, 89.15),
+    # 3. MobileNetV2 kNN (Placed directly below)
+    ax.annotate("MobileNetV2 (kNN)\n(89.42%)", xy=(11.32, 89.42), xytext=(11.32, 88.60),
                 ha='center', va='top', fontsize=8.5, color="#555555",
                 arrowprops=dict(arrowstyle="->", color="#888888", lw=0.9))
 
     # 4. MobileNetV2 CURE B=1 (Placed to the RIGHT with leader line)
-    ax.annotate("MobileNetV2 (CURE B=1)\n(91.75%)", xy=(11.32, 91.75), xytext=(14.2, 91.65),
+    ax.annotate("MobileNetV2 (CURE B=1)\n(91.74%)", xy=(11.32, 91.74), xytext=(15.2, 91.50),
                 ha='left', va='center', fontsize=8.8, fontweight='bold', color="#D35400",
                 arrowprops=dict(arrowstyle="->", color="#D35400", lw=1.2))
 
-    # 5. ResNet-18 kNN (Placed to the LEFT, lower)
-    ax.annotate("ResNet-18 (kNN)\n(92.19%)", xy=(10.60, 92.19), xytext=(7.5, 91.85),
+    # 5. ResNet-18 kNN (Placed to the lower-left)
+    ax.annotate("ResNet-18 (kNN)\n(92.43%)", xy=(10.60, 92.43), xytext=(7.2, 91.50),
                 ha='right', va='center', fontsize=8.5, color="#555555",
                 arrowprops=dict(arrowstyle="->", color="#888888", lw=0.9))
 
-    # 6. Official RN18 kNN (Placed to the LEFT, middle)
-    ax.annotate("Official RN18 (kNN)\n(92.40%)", xy=(10.60, 92.40), xytext=(7.5, 92.55),
-                ha='right', va='center', fontsize=8.5, color="#4A4A4A",
-                arrowprops=dict(arrowstyle="->", color="#7F8C8D", lw=0.9))
+    # 6. ResNet-18 CURE B=1 (Placed directly above)
+    ax.annotate("ResNet-18 (CURE B=1)\n(93.61%)", xy=(10.60, 93.61), xytext=(10.60, 94.40),
+                ha='center', va='bottom', fontsize=8.8, fontweight='bold', color="#2BAE66",
+                arrowprops=dict(arrowstyle="->", color="#2BAE66", lw=1.2))
 
-    # 7. ResNet-18 CURE B=1 (Placed to the LEFT, higher)
-    ax.annotate("ResNet-18 (CURE B=1)\n(93.47%)", xy=(10.60, 93.47), xytext=(7.5, 93.45),
-                ha='right', va='center', fontsize=8.8, fontweight='bold', color="#2BAE66",
-                arrowprops=dict(arrowstyle="->", color="#2BAE66", lw=1.1))
-
-    # 8. Official RN18 CURE B=1 (Placed DIRECTLY ABOVE)
-    ax.annotate("Official RN18 (CURE B=1)\n(93.69%)", xy=(10.60, 93.69), xytext=(10.60, 94.30),
-                ha='center', va='bottom', fontsize=8.8, fontweight='bold', color="#1B365D",
-                arrowprops=dict(arrowstyle="->", color="#1B365D", lw=1.2))
-
-    # 9. ResNet-50 kNN (Placed BELOW)
-    ax.annotate("ResNet-50 (kNN)\n(92.50%)", xy=(22.28, 92.50), xytext=(22.28, 91.75),
+    # 7. ResNet-50 kNN (Placed directly below)
+    ax.annotate("ResNet-50 (kNN)\n(92.50%)", xy=(22.28, 92.50), xytext=(22.28, 91.70),
                 ha='center', va='top', fontsize=8.5, color="#555555",
                 arrowprops=dict(arrowstyle="->", color="#888888", lw=0.9))
 
-    # 10. ResNet-50 CURE B=1 (Placed ABOVE)
-    ax.annotate("ResNet-50 (CURE B=1)\n(93.74%)", xy=(22.28, 93.74), xytext=(22.28, 94.35),
+    # 8. ResNet-50 CURE B=1 (Placed directly above)
+    ax.annotate("ResNet-50 (CURE B=1)\n(93.74%)", xy=(22.28, 93.74), xytext=(22.28, 94.40),
                 ha='center', va='bottom', fontsize=8.8, fontweight='bold', color="#C0392B",
                 arrowprops=dict(arrowstyle="->", color="#C0392B", lw=1.2))
 
     # Highlight Callout: Industrial Sweet Spot
-    ax.annotate("Industrial Sweet Spot:\nResNet-20 + CURE B=1\n(3.5ms, 1.1MB, 91.90% AUROC)",
-                xy=(3.5, 91.90), xytext=(4.8, 90.75),
+    ax.annotate("Industrial Sweet Spot:\nResNet-20 + CURE B=1\n(3.5ms, 1.1MB, 91.54% AUROC)",
+                xy=(3.5, 91.54), xytext=(4.8, 90.60),
                 arrowprops=dict(facecolor='#2E86AB', shrink=0.08, width=1.4, headwidth=6),
                 bbox=dict(boxstyle="round,pad=0.5", facecolor="#EBF5FB", edgecolor="#2E86AB", lw=1.5),
                 fontsize=8.8, fontweight="bold", color="#1B365D")
