@@ -1,0 +1,16 @@
+# sinh cho run r61_mobilenetv2_s1
+name: r61_mobilenetv2_s1
+description: CIFAR-10, MobileNetV2 Seed 1 tự huấn luyện
+backbone: mobilenetv2_32x32 (r61_mobilenetv2_s1)
+features: r61_mobilenetv2_s1.npz
+k: 10
+val_ood: val_tin
+near:
+- cifar100
+- tin
+far:
+- mnist
+- svhn
+- texture
+- places365
+

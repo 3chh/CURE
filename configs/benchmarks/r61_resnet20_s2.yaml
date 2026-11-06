@@ -1,0 +1,16 @@
+# sinh bởi `cure-ood train` cho run r61_resnet20_s2; k lấy từ mẫu, chọn lại bằng --select-k sau khi trích
+name: r61_resnet20_s2
+description: CIFAR-10, official OpenOOD v1.5 ResNet18 checkpoint | backbone tự huấn
+  luyện, run r61_resnet20_s2
+backbone: resnet20_32x32 (r61_resnet20_s2)
+features: r61_resnet20_s2.npz
+k: 10
+val_ood: val_tin
+near:
+- cifar100
+- tin
+far:
+- mnist
+- svhn
+- texture
+- places365

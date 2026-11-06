@@ -99,9 +99,9 @@ def check_colab_checkpoints():
 def main():
     log("KÍCH HOẠT HỆ THỐNG HUẤN LUYỆN MULTI-SEED TỰ ĐỘNG...")
     
-    # 1. Chờ ResNet-20 Seed 1
-    wait_for_completion("r61_resnet20_s1", 100)
-    time.sleep(5)
+    # 1. Huấn luyện / Tiếp tục ResNet-20 Seed 1 (resume từ epoch 72 lên 100 với num_workers=0)
+    cfg_r20_s1 = REPO / "configs" / "train" / "r61_resnet20_s1.yaml"
+    run_train(cfg_r20_s1)
     run_extract("r61_resnet20_s1")
     
     # 2. Huấn luyện ResNet-20 Seed 2

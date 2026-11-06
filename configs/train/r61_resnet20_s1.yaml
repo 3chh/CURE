@@ -4,7 +4,7 @@ data:
   image_root: images_classic
   imglists: cifar10
   norm: cifar10
-  num_workers: 2
+  num_workers: 0
   resize: 32
   size: 32
   train: train_cifar10
@@ -33,3 +33,4 @@ stages:
     min_lr: 1.0e-06
     name: cosine
     per: step
+

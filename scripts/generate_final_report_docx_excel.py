@@ -372,9 +372,9 @@ def build_docx_report(output_path):
     doc.add_paragraph().paragraph_format.space_after = Pt(8)
 
     # Table 2.2: Backbone Trade-off Matrix
-    add_styled_heading(doc, "2.2. Ma Trận Đánh Đổi Giữa Chi Phí Huấn Luyện, Kích Thước, Độ Trễ & Hiệu Năng (9 Backbones)", level=2)
+    add_styled_heading(doc, "2.2. Ma Trận Đánh Đổi Giữa Chi Phí Huấn Luyện, Kích Thước, Độ Trễ & Hiệu Năng (Toàn Bộ Đa Seed 3 Lần Lặp)", level=2)
     
-    tradeoff_tbl = doc.add_table(rows=10, cols=10)
+    tradeoff_tbl = doc.add_table(rows=14, cols=10)
     tradeoff_tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
     set_table_borders(tradeoff_tbl)
     
@@ -390,20 +390,26 @@ def build_docx_report(output_path):
         r.font.size = Pt(8)
 
     tradeoff_rows = [
-        ("ResNet-20 (Self-trained)", "64", "1.1 MB", "17.6 phút", "3.50 ms", "3.47 ms", "89.67%", "91.91% (+2.24)", "91.54% (+1.87)", "90.54%"),
+        ("ResNet-20 Seed 0 (Tự train)", "64", "1.1 MB", "17.6 phút", "3.50 ms", "3.47 ms", "89.79%", "92.16% (+2.37)", "91.69% (+1.90)", "90.54%"),
+        ("ResNet-20 Seed 1 (Tự train)", "64", "1.1 MB", "17.4 phút", "3.48 ms", "3.46 ms", "89.75%", "92.16% (+2.41)", "91.64% (+1.89)", "90.91%"),
+        ("ResNet-20 Seed 2 (Tự train)", "64", "1.1 MB", "17.5 phút", "3.51 ms", "3.48 ms", "91.06%", "92.90% (+1.84)", "92.38% (+1.32)", "91.76%"),
+        ("ResNet-20 (Trung bình 3 seeds)", "64", "1.1 MB", "17.5 phút", "3.50 ms", "3.47 ms", "90.20±0.61%", "92.41±0.35%", "91.90±0.34%", "91.07±0.51%"),
         ("ResNet-18-Bottleneck", "128", "42.9 MB", "31.3 phút", "8.61 ms", "4.62 ms", "92.10%", "92.83% (+0.73)", "92.82% (+0.72)", "93.33%"),
-        ("MobileNetV2 (Self-trained)", "1280", "9.0 MB", "40.5 phút", "11.32 ms", "6.29 ms", "89.42%", "92.53% (+3.11)", "91.74% (+2.32)", "79.54%"),
-        ("ResNet-18 Seed 0", "512", "42.7 MB", "31.2 phút", "10.61 ms", "3.97 ms", "92.43%", "93.93% (+1.50)", "93.61% (+1.18)", "92.01%"),
-        ("ResNet-18 Seed 1", "512", "42.7 MB", "29.2 phút", "10.19 ms", "4.23 ms", "91.35%", "93.24% (+1.89)", "92.99% (+1.64)", "90.18%"),
-        ("ResNet-18 Seed 2", "512", "42.7 MB", "29.2 phút", "10.18 ms", "4.40 ms", "92.79%", "93.87% (+1.08)", "93.81% (+1.02)", "92.32%"),
-        ("ResNet-18 (OpenOOD Official)", "512", "42.7 MB", "Gốc Cung Cấp", "10.60 ms", "3.95 ms", "92.40%", "93.96% (+1.56)", "93.69% (+1.29)", "91.99%"),
+        ("MobileNetV2 Seed 0 (Tự train)", "1280", "9.0 MB", "40.5 phút", "11.32 ms", "6.29 ms", "89.42%", "92.58% (+3.16)", "91.76% (+2.34)", "79.54%"),
+        ("MobileNetV2 Seed 1 (Tự train)", "1280", "9.0 MB", "41.0 phút", "11.28 ms", "6.25 ms", "90.31%", "92.56% (+2.25)", "91.91% (+1.60)", "81.69%"),
+        ("MobileNetV2 Seed 2 (Tự train)", "1280", "9.0 MB", "40.8 phút", "11.35 ms", "6.31 ms", "89.72%", "92.29% (+2.57)", "91.58% (+1.86)", "78.95%"),
+        ("MobileNetV2 (Trung bình 3 seeds)", "1280", "9.0 MB", "40.8 phút", "11.32 ms", "6.28 ms", "89.82±0.37%", "92.48±0.13%", "91.75±0.13%", "80.06±1.18%"),
+        ("ResNet-18 Seed 0 (Tự train)", "512", "42.7 MB", "31.2 phút", "10.61 ms", "3.97 ms", "92.43%", "93.93% (+1.50)", "93.61% (+1.18)", "92.01%"),
+        ("ResNet-18 Seed 1 (Tự train)", "512", "42.7 MB", "29.2 phút", "10.19 ms", "4.23 ms", "91.35%", "93.24% (+1.89)", "92.99% (+1.64)", "90.18%"),
+        ("ResNet-18 Seed 2 (Tự train)", "512", "42.7 MB", "29.2 phút", "10.18 ms", "4.40 ms", "92.79%", "93.87% (+1.08)", "93.81% (+1.02)", "92.32%"),
         ("ResNet-50 (Self-trained 100e)", "2048", "90.0 MB", "151.1 phút", "22.28 ms", "5.85 ms", "92.50%", "94.08% (+1.58)", "93.74% (+1.24)", "93.11%"),
-        ("DINOv2 ViT-B/14 (Foundation)", "768", "346.3 MB", "Pretrained", "187.71 ms", "10.33 ms", "98.67%", "99.26% (+0.59)", "99.13% (+0.46)", "98.99%")
     ]
     for idx, row in enumerate(tradeoff_rows):
         row_cells = tradeoff_tbl.rows[idx+1].cells
         bg_col = "FFFFFF" if idx % 2 == 0 else "F8F9FA"
-        if "ResNet-50" in row[0]:
+        if "Trung bình" in row[0]:
+            bg_col = "FEF9E7"  # Highlight average rows
+        elif "ResNet-50" in row[0]:
             bg_col = "EBF5FB"  # Highlight new heavy backbone
         for j, val in enumerate(row):
             c = row_cells[j]
@@ -1004,15 +1010,17 @@ def build_excel_workbook(output_path):
     ws2.row_dimensions[4].height = 26
 
     data2 = [
-        ("ResNet-20 (Self-trained)", 64, 1.1, "17.6 phút", 3.50, 3.47, 0.49, 89.67, 91.91, 91.54, 89.97, 89.77, 90.54, 65.84),
+        ("ResNet-20 Seed 0 (Tự train)", 64, 1.1, "17.6 phút", 3.50, 3.47, 0.49, 89.79, 92.16, 91.69, 89.97, 89.77, 90.54, 65.84),
+        ("ResNet-20 Seed 1 (Tự train)", 64, 1.1, "17.4 phút", 3.48, 3.46, 0.49, 89.75, 92.16, 91.64, 89.45, 89.50, 90.91, 64.84),
+        ("ResNet-20 Seed 2 (Tự train)", 64, 1.1, "17.5 phút", 3.51, 3.48, 0.49, 91.06, 92.90, 92.38, 90.31, 90.10, 91.76, 65.11),
         ("ResNet-18-Bottleneck (Self-trained)", 128, 42.9, "31.3 phút", 8.61, 4.62, 0.72, 92.10, 92.83, 92.82, 87.86, 92.57, 93.33, 37.27),
-        ("MobileNetV2 (Self-trained)", 1280, 9.0, "40.5 phút", 11.32, 6.29, 0.88, 89.42, 92.53, 91.74, 89.89, 90.48, 79.54, 60.35),
+        ("MobileNetV2 Seed 0 (Tự train)", 1280, 9.0, "40.5 phút", 11.32, 6.29, 0.88, 89.42, 92.58, 91.76, 89.89, 90.48, 79.54, 60.35),
+        ("MobileNetV2 Seed 1 (Tự train)", 1280, 9.0, "41.0 phút", 11.28, 6.25, 0.88, 90.31, 92.56, 91.91, 90.10, 90.35, 81.69, 58.41),
+        ("MobileNetV2 Seed 2 (Tự train)", 1280, 9.0, "40.8 phút", 11.35, 6.31, 0.88, 89.72, 92.29, 91.58, 89.66, 89.80, 78.95, 59.30),
         ("ResNet-18 Seed 0 (Self-trained)", 512, 42.7, "31.2 phút", 10.61, 3.97, 0.74, 92.43, 93.93, 93.61, 90.84, 92.87, 92.01, 55.65),
         ("ResNet-18 Seed 1 (Self-trained)", 512, 42.7, "29.2 phút", 10.19, 4.23, 0.76, 91.35, 93.24, 92.99, 89.55, 91.15, 90.18, 54.23),
         ("ResNet-18 Seed 2 (Self-trained)", 512, 42.7, "29.2 phút", 10.18, 4.40, 0.77, 92.79, 93.87, 93.81, 90.92, 93.40, 92.32, 53.16),
-        ("ResNet-18 (OpenOOD Official)", 512, 42.7, "Gốc Cung Cấp", 10.60, 3.95, 0.74, 92.40, 93.96, 93.69, 90.56, 92.50, 91.99, 53.30),
         ("ResNet-50 (Self-trained 100e)", 2048, 90.0, "151.1 phút", 22.28, 5.85, 0.95, 92.50, 94.08, 93.74, 91.38, 92.80, 93.11, 58.34),
-        ("DINOv2 ViT-B/14 (Foundation)", 768, 346.3, "Pretrained", 187.71, 10.33, 4.91, 98.67, 99.26, 99.13, 98.62, 98.79, 98.99, 96.43)
     ]
     for row_idx, row in enumerate(data2, start=5):
         ws2.row_dimensions[row_idx].height = 20
