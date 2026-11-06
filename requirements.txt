@@ -1,0 +1,25 @@
+# CURE: Dynamic Memory Curation via Retroactive Eviction for Test-Time OOD Detection
+# Core & Evaluation Requirements for Python >= 3.10
+
+# Scientific & ML Compute
+numpy>=1.26.0
+scipy>=1.11.0
+scikit-learn>=1.3.0
+torch>=2.1.0
+torchvision>=0.16.0
+pillow>=10.0.0
+pyyaml>=6.0
+huggingface_hub>=0.23.0
+
+# Visualization & Reporting
+matplotlib>=3.8.0
+seaborn>=0.13.0
+pandas>=2.1.0
+tqdm>=4.66.0
+
+# Edge Acceleration & Development (Optional)
+faiss-cpu>=1.8.0
+pytest>=7.4.0
+nbformat>=5.9.0
+nbconvert>=7.10.0
+ipykernel>=6.25.0

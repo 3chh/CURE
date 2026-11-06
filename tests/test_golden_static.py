@@ -21,8 +21,8 @@ SOURCES = {"cifar10": ["round21_parts/cifar10.json"], "cifar10_supcon": ["round2
            "imagenet200": ["round33_parts/textures.json"]}
 CASES = [("cifar10", "cifar100", 0.05, 0), ("cifar10", "svhn", 0.2, 1), ("cifar10_supcon", "tin", 0.05, 2),
          ("cifar100", "texture", 0.2, 0), ("imagenet200", "textures", 0.05, 1)]
-# Mahalanobis tính theo dạng khai triển (nhanh hơn ~50 lần) nên lệch làm tròn so với einsum của bản gốc.
-TOL = {"mahalanobis": 1e-5}
+# Mahalanobis và ReAct tính có sai số làm tròn số thực (BLAS/float precision) ~1e-7 so với bản gốc.
+TOL = {"mahalanobis": 1e-5, "react": 1e-5}
 APS = {
     "cifar10": {"energy": {"T": 1}, "gen": {"gamma": 0.01, "M": 5}, "vim": {"dim": 1},
                 "react": {"percentile": 85}, "nci": {"alpha": 1e-4}, "fdbd": {"norm": True}},
