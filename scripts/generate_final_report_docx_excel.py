@@ -130,6 +130,33 @@ def add_callout_box(doc, text, title="ĐIỂM NHẤN KHOA HỌC / THẨM ĐỊNH
     
     doc.add_paragraph().paragraph_format.space_after = Pt(4)
 
+def add_figure_with_caption(doc, img_path, fig_title_en, fig_desc_vi, width=Inches(6.0)):
+    if not os.path.exists(img_path):
+        return
+    p_img = doc.add_paragraph()
+    p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_img.paragraph_format.space_before = Pt(8)
+    p_img.paragraph_format.space_after = Pt(3)
+    run_img = p_img.add_run()
+    run_img.add_picture(img_path, width=width)
+    
+    p_cap = doc.add_paragraph()
+    p_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_cap.paragraph_format.space_after = Pt(6)
+    r_title = p_cap.add_run(fig_title_en + "\n")
+    r_title.font.name = "Calibri"
+    r_title.font.size = Pt(9)
+    r_title.font.bold = True
+    r_title.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
+    
+    r_desc = p_cap.add_run(fig_desc_vi)
+    r_desc.font.name = "Calibri"
+    r_desc.font.size = Pt(8.5)
+    r_desc.font.italic = True
+    r_desc.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
+    
+    doc.add_paragraph().paragraph_format.space_after = Pt(4)
+
 # ==========================================================
 # 2. GENERATE WORD REPORT (.DOCX)
 # ==========================================================
@@ -371,6 +398,19 @@ def build_docx_report(output_path):
 
     doc.add_paragraph().paragraph_format.space_after = Pt(8)
 
+    # Figure 1: Training Dynamics across 4 Backbones
+    figures_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "figures"))
+    if not os.path.exists(figures_dir):
+        figures_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "deliverables", "figures"))
+    
+    fig1 = os.path.join(figures_dir, "fig1_training_dynamics.png")
+    add_figure_with_caption(
+        doc,
+        fig1,
+        "Figure 1: Cross-Entropy Loss & Top-1 Validation Accuracy Dynamics over 100 Training Epochs across 4 Architectures.",
+        "Hình 1 thể hiện động học hội tụ hàm mất mát CE Loss (trái) và độ chính xác phân loại Top-1 Val Acc (phải) trên 100 epochs của 4 kiến trúc: ResNet-20, MobileNetV2, ResNet-18, và ResNet-50. Quá trình tối ưu hóa đạt trạng thái ổn định vững chắc, tạo không gian đặc trưng chất lượng cao cho bài toán OOD."
+    )
+
     # Table 2.2: Backbone Trade-off Matrix
     add_styled_heading(doc, "2.2. Ma Trận Đánh Đổi Giữa Chi Phí Huấn Luyện, Kích Thước, Độ Trễ & Hiệu Năng (Toàn Bộ Đa Seed 3 Lần Lặp)", level=2)
     
@@ -424,6 +464,15 @@ def build_docx_report(output_path):
 
     doc.add_paragraph().paragraph_format.space_after = Pt(8)
 
+    # Figure 2: Operational Pareto Trade-off
+    fig2 = os.path.join(figures_dir, "fig2_tradeoff_latency_vs_auroc.png")
+    add_figure_with_caption(
+        doc,
+        fig2,
+        "Figure 2: Empirical Operational Trade-off Pareto Frontier: CPU Latency (ms/sample) vs. OpenOOD Global AUROC (%).",
+        "Hình 2 trực quan hóa toàn bộ đường biên Pareto đánh đổi giữa độ trễ CPU (ms/mẫu) và hiệu năng AUROC toàn cục (OpenOOD v1.5 benchmark). Kích thước bong bóng tỷ lệ thuận với dung lượng tệp trọng số (checkpoint size). ResNet-20 + CURE Online B=1 xác lập Điểm ngọt Công nghiệp (Industrial Sweet Spot) tối ưu cho thiết bị Edge AI nhúng."
+    )
+
     # Detailed Analysis bullets
     p = doc.add_paragraph()
     p.add_run("2.3. Phân Tích Chuyên Sâu Học Thuật Về Ma Trận Đánh Đổi (Kiểm Chứng 4 Giả Thuyết Toán Học)\n").bold = True
@@ -431,11 +480,37 @@ def build_docx_report(output_path):
         "1. Định luật Bảo toàn Giảm Phương sai (Variance Reduction Theorem) qua Bộ nhớ Động:\n"
         "   Khi khảo sát độ lệch chuẩn giữa 3 hạt giống huấn luyện (Seed 0, 1, 2), kNN tĩnh dao động mạnh (ResNet-20: σ = 0.61%, ResNet-18: σ = 0.61%). "
         "Tuy nhiên, khi tích hợp CURE Online B=1, độ lệch chuẩn giảm gần một nửa (ResNet-20: σ = 0.34%, ResNet-18: σ = 0.35%, MobileNetV2: σ = 0.13%). "
-        "Cơ chế chứng chỉ an toàn e-BH hoạt động như một bộ lọc thông thấp (low-pass statistical filter), hấp thụ các biến dạng hình học cục bộ do khởi tạo trọng số ngẫu nhiên ban đầu.\n\n"
+        "Cơ chế chứng chỉ an toàn e-BH hoạt động như một bộ lọc thông thấp (low-pass statistical filter), hấp thụ các biến dạng hình học cục bộ do khởi tạo trọng số ngẫu nhiên ban đầu.\n"
+    )
+
+    # Figure 4: Multi-seed Variance Reduction
+    fig4 = os.path.join(figures_dir, "fig4_multi_seed_variance.png")
+    add_figure_with_caption(
+        doc,
+        fig4,
+        "Figure 4: Multi-Seed Variance Reduction under e-BH Online Certification across Backbones.",
+        "Hình 4 minh chứng hiệu ứng lọc thông thấp (low-pass filter) của chứng chỉ e-BH: thanh sai số (error bars) của CURE Online B=1 thu hẹp rõ rệt so với kNN tĩnh trên cả 3 kiến trúc tự huấn luyện độc lập."
+    )
+
+    p2 = doc.add_paragraph()
+    p2.add_run(
         "2. Tính chất Bù trừ Cận biên Giảm dần (Inverse Marginal Utility Property):\n"
         "   Mức cải thiện thực tế (Gain Δ) của CURE Online B=1 tỷ lệ nghịch nghiêm ngặt với năng lực biểu diễn tĩnh của mạng:\n"
         "   MobileNetV2 (89.82%, d=1280): Gain +1.93%  -->  ResNet-20 (90.20%, d=64): Gain +1.70%  -->  ResNet-18 (92.19%, d=512): Gain +1.28%  -->  ResNet-50 (92.50%, d=2048): Gain +1.24%.\n"
-        "   Các mạng nhẹ có manifold biên ID thưa thớt, tạo điều kiện cho bộ nhớ động bù đắp thiếu hụt biểu diễn. Ngược lại, mạng càng bão hòa thì lợi ích cận biên càng tiệm cận giới hạn.\n\n"
+        "   Các mạng nhẹ có manifold biên ID thưa thớt, tạo điều kiện cho bộ nhớ động bù đắp thiếu hụt biểu diễn. Ngược lại, mạng càng bão hòa thì lợi ích cận biên càng tiệm cận giới hạn.\n"
+    )
+
+    # Figure 3: Diminishing Returns Gain vs Capacity
+    fig3 = os.path.join(figures_dir, "fig3_cure_gain_vs_capacity.png")
+    add_figure_with_caption(
+        doc,
+        fig3,
+        "Figure 3: Diminishing Marginal Returns of Dynamic Memory Replay: CURE Online B=1 vs. Static kNN across Model Capacities.",
+        "Hình 3 thể hiện tính chất bù trừ cận biên giảm dần: mức tăng AUROC (Δ_kNN) đạt cao nhất ở các mô hình nhẹ (+1.93% trên MobileNetV2, +1.70% trên ResNet-20) và tiệm cận mức bão hòa trên mô hình nặng (+1.24% trên ResNet-50)."
+    )
+
+    p3 = doc.add_paragraph()
+    p3.add_run(
         "3. Lời nguyền Số chiều và Sự sụp đổ của Phương pháp Tham số (Parametric Collapse):\n"
         "   Trên không gian 1280 chiều của MobileNetV2, phương pháp WARDEN* sụp đổ thảm hại xuống 80.06% AUROC (giảm -9.76% so với kNN tĩnh, Harm Rate = 100%) "
         "do việc ước lượng nghịch đảo ma trận hiệp phương sai Σ^-1 (1280 x 1280) bị suy biến nặng nề (ill-conditioned). "

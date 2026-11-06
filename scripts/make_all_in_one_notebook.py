@@ -171,3 +171,4 @@ out_path = r"c:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\CURE_Pipe
 with open(out_path, "w", encoding="utf-8") as f:
     nbf.write(nb, f)
 print("Đã tạo thành công Notebook tổng hợp:", out_path)
+

@@ -1,0 +1,48 @@
+Bạn là Claude Opus 5.5 - Kiến trúc sư trưởng kiêm Nhà khoa học máy tính thẩm định báo cáo luận văn cao học / bài báo khoa học chuẩn IEEE/ACM.
+
+Nhiệm vụ của bạn: Viết toàn bộ một script Python hoàn chỉnh (sử dụng thư viện `python-docx`) để sinh ra file Word báo cáo khoa học:
+Đường dẫn output: "c:\\Users\\Hp Victus\\Desktop\\DeepFakeDetection\\deliverables\\BaoCao_KhoaHoc_CURE_OOD_Chuan_Academic.docx"
+
+YÊU CẦU NGHIÊM NGẶT VỀ PHONG CÁCH VÀ NỘI DUNG TỪ TÁC GIẢ:
+- Viết theo phong cách HỌC THUẬT, CLEAN, CÔ ĐỌNG, LOGIC CHẶT CHẼ, BỎ HẾT VĂN PHONG QUẢNG CÁO LÊ THÊ / SÁO RỖNG.
+- Mọi nhận định đều phải bám chắc vào SỐ LIỆU ĐO THẬT và HIỆN TƯỢNG TOÁN HỌC/VẬT LÝ của mô hình.
+- LOẠI BỎ HOÀN TOÀN TẤT CẢ DỮ LIỆU DEEPFAKE / GENERATIVE AI. Tập trung chuyên sâu vào:
+  1. Thị giác máy tính OOD (CIFAR-10 chuẩn OpenOOD đa kiến trúc: ResNet-20 64-d, MobileNetV2 1280-d, ResNet-18 512-d, ResNet-50 2048-d).
+  2. An ninh mạng SCADA Công nghiệp (Westermo network stream).
+  3. Kiểm định khuyết tật vi mạch bán dẫn (WM-811K wafer defect).
+
+CẤU TRÚC BÁO CÁO KHOA HỌC 4 PHẦN CHUẨN:
+
+PHẦN 1: TỔNG QUAN BÀI TOÁN & GIỚI HẠN CỦA CÁC PHƯƠNG PHÁP OOD HIỆN NAY
+- OOD tĩnh (Static OOD) vs OOD trên dòng dữ liệu động thời gian thực (Continual/Streaming OOD).
+- Nghịch lý an toàn của bộ nhớ động: Nếu không cập nhật thì suy giảm thích nghi; nếu cập nhật tự do thì bị "nhiễm độc bộ nhớ" (Memory Poisoning do rò rỉ mẫu OOD).
+- Lỗ hổng của các phương pháp tham số (Parametric like WARDEN*, Mahalanobis): Ma trận hiệp phương sai mẫu Sigma suy biến khi số chiều d lớn (Curse of Dimensionality).
+
+PHẦN 2: CƠ SỞ LÝ THUYẾT & THUẬT TOÁN CURE (CONTINUAL UNCERTAINTY-AWARE REPLAY)
+- Cơ chế kiểm định giả thuyết Online e-BH (Batch size B=1): Đặt ngưỡng an toàn thống kê chặt chẽ (alpha = 0.05) dựa trên e-value để chỉ kết nạp các mẫu ID sạch vào bộ nhớ trượt CDM, triệt tiêu rủi ro nhiễm độc.
+- Thuật toán Nonparametric kNN trên không gian metric: Miễn nhiễm trước sự suy biến ma trận của số chiều cao.
+
+PHẦN 3: KẾT QUẢ THỰC NGHIỆM ĐA KIẾN TRÚC & ĐA SEED (100% SỐ THỰC TẾ)
+- Bảng 1: Ma trận đánh đổi đa kiến trúc trên 162 luồng OpenOOD (3 seeds / model, 54 streams/seed):
+  + ResNet-20 (64-d, 1.1 MB, 17.5p train): kNN = 90.20±0.61%, CURE B=1 = 91.90±0.34% (Gain: +1.70%, Harm Rate: 0.0%, Trễ CPU: 3.50 ms).
+  + MobileNetV2 (1280-d, 9.0 MB, 40.8p train): kNN = 89.82±0.37%, CURE B=1 = 91.75±0.13% (Gain: +1.93%, Harm Rate: 0.0%, Trễ CPU: 11.32 ms).
+    Đối chứng WARDEN* sụp đổ: 80.06±1.18% (thua kNN -9.76%, Harm Rate = 100%).
+  + ResNet-18 (512-d, 42.7 MB, 30p train): kNN = 92.19±0.61%, CURE B=1 = 93.47±0.35% (Gain: +1.28%, Harm Rate: 0.0%, Trễ CPU: 10.60 ms).
+  + ResNet-50 (2048-d, 90.0 MB, 151p train): kNN = 92.50%, CURE B=1 = 93.74% (Gain: +1.24%, Harm Rate: 0.0%, Trễ CPU: 22.28 ms).
+- 4 Phân tích học thuật sâu sắc:
+  1. Định luật giảm phương sai (Variance Reduction): CURE giảm sigma giữa các seed từ 0.61% xuống 0.13% - 0.35%.
+  2. Tính chất bù trừ cận biên giảm dần (Inverse Marginal Utility): Gain CURE giảm đơn điệu theo độ bão hòa mạng (+1.93% -> +1.70% -> +1.28% -> +1.24%). Mạng càng nhẹ CURE buff càng mạnh.
+  3. Đánh giá khách quan ResNet-50 vs ResNet-18: Tăng 2.1x tham số, 4x chiều, 5x thời gian train nhưng kNN tĩnh chỉ nhích +0.10% (Near-OOD giảm nhẹ do bão hòa ngữ nghĩa 32x32 và nhiễu chiều cao).
+  4. Phân tích hiện tượng sụp đổ của WARDEN* trên MobileNetV2 do ill-conditioned covariance matrix.
+
+PHẦN 4: KẾT LUẬN & ĐỀ XUẤT ỨNG DỤNG THỰC TIỄN
+- Điểm ngọt công nghiệp (Sweet Spot): ResNet-20 (1.1 MB, 64-d) + CURE B=1 (3.5 ms CPU) đạt 91.90% tiệm cận ResNet-18 tĩnh nhưng nhẹ hơn 39 lần, nhanh hơn 3 lần.
+- Đề xuất mở rộng: Thử nghiệm trên ảnh độ phân giải lớn (ImageNet-1K).
+
+ĐỊNH DẠNG DOCX CHUYÊN NGHIỆP:
+- Font Calibri / Times New Roman, phân cấp Heading 1 (16pt bold, xanh đậm #1B365D), Heading 2 (13pt bold), Text (10.5pt, line spacing 1.15, space after 4pt).
+- Bảng kẻ viền thanh lịch (#D3D3D3), tiêu đề bảng nền xanh #1B365D chữ trắng bold, căn lề số liệu chuẩn (text canh trái, số canh phải, độ trễ/kích thước canh giữa).
+- Hộp Callout / Box phân tích đóng khung bo viền màu xanh nhạt.
+
+Hãy viết code Python hoàn chỉnh để tạo file docx trên và lưu vào script `scripts/generate_academic_clean_docx.py`. Đảm bảo code chạy không có bất kỳ lỗi cú pháp nào.
+

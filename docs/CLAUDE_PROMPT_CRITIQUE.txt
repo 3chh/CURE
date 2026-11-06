@@ -1,0 +1,55 @@
+Bạn là Claude Opus 5.5 - Chuyên gia Thẩm định Khoa học & Kiến trúc Sư Trưởng Machine Learning.
+Nhiệm vụ của bạn là đánh giá CÔNG TÂM, THẲNG THẮN, SẮC SẢO VÀ ĐẬM CHẤT HỌC THUẬT về toàn bộ kết quả thực nghiệm vừa thu được của đề tài "CURE: Continual Uncertainty-Aware Nonparametric OOD Detection".
+
+TÁC GIẢ ĐÃ CHỈ TRÍCH CHÍNH XÁC:
+"đi so sánh 1 cái resnet50 đc ta train vs 1 cái resnet18 có sẵn mà hơn đc có tẹo rồi bảo vượt trội à. Hãy đánh giá công tâm các kết quả chạy và cho ra các insight học thuật sắc sảo hơn có ý nghĩa thật hơn."
+
+DỮ LIỆU THỰC NGHIỆM THỰC TẾ (100% SỐ THỰC, KHÔNG BỊA ĐẶT):
+
+1. So sánh ResNet-50 (23.5M params, 2048-d, ckpt 90 MB, train 151.1 phút) vs ResNet-18 OpenOOD Gốc (11.2M params, 512-d, ckpt 42.7 MB) vs ResNet-18 Tự train s0:
+- kNN AUROC (Tĩnh):
+  + ResNet-50: 92.50% (Near=90.77%, Far=93.37%, FPR95=27.42%)
+  + ResNet-18 Official: 92.40% (Near=91.12%, Far=93.05%, FPR95=27.32%)
+  + ResNet-18 s0: 92.42% (Near=90.46%, Far=93.40%, FPR95=26.34%)
+  -> NHẬN XÉT CỦA BẠN: Tăng tham số gấp đôi (11.2M -> 23.5M), chiều đặc trưng tăng gấp 4 (512 -> 2048), thời gian train tốn gấp 5 lần (151 phút), nhưng kNN tĩnh chỉ nhích từ 92.40% lên 92.50% (+0.10%), thậm chí Near-OOD còn giảm nhẹ từ 91.12% xuống 90.77%! Đây là biểu hiện kinh điển của "Hiệu suất cận biên tiệm cận" (Diminishing Marginal Returns) và "Bẫy dư thừa tham số trên CIFAR-10 32x32".
+
+- CURE Batch AUROC:
+  + ResNet-50: 94.08% (+1.57%)
+  + ResNet-18 Official: 93.96% (+1.55%)
+  + ResNet-18 s0: 94.06% (+1.64%)
+
+- CURE Online B=1 AUROC:
+  + ResNet-50: 93.74% (+1.23%)
+  + ResNet-18 Official: 93.69% (+1.29%)
+  + ResNet-18 s0: 93.65% (+1.24%)
+
+2. So sánh Toàn bộ Ma trận Đa Kiến Trúc (Từ 64-d đến 2048-d):
+- ResNet-20 (64-d, 1.1 MB, 17.5 phút train):
+  + kNN: 90.20 ± 0.61%
+  + CURE Batch: 92.41 ± 0.35% (Gain: +2.21%)
+  + CURE B=1: 91.90 ± 0.34% (Gain: +1.70%)
+  + Độ trễ CPU: 3.50 ms | GPU: 3.47 ms
+- MobileNetV2 (1280-d, 9.0 MB, 40.8 phút train):
+  + kNN: 89.82 ± 0.37%
+  + CURE Batch: 92.48 ± 0.13% (Gain: +2.66%)
+  + CURE B=1: 91.75 ± 0.13% (Gain: +1.93%)
+  + WARDEN*: 80.06 ± 1.18% (Sụp đổ -9.76% so với kNN, Harm Rate 83-100%!)
+- ResNet-18 (512-d, 42.7 MB, 29-31 phút train):
+  + kNN: 92.19 ± 0.61%
+  + CURE Batch: 93.68 ± 0.31% (Gain: +1.49%)
+  + CURE B=1: 93.47 ± 0.35% (Gain: +1.28%)
+- ResNet-50 (2048-d, 90.0 MB, 151.1 phút train):
+  + kNN: 92.50%
+  + CURE Batch: 94.08% (Gain: +1.58%)
+  + CURE B=1: 93.74% (Gain: +1.24%)
+  + Độ trễ CPU: 22.28 ms (chậm hơn ResNet-20 gấp 6.4 lần!)
+
+YÊU CẦU ĐÁNH GIÁ CỦA CLAUDE OPUS 5.5:
+Hãy xuất bản một bản thẩm định khoa học sắc sảo, không khen vuốt đuôi, tập trung vào:
+1. Đánh giá thẳng thắn về ResNet-50: Tại sao việc bảo ResNet-50 "vượt trội" là ngụy biện khoa học? Phân tích hiện tượng bão hòa thông tin trên ảnh độ phân giải thấp (32x32) và sự lãng phí tài nguyên tính toán (FLOPs/VRAM).
+2. Insight thật sự có giá trị học thuật & thực tiễn nằm ở đâu?
+   - Tại sao ResNet-20 (64-d) kết hợp CURE mới là "điểm ngọt" (Sweet Spot) tối ưu công nghiệp? (So sánh 91.90% của ResNet-20 CURE vs 92.40% của ResNet-18 tĩnh gốc).
+   - "Curse of Dimensionality" (Lời nguyền số chiều) và sự sụp đổ của các phương pháp Parametric Covariance (WARDEN*, Mahalanobis) trên MobileNetV2 1280-d vs tính bền vững của Nonparametric CURE.
+   - Bản chất của cơ chế CURE Online B=1: Tại sao Delta Gain của CURE lại tỷ lệ nghịch với độ lớn mô hình (mô hình càng nhỏ, CURE buff càng mạnh)?
+3. Khuyến nghị chiến lược để tác giả trả lời Hội đồng/Giáo viên một cách chuyên nghiệp, thuyết phục và có tư duy nghiên cứu trưởng thành.
+
