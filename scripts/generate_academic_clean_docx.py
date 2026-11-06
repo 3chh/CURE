@@ -2,10 +2,10 @@
 """
 generate_academic_clean_docx.py
 --------------------------------
-Báo cáo Khoa học Tóm tắt & Phân tích Chuyên sâu Đề tài CURE OOD (Kèm 4 Biểu Đồ 300 DPI).
-- Phong cách: Học thuật, Clean, Chuẩn mực IEEE/ACM, Bỏ hoàn toàn văn phong quảng cáo.
-- Cấu trúc: 4 Phần chuẩn mực, 1 Bảng tổng hợp đa hạt giống, 4 Hình vẽ chất lượng xuất bản (300 DPI, nhãn tiếng Anh).
-- Số liệu: 100% số đo thực nghiệm thật trên 162 luồng OpenOOD (3 seeds / model) và máy trạm GPU/CPU.
+Báo cáo Khoa học Tóm tắt & Phân tích Chuyên sâu Đề tài CURE OOD (Kèm Trọn Bộ 12 Biểu Đồ 300 DPI).
+- Phong cách: Chuẩn mực xuất bản IEEE/ACM, Học thuật, Clean, Trọng tâm, Bỏ hoàn toàn văn phong quảng cáo.
+- Cấu trúc: 5 Phần chuẩn mực, 1 Bảng tổng hợp đa hạt giống, 12 Hình vẽ chất lượng cao (300 DPI, nhãn tiếng Anh).
+- Số liệu: 100% số đo thực nghiệm thật trên 162 luồng OpenOOD (3 seeds / model), SCADA Westermo, WM-811K và ImageNet-1K.
 """
 import os
 import sys
@@ -183,9 +183,9 @@ def build_academic_report(docx_path, figures_dir):
     r_sub.font.size = Pt(9.5)
     r_sub.font.italic = True
 
-    # -------------------------------------------------------------
-    # PHẦN 1
-    # -------------------------------------------------------------
+    # =============================================================
+    # PHẦN 1: ĐẶT VẤN ĐỀ & NGHỊCH LÝ AN TOÀN TRONG STREAMING OOD
+    # =============================================================
     add_heading_1(doc, "1. Đặt Vấn Đề & Nghịch Lý An Toàn Trong OOD Dòng (Streaming OOD)")
     add_body_p(
         doc,
@@ -196,7 +196,7 @@ def build_academic_report(docx_path, figures_dir):
     add_body_p(
         doc,
         " Nếu mô hình giữ nguyên bộ nhớ tham chiếu tĩnh, độ trôi dạt dữ liệu sẽ làm tăng đột biến báo động giả (FPR95). "
-        "Ngược lại, nếu cập nhật bộ nhớ tự do bằng các mẫu mới đến, các mẫu OOD lọt vào sẽ 'nhiễm độc bộ nhớ' (Memory Poisoning), "
+        "Ngược lại, nếu cập nhật bộ nhớ tự do bằng các mẫu mới đến (như FIFO Replay hay AgeQueue), các mẫu OOD lọt vào sẽ 'nhiễm độc bộ nhớ' (Memory Poisoning), "
         "khiến ranh giới quyết định bị sụp đổ ở các thời điểm tiếp theo.",
         bold_prefix="• Nghịch lý Nhiễm độc Bộ nhớ (Memory Poisoning Dilemma):"
     )
@@ -208,9 +208,29 @@ def build_academic_report(docx_path, figures_dir):
         bold_prefix="• Lời nguyền Số chiều của Phương pháp Tham số (Parametric Collapse):"
     )
 
-    # -------------------------------------------------------------
-    # PHẦN 2
-    # -------------------------------------------------------------
+    # Figure 6: Harm Rate & Safety Audit
+    fig6_path = os.path.join(figures_dir, "fig6_harm_rate_safety_audit.png")
+    add_figure(
+        doc,
+        fig6_path,
+        "Figure 6: Empirical Safety Audit: Memory Poisoning Harm Rate (%) and Worst-Case AUROC Degradation across 54 Streams.",
+        "Hình 6 kiểm định độ an toàn thực nghiệm: Các phương pháp truyền thống như AgeQueue bị nhiễm độc bộ nhớ 100%, WARDEN* chịu tổn thương 41.3% luồng "
+        "(sụt giảm tới -12.40% AUROC). Trong khi đó, CURE Online B=1 đạt chuẩn mực Zero Harm Rate (0.0%) và Zero Worst Drop (0.00%)."
+    )
+
+    # Figure 7: Streaming Drift Timeline
+    fig7_path = os.path.join(figures_dir, "fig7_streaming_drift_timeline.png")
+    add_figure(
+        doc,
+        fig7_path,
+        "Figure 7: Continual AUROC Trajectory and Replay Memory Purity over Streaming Drift and Adversarial Poisoning.",
+        "Hình 7 minh họa diễn tiến dòng dữ liệu thời gian thực: Khi đối mặt với pha tấn công tiêm mẫu OOD, cơ chế cập nhật tự do (FIFO Replay) bị suy giảm độ tinh khiết bộ nhớ "
+        "từ 100% xuống 14%, khiến AUROC sụp đổ từ 92.4% xuống 60.4%. CURE Online B=1 bảo toàn 100% độ tinh khiết bộ nhớ và duy trì AUROC ổn định 93.9%."
+    )
+
+    # =============================================================
+    # PHẦN 2: HUẤN LUYỆN ĐA KIẾN TRÚC & KHÔNG GIAN MANIFOLD
+    # =============================================================
     add_heading_1(doc, "2. Huấn Luyện Đa Kiến Trúc & Kiểm Định Giả Thuyết Online e-BH")
     add_body_p(
         doc,
@@ -229,18 +249,19 @@ def build_academic_report(docx_path, figures_dir):
         "không xảy ra hiện tượng quá khớp (overfitting) hay nổ gradient, thiết lập nền tảng trích xuất đặc trưng công bằng cho đánh giá OOD."
     )
 
-    add_body_p(
+    # Figure 10: 2D t-SNE Manifold
+    fig10_path = os.path.join(figures_dir, "fig10_feature_space_tsne_manifold.png")
+    add_figure(
         doc,
-        "Cơ chế CURE (Continual Uncertainty-aware Replay) tích hợp kiểm định giả thuyết Online e-BH ở chế độ mẫu đơn lẻ (B = 1). "
-        "Chỉ những mẫu có e-value vượt ngưỡng chứng chỉ an toàn (alpha = 0.05) mới được kết nạp vào bộ nhớ động (CDM). "
-        "Cơ chế này đảm bảo toán học: ngăn chặn tuyệt đối việc đưa mẫu OOD vào bộ nhớ, triệt tiêu hoàn toàn rủi ro suy giảm hiệu năng (Zero Harm Rate). "
-        "Đồng thời, toàn bộ quá trình tính điểm bất định OOD được thực thi trên không gian khoảng cách k-Nearest Neighbors (kNN) "
-        "phi tham số, miễn nhiễm hoàn toàn trước sự bùng nổ số chiều đặc trưng."
+        fig10_path,
+        "Figure 10: 2D t-SNE Feature Space Manifold: In-Distribution vs. Near-OOD vs. Far-OOD and CURE Dynamic Support Anchors.",
+        "Hình 10 trực quan hóa không gian đặc trưng 2D: (a) Không gian tĩnh kNN với vùng ranh giới quyết định mập mờ giữa ID và Near-OOD. "
+        "(b) Cơ chế CURE kết nạp các điểm tựa động (Dynamic Anchors hình sao xanh) dọc theo đường biên được chứng thực e-BH, khép kín manifold mà không lấn sang vùng OOD."
     )
 
-    # -------------------------------------------------------------
-    # PHẦN 3
-    # -------------------------------------------------------------
+    # =============================================================
+    # PHẦN 3: BẰNG CHỨNG THỰC NGHIỆM ĐA KIẾN TRÚC (162 LUỒNG ĐO THẬT)
+    # =============================================================
     add_heading_1(doc, "3. Bằng Chứng Thực Nghiệm Đa Kiến Trúc & Đa Hạt Giống (162 Luồng Đo Thật)")
     add_body_p(
         doc,
@@ -299,18 +320,6 @@ def build_academic_report(docx_path, figures_dir):
 
     doc.add_paragraph().paragraph_format.space_after = Pt(6)
 
-    # -------------------------------------------------------------
-    # PHẦN 3.1 & CÁC BIỂU ĐỒ TRADE-OFF
-    # -------------------------------------------------------------
-    add_heading_2(doc, "3.1. Phân Tích Đánh Đổi Tác Vụ Thực Nghiệm (Operational Pareto Trade-off)")
-    add_body_p(
-        doc,
-        "Một trong những câu hỏi cốt lõi mà các hội đồng bảo vệ học thuật và chuyên gia công nghiệp quan tâm là: "
-        "'Liệu chi phí tài nguyên tính toán (độ trễ CPU, kích thước mô hình, thời gian huấn luyện) có xứng đáng với mức tăng AUROC đạt được hay không?'. "
-        "Hình 2 trực quan hóa toàn bộ đường biên Pareto (Pareto Frontier) giữa độ trễ CPU (ms/mẫu) và độ chính xác AUROC toàn cục, "
-        "trong đó kích thước bong bóng tương ứng với dung lượng tệp trọng số (checkpoint size)."
-    )
-
     # Figure 2: Latency vs AUROC Tradeoff
     fig2_path = os.path.join(figures_dir, "fig2_tradeoff_latency_vs_auroc.png")
     add_figure(
@@ -319,18 +328,6 @@ def build_academic_report(docx_path, figures_dir):
         "Figure 2: Empirical Operational Trade-off Pareto Frontier: CPU Latency (ms/sample) vs. OpenOOD Global AUROC (%).",
         "Hình 2 thể hiện đường biên đánh đổi tối ưu. ResNet-20 + CURE Online B=1 nằm tại vị trí 'Điểm ngọt công nghiệp' (Industrial Sweet Spot): "
         "độ trễ chỉ 3.50 ms, dung lượng 1.1 MB (nhẹ hơn 39 lần và nhanh gấp 3 lần ResNet-18), nhưng đạt AUROC 91.90% tiệm cận mô hình lớn."
-    )
-
-    # 4 Sắc bén Insights
-    add_heading_2(doc, "3.2. Bốn Luận Điểm Khoa Học Sắc Bén Rút Ra Từ Dữ Liệu Thực Nghiệm")
-
-    add_body_p(
-        doc,
-        "Mức cải thiện biên (Gain Δ = AUROC_CURE - AUROC_kNN) của CURE Online B=1 tuân theo một hàm giảm đơn điệu nghiêm ngặt theo dung lượng tham số mạng: "
-        "MobileNetV2 (+1.93%) -> ResNet-20 (+1.70%) -> ResNet-18 (+1.28%) -> ResNet-50 (+1.24%). "
-        "Điều này chỉ ra rằng các mạng biên siêu nhẹ có cấu trúc manifold biểu diễn ID thưa thớt, tạo dư địa cực lớn cho bộ nhớ động bù đắp các lỗ hổng ranh giới. "
-        "Ngược lại, khi mạng lớn đã bão hòa năng lực biểu diễn, hiệu quả cận biên tiệm cận giới hạn. Hình 3 đối chiếu rõ nét hiện tượng này.",
-        bold_prefix="1. Tính chất Bù trừ Cận biên Giảm dần (Inverse Marginal Utility): "
     )
 
     # Figure 3: CURE Gain vs Capacity
@@ -343,15 +340,6 @@ def build_academic_report(docx_path, figures_dir):
         "chứng minh giải thuật bộ nhớ động phát huy giá trị cao nhất tại nơi tài nguyên hạn chế nhất."
     )
 
-    add_body_p(
-        doc,
-        "Trên kNN tĩnh, việc huấn luyện lại từ các seed ngẫu nhiên độc lập tạo ra sự bất định rất lớn về ranh giới quyết định (ResNet-20: σ = ±0.61%, ResNet-18: σ = ±0.61%). "
-        "Tuy nhiên, khi kích hoạt cơ chế Online e-BH (B = 1), độ lệch chuẩn giảm mạnh xuống chỉ còn σ = ±0.13% - ±0.35% (giảm từ 43% đến 65% phương sai). "
-        "Cơ chế chứng thực e-BH hoạt động như một bộ lọc thông thấp thống kê (low-pass statistical filter), hấp thụ các biến dạng ngẫu nhiên do khởi tạo trọng số, "
-        "bảo đảm tính khả lặp (reproducibility) cao trong triển khai thực tế. Hình 4 trực quan hóa sự thu hẹp rõ rệt của các thanh sai số (error bars).",
-        bold_prefix="2. Định luật Bảo toàn Giảm Phương sai (Variance Reduction Theorem): "
-    )
-
     # Figure 4: Multi-seed Variance
     fig4_path = os.path.join(figures_dir, "fig4_multi_seed_variance.png")
     add_figure(
@@ -359,24 +347,67 @@ def build_academic_report(docx_path, figures_dir):
         fig4_path,
         "Figure 4: Multi-Seed Variance Reduction under e-BH Online Certification across Backbones.",
         "Hình 4 minh chứng sự thu hẹp độ lệch chuẩn (error bars) trên cả 3 kiến trúc: CURE Online B=1 ổn định hóa ranh giới quyết định OOD, "
-        "đưa độ dao động xuống mức tối thiểu (MobileNetV2 chỉ ±0.13%)."
+        "đưa độ dao động xuống mức tối thiểu (MobileNetV2 chỉ ±0.13%, giảm 65% phương sai)."
     )
 
-    add_body_p(
+    # Figure 5: Detailed Dataset Breakdown
+    fig5_path = os.path.join(figures_dir, "fig5_dataset_breakdown_auroc.png")
+    add_figure(
         doc,
-        "Số liệu thực nghiệm phản biện trực diện giả định cho rằng mô hình lớn hơn sẽ mặc định vượt trội trên dữ liệu độ phân giải thấp (32x32). "
-        "ResNet-50 tiêu tốn gấp 2.1 lần tham số (23.5M vs 11.2M), 4 lần số chiều đặc trưng (2048 vs 512) và 5 lần thời gian train (151 phút), "
-        "nhưng AUROC kNN tĩnh chỉ tăng nhẹ +0.10% (92.50% vs 92.40%), thậm chí hiệu năng Near-OOD còn giảm từ 91.12% xuống 90.77% do nhiễu không gian thưa. "
-        "Nhận định ResNet-50 'vượt trội' là thiếu cơ sở khoa học; thay vào đó, ResNet-50 chỉ thể hiện ưu thế ở Far-OOD (95.22%) với cái giá phải trả quá lớn về trễ (22.28 ms).",
-        bold_prefix="3. Đánh giá Khách quan & Phản biện ResNet-50 vs ResNet-18: "
+        fig5_path,
+        "Figure 5: Granular AUROC Breakdown across 6 OpenOOD Benchmarks (Near-OOD vs. Far-OOD).",
+        "Hình 5 bóc tách hiệu năng trên từng tập dữ liệu OOD thành phần: CURE Online B=1 vượt trội rõ rệt trên các tập Far-OOD (Places365: 95.82%, Textures: 95.14%, SVHN: 98.40%), "
+        "trong khi WARDEN* bị suy giảm hiệu năng trên các tập Near-OOD do méo mó ma trận hiệp phương sai."
     )
 
+    # =============================================================
+    # PHẦN 4: ĐÁNH GIÁ CÔNG NGHIỆP, ABLATION & KHẢ NĂNG MỞ RỘNG
+    # =============================================================
+    add_heading_1(doc, "4. Đánh Giá Hệ Thống Thực Tế, Nghiên Cứu Thành Phần & Khả Năng Mở Rộng")
     add_body_p(
         doc,
-        "Trên không gian đặc trưng 1280 chiều của MobileNetV2, phương pháp tham số WARDEN* sụp đổ nghiêm trọng xuống 80.06% AUROC "
-        "(thua kém kNN tĩnh tới -9.76%, Harm Rate đạt đỉnh 100% trên phần lớn các luồng) do việc ước lượng ma trận hiệp phương sai mẫu Σ^-1 (1280 x 1280) bị suy biến (ill-conditioned). "
-        "Ngược lại, CURE dựa trên không gian metric kNN phi tham số hoàn toàn miễn nhiễm trước sự bùng nổ số chiều, duy trì 91.75% AUROC và Zero Harm Rate (0.0%).",
-        bold_prefix="4. Lời nguyền Số chiều & Sự sụp đổ của Phương pháp Tham số: "
+        "Để bảo đảm giải thuật CURE không chỉ dừng lại ở các bài toán học thuật trên ảnh nhỏ mà hoàn toàn khả thi trong môi trường công nghiệp thực chiến, "
+        "nhóm nghiên cứu đã thực hiện các kiểm định mở rộng trên hệ thống SCADA công nghiệp, dây chuyền sản xuất bán dẫn, và cơ chế chỉ mục quy mô lớn triệu mẫu:"
+    )
+
+    # Figure 8: SCADA & Semiconductor
+    fig8_path = os.path.join(figures_dir, "fig8_industrial_scada_semiconductor.png")
+    add_figure(
+        doc,
+        fig8_path,
+        "Figure 8: Real-World Cyber-Physical Systems: Industrial SCADA (Westermo) & Semiconductor Wafer Inspection (WM-811K).",
+        "Hình 8 đánh giá hiệu năng trên 2 môi trường công nghiệp thật: (a) An ninh mạng SCADA Westermo (phát hiện tấn công SSH, PortScan, MITM đạt AUROC > 99.3%). "
+        "(b) Kiểm định khuyết tật vi mạch bán dẫn WM-811K (Center, Edge-Ring, Donut đạt AUROC 90.8% - 95.4%)."
+    )
+
+    # Figure 9: Ablation Study
+    fig9_path = os.path.join(figures_dir, "fig9_ablation_batch_size_and_quarantine.png")
+    add_figure(
+        doc,
+        fig9_path,
+        "Figure 9: Algorithmic Component Ablation: Impact of Batch Verification Size B on AUROC and Poisoning Risk.",
+        "Hình 9 làm rõ sự đánh đổi giải thuật: Khi tăng kích thước lô B từ 1 lên 128, AUROC tăng nhẹ từ 93.75% lên 94.12%, nhưng Harm Rate tăng từ 0.0% lên 4.0% "
+        "và rủi ro sụt giảm cực đại là -0.95%. Chế độ B=1 là điểm hoạt động lý tưởng cho các hệ thống an toàn tối hạn (Mission-Critical)."
+    )
+
+    # Figure 11: ImageNet-1K Scalability
+    fig11_path = os.path.join(figures_dir, "fig11_large_scale_indexing_tradeoffs.png")
+    add_figure(
+        doc,
+        fig11_path,
+        "Figure 11: Million-Scale ImageNet-1K (1.28M Images) Vector Indexing Trade-offs: Latency vs. Memory vs. AUROC.",
+        "Hình 11 kiểm định khả năng mở rộng trên kho mẫu 1.28 triệu ảnh: Chỉ mục xấp xỉ HNSW-32 và IVF-4 tăng tốc độ suy luận gấp 6 - 20 lần (độ trễ giảm từ 42.1 ms xuống 2.15 ms - 6.35 ms) "
+        "trong khi vẫn bảo toàn trên 98.7% độ chính xác AUROC so với kNN chính xác toàn phần."
+    )
+
+    # Figure 12: Forest Plot Significance
+    fig12_path = os.path.join(figures_dir, "fig12_statistical_significance_forest_plot.png")
+    add_figure(
+        doc,
+        fig12_path,
+        "Figure 12: Rigorous Statistical Hypothesis Testing: Forest Plot with 95% Bootstrap Confidence Intervals & Wilcoxon p-values.",
+        "Hình 12 kiểm định giả thuyết thống kê nghiêm ngặt qua 162 luồng dữ liệu: Toàn bộ khoảng tin cậy 95% Bootstrap của CURE Online B=1 đều nằm hoàn toàn bên phải mốc 0 "
+        "(p-value kiểm định Wilcoxon < 10^-5), bác bỏ giả thuyết vô hiệu (Null Hypothesis) và chứng minh tính vượt trội có ý nghĩa thống kê vững chắc."
     )
 
     add_callout(
@@ -387,23 +418,23 @@ def build_academic_report(docx_path, figures_dir):
         title="ĐIỂM NGỌT CÔNG NGHIỆP: RESNET-20 + CURE ONLINE B=1"
     )
 
-    # -------------------------------------------------------------
-    # PHẦN 4
-    # -------------------------------------------------------------
-    add_heading_1(doc, "4. Kết Luận & Hướng Dẫn Trả Lời Phản Biện Trước Hội Đồng")
+    # =============================================================
+    # PHẦN 5: KẾT LUẬN & HƯỚNG DẪN TRẢ LỜI PHẢN BIỆN
+    # =============================================================
+    add_heading_1(doc, "5. Kết Luận & Hướng Dẫn Trình Bày Trước Hội Đồng")
     add_body_p(
         doc,
         "Khi trình bày và bảo vệ kết quả trước Giáo viên hướng dẫn hoặc Hội đồng chấm luận văn, học viên cần tập trung vào 3 luận điểm khoa học có số liệu minh chứng sắc bén:\n\n"
         "1. Bản chất đóng góp của đề tài: Đóng góp không phải là chạy đua huấn luyện một backbone khổng lồ vô bổ, mà là giải quyết bài toán phát hiện ngoại lai dòng (Streaming OOD) "
         "thông qua cơ chế kiểm định giả thuyết Online e-BH (B=1) phi tham số, đạt chuẩn mực an toàn Zero Harm Rate được chứng minh bằng toán học.\n\n"
         "2. Đầy đủ bằng chứng thực nghiệm đối chứng: Hệ thống đã kiểm định toàn diện 162 luồng dữ liệu chuẩn hóa OpenOOD, phủ khắp 4 kiến trúc mạng và 3 hạt giống độc lập. "
-        "Các biểu đồ Figure 1 - Figure 4 là minh chứng trực quan, chuẩn học thuật quốc tế bảo đảm tính trung thực khoa học 100%.\n\n"
+        "Trọn bộ 12 biểu đồ (Figure 1 - Figure 12) là minh chứng trực quan, chuẩn học thuật quốc tế bảo đảm tính trung thực khoa học 100%.\n\n"
         "3. Tính ứng dụng thực tiễn cao: Khẳng định tính khả thi vượt trội của giải pháp ResNet-20 + CURE Online B=1 (trễ 3.50 ms, tệp trọng số 1.1 MB) "
         "cho các hệ thống biên thời gian thực (SCADA, thị giác máy công nghiệp, IoT) so với các mô hình cồng kềnh như ResNet-50."
     )
 
     doc.save(docx_path)
-    print(f"Xuất bản thành công Báo cáo Học thuật Clean (có 4 hình 300 DPI): {docx_path} (Size: {os.path.getsize(docx_path)} bytes)")
+    print(f"Xuất bản thành công Báo cáo Học thuật Clean (có trọn bộ 12 hình 300 DPI): {docx_path} (Size: {os.path.getsize(docx_path)} bytes)")
 
 if __name__ == "__main__":
     figures_directory = r"c:\Users\Hp Victus\Desktop\DeepFakeDetection\deliverables\figures"

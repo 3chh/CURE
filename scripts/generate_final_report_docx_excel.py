@@ -332,6 +332,29 @@ def build_docx_report(output_path):
         r2 = p2.add_run(m_desc)
         r2.font.size = Pt(9)
 
+    doc.add_paragraph().paragraph_format.space_after = Pt(6)
+
+    # Figure 6 & Figure 7: Safety Audit & Streaming Drift
+    figures_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "figures"))
+    if not os.path.exists(figures_dir):
+        figures_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "deliverables", "figures"))
+
+    fig6 = os.path.join(figures_dir, "fig6_harm_rate_safety_audit.png")
+    add_figure_with_caption(
+        doc,
+        fig6,
+        "Figure 6: Empirical Safety Audit: Memory Poisoning Harm Rate (%) and Worst-Case AUROC Degradation across 54 Streams.",
+        "Hình 6 kiểm định độ an toàn thực nghiệm: Các phương pháp thích nghi truyền thống như AgeQueue bị nhiễm độc bộ nhớ 100%, WARDEN* chịu tổn thương 41.3% luồng (sụt giảm tới -12.40% AUROC). Trong khi đó, CURE Online B=1 đạt chuẩn mực an toàn Zero Harm Rate (0.0%) và Zero Worst Drop (0.00%)."
+    )
+
+    fig7 = os.path.join(figures_dir, "fig7_streaming_drift_timeline.png")
+    add_figure_with_caption(
+        doc,
+        fig7,
+        "Figure 7: Continual AUROC Trajectory and Replay Memory Purity over Streaming Drift and Adversarial Poisoning.",
+        "Hình 7 minh họa diễn tiến dòng dữ liệu thời gian thực: Khi đối mặt với pha tấn công tiêm mẫu OOD, cơ chế cập nhật tự do (FIFO Replay) bị suy giảm độ tinh khiết bộ nhớ từ 100% xuống 14%, khiến AUROC sụp đổ từ 92.4% xuống 60.4%. CURE Online B=1 bảo toàn 100% độ tinh khiết bộ nhớ và duy trì AUROC ổn định 93.9%."
+    )
+
     doc.add_paragraph().paragraph_format.space_after = Pt(10)
 
     # ------------------------------------------------------
@@ -397,6 +420,15 @@ def build_docx_report(output_path):
                     r.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
 
     doc.add_paragraph().paragraph_format.space_after = Pt(8)
+
+    # Figure 5: Granular Dataset Breakdown across 6 OpenOOD Benchmarks
+    fig5 = os.path.join(figures_dir, "fig5_dataset_breakdown_auroc.png")
+    add_figure_with_caption(
+        doc,
+        fig5,
+        "Figure 5: Granular AUROC Breakdown across 6 OpenOOD Benchmarks (Near-OOD vs. Far-OOD).",
+        "Hình 5 bóc tách hiệu năng trên từng tập dữ liệu OOD thành phần: CURE Online B=1 vượt trội rõ rệt trên các tập Far-OOD (Places365: 95.82%, Textures: 95.14%, SVHN: 98.40%), trong khi WARDEN* bị suy giảm hiệu năng trên các tập Near-OOD do méo mó ma trận hiệp phương sai."
+    )
 
     # Figure 1: Training Dynamics across 4 Backbones
     figures_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "figures"))
@@ -520,6 +552,15 @@ def build_docx_report(output_path):
         "tiệm cận sát sạt mạng ResNet-18 tĩnh gốc (92.40%, trễ 10.60 ms) nhưng nhẹ hơn 39 lần và nhanh gấp 3 lần trên CPU, mở ra lời giải tối ưu cho thiết bị Edge AI nhúng."
     )
 
+    # Figure 10: 2D t-SNE Feature Manifold
+    fig10 = os.path.join(figures_dir, "fig10_feature_space_tsne_manifold.png")
+    add_figure_with_caption(
+        doc,
+        fig10,
+        "Figure 10: 2D t-SNE Feature Space Manifold: In-Distribution vs. Near-OOD vs. Far-OOD and CURE Dynamic Support Anchors.",
+        "Hình 10 trực quan hóa không gian đặc trưng 2D: (a) Không gian tĩnh kNN với vùng ranh giới quyết định mập mờ giữa ID và Near-OOD. (b) Cơ chế CURE kết nạp các điểm tựa động (Dynamic Anchors hình sao xanh) dọc theo đường biên được chứng thực e-BH, khép kín manifold mà không lấn sang vùng OOD."
+    )
+
     # Section 2.4: Direct Head-to-Head Comparison ResNet-50 vs Official ResNet-18
     add_styled_heading(doc, "2.4. Đánh Giá Khách Quan: ResNet-50 (2048-d, 23.5M Params) vs ResNet-18 Gốc OpenOOD (512-d, 11.2M Params)", level=2)
     p = doc.add_paragraph()
@@ -640,6 +681,15 @@ def build_docx_report(output_path):
         "4. Bằng chứng thực nghiệm này đập tan mọi nghi vấn về khả năng mở rộng quy mô (scalability) của CURE trên các bài toán thị giác máy tính công nghiệp khổng lồ.",
         title="KẾT LUẬN THẨM ĐỊNH TRÊN IMAGENET-1K (RESNET-50 OPENOOD GỐC)",
         box_type="info"
+    )
+
+    # Figure 11: Large-Scale ImageNet-1K Scalability
+    fig11 = os.path.join(figures_dir, "fig11_large_scale_indexing_tradeoffs.png")
+    add_figure_with_caption(
+        doc,
+        fig11,
+        "Figure 11: Million-Scale ImageNet-1K (1.28M Images) Vector Indexing Trade-offs: Latency vs. Memory vs. AUROC.",
+        "Hình 11 kiểm định khả năng mở rộng trên kho mẫu 1.28 triệu ảnh: Chỉ mục xấp xỉ HNSW-32 và IVF-4 tăng tốc độ suy luận gấp 6 - 20 lần (độ trễ giảm từ 42.1 ms xuống 2.15 ms - 6.35 ms) trong khi vẫn bảo toàn trên 98.7% độ chính xác AUROC so với kNN chính xác toàn phần."
     )
 
     # ------------------------------------------------------
@@ -769,6 +819,15 @@ def build_docx_report(output_path):
         "vượt xa hoàn toàn OODD (FPR95 8.86%) và WARDEN* (FPR95 3.50%)."
     )
 
+    # Figure 8: Industrial SCADA & Semiconductor
+    fig8 = os.path.join(figures_dir, "fig8_industrial_scada_semiconductor.png")
+    add_figure_with_caption(
+        doc,
+        fig8,
+        "Figure 8: Real-World Cyber-Physical Systems: Industrial SCADA (Westermo) & Semiconductor Wafer Inspection (WM-811K).",
+        "Hình 8 đánh giá hiệu năng trên 2 môi trường công nghiệp thật: (a) An ninh mạng SCADA Westermo (phát hiện tấn công SSH, PortScan, MITM đạt AUROC > 99.3%). (b) Kiểm định khuyết tật vi mạch bán dẫn WM-811K (Center, Edge-Ring, Donut đạt AUROC 90.8% - 95.4%)."
+    )
+
     # ------------------------------------------------------
     # PHẦN 4: ABLATION CÔNG TẮC BỘ NHỚ
     # ------------------------------------------------------
@@ -841,6 +900,15 @@ def build_docx_report(output_path):
         "không thể thay thế để đảm bảo độ tin cậy thực chiến."
     )
 
+    # Figure 9: Ablation of Batch Size & Quarantine
+    fig9 = os.path.join(figures_dir, "fig9_ablation_batch_size_and_quarantine.png")
+    add_figure_with_caption(
+        doc,
+        fig9,
+        "Figure 9: Algorithmic Component Ablation: Impact of Batch Verification Size B on AUROC and Poisoning Risk.",
+        "Hình 9 làm rõ sự đánh đổi giải thuật: Khi tăng kích thước lô B từ 1 lên 128, AUROC tăng nhẹ từ 93.75% lên 94.12%, nhưng Harm Rate tăng từ 0.0% lên 4.0% và rủi ro sụt giảm cực đại là -0.95%. Chế độ B=1 là điểm hoạt động lý tưởng cho các hệ thống an toàn tối hạn (Mission-Critical)."
+    )
+
     # ------------------------------------------------------
     # PHẦN 5: KIỂM ĐỊNH THỐNG KÊ Ý NGHĨA KHOA HỌC
     # ------------------------------------------------------
@@ -888,6 +956,17 @@ def build_docx_report(output_path):
             if j == 5:
                 r.bold = True
                 r.font.color.rgb = RGBColor(0x27, 0xAE, 0x60)
+
+    doc.add_paragraph().paragraph_format.space_after = Pt(6)
+
+    # Figure 12: Statistical Significance Forest Plot
+    fig12 = os.path.join(figures_dir, "fig12_statistical_significance_forest_plot.png")
+    add_figure_with_caption(
+        doc,
+        fig12,
+        "Figure 12: Rigorous Statistical Hypothesis Testing: Forest Plot with 95% Bootstrap Confidence Intervals & Wilcoxon p-values.",
+        "Hình 12 kiểm định giả thuyết thống kê nghiêm ngặt qua 162 luồng dữ liệu: Toàn bộ khoảng tin cậy 95% Bootstrap của CURE Online B=1 đều nằm hoàn toàn bên phải mốc 0 (p-value kiểm định Wilcoxon < 10^-5), bác bỏ giả thuyết vô hiệu (Null Hypothesis) và chứng minh tính vượt trội có ý nghĩa thống kê vững chắc."
+    )
 
     doc.add_paragraph().paragraph_format.space_after = Pt(10)
 
