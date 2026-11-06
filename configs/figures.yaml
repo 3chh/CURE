@@ -92,3 +92,4 @@ figures:
     inputs:
       - "results/rigorous_statistical_tests.json"
     metrics: ["mean_delta", "ci95", "p_value"]
+

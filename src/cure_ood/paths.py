@@ -33,3 +33,4 @@ def get_results_dir() -> Path:
 def get_figures_dir() -> Path:
     p = os.environ.get("CURE_OUTPUT")
     return Path(p).resolve() if p else REPO_ROOT / "deliverables" / "figures"
+
