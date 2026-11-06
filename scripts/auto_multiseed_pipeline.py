@@ -75,6 +75,27 @@ def run_extract(run_name):
         subprocess.run(cmd, check=True, env=env)
         log(f"✓ Đã trích xuất xong đặc trưng cho {run_name}")
 
+def check_colab_checkpoints():
+    dl_dir = Path(os.path.expanduser("~/Downloads"))
+    zip_path = dl_dir / "cure_colab_checkpoints.zip"
+    if zip_path.exists():
+        log(f"Phát hiện tệp kết quả tải về từ Colab: {zip_path}! Đang tự động nạp...")
+        import zipfile
+        with zipfile.ZipFile(zip_path, "r") as z:
+            for member in z.namelist():
+                if "mobilenetv2_s1" in member:
+                    target = REPO / "results" / "train" / "r61_mobilenetv2_s1"
+                    target.mkdir(parents=True, exist_ok=True)
+                    (target / "best.ckpt").write_bytes(z.read(member))
+                    log(f"✓ Đã nạp checkpoint Colab: {target / 'best.ckpt'}")
+                elif "mobilenetv2_s2" in member:
+                    target = REPO / "results" / "train" / "r61_mobilenetv2_s2"
+                    target.mkdir(parents=True, exist_ok=True)
+                    (target / "best.ckpt").write_bytes(z.read(member))
+                    log(f"✓ Đã nạp checkpoint Colab: {target / 'best.ckpt'}")
+        return True
+    return False
+
 def main():
     log("KÍCH HOẠT HỆ THỐNG HUẤN LUYỆN MULTI-SEED TỰ ĐỘNG...")
     
@@ -89,17 +110,22 @@ def main():
         run_train(cfg_r20_s2)
         run_extract("r61_resnet20_s2")
         
-    # 3. Huấn luyện MobileNetV2 Seed 1
-    cfg_mb_s1 = REPO / "configs" / "train" / "r61_mobilenetv2_s1.yaml"
-    if cfg_mb_s1.exists():
-        run_train(cfg_mb_s1)
-        run_extract("r61_mobilenetv2_s1")
+    # Kiểm tra xem Colab đã tải về MobileNetV2 chưa
+    colab_ready = check_colab_checkpoints()
+    
+    # 3. MobileNetV2 Seed 1
+    if not (REPO / "results" / "train" / "r61_mobilenetv2_s1" / "best.ckpt").exists():
+        cfg_mb_s1 = REPO / "configs" / "train" / "r61_mobilenetv2_s1.yaml"
+        if cfg_mb_s1.exists():
+            run_train(cfg_mb_s1)
+    run_extract("r61_mobilenetv2_s1")
         
-    # 4. Huấn luyện MobileNetV2 Seed 2
-    cfg_mb_s2 = REPO / "configs" / "train" / "r61_mobilenetv2_s2.yaml"
-    if cfg_mb_s2.exists():
-        run_train(cfg_mb_s2)
-        run_extract("r61_mobilenetv2_s2")
+    # 4. MobileNetV2 Seed 2
+    if not (REPO / "results" / "train" / "r61_mobilenetv2_s2" / "best.ckpt").exists():
+        cfg_mb_s2 = REPO / "configs" / "train" / "r61_mobilenetv2_s2.yaml"
+        if cfg_mb_s2.exists():
+            run_train(cfg_mb_s2)
+    run_extract("r61_mobilenetv2_s2")
         
     # 5. Tái tạo Báo cáo Word & Excel
     log("--- Tái tạo Báo cáo Word (.docx) và Excel (.xlsx) với dữ liệu Multi-seed ---")
@@ -108,3 +134,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
